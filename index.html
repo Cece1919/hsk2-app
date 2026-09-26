@@ -194,7 +194,10 @@
             <div class="flex-1 p-4 overflow-y-auto pb-24">
 
                 <div id="view-home" class="app-view space-y-4">
-                
+                    <div class="bg-gradient-to-r from-blue-950 to-indigo-900 rounded-2xl p-4 text-white shadow-sm border border-blue-800">
+                        <div class="text-[11px] text-blue-300 font-bold uppercase tracking-wider mb-1">🎯 Bài học đang chọn</div>
+                        <h2 id="home-lesson-title" class="text-base font-extrabold text-amber-300 mb-1">Bài 1: 第一课 她请我们吃了北京烤鸭</h2>
+                        <p id="home-lesson-desc" class="text-xs text-slate-200 opacity-90">Bài học số 1</p>
                     </div>
 
                     <button onclick="showAppNav('vocab', true)" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-2xl p-4 shadow-md flex items-center justify-between transition active:scale-98">
@@ -375,13 +378,20 @@
 
             const data = LESSON_CONTENT[num];
             if (data) {
-                document.getElementById('home-lesson-title').innerText = data.title;
-                document.getElementById('home-lesson-desc').innerText = data.desc;
-                document.getElementById('vocab-list-container').innerHTML = data.vocab;
-                document.getElementById('writing-container').innerHTML = data.writing;
-                document.getElementById('grammar-container').innerHTML = data.grammar;
-                document.getElementById('text-container').innerHTML = data.text;
-                document.getElementById('practice-container').innerHTML = data.practice;
+                const titleEl = document.getElementById('home-lesson-title');
+                if (titleEl) titleEl.innerText = data.title;
+                const descEl = document.getElementById('home-lesson-desc');
+                if (descEl) descEl.innerText = data.desc;
+                const vocabEl = document.getElementById('vocab-list-container');
+                if (vocabEl) vocabEl.innerHTML = data.vocab;
+                const writingEl = document.getElementById('writing-container');
+                if (writingEl) writingEl.innerHTML = data.writing;
+                const grammarEl = document.getElementById('grammar-container');
+                if (grammarEl) grammarEl.innerHTML = data.grammar;
+                const textEl = document.getElementById('text-container');
+                if (textEl) textEl.innerHTML = data.text;
+                const practiceEl = document.getElementById('practice-container');
+                if (practiceEl) practiceEl.innerHTML = data.practice;
             }
             initFcForLesson();
         }
