@@ -182,12 +182,12 @@
                 </div>
 
                 <div class="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-none text-xs">
-<button onclick="selectLesson(1)" id="btn-lesson-1" class="lesson-pill px-3 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition">Bài 1: 第一课 她请我们吃了</button>
-<button onclick="selectLesson(2)" id="btn-lesson-2" class="lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 2: 第二课 还是打车去北</button>
-<button onclick="selectLesson(3)" id="btn-lesson-3" class="lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 3: 我想去西安旅游</button>
-<button onclick="selectLesson(4)" id="btn-lesson-4" class="lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 4: 这个西瓜真甜</button>
-<button onclick="selectLesson(5)" id="btn-lesson-5" class="lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 5: 第五课 就买这件吧</button>
-<button onclick="selectLesson(6)" id="btn-lesson-6" class="lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 6: 第六课 你怎么不吃了</button>
+<button onclick="selectLesson(1)" id="btn-lesson-1" class="lesson-pill px-3.5 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition">Bài 1</button>
+<button onclick="selectLesson(2)" id="btn-lesson-2" class="lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 2</button>
+<button onclick="selectLesson(3)" id="btn-lesson-3" class="lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 3</button>
+<button onclick="selectLesson(4)" id="btn-lesson-4" class="lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 4</button>
+<button onclick="selectLesson(5)" id="btn-lesson-5" class="lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 5</button>
+<button onclick="selectLesson(6)" id="btn-lesson-6" class="lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Bài 6</button>
 </div>
             </div>
 
@@ -366,13 +366,17 @@
             if (currentAudio) currentAudio.playbackRate = currentRate;
         }
 
+        let appInited = false;
+        let writers = {};
+
         function selectLesson(num) {
             currentLesson = num;
+            writers = {};
             document.querySelectorAll('.lesson-pill').forEach((btn, idx) => {
                 if (idx + 1 === num) {
-                    btn.className = "lesson-pill px-3 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition";
+                    btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition";
                 } else {
-                    btn.className = "lesson-pill px-3 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition";
+                    btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition";
                 }
             });
 
@@ -394,6 +398,16 @@
                 if (practiceEl) practiceEl.innerHTML = data.practice;
             }
             initFcForLesson();
+            if (typeof initLessonWriters === 'function') {
+                initLessonWriters();
+            }
+
+            if (appInited) {
+                const homeView = document.getElementById('view-home');
+                if (homeView && !homeView.classList.contains('hidden')) {
+                    showAppNav('lesson');
+                }
+            }
         }
 
         function showAppNav(tabName, autoFcMode = false) {
@@ -654,6 +668,7 @@
 
         window.onload = function() {
             selectLesson(1);
+            appInited = true;
             ['home', 'vocab', 'writing', 'lesson', 'quiz'].forEach(function(tab) {
                 var btn = document.getElementById('nav-' + tab);
                 if (btn) {
