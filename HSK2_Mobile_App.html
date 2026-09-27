@@ -175,9 +175,14 @@
                             <p class="text-[10px] text-blue-200">Ứng dụng Tự Học Tiếng Trung Di Động</p>
                         </div>
                     </div>
-                    <div class="flex items-center bg-slate-800/80 p-0.5 rounded-lg text-[11px] border border-slate-700">
-                        <button onclick="setSpeed(0.75)" id="speed-slow" class="px-2 py-0.5 rounded text-slate-400">0.75x</button>
-                        <button onclick="setSpeed(1.0)" id="speed-normal" class="px-2 py-0.5 rounded bg-blue-600 font-bold text-white">1.0x</button>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="window.location.href=window.location.pathname+'?v='+Date.now()" class="px-2 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[10px] active:scale-95 transition flex items-center gap-1 shadow-xs">
+                            🔄 Nạp mới
+                        </button>
+                        <div class="flex items-center bg-slate-800/80 p-0.5 rounded-lg text-[11px] border border-slate-700">
+                            <button onclick="setSpeed(0.75)" id="speed-slow" class="px-2 py-0.5 rounded text-slate-400">0.75x</button>
+                            <button onclick="setSpeed(1.0)" id="speed-normal" class="px-2 py-0.5 rounded bg-blue-600 font-bold text-white">1.0x</button>
+                        </div>
                     </div>
                 </div>
 
@@ -369,7 +374,7 @@
         let appInited = false;
         let writers = {};
 
-        function selectLesson(num) {
+        function selectLesson(num, autoSwitch = true) {
             currentLesson = num;
             writers = {};
             document.querySelectorAll('.lesson-pill').forEach((btn, idx) => {
@@ -402,7 +407,7 @@
                 initLessonWriters();
             }
 
-            if (appInited) {
+            if (autoSwitch) {
                 const homeView = document.getElementById('view-home');
                 if (homeView && !homeView.classList.contains('hidden')) {
                     showAppNav('lesson');
@@ -667,8 +672,7 @@
         }
 
         window.onload = function() {
-            selectLesson(1);
-            appInited = true;
+            selectLesson(1, false);
             ['home', 'vocab', 'writing', 'lesson', 'quiz'].forEach(function(tab) {
                 var btn = document.getElementById('nav-' + tab);
                 if (btn) {
