@@ -1273,11 +1273,13 @@ function showTab(tabId) {
     
     document.querySelectorAll('.tab-content').forEach(el => {
         el.classList.add('hidden');
+        el.style.display = 'none';
     });
     
     const targetSec = document.getElementById('sec-' + tabId);
     if (targetSec) {
         targetSec.classList.remove('hidden');
+        targetSec.style.display = 'block';
     }
 
     tabs.forEach(t => {
@@ -1297,7 +1299,7 @@ function showTab(tabId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function setSpeed(rate) {
+        function setSpeed(rate) {
     currentRate = rate;
     const btnSlow = document.getElementById('speed-slow');
     const btnNormal = document.getElementById('speed-normal');
