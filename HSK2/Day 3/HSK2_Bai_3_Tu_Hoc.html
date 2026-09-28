@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSK 2 - Bài 3: 我想去西安旅游</title>
+    <title>HSK 2 - Bài 3: 我想去西安旅游 (Có Mô Phỏng Nét Viết)</title>
     <script src="https://cdn.tailwindcss.com">
         function toggleAns(id) {
             const el = document.getElementById(id);
@@ -111,34 +111,48 @@
                 <div class="flex flex-wrap gap-4 text-xs md:text-sm text-slate-200">
                     <div class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg border border-white/10">🎯 15 Từ mới & Danh từ riêng</div>
                     <div class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg border border-white/10">📖 3 Điểm Ngữ pháp bổ ngữ & lặp động từ</div>
-                    
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                    <div class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg border border-white/10">🗣️ 4 Bài khóa hội thoại</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR -->
+        <div class="no-print flex space-x-2 md:space-x-3 border-b border-slate-200 mb-8 overflow-x-auto pb-1 text-xs md:text-sm font-medium">
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn text-slate-600 hover:text-blue-900 px-3 py-2 transition">🎯 Mục tiêu</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📚 Từ vựng (15)</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📖 Ngữ pháp (3)</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa & Audio (4)</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">🦆 Văn hóa Tây An</button>
+        </div>
+
+        <!-- CONTENT SECTIONS -->
+        <div id="sec-overview" class="tab-content space-y-6 hidden">
+            <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>🎯</span> Mục tiêu bài học (Objectives)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-blue-50/70 p-4 rounded-xl border border-blue-100">
+                        <div class="font-bold text-blue-900 mb-2">1. Nghe hiểu & Giao tiếp:</div>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1">
+                            <li>Biết nghe hiểu và hỏi về nguyên nhân, lý do của một sự việc (`为什么`).</li>
+                            <li>Biết thảo luận kế hoạch đi du lịch, rủ rê bạn bè cùng đi chơi (`一起出去看/玩`).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-indigo-50/70 p-4 rounded-xl border border-indigo-100">
+                        <div class="font-bold text-indigo-900 mb-2">2. Ngữ pháp & Cấu trúc:</div>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1">
+                            <li>Nắm vững **Bổ ngữ kết quả (结果补语)** với `好`, `完`, `到`, `懂`, `对`, `错`.</li>
+                            <li>Nắm vững **Hình thức lặp động từ (动词重叠)** trong hiện tại (`想一想`, `休息休息`) và quá khứ (`看了看`, `休息了一下`).</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- SECTION VOCAB -->
         <div id="sec-vocab" class="tab-content space-y-6 hidden">
             <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="flex justify-between items-center mb-4">
