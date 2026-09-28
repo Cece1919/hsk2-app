@@ -7,8 +7,13 @@ def read_file(path):
         return f.read()
 
 def get_sec(html, sec_id):
-    m = re.search(r'<div[^>]*id="' + sec_id + r'"[^>]*>(.*?)(?=<div[^>]*id="sec-|</body)', html, re.DOTALL)
-    return m.group(1).strip() if m else ""
+    m = re.search(r'<(?:div|section)[^>]*id="' + sec_id + r'"[^>]*>(.*?)(?=<(?:div|section)[^>]*id="sec-|<script|</body)', html, re.DOTALL)
+    content = m.group(1).strip() if m else ""
+    content = re.sub(r'<script[^>]*>.*?</script>', '', content, flags=re.DOTALL)
+    return content
+
+def safe_json(obj):
+    return json.dumps(obj).replace("</", "<\\/")
 
 def update_mobile_app():
     day_folders = sorted(glob.glob(os.path.join(hsk_dir, "HSK2/Day *")), key=lambda p: int(re.search(r'Day (\d+)', p).group(1)) if re.search(r'Day (\d+)', p) else 0)
@@ -102,16 +107,16 @@ def update_mobile_app():
                 return code[:idx] + marker + new_val_json + code[end_idx:]
         return code
 
-    html_template = replace_js_var(html_template, "VOCAB_AUDIO", json.dumps(all_vocab_audio))
-    html_template = replace_js_var(html_template, "TEXT_AUDIO", json.dumps(all_text_audio))
-    html_template = replace_js_var(html_template, "FLASHCARDS", json.dumps(flashcards_data))
-    html_template = replace_js_var(html_template, "LESSON_ITEMS", json.dumps(all_items_dict))
+    html_template = replace_js_var(html_template, "VOCAB_AUDIO", safe_json(all_vocab_audio))
+    html_template = replace_js_var(html_template, "TEXT_AUDIO", safe_json(all_text_audio))
+    html_template = replace_js_var(html_template, "FLASHCARDS", safe_json(flashcards_data))
+    html_template = replace_js_var(html_template, "LESSON_ITEMS", safe_json(all_items_dict))
+    html_template = replace_js_var(html_template, "LESSON_CONTENT", safe_json(lesson_content))
 
     pills_html = ""
     for l_num in sorted(lesson_content.keys()):
-        title_short = lesson_content[l_num]["title"].replace(f"第{l_num}课 ", "")
         active_class = "font-bold bg-white text-blue-950 shadow-sm" if l_num == 1 else "font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800"
-        pills_html += f'''<button onclick="selectLesson({l_num})" id="btn-lesson-{l_num}" class="lesson-pill px-3 py-1.5 rounded-xl {active_class} whitespace-nowrap transition">Bài {l_num}: {title_short[:10]}</button>\n'''
+        pills_html += f'''<button onclick="selectLesson({l_num})" id="btn-lesson-{l_num}" class="lesson-pill px-3.5 py-1.5 rounded-xl {active_class} whitespace-nowrap transition">Bài {l_num}</button>\n'''
 
     marker_pills_start = '<div class="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-none text-xs">'
     m_idx = html_template.find(marker_pills_start)
@@ -134,6 +139,19 @@ def update_mobile_app():
         print("[SUCCESS] Synced Mobile App to iCloud Drive for iPhone access!")
     except Exception as e:
         print(f"[WARNING] iCloud sync failed: {e}")
+
+    
+    # Sync index.html and push to GitHub Pages
+    try:
+        import shutil, subprocess
+        index_path = os.path.join(hsk_dir, "index.html")
+        shutil.copy2(app_path, index_path)
+        subprocess.run(["git", "add", "index.html", "HSK2_Mobile_App.html"], cwd=hsk_dir, check=False)
+        subprocess.run(["git", "commit", "-m", f"Auto-update HSK 2 App with {len(lesson_content)} lessons"], cwd=hsk_dir, check=False)
+        subprocess.run(["git", "push", "origin", "main"], cwd=hsk_dir, check=False)
+        print("[SUCCESS] Auto-pushed updated app to GitHub Pages!")
+    except Exception as e:
+        print(f"[INFO] Git push skipped: {e}")
 
     print(f"[SUCCESS] Automatically updated App with {len(lesson_content)} lessons and {len(flashcards_data)} flashcards!")
 
