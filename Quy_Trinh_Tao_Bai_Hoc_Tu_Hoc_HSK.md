@@ -25,7 +25,7 @@
 | 3 | **✍️ Tập viết & Mẹo nhớ** | `showTab('writing')` | 7 Quy tắc nét bút + Bộ thủ trọng tâm + **Thẻ Chiết tự & Mẹo nhớ 4 thành phần cho 100% TẤT CẢ TỪ MỚI** (1. Số nét, 2. Bộ thủ, 3. Mẹo nhớ, 4. Thuận bút). *KHÔNG chứa ô vẽ/mô phỏng nét.* |
 | 4 | **💡 Ngữ pháp** | `showTab('grammar')` | 2-4 điểm ngữ pháp trọng tâm (Công thức, bảng cấu trúc, giải thích chi tiết, ví dụ kèm Pinyin & Dịch). |
 | 5 | **🗣️ Bài khóa** | `showTab('text')` | 2-4 bài khóa hội thoại đầy đủ Chữ Hán, Pinyin, Dịch tiếng Việt, Audio từng câu & phân vai. |
-| 6 | **📝 Luyện tập** | `showTab('practice')` | **15 câu trắc nghiệm tương tác (`checkQ`)** (Phần 1: Từ vựng, Phần 2: Ngữ pháp) + Phần 3 Sắp xếp/Viết lại câu có nút bung đáp án giải thích. |
+| 6 | **📝 Luyện tập** | `showTab('practice')` | **15 câu trắc nghiệm tương tác (`checkQ`)** (Phần 1: Từ vựng, Phần 2: Ngữ pháp) + **Phần 3 Sắp xếp/Viết lại câu BẮT BUỘC chứa ô nhập câu trả lời** (`<input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." ...>`) trước nút bung đáp án. |
 | 7 | **🎋 Góc văn hóa** | `showTab('culture')` | Bài viết ngắn kèm kiến thức văn hóa, ẩm thực, phong tục liên quan. |
 
 ---
