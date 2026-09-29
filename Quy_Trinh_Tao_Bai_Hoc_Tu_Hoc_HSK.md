@@ -22,7 +22,7 @@
 |---|---|---|---|
 | 1 | **📌 Overview** | `showTab('overview')` <br> Nút: `<button id="tab-overview" onclick="showTab('overview')">` | Màn hình mặc định khi mở file. Hiển thị mục tiêu từ vựng, ngữ pháp, bài khóa và kỹ năng đạt được. |
 | 2 | **📖 Từ vựng** | `showTab('vocab')` | Callout box **"⚡ QUY TẮC BIẾN ĐIỆU THANH ĐIỆU TRỌNG TÂM BÀI X"** ở đầu tab + Bảng từ vựng chuẩn (Biến thể Thanh điệu, Ví dụ Hán/Pinyin/Audio/Dịch). |
-| 3 | **✍️ Tập viết & Mẹo nhớ** | `showTab('writing')` | 7 Quy tắc nét bút + Bộ thủ trọng tâm + **Thẻ Chiết tự & Mẹo nhớ 4 thành phần cho 100% TẤT CẢ TỪ MỚI** (1. Số nét, 2. Bộ thủ, 3. Mẹo nhớ, 4. Thuận bút). *KHÔNG chứa ô vẽ/mô phỏng nét.* |
+| 3 | **✍️ Tập viết & Mẹo nhớ** | `showTab('writing')` | 7 Quy tắc nét bút + Bộ thủ trọng tâm + **Thẻ Chiết tự & Mẹo nhớ 4 thành phần cho 100% TẤT CẢ TỪ MỚI** (1. Số nét, 2. Bộ thủ, 3. Mẹo nhớ + Bổ sung trích dẫn chiết tự từ sách *"Nhớ Hán Tự Thông Qua Chiết Tự Chữ Hán"* nếu có, 4. Thuận bút). *KHÔNG chứa ô vẽ/mô phỏng nét.* |
 | 4 | **💡 Ngữ pháp** | `showTab('grammar')` | 2-4 điểm ngữ pháp trọng tâm (Công thức, bảng cấu trúc, giải thích chi tiết, ví dụ kèm Pinyin & Dịch). |
 | 5 | **🗣️ Bài khóa** | `showTab('text')` | 2-4 bài khóa hội thoại đầy đủ Chữ Hán, Pinyin, Dịch tiếng Việt, Audio từng câu & phân vai. |
 | 6 | **📝 Luyện tập** | `showTab('practice')` | **15 câu trắc nghiệm tương tác (`checkQ`)** (Phần 1: Từ vựng, Phần 2: Ngữ pháp) + **Phần 3 Sắp xếp/Viết lại câu BẮT BUỘC chứa ô nhập câu trả lời** (`<input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." ...>`) trước nút bung đáp án. |
