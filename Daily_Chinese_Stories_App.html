@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mỗi Ngày 2 Truyện">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/chinese-dragon.png">
+    <title>Mỗi Ngày 2 Câu Chuyện Tiếng Trung - Daily Chinese Stories App</title>
+    <!-- Tailwind CSS CDN & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #0f172a;
+            color: #1e293b;
+            -webkit-tap-highlight-color: transparent;
+            user-select: text;
+        }
+        .zh-font {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        /* Mobile App Frame Container */
+        .app-wrapper {
+            max-width: 480px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background-color: #f8fafc;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        @media (min-width: 640px) {
+            .app-wrapper {
+                min-height: 92vh;
+                height: 92vh;
+                margin: 24px auto;
+                border-radius: 36px;
+                border: 8px solid #1e293b;
+            }
+        }
+        /* Hide Pinyin Ruby when toggled off */
+        .hide-pinyin rt {
+            display: none !important;
+        }
+        .hide-translation .translation-text {
+            display: none !important;
+        }
+        /* Ruby formatting */
+        ruby {
+            ruby-position: over;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            padding: 0 2px;
+        }
+        rt {
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #2563eb;
+            user-select: none;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        /* Tab transitions */
+        .tab-content-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out forwards;
+        }
+        .tab-content-panel.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-item.active {
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .nav-item.active i {
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 flex justify-center items-center min-h-screen p-0 sm:p-4">
+
+    <!-- APP WRAPPER -->
+    <div class="app-wrapper flex flex-col justify-between">
+        
+        <!-- HEADER BAR -->
+        <header class="bg-gradient-to-r from-indigo-900 via-blue-900 to-slate-900 text-white p-4 pt-5 rounded-b-3xl shadow-lg relative z-20">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 text-xl font-bold shadow-inner">
+                        🏮
+                    </div>
+                    <div>
+                        <h1 class="text-base font-extrabold tracking-wide leading-tight text-amber-200">Mỗi Ngày 2 Truyện</h1>
+                        <p class="text-xs text-blue-200/80 font-medium">Học Tiếng Trung Qua Câu Chuyện</p>
+                    </div>
+                </div>
+                <!-- Stats Badges -->
+                <div class="flex items-center space-x-2">
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-full px-3 py-1 flex items-center space-x-1 text-xs font-semibold text-amber-400">
+                        <span>🔥</span>
+                        <span id="streak-count">1 Ngày</span>
+                    </div>
+                    <button onclick="toggleBookmarkCurrent()" id="btn-header-bookmark" class="bg-slate-800/80 border border-slate-700/60 text-slate-300 hover:text-amber-400 w-8 h-8 rounded-full flex items-center justify-center transition">
+                        <i class="ri-bookmark-line text-lg" id="icon-header-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- DAY CAROUSEL / SELECTOR -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar text-xs font-semibold" id="day-selector-container">
+                <!-- Day Pills Rendered by JS -->
+            </div>
+        </header>
+
+        <!-- MAIN SCROLLABLE CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto p-4 pb-20 space-y-4" id="main-content-scroll">
+            
+            <!-- VIEW 1: STORIES READER (DEFAULT) -->
+            <div id="view-stories" class="view-panel active">
+                
+                <!-- STORY SWITCHER (STORY 1 vs STORY 2) -->
+                <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between mb-4">
+                    <button onclick="switchStory(1)" id="btn-story-1" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 bg-blue-600 text-white shadow">
+                        <span>📖 Truyện 1</span>
+                    </button>
+                    <button onclick="switchStory(2)" id="btn-story-2" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 text-slate-600 hover:bg-slate-100">
+                        <span>📖 Truyện 2</span>
+                    </button>
+                </div>
+
+                <!-- STORY HEADER INFO CARD -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50/60 rounded-2xl p-4 border border-blue-100 shadow-sm relative overflow-hidden mb-4">
+                    <div class="absolute -right-6 -bottom-6 text-7xl opacity-10 pointer-events-none">📚</div>
+                    <div class="flex items-center space-x-2 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                        <span id="story-level-badge" class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-md">HSK 2-3</span>
+                        <span>•</span>
+                        <span id="story-read-time">3 phút đọc</span>
+                    </div>
+                    <h2 id="story-title-zh" class="text-xl font-black text-slate-800 zh-font mb-0.5">一杯热咖啡</h2>
+                    <p id="story-title-vi" class="text-xs font-semibold text-slate-600 italic">Một ly cà phê nóng</p>
+                    
+                    <!-- CONTROL BUTTONS BAR -->
+                    <div class="mt-3 pt-3 border-t border-blue-100/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <!-- Toggle Controls -->
+                        <div class="flex items-center space-x-2">
+                            <button onclick="togglePinyin()" id="btn-toggle-pinyin" class="px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white shadow-xs transition flex items-center space-x-1">
+                                <span>🔤 Pinyin</span>
+                            </button>
+                            <button onclick="toggleTranslation()" id="btn-toggle-trans" class="px-2.5 py-1 rounded-lg font-bold bg-emerald-600 text-white shadow-xs transition flex items-center space-x-1">
+                                <span>🌐 Dịch</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Audio Controls -->
+                        <div class="flex items-center space-x-1 bg-white px-2 py-1 rounded-lg border border-slate-200 shadow-xs">
+                            <button onclick="playFullAudio()" id="btn-play-audio" class="text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 px-1">
+                                <i class="ri-volume-up-fill text-base" id="icon-audio"></i>
+                                <span id="label-audio">Nghe</span>
+                            </button>
+                            <span class="text-slate-300">|</span>
+                            <button onclick="toggleSpeed()" id="btn-audio-speed" class="text-slate-500 font-bold px-1 hover:text-slate-700">
+                                1.0x
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-TABS: STORY / VOCAB / STRUCTURES / GRAMMAR -->
+                <div class="flex space-x-1 bg-slate-200/70 p-1 rounded-xl text-xs font-bold text-slate-600 mb-4">
+                    <button onclick="showStorySection('story')" id="tab-sec-story" class="flex-1 py-1.5 rounded-lg text-center transition bg-white text-blue-700 shadow-xs">
+                        📖 Bài đọc
+                    </button>
+                    <button onclick="showStorySection('vocab')" id="tab-sec-vocab" class="flex-1 py-1.5 rounded-lg text-center transition hover:text-slate-800">
+                        🧠 Từ mới (<span id="count-vocab">0</span>)
+                    </button>
+                    <button onclick="showStorySection('structures')" id="tab-sec-structures" class="flex-1 py-1.5 rounded-lg text-center transition hover:text-slate-800">
+                        ✨ Mẫu câu
+                    </button>
+                    <button onclick="showStorySection('grammar')" id="tab-sec-grammar" class="flex-1 py-1.5 rounded-lg text-center transition hover:text-slate-800">
+                        💡 Ngữ pháp
+                    </button>
+                </div>
+
+                <!-- SECTION 1: STORY READING CONTAINER -->
+                <div id="panel-sec-story" class="tab-content-panel active space-y-4">
+                    <div id="story-content-box" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 space-y-4">
+                        <!-- Content rendered dynamically with <ruby> tags -->
+                    </div>
+                </div>
+
+                <!-- SECTION 2: KEY VOCABULARY -->
+                <div id="panel-sec-vocab" class="tab-content-panel space-y-3">
+                    <div id="vocab-cards-box" class="space-y-3">
+                        <!-- Vocab Cards Rendered Dynamically -->
+                    </div>
+                </div>
+
+                <!-- SECTION 3: USEFUL STRUCTURES -->
+                <div id="panel-sec-structures" class="tab-content-panel space-y-3">
+                    <div id="structures-box" class="space-y-3">
+                        <!-- Structures Rendered Dynamically -->
+                    </div>
+                </div>
+
+                <!-- SECTION 4: GRAMMAR POINTS -->
+                <div id="panel-sec-grammar" class="tab-content-panel space-y-3">
+                    <div id="grammar-box" class="space-y-3">
+                        <!-- Grammar Points Rendered Dynamically -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- VIEW 2: ALL VOCABULARY & GRAMMAR VAULT -->
+            <div id="view-vault" class="view-panel hidden space-y-4">
+                <div class="bg-gradient-to-r from-purple-800 to-indigo-900 rounded-2xl p-4 text-white shadow-md">
+                    <h3 class="text-base font-extrabold flex items-center space-x-2">
+                        <span>🗂️ Thư Viện Kiến Thức</span>
+                    </h3>
+                    <p class="text-xs text-purple-200 mt-1">Tổng hợp từ vựng & ngữ pháp tất cả câu chuyện</p>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative">
+                    <i class="ri-search-line absolute left-3 top-2.5 text-slate-400"></i>
+                    <input type="text" id="vault-search-input" onkeyup="filterVault()" placeholder="Tìm từ vựng, pinyin, ngữ pháp..." class="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-blue-500 shadow-xs">
+                </div>
+
+                <div id="vault-content" class="space-y-3">
+                    <!-- Vault items aggregated from dataset -->
+                </div>
+            </div>
+
+            <!-- VIEW 3: BOOKMARKS / SAVED -->
+            <div id="view-bookmarks" class="view-panel hidden space-y-4">
+                <div class="bg-gradient-to-r from-amber-600 to-orange-700 rounded-2xl p-4 text-white shadow-md">
+                    <h3 class="text-base font-extrabold flex items-center space-x-2">
+                        <span>⭐ Bài Đã Lưu</span>
+                    </h3>
+                    <p class="text-xs text-amber-100 mt-1">Danh sách câu chuyện bạn đã lưu để ôn tập lại</p>
+                </div>
+
+                <div id="bookmarks-list" class="space-y-3">
+                    <!-- Bookmarked stories rendered here -->
+                </div>
+            </div>
+
+            <!-- VIEW 4: PROGRESS & STATS -->
+            <div id="view-stats" class="view-panel hidden space-y-4">
+                <div class="bg-gradient-to-r from-emerald-700 to-teal-800 rounded-2xl p-4 text-white shadow-md">
+                    <h3 class="text-base font-extrabold flex items-center space-x-2">
+                        <span>📊 Tiến Độ Học Tập</span>
+                    </h3>
+                    <p class="text-xs text-emerald-100 mt-1">Hành trình chinh phục tiếng Trung qua câu chuyện</p>
+                </div>
+
+                <!-- Stat Cards Grid -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs text-center">
+                        <div class="text-3xl font-black text-amber-500 mb-1">🔥 <span id="stat-streak-val">1</span></div>
+                        <div class="text-xs font-bold text-slate-600">Chuỗi Ngày Học</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs text-center">
+                        <div class="text-3xl font-black text-blue-600 mb-1">📖 <span id="stat-read-val">2</span></div>
+                        <div class="text-xs font-bold text-slate-600">Truyện Đã Đọc</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs text-center">
+                        <div class="text-3xl font-black text-purple-600 mb-1">🧠 <span id="stat-vocab-val">30</span></div>
+                        <div class="text-xs font-bold text-slate-600">Từ Vựng Đã Học</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs text-center">
+                        <div class="text-3xl font-black text-emerald-600 mb-1">💡 <span id="stat-grammar-val">12</span></div>
+                        <div class="text-xs font-bold text-slate-600">Điểm Ngữ Pháp</div>
+                    </div>
+                </div>
+
+                <!-- Daily Check-in Button -->
+                <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 text-center">
+                    <p class="text-xs font-semibold text-emerald-800 mb-2">Đánh dấu đã hoàn thành bài học hôm nay!</p>
+                    <button onclick="checkInToday()" id="btn-checkin" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl text-xs shadow-md transition transform active:scale-95">
+                        ✅ Điểm Danh Hôm Nay
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- BOTTOM NAVIGATION BAR -->
+        <nav class="bg-white border-t border-slate-200/90 py-2 px-4 flex justify-between items-center relative z-20 shadow-lg rounded-t-2xl">
+            <button onclick="switchNavView('stories')" id="nav-stories" class="nav-item active flex-1 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 transition">
+                <i class="ri-book-open-fill text-xl transition-transform"></i>
+                <span class="text-[10px] mt-0.5">Bài Học</span>
+            </button>
+            <button onclick="switchNavView('vault')" id="nav-vault" class="nav-item flex-1 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 transition">
+                <i class="ri-folders-fill text-xl transition-transform"></i>
+                <span class="text-[10px] mt-0.5">Thư Viện</span>
+            </button>
+            <button onclick="switchNavView('bookmarks')" id="nav-bookmarks" class="nav-item flex-1 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 transition">
+                <i class="ri-star-fill text-xl transition-transform"></i>
+                <span class="text-[10px] mt-0.5">Đã Lưu</span>
+            </button>
+            <button onclick="switchNavView('stats')" id="nav-stats" class="nav-item flex-1 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 transition">
+                <i class="ri-bar-chart-fill text-xl transition-transform"></i>
+                <span class="text-[10px] mt-0.5">Tiến Độ</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC & DATASET -->
+    <script>
+        /* ----------------------------------------------------
+           1. COMPREHENSIVE DATASET (DAY 1 TO DAY 3)
+           Each Day has 2 complete stories with full details.
+        ---------------------------------------------------- */
+        const APP_DATA = [
+            {
+                day: 1,
+                title: "Ngày 1: Thói Quên & Nhận Thức",
+                stories: [
+                    {
+                        id: "d1s1",
+                        titleZh: "一杯热咖啡",
+                        titleVi: "Một Ly Cà Phê Nóng",
+                        level: "HSK 2-3",
+                        readTime: "3 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>张<rt>zhāng</rt></ruby><ruby>伟<rt>wěi</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>名<rt>míng</rt></ruby><ruby>公<rt>gōng</rt></ruby><ruby>司<rt>sī</rt></ruby><ruby>职<rt>zhí</rt></ruby><ruby>员<rt>yuán</rt></ruby>。
+                                <ruby>他<rt>tā</rt></ruby><ruby>每<rt>měi</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>早<rt>zǎo</rt></ruby><ruby>上<rt>shang</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>会<rt>huì</rt></ruby><ruby>去<rt>qù</rt></ruby><ruby>地<rt>dì</rt></ruby><ruby>铁<rt>tiě</rt></ruby><ruby>站<rt>zhàn</rt></ruby><ruby>旁<rt>páng</rt></ruby><ruby>边<rt>biān</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>咖<rt>kā</rt></ruby><ruby>啡<rt>fēi</rt></ruby><ruby>店<rt>diàn</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Trương Vĩ là một nhân viên công ty. Mới sáng sớm mỗi ngày anh ấy đều đến quán cà phê bên cạnh ga tàu điện ngầm.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>店<rt>diàn</rt></ruby><ruby>里<rt>lǐ</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>常<rt>cháng</rt></ruby><ruby>客<rt>kè</rt></ruby><ruby>很<rt>hěn</rt></ruby><ruby>多<rt>duō</rt></ruby>。
+                                <ruby>张<rt>zhāng</rt></ruby><ruby>伟<rt>wěi</rt></ruby><ruby>喜<rt>xǐ</rt></ruby><ruby>欢<rt>huan</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>边<rt>biān</rt></ruby><ruby>喝<rt>hē</rt></ruby><ruby>热<rt>rè</rt></ruby><ruby>咖<rt>kā</rt></ruby><ruby>啡<rt>fēi</rt></ruby>，<ruby>一<rt>yì</rt></ruby><ruby>边<rt>biān</rt></ruby><ruby>看<rt>kàn</rt></ruby><ruby>手<rt>shǒu</rt></ruby><ruby>机<rt>jī</rt></ruby><ruby>上<rt>shang</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>新<rt>xīn</rt></ruby><ruby>闻<rt>wén</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Khách quen trong quán rất đông. Trương Vĩ thích vừa uống cà phê nóng vừa xem tin tức trên điện thoại.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>令<rt>lìng</rt></ruby><ruby>人<rt>rén</rt></ruby><ruby>感<rt>gǎn</rt></ruby><ruby>动<rt>dòng</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>是<rt>shì</rt></ruby>，<ruby>服<rt>fú</rt></ruby><ruby>务<rt>wù</rt></ruby><ruby>员<rt>yuán</rt></ruby><ruby>总<rt>zǒng</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>热<rt>rè</rt></ruby><ruby>情<rt>qíng</rt></ruby><ruby>地<rt>de</rt></ruby><ruby>为<rt>wèi</rt></ruby><ruby>他<rt>tā</rt></ruby><ruby>准<rt>zhǔn</rt></ruby><ruby>备<rt>bèi</rt></ruby><ruby>好<rt>hǎo</rt></ruby><ruby>他<rt>tā</rt></ruby><ruby>最<rt>zuì</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>美<rt>měi</rt></ruby><ruby>式<rt>shì</rt></ruby><ruby>咖<rt>kā</rt></ruby><ruby>啡<rt>fēi</rt></ruby>。
+                                <ruby>这<rt>zhè</rt></ruby><ruby>杯<rt>bēi</rt></ruby><ruby>暖<rt>nuǎn</rt></ruby><ruby>和<rt>huo</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>咖<rt>kā</rt></ruby><ruby>啡<rt>fēi</rt></ruby>，<ruby>让<rt>ràng</rt></ruby><ruby>他<rt>tā</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>充<rt>chōng</rt></ruby><ruby>满<rt>mǎn</rt></ruby><ruby>活<rt>huó</rt></ruby><ruby>力<rt>lì</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Điều làm người ta cảm động là người phục vụ luôn nhiệt tình chuẩn bị sẵn ly cà phê Americano yêu thích của anh. Ly cà phê ấm áp này giúp cho cả ngày của anh tràn đầy năng lượng.
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "咖啡",
+                                pinyin: "kāfēi",
+                                hanviet: "Cà phê",
+                                meaning: "Cà phê",
+                                example: "我每天早上都要喝一杯咖啡。",
+                                examplePinyin: "Wǒ měitiān zǎoshang dōu yào hē yì bēi kāfēi.",
+                                exampleVi: "Mỗi sáng tôi đều phải uống một ly cà phê.",
+                                tip: "💡 Bộ Khẩu 口 (miệng) ghép với âm 咖 (gā/kā) và 啡 (fēi)."
+                            },
+                            {
+                                hanzi: "经常",
+                                pinyin: "jīngcháng",
+                                hanviet: "Kinh thường",
+                                meaning: "Thường xuyên",
+                                example: "他经常去这家书店买书。",
+                                examplePinyin: "Tā jīngcháng qù zhè jiā shūdiàn mǎi shū.",
+                                exampleVi: "Anh ấy thường xuyên đến hiệu sách này mua sách.",
+                                tip: "💡 经 (qua, qua lại) + 常 (thường xuyên, lâu dài)."
+                            },
+                            {
+                                hanzi: "准备",
+                                pinyin: "zhǔnbèi",
+                                hanviet: "Chuẩn bị",
+                                meaning: "Chuẩn bị, sẵn sàng",
+                                example: "服务员准备好了我们要的菜。",
+                                examplePinyin: "Fúwùyuán zhǔnbèi hǎo le wǒmen yào de cài.",
+                                exampleVi: "Phục vụ đã chuẩn bị xong món ăn chúng tôi gọi.",
+                                tip: "💡 准 (chuẩn xác) + 备 (dự phòng, bị)."
+                            },
+                            {
+                                hanzi: "暖和",
+                                pinyin: "nuǎnhuo",
+                                hanviet: "Noãn hòa",
+                                meaning: "Ấm áp, dễ chịu",
+                                example: "喝了热茶，身体感觉很暖和。",
+                                examplePinyin: "Hē le rè chá, shēntǐ gǎnjué hěn nuǎnhuo.",
+                                exampleVi: "Uống trà nóng xong, cơ thể cảm thấy rất ấm áp.",
+                                tip: "💡 Bộ Nhật 日 (mặt trời) mang lại cảm giác ấm áp 暖."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "一边 ... 一边 ...",
+                                meaning: "Vừa ... vừa ... (diễn tả 2 hành động diễn ra song song)",
+                                explanation: "Đứng trước 2 động từ để chỉ hai việc thực hiện đồng thời cùng một lúc.",
+                                example: "张伟喜欢一边喝咖啡，一边看新闻。",
+                                examplePinyin: "Zhāng Wěi xǐhuan yìbiān hē kāfēi, yìbiān kàn xīnwén.",
+                                exampleVi: "Trương Vĩ thích vừa uống cà phê vừa xem tin tức."
+                            },
+                            {
+                                pattern: "让 / 使 + Ai đó + Làm gì / Như thế nào",
+                                meaning: "Khiến cho / Làm cho ai đó cảm thấy...",
+                                explanation: "Mẫu câu sai khiến (兼语句), biểu thị nguyên nhân dẫn đến cảm xúc hay hành động.",
+                                example: "这杯热咖啡让他一天都充满活力。",
+                                examplePinyin: "Zhè bēi rè kāfēi ràng tā yì tiān dōu chōngmǎn huólì.",
+                                exampleVi: "Cốc cà phê nóng này khiến anh ấy tràn đầy năng lượng cả ngày."
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Bổ ngữ kết quả 『好』 và 『完』",
+                                formula: "Động từ + 好 / 完 + (Tân ngữ)",
+                                explanation: "• 『完』: Hoàn thành, xong (chú trọng về mặt thời gian/kết thúc).\n• 『好』: Làm xong và kết quả đạt mức hoàn hảo/sẵn sàng để dùng.",
+                                example: "服务员已经准备好了咖啡。(Phục vụ đã chuẩn bị xong hoàn chỉnh cà phê).",
+                                note: "Không dùng trợ từ 『了』 ở giữa động từ và bổ ngữ kết quả."
+                            },
+                            {
+                                title: "Phó từ chỉ tần suất 『总是』 (Luôn luôn)",
+                                formula: "Chủ ngữ + 总是 + Động từ / Tính từ",
+                                explanation: "Diễn tả hành động diễn ra liên tục, thành thói quen cố định không thay đổi.",
+                                example: "他总是去地铁站旁边的咖啡店。(Anh ấy luôn đến quán cà phê cạnh ga tàu).",
+                                note: "Khác với 『经常』 (thường xuyên nhưng có thể ngắt quãng)."
+                            }
+                        ]
+                    },
+                    {
+                        id: "d1s2",
+                        titleZh: "小猫的网卡",
+                        titleVi: "Con Mèo Và Chiếc Thẻ Mạng",
+                        level: "HSK 2-3",
+                        readTime: "2.5 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>小<rt>xiǎo</rt></ruby><ruby>明<rt>míng</rt></ruby><ruby>养<rt>yǎng</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>只<rt>zhī</rt></ruby><ruby>可<rt>kě</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>猫<rt>māo</rt></ruby>，<ruby>名<rt>míng</rt></ruby><ruby>字<rt>zi</rt></ruby><ruby>叫<rt>jiào</rt></ruby>“<ruby>咪<rt>mī</rt></ruby><ruby>咪<rt>mī</rt></ruby>”。
+                                <ruby>咪<rt>mī</rt></ruby><ruby>咪<rt>mī</rt></ruby><ruby>不<rt>bù</rt></ruby><ruby>但<rt>dàn</rt></ruby><ruby>漂<rt>piào</rt></ruby><ruby>亮<rt>liang</rt></ruby>，<ruby>而<rt>ér</rt></ruby><ruby>且<rt>qiě</rt></ruby><ruby>非<rt>fēi</rt></ruby><ruby>常<rt>cháng</rt></ruby><ruby>聪<rt>cōng</rt></ruby><ruby>明<rt>míng</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Tiểu Minh nuôi một chú mèo nhỏ đáng yêu tên là "Mimi". Mimi không những xinh đẹp mà còn cực kỳ thông minh.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>昨<rt>zuó</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>晚<rt>wǎn</rt></ruby><ruby>上<rt>shang</rt></ruby>，<ruby>小<rt>xiǎo</rt></ruby><ruby>明<rt>míng</rt></ruby><ruby>在<rt>zài</rt></ruby><ruby>写<rt>xiě</rt></ruby><ruby>作<rt>zuò</rt></ruby><ruby>业<rt>yè</rt></ruby>，<ruby>突<rt>tū</rt></ruby><ruby>然<rt>rán</rt></ruby><ruby>网<rt>wǎng</rt></ruby><ruby>络<rt>luò</rt></ruby><ruby>断<rt>duàn</rt></ruby><ruby>了<rt>le</rt></ruby>。
+                                <ruby>他<rt>tā</rt></ruby><ruby>很<rt>hěn</rt></ruby><ruby>着<rt>zháo</rt></ruby><ruby>急<rt>jí</rt></ruby>，<ruby>不<rt>bù</rt></ruby><ruby>知<rt>zhī</rt></ruby><ruby>道<rt>dào</rt></ruby><ruby>该<rt>gāi</rt></ruby><ruby>怎<rt>zěn</rt></ruby><ruby>么<rt>me</rt></ruby><ruby>办<rt>bàn</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Tối qua, Tiểu Minh đang làm bài tập thì đột nhiên mạng bị ngắt. Cậu ấy rất sốt ruột, không biết phải làm sao.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>只<rt>zhǐ</rt></ruby><ruby>见<rt>jiàn</rt></ruby><ruby>咪<rt>mī</rt></ruby><ruby>咪<rt>mī</rt></ruby><ruby>走<rt>zǒu</rt></ruby><ruby>过<rt>guò</rt></ruby><ruby>去<rt>qù</rt></ruby>，<ruby>用<rt>yòng</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>爪<rt>zhuǎ</rt></ruby><ruby>子<rt>zi</rt></ruby><ruby>碰<rt>pèng</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>碰<rt>pèng</rt></ruby><ruby>网<rt>wǎng</rt></ruby><ruby>线<rt>xiàn</rt></ruby>。
+                                <ruby>没<rt>méi</rt></ruby><ruby>想<rt>xiǎng</rt></ruby><ruby>到<rt>dào</rt></ruby>，<ruby>网<rt>wǎng</rt></ruby><ruby>络<rt>luò</rt></ruby><ruby>被<rt>bèi</rt></ruby><ruby>修<rt>xiū</rt></ruby><ruby>好<rt>hǎo</rt></ruby><ruby>了<rt>le</rt></ruby>！<ruby>小<rt>xiǎo</rt></ruby><ruby>明<rt>míng</rt></ruby><ruby>高<rt>gāo</rt></ruby><ruby>兴<rt>xìng</rt></ruby><ruby>地<rt>de</rt></ruby><ruby>抱<rt>bào</rt></ruby><ruby>起<rt>qǐ</rt></ruby><ruby>咪<rt>mī</rt></ruby><ruby>咪<rt>mī</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Chỉ thấy Mimi đi tới, dùng chiếc móng nhỏ chạm chạm vào dây mạng. Không ngờ rằng, mạng đã được sửa xong! Tiểu Minh vui mừng ôm chầm lấy Mimi.
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "聪明",
+                                pinyin: "cōngmíng",
+                                hanviet: "Thông minh",
+                                meaning: "Thông minh, nhạy bén",
+                                example: "这只小猫真的很聪明。",
+                                examplePinyin: "Zhè zhī xiǎo māo zhēnde hěn cōngmíng.",
+                                exampleVi: "Con mèo này thực sự rất thông minh.",
+                                tip: "💡 聪 (tai thính, nhạy cảm) + 明 (sáng suốt)."
+                            },
+                            {
+                                hanzi: "着急",
+                                pinyin: "zháojí",
+                                hanviet: "Trước cấp",
+                                meaning: "Sốt ruột, lo lắng",
+                                example: "别着急，问题很快就能解决。",
+                                examplePinyin: "Bié zháojí, wèntí hěn kuài jiù néng jiějué.",
+                                exampleVi: "Đừng sốt ruột, vấn đề sẽ nhanh chóng giải quyết thôi.",
+                                tip: "💡 Bộ Tâm 心 ở dưới chữ 急 chỉ cảm giác nôn nóng trong lòng."
+                            },
+                            {
+                                hanzi: "突然",
+                                pinyin: "tūrán",
+                                hanviet: "Đột nhiên",
+                                meaning: "Bất ngờ, đột ngột",
+                                example: "天气突然变冷了。",
+                                examplePinyin: "Tiānqì tūrán biàn lěng le.",
+                                exampleVi: "Thời tiết đột nhiên trở lạnh."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "不但 ... 而且 ...",
+                                meaning: "Không những ... mà còn ... (Mối quan hệ tăng tiến)",
+                                example: "咪咪不但漂亮，而且非常聪明。",
+                                examplePinyin: "Mīmī búdàn piàoliang, érqiě fēicháng cōngmíng.",
+                                exampleVi: "Mimi không những xinh đẹp mà còn cực kỳ thông minh."
+                            },
+                            {
+                                pattern: "没想到 ...",
+                                meaning: "Không ngờ rằng ... / Thật bất ngờ ...",
+                                example: "没想到，网络被修好了！",
+                                examplePinyin: "Méi xiǎngdào, wǎngluò bèi xiū hǎo le!",
+                                exampleVi: "Không ngờ rằng, mạng đã được sửa xong!"
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Câu bị động với 『被』 (Passive Voice)",
+                                formula: "Đối tượng bị tác động + 被 + (Tác nhân) + Động từ + Thành phần khác",
+                                explanation: "Dùng để diễn tả đối tượng chịu ảnh hưởng của hành động.",
+                                example: "网络被修好了。(Mạng đã được sửa xong).",
+                                note: "Nếu không muốn chỉ rõ ai sửa, có thể bỏ qua tác nhân đằng sau 被."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: 2,
+                title: "Ngày 2: Tình Bạn & Sự Chia Sẻ",
+                stories: [
+                    {
+                        id: "d2s1",
+                        titleZh: "苹果与友情",
+                        titleVi: "Quả Táo Và Tình Bạn",
+                        level: "HSK 2-3",
+                        readTime: "3 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>小<rt>xiǎo</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>和<rt>hé</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>丽<rt>lì</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>从<rt>cóng</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>起<rt>qǐ</rt></ruby><ruby>长<rt>zhǎng</rt></ruby><ruby>大<rt>dà</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>好<rt>hǎo</rt></ruby><ruby>朋<rt>péng</rt></ruby><ruby>友<rt>yǒu</rt></ruby>。
+                                <ruby>夏<rt>xià</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>天<rt>tiān</rt></ruby>，<ruby>小<rt>xiǎo</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>带<rt>dài</rt></ruby><ruby>着<rt>zhe</rt></ruby><ruby>一<rt>yí</rt></ruby><ruby>个<rt>gè</rt></ruby><ruby>大<rt>dà</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>苹<rt>píng</rt></ruby><ruby>果<rt>guǒ</rt></ruby><ruby>来<rt>lái</rt></ruby><ruby>到<rt>dào</rt></ruby><ruby>公<rt>gōng</rt></ruby><ruby>园<rt>yuán</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Tiểu Hồng và Tiểu Lệ là bạn thân lớn lên bên nhau từ nhỏ. Một ngày mùa hè, Tiểu Hồng mang theo một quả táo đỏ to đến công viên.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>小<rt>xiǎo</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>把<rt>bǎ</rt></ruby><ruby>苹<rt>píng</rt></ruby><ruby>果<rt>guǒ</rt></ruby><ruby>分<rt>fēn</rt></ruby><ruby>成<rt>chéng</rt></ruby><ruby>两<rt>liǎng</rt></ruby><ruby>半<rt>bàn</rt></ruby>，<ruby>把<rt>bǎ</rt></ruby><ruby>大<rt>dà</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>那<rt>nà</rt></ruby><ruby>半<rt>bàn</rt></ruby><ruby>给<rt>gěi</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>丽<rt>lì</rt></ruby>。
+                                <ruby>小<rt>xiǎo</rt></ruby><ruby>丽<rt>lì</rt></ruby><ruby>感<rt>gǎn</rt></ruby><ruby>动<rt>dòng</rt></ruby><ruby>地<rt>de</rt></ruby><ruby>说<rt>shuō</rt></ruby>：“<ruby>谢<rt>xiè</rt></ruby><ruby>谢<rt>xie</rt></ruby><ruby>你<rt>nǐ</rt></ruby>！<ruby>和<rt>hé</rt></ruby><ruby>你<rt>nǐ</rt></ruby><ruby>分<rt>fēn</rt></ruby><ruby>享<rt>xiǎng</rt></ruby>，<ruby>苹<rt>píng</rt></ruby><ruby>果<rt>guǒ</rt></ruby><ruby>变<rt>biàn</rt></ruby><ruby>得<rt>de</rt></ruby><ruby>更<rt>gèng</rt></ruby><ruby>甜<rt>tián</rt></ruby><ruby>了<rt>le</rt></ruby>。”
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Tiểu Hồng bổ quả táo làm đôi, đưa nửa to hơn cho Tiểu Lệ. Tiểu Lệ cảm động nói: "Cảm ơn bạn! Chia sẻ cùng bạn, quả táo trở nên ngọt hơn rồi."
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "分享",
+                                pinyin: "fēnxiǎng",
+                                hanviet: "Phân hưởng",
+                                meaning: "Chia sẻ",
+                                example: "好东西要和朋友一起分享。",
+                                examplePinyin: "Hǎo dōngxi yào hé péngyou yìqǐ fēnxiǎng.",
+                                exampleVi: "Đồ tốt nên chia sẻ cùng bạn bè."
+                            },
+                            {
+                                hanzi: "感动",
+                                pinyin: "gǎndòng",
+                                hanviet: "Cảm động",
+                                meaning: "Cảm động, xúc động",
+                                example: "听到这句话，我很感动。",
+                                examplePinyin: "Tīngdào zhè jù huà, wǒ hěn gǎndòng.",
+                                exampleVi: "Nghe thấy câu nói này, tôi rất cảm động."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "越 ... 越 ...",
+                                meaning: "Càng ... càng ...",
+                                example: "苹果变得越来越甜了。",
+                                examplePinyin: "Píngguǒ biàn de yuè lái yuè tián le.",
+                                exampleVi: "Quả táo trở nên ngày càng ngọt hơn."
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Câu chữ 『把』 (Ba Sentences)",
+                                formula: "Chủ ngữ + 把 + Tân ngữ + Động từ + Bổ ngữ / 成",
+                                explanation: "Dùng khi người nói muốn tác động làm thay đổi trạng thái hoặc vị trí của vật.",
+                                example: "小红把苹果分成两半。(Tiểu Hồng chia quả táo làm 2 nửa).",
+                                note: "Tân ngữ đằng sau 把 phải là vật xác định."
+                            }
+                        ]
+                    },
+                    {
+                        id: "d2s2",
+                        titleZh: "迟到者的理由",
+                        titleVi: "Lý Do Của Người Đến Muộn",
+                        level: "HSK 3",
+                        readTime: "2.5 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>王<rt>wáng</rt></ruby><ruby>明<rt>míng</rt></ruby><ruby>今<rt>jīn</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>开<rt>kāi</rt></ruby><ruby>会<rt>huì</rt></ruby><ruby>又<rt>yòu</rt></ruby><ruby>迟<rt>chí</rt></ruby><ruby>到<rt>dào</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>十<rt>shí</rt></ruby><ruby>分<rt>fēn</rt></ruby><ruby>钟<rt>zhōng</rt></ruby>。
+                                <ruby>经<rt>jīng</rt></ruby><ruby>理<rt>lǐ</rt></ruby><ruby>生<rt>shēng</rt></ruby><ruby>气<rt>qì</rt></ruby><ruby>地<rt>de</rt></ruby><ruby>问<rt>wèn</rt></ruby><ruby>他<rt>tā</rt></ruby>：“<ruby>你<rt>nǐ</rt></ruby><ruby>为<rt>wèi</rt></ruby><ruby>什<rt>shén</rt></ruby><ruby>么<rt>me</rt></ruby><ruby>老<rt>lǎo</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>迟<rt>chí</rt></ruby><ruby>到<rt>dào</rt></ruby>？”
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Vương Minh hôm nay đi họp lại đến muộn 10 phút. Giám đốc tức giận hỏi anh: "Tại sao cậu luôn luôn đi muộn vậy?"
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>王<rt>wáng</rt></ruby><ruby>明<rt>míng</rt></ruby><ruby>解<rt>jiě</rt></ruby><ruby>释<rt>shì</rt></ruby><ruby>道<rt>dào</rt></ruby>：“<ruby>我<rt>wǒ</rt></ruby><ruby>出<rt>chū</rt></ruby><ruby>门<rt>mén</rt></ruby><ruby>很<rt>hěn</rt></ruby><ruby>早<rt>zǎo</rt></ruby>，<ruby>原<rt>yuán</rt></ruby><ruby>来<rt>lái</rt></ruby><ruby>路<rt>lù</rt></ruby><ruby>上<rt>shang</rt></ruby><ruby>大<rt>dà</rt></ruby><ruby>堵<rt>dǔ</rt></ruby><ruby>车<rt>chē</rt></ruby>！”
+                                <ruby>大<rt>dà</rt></ruby><ruby>家<rt>jiā</rt></ruby><ruby>听<rt>tīng</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>笑<rt>xiào</rt></ruby><ruby>了<rt>le</rt></ruby>，<ruby>原<rt>yuán</rt></ruby><ruby>来<rt>lái</rt></ruby><ruby>他<rt>tā</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>闹<rt>nào</rt></ruby><ruby>钟<rt>zhōng</rt></ruby><ruby>坏<rt>huài</rt></ruby><ruby>了<rt>le</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Vương Minh giải thích: "Tôi ra khỏi nhà rất sớm, hóa ra trên đường tắc đường nghiêm trọng!" Mọi người nghe xong đều cười, hóa ra đồng hồ báo thức của anh bị hỏng.
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "迟到",
+                                pinyin: "chídào",
+                                hanviet: "Trì đáo",
+                                meaning: "Đến muộn, trễ",
+                                example: "上课不要迟到。",
+                                examplePinyin: "Shàngkè bú yào chídào.",
+                                exampleVi: "Đi học đừng có đến muộn."
+                            },
+                            {
+                                hanzi: "解释",
+                                pinyin: "jiěshì",
+                                hanviet: "Giải thích",
+                                meaning: "Giải thích, phân giải",
+                                example: "请你给我解释一下。",
+                                examplePinyin: "Qǐng nǐ gěi wǒ jiěshì yíxià.",
+                                exampleVi: "Xin bạn giải thích giúp tôi một chút."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "原来 ...",
+                                meaning: "Hóa ra là ... (Phát hiện ra sự thật)",
+                                example: "原来他的闹钟坏了。",
+                                examplePinyin: "Yuánlái tā de nàozhōng huài le.",
+                                exampleVi: "Hóa ra đồng hồ báo thức của anh ấy bị hỏng."
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Phó từ 『又』 vs 『再』 (Lại)",
+                                formula: "又 + Động từ (Đã xảy ra) / 再 + Động từ (Chưa xảy ra)",
+                                explanation: "• 『又』: Diễn tả lặp lại của sự việc đã xảy ra trong quá khứ.\n• 『再』: Sự lặp lại trong tương lai.",
+                                example: "王明今天又迟到了。(Hôm nay Vương Minh lại đến muộn - đã xảy ra).",
+                                note: "Nhớ kiểm tra thời điểm xảy ra của hành động."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: 3,
+                title: "Ngày 3: Học Tập & Trải Nghiệm",
+                stories: [
+                    {
+                        id: "d3s1",
+                        titleZh: "图书馆的秘密",
+                        titleVi: "Bí Mật Ở Thư Viện",
+                        level: "HSK 3-4",
+                        readTime: "3.5 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>李<rt>lǐ</rt></ruby><ruby>娜<rt>nà</rt></ruby><ruby>每<rt>měi</rt></ruby><ruby>个<rt>gè</rt></ruby><ruby>周<rt>zhōu</rt></ruby><ruby>末<rt>mò</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>去<rt>qù</rt></ruby><ruby>市<rt>shì</rt></ruby><ruby>图<rt>tú</rt></ruby><ruby>书<rt>shū</rt></ruby><ruby>馆<rt>guǎn</rt></ruby>。
+                                <ruby>无<rt>wú</rt></ruby><ruby>论<rt>lùn</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>气<rt>qì</rt></ruby><ruby>好<rt>hǎo</rt></ruby><ruby>坏<rt>huài</rt></ruby>，<ruby>她<rt>tā</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>会<rt>huì</rt></ruby><ruby>坚<rt>jiān</rt></ruby><ruby>持<rt>chí</rt></ruby><ruby>读<rt>dú</rt></ruby><ruby>两<rt>liǎng</rt></ruby><ruby>个<rt>gè</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>时<rt>shí</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>书<rt>shū</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Lý Na mỗi cuối tuần đều đến thư viện thành phố. Bất kể thời tiết tốt hay xấu, cô ấy đều kiên trì đọc sách 2 tiếng đồng hồ.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>她<rt>tā</rt></ruby><ruby>发<rt>fā</rt></ruby><ruby>现<rt>xiàn</rt></ruby>，<ruby>坚<rt>jiān</rt></ruby><ruby>持<rt>chí</rt></ruby><ruby>阅<rt>yuè</rt></ruby><ruby>读<rt>dú</rt></ruby><ruby>不<rt>bù</rt></ruby><ruby>仅<rt>jǐn</rt></ruby><ruby>能<rt>néng</rt></ruby><ruby>增<rt>zēng</rt></ruby><ruby>加<rt>jiā</rt></ruby><ruby>知<rt>zhī</rt></ruby><ruby>识<rt>shi</rt></ruby>，<ruby>还<rt>hái</rt></ruby><ruby>能<rt>néng</rt></ruby><ruby>让<rt>ràng</rt></ruby><ruby>心<rt>xīn</rt></ruby><ruby>情<rt>qíng</rt></ruby><ruby>变<rt>biàn</rt></ruby><ruby>得<rt>de</rt></ruby><ruby>平<rt>píng</rt></ruby><ruby>静<rt>jìng</rt></ruby>。
+                                <ruby>这<rt>zhè</rt></ruby><ruby>就<rt>jiù</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>她<rt>tā</rt></ruby><ruby>进<rt>jìn</rt></ruby><ruby>步<rt>bù</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>秘<rt>mì</rt></ruby><ruby>诀<rt>jué</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Cô phát hiện rằng, kiên trì đọc sách không những tăng thêm kiến thức mà còn giúp tâm trạng trở nên bình tĩnh. Đây chính là bí quyết tiến bộ của cô.
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "坚持",
+                                pinyin: "jiānchí",
+                                hanviet: "Kiên trì",
+                                meaning: "Kiên trì, giữ vững",
+                                example: "只要坚持，就一定会成功。",
+                                examplePinyin: "Zhǐyào jiānchí, jiù yídìng huì chénggōng.",
+                                exampleVi: "Chỉ cần kiên trì nhất định sẽ thành công."
+                            },
+                            {
+                                hanzi: "知识",
+                                pinyin: "zhīshi",
+                                hanviet: "Tri thức",
+                                meaning: "Kiến thức, tri thức",
+                                example: "读书可以增加知识。",
+                                examplePinyin: "Dúshū kěyǐ zēngjiā zhīshi.",
+                                exampleVi: "Đọc sách có thể nâng cao kiến thức."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "无论 ... 都 ...",
+                                meaning: "Bất kể ... đều ...",
+                                example: "无论天气好坏，她都会坚持读书。",
+                                examplePinyin: "Wúlùn tiānqì hǎo huài, tā dōu huì jiānchí dúshū.",
+                                exampleVi: "Bất kể thời tiết tốt hay xấu, cô ấy đều kiên trì đọc sách."
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Cấu trúc nhấn mạnh 『是...的』",
+                                formula: "Chủ ngữ + 是 + [Thời gian/Địa điểm/Cách thức] + Động từ + 的",
+                                explanation: "Dùng để nhấn mạnh thời gian, địa điểm hoặc phương thức của một hành động đã xảy ra.",
+                                example: "她是在图书馆认识这个朋友的。(Cô ấy quen người bạn này ở thư viện).",
+                                note: "Động từ chính nằm ở giữa 是 và 的."
+                            }
+                        ]
+                    },
+                    {
+                        id: "d3s2",
+                        titleZh: "第一次做饭",
+                        titleVi: "Lần Đầu Làm Bếp",
+                        level: "HSK 3",
+                        readTime: "3 phút",
+                        contentHtml: `
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>今<rt>jīn</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>朋<rt>péng</rt></ruby><ruby>友<rt>yǒu</rt></ruby><ruby>的<rt>de</rt></ruby><ruby>生<rt>shēng</rt></ruby><ruby>日<rt>rì</rt></ruby>，<ruby>大<rt>dà</rt></ruby><ruby>卫<rt>wèi</rt></ruby><ruby>决<rt>jué</rt></ruby><ruby>定<rt>dìng</rt></ruby><ruby>亲<rt>qīn</rt></ruby><ruby>自<rt>zì</rt></ruby><ruby>做<rt>zuò</rt></ruby><ruby>一<rt>yí</rt></ruby><ruby>顿<rt>dùn</rt></ruby><ruby>中<rt>zhōng</rt></ruby><ruby>餐<rt>cān</rt></ruby>。
+                                <ruby>自<rt>zì</rt></ruby><ruby>己<rt>jǐ</rt></ruby><ruby>做<rt>zuò</rt></ruby><ruby>饭<rt>fàn</rt></ruby><ruby>虽<rt>suī</rt></ruby><ruby>然<rt>rán</rt></ruby><ruby>有<rt>yǒu</rt></ruby><ruby>点<rt>diǎn</rt></ruby><ruby>难<rt>nán</rt></ruby>，<ruby>但<rt>dàn</rt></ruby><ruby>他<rt>tā</rt></ruby><ruby>做<rt>zuò</rt></ruby><ruby>得<rt>de</rt></ruby><ruby>非<rt>fēi</rt></ruby><ruby>常<rt>cháng</rt></ruby><ruby>认<rt>rèn</rt></ruby><ruby>真<rt>zhēn</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Hôm nay là sinh nhật bạn, David quyết định tự tay nấu một bữa đồ ăn Trung Quốc. Tự mình nấu ăn tuy có chút khó nhưng anh làm rất nghiêm túc.
+                            </div>
+
+                            <p class="mb-3 leading-relaxed">
+                                <ruby>当<rt>dāng</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>烧<rt>shāo</rt></ruby><ruby>肉<rt>ròu</rt></ruby><ruby>端<rt>duān</rt></ruby><ruby>上<rt>shàng</rt></ruby><ruby>桌<rt>zhuō</rt></ruby><ruby>时<rt>shí</rt></ruby>，<ruby>大<rt>dà</rt></ruby><ruby>家<rt>jiā</rt></ruby><ruby>尝<rt>cháng</rt></ruby><ruby>了<rt>le</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>夸<rt>kuā</rt></ruby><ruby>奖<rt>jiǎng</rt></ruby><ruby>味<rt>wèi</rt></ruby><ruby>道<rt>dào</rt></ruby><ruby>真<rt>zhēn</rt></ruby><ruby>棒<rt>bàng</rt></ruby>！
+                                <ruby>大<rt>dà</rt></ruby><ruby>卫<rt>wèi</rt></ruby><ruby>开<rt>kāi</rt></ruby><ruby>心<rt>xīn</rt></ruby><ruby>地<rt>de</rt></ruby><ruby>笑<rt>xiào</rt></ruby><ruby>了<rt>le</rt></ruby>。
+                            </p>
+                            <div class="translation-text text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-500 mb-3">
+                                Khi món thịt kho bưng lên bàn, mọi người nếm thử đều khen ngợi hương vị thật tuyệt! David vui mừng mỉm cười.
+                            </div>
+                        `,
+                        vocab: [
+                            {
+                                hanzi: "决定",
+                                pinyin: "juédìng",
+                                hanviet: "Quyết định",
+                                meaning: "Quyết định",
+                                example: "我决定认真学习汉语。",
+                                examplePinyin: "Wǒ juédìng rènzhēn xuéxí Hànyǔ.",
+                                exampleVi: "Tôi quyết định chăm chỉ học tiếng Trung."
+                            },
+                            {
+                                hanzi: "夸奖",
+                                pinyin: "kuājiǎng",
+                                hanviet: "Khoa thưởng",
+                                meaning: "Khen ngợi",
+                                example: "老师夸奖了他的表现。",
+                                examplePinyin: "Lǎoshī kuājiǎng le tā de biǎoxiàn.",
+                                exampleVi: "Thầy giáo đã khen ngợi thể hiện của anh ấy."
+                            }
+                        ],
+                        structures: [
+                            {
+                                pattern: "虽然 ... 但是 ...",
+                                meaning: "Tuy rằng ... nhưng ...",
+                                example: "做饭虽然有点难，但他做得非常认真。",
+                                examplePinyin: "Zuò fàn suīrán yǒudiǎn nán, dàn tā zuò de fēicháng rènzhēn.",
+                                exampleVi: "Nấu ăn tuy rằng có chút khó, nhưng anh làm rất nghiêm túc."
+                            }
+                        ],
+                        grammar: [
+                            {
+                                title: "Bổ ngữ trạng thái 『V + 得 + Adj』",
+                                formula: "Động từ + 得 + Tính từ / Cụm từ miêu tả",
+                                explanation: "Dùng để nhận xét, đánh giá về mức độ hay kết quả của một hành động.",
+                                example: "他做得非常认真。(Anh ấy làm rất nghiêm túc).",
+                                note: "Phân biệt với trợ từ sở hữu 的 và trợ từ trạng thái 地."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        /* ----------------------------------------------------
+           2. STATE MANAGEMENT (LOCAL STORAGE & APP STATE)
+        ---------------------------------------------------- */
+        let state = {
+            currentDay: 1,
+            currentStoryIdx: 0, // 0 for Story 1, 1 for Story 2
+            showPinyin: true,
+            showTranslation: true,
+            bookmarks: JSON.parse(localStorage.getItem('chinese_story_bookmarks') || '[]'),
+            streak: parseInt(localStorage.getItem('chinese_story_streak') || '1'),
+            audioSpeed: 1.0,
+            activeNav: 'stories',
+            activeSection: 'story'
+        };
+
+        /* ----------------------------------------------------
+           3. INITIALIZATION & RENDERERS
+        ---------------------------------------------------- */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDaySelector();
+            loadStoryContent();
+            updateStreakUI();
+            renderVault();
+            renderBookmarks();
+            updateBookmarkButtonUI();
+        });
+
+        // Render Day Selector Tabs
+        function renderDaySelector() {
+            const container = document.getElementById('day-selector-container');
+            container.innerHTML = '';
+            APP_DATA.forEach(d => {
+                const btn = document.createElement('button');
+                btn.className = `px-3 py-1.5 rounded-xl transition flex-shrink-0 flex items-center space-x-1 ${
+                    d.day === state.currentDay 
+                    ? 'bg-amber-400 text-slate-900 shadow-md font-bold' 
+                    : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700'
+                }`;
+                btn.innerHTML = `<span>Ngày ${d.day}</span>`;
+                btn.onclick = () => selectDay(d.day);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectDay(dayNum) {
+            state.currentDay = dayNum;
+            state.currentStoryIdx = 0; // Reset to Story 1 when changing day
+            renderDaySelector();
+            loadStoryContent();
+            updateBookmarkButtonUI();
+        }
+
+        function switchStory(storyNum) {
+            state.currentStoryIdx = storyNum - 1;
+            
+            // Toggle active styling on story buttons
+            const btn1 = document.getElementById('btn-story-1');
+            const btn2 = document.getElementById('btn-story-2');
+            if (storyNum === 1) {
+                btn1.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 bg-blue-600 text-white shadow";
+                btn2.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 text-slate-600 hover:bg-slate-100";
+            } else {
+                btn2.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 bg-blue-600 text-white shadow";
+                btn1.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 text-slate-600 hover:bg-slate-100";
+            }
+            loadStoryContent();
+            updateBookmarkButtonUI();
+        }
+
+        // Load active story data into view
+        function loadStoryContent() {
+            const dayObj = APP_DATA.find(d => d.day === state.currentDay) || APP_DATA[0];
+            const story = dayObj.stories[state.currentStoryIdx] || dayObj.stories[0];
+
+            // Header Meta
+            document.getElementById('story-level-badge').innerText = story.level;
+            document.getElementById('story-read-time').innerText = story.readTime + " đọc";
+            document.getElementById('story-title-zh').innerText = story.titleZh;
+            document.getElementById('story-title-vi').innerText = story.titleVi;
+            document.getElementById('count-vocab').innerText = story.vocab.length;
+
+            // Section 1: Story Text HTML
+            const contentBox = document.getElementById('story-content-box');
+            contentBox.innerHTML = story.contentHtml;
+            applyDisplayToggles();
+
+            // Section 2: Key Vocab Cards
+            const vocabBox = document.getElementById('vocab-cards-box');
+            vocabBox.innerHTML = story.vocab.map((v, i) => `
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs space-y-2">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400">#${i+1}</span>
+                            <span class="text-lg font-bold text-slate-800 zh-font ml-1">${v.hanzi}</span>
+                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md ml-2">${v.pinyin}</span>
+                        </div>
+                        <span class="text-xs font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">${v.hanviet}</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-700">👉 ${v.meaning}</p>
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-xs space-y-1">
+                        <div class="font-bold text-slate-800 zh-font flex items-center justify-between">
+                            <span>${v.example}</span>
+                            <button onclick="speakText('${v.example}')" class="text-blue-600 hover:text-blue-800 ml-2">🔊</button>
+                        </div>
+                        <div class="text-slate-500 text-[11px]">${v.examplePinyin}</div>
+                        <div class="text-slate-600 font-medium text-[11px]">${v.exampleVi}</div>
+                    </div>
+                    ${v.tip ? `<div class="text-[11px] font-medium text-amber-800 bg-amber-50 p-2 rounded-lg border border-amber-100">${v.tip}</div>` : ''}
+                </div>
+            `).join('');
+
+            // Section 3: Useful Structures
+            const structBox = document.getElementById('structures-box');
+            structBox.innerHTML = story.structures.map(s => `
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs space-y-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">✨ ${s.pattern}</span>
+                    </div>
+                    <p class="text-xs font-bold text-slate-700">${s.meaning}</p>
+                    ${s.explanation ? `<p class="text-xs text-slate-500 leading-relaxed">${s.explanation}</p>` : ''}
+                    <div class="bg-blue-50/60 p-2.5 rounded-xl border border-blue-100 text-xs space-y-1">
+                        <div class="font-bold text-slate-800 zh-font flex items-center justify-between">
+                            <span>${s.example}</span>
+                            <button onclick="speakText('${s.example}')" class="text-blue-600">🔊</button>
+                        </div>
+                        <div class="text-blue-600 text-[11px] font-medium">${s.examplePinyin}</div>
+                        <div class="text-slate-600 text-[11px]">${s.exampleVi}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Section 4: Grammar Points
+            const grammarBox = document.getElementById('grammar-box');
+            grammarBox.innerHTML = story.grammar.map(g => `
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs space-y-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">💡 ${g.title}</span>
+                    </div>
+                    <div class="bg-slate-100 text-slate-800 font-mono text-[11px] p-2 rounded-lg border border-slate-200 font-semibold">
+                        Công thức: ${g.formula}
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-line">${g.explanation}</p>
+                    <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 text-xs">
+                        <span class="font-bold text-emerald-900">Ví dụ:</span>
+                        <span class="font-bold text-slate-800 zh-font ml-1">${g.example}</span>
+                    </div>
+                    ${g.note ? `<p class="text-[11px] text-amber-700 italic">⚠️ ${g.note}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        /* ----------------------------------------------------
+           4. TOGGLE & DISPLAY CONTROLS
+        ---------------------------------------------------- */
+        function togglePinyin() {
+            state.showPinyin = !state.showPinyin;
+            applyDisplayToggles();
+        }
+
+        function toggleTranslation() {
+            state.showTranslation = !state.showTranslation;
+            applyDisplayToggles();
+        }
+
+        function applyDisplayToggles() {
+            const storyBox = document.getElementById('story-content-box');
+            const btnPinyin = document.getElementById('btn-toggle-pinyin');
+            const btnTrans = document.getElementById('btn-toggle-trans');
+
+            if (state.showPinyin) {
+                storyBox.classList.remove('hide-pinyin');
+                btnPinyin.className = "px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white shadow-xs transition flex items-center space-x-1 opacity-100";
+            } else {
+                storyBox.classList.add('hide-pinyin');
+                btnPinyin.className = "px-2.5 py-1 rounded-lg font-bold bg-slate-300 text-slate-700 shadow-xs transition flex items-center space-x-1 opacity-70";
+            }
+
+            if (state.showTranslation) {
+                storyBox.classList.remove('hide-translation');
+                btnTrans.className = "px-2.5 py-1 rounded-lg font-bold bg-emerald-600 text-white shadow-xs transition flex items-center space-x-1 opacity-100";
+            } else {
+                storyBox.classList.add('hide-translation');
+                btnTrans.className = "px-2.5 py-1 rounded-lg font-bold bg-slate-300 text-slate-700 shadow-xs transition flex items-center space-x-1 opacity-70";
+            }
+        }
+
+        function showStorySection(secName) {
+            state.activeSection = secName;
+            ['story', 'vocab', 'structures', 'grammar'].forEach(s => {
+                const btn = document.getElementById(`tab-sec-${s}`);
+                const panel = document.getElementById(`panel-sec-${s}`);
+                if (s === secName) {
+                    btn.className = "flex-1 py-1.5 rounded-lg text-center transition bg-white text-blue-700 shadow-xs font-extrabold";
+                    panel.classList.add('active');
+                } else {
+                    btn.className = "flex-1 py-1.5 rounded-lg text-center transition hover:text-slate-800 text-slate-600 font-bold";
+                    panel.classList.remove('active');
+                }
+            });
+        }
+
+        /* ----------------------------------------------------
+           5. AUDIO PLAYER (WEB SPEECH API TTS)
+        ---------------------------------------------------- */
+        let synth = window.speechSynthesis;
+        let isSpeaking = false;
+
+        function speakText(text) {
+            if (!synth) {
+                alert("Trình duyệt không hỗ trợ phát âm tự động.");
+                return;
+            }
+            synth.cancel(); // stop previous
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = state.audioSpeed;
+            synth.speak(utterance);
+        }
+
+        function playFullAudio() {
+            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
+            const story = dayObj.stories[state.currentStoryIdx];
+            
+            // Extract raw Chinese text from HTML (removing HTML tags)
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = story.contentHtml;
+            // Remove rt pinyin tags before getting innerText
+            tempDiv.querySelectorAll('rt').forEach(el => el.remove());
+            tempDiv.querySelectorAll('.translation-text').forEach(el => el.remove());
+            const textToRead = tempDiv.innerText.trim();
+
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                document.getElementById('label-audio').innerText = "Nghe";
+                document.getElementById('icon-audio').className = "ri-volume-up-fill text-base";
+            } else {
+                speakText(textToRead);
+                isSpeaking = true;
+                document.getElementById('label-audio').innerText = "Dừng";
+                document.getElementById('icon-audio').className = "ri-pause-circle-fill text-base text-rose-600";
+            }
+        }
+
+        function toggleSpeed() {
+            if (state.audioSpeed === 1.0) {
+                state.audioSpeed = 0.75;
+            } else {
+                state.audioSpeed = 1.0;
+            }
+            document.getElementById('btn-audio-speed').innerText = state.audioSpeed.toFixed(2) + "x";
+        }
+
+        /* ----------------------------------------------------
+           6. BOOKMARK & STREAK MANAGEMENT
+        ---------------------------------------------------- */
+        function toggleBookmarkCurrent() {
+            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
+            const story = dayObj.stories[state.currentStoryIdx];
+
+            const idx = state.bookmarks.findIndex(b => b.id === story.id);
+            if (idx > -1) {
+                state.bookmarks.splice(idx, 1);
+            } else {
+                state.bookmarks.push({
+                    id: story.id,
+                    day: state.currentDay,
+                    storyIdx: state.currentStoryIdx,
+                    titleZh: story.titleZh,
+                    titleVi: story.titleVi
+                });
+            }
+            localStorage.setItem('chinese_story_bookmarks', JSON.stringify(state.bookmarks));
+            updateBookmarkButtonUI();
+            renderBookmarks();
+        }
+
+        function updateBookmarkButtonUI() {
+            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
+            const story = dayObj.stories[state.currentStoryIdx];
+            const isBookmarked = state.bookmarks.some(b => b.id === story.id);
+
+            const icon = document.getElementById('icon-header-bookmark');
+            if (isBookmarked) {
+                icon.className = "ri-star-fill text-amber-400 text-lg";
+            } else {
+                icon.className = "ri-star-line text-slate-300 text-lg";
+            }
+        }
+
+        function renderBookmarks() {
+            const container = document.getElementById('bookmarks-list');
+            if (state.bookmarks.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center p-8 bg-white rounded-2xl border border-slate-200/80 text-slate-400 text-xs">
+                        <p class="text-2xl mb-2">⭐</p>
+                        Chưa có câu chuyện nào được lưu.<br>Bấm biểu tượng ngôi sao ở góc trên để lưu bài học.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.bookmarks.map(b => `
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex justify-between items-center">
+                    <div>
+                        <div class="text-xs font-bold text-amber-600 mb-0.5">Ngày ${b.day} • Truyện ${b.storyIdx + 1}</div>
+                        <div class="text-base font-bold text-slate-800 zh-font">${b.titleZh}</div>
+                        <div class="text-xs text-slate-500">${b.titleVi}</div>
+                    </div>
+                    <button onclick="goToBookmarkedStory(${b.day}, ${b.storyIdx})" class="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-blue-100">
+                        Đọc Ngay ➔
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function goToBookmarkedStory(dayNum, storyIdx) {
+            switchNavView('stories');
+            selectDay(dayNum);
+            switchStory(storyIdx + 1);
+        }
+
+        function updateStreakUI() {
+            document.getElementById('streak-count').innerText = `${state.streak} Ngày`;
+            document.getElementById('stat-streak-val').innerText = state.streak;
+        }
+
+        function checkInToday() {
+            state.streak += 1;
+            localStorage.setItem('chinese_story_streak', state.streak);
+            updateStreakUI();
+            const btn = document.getElementById('btn-checkin');
+            btn.innerHTML = "🎉 Đã Điểm Danh!";
+            btn.className = "bg-slate-400 text-white font-bold py-2.5 px-6 rounded-xl text-xs shadow-md cursor-not-allowed";
+            btn.onclick = null;
+        }
+
+        /* ----------------------------------------------------
+           7. VAULT & SEARCH SYSTEM
+        ---------------------------------------------------- */
+        function renderVault() {
+            const container = document.getElementById('vault-content');
+            let allVocab = [];
+            APP_DATA.forEach(d => {
+                d.stories.forEach(s => {
+                    s.vocab.forEach(v => {
+                        allVocab.push({ ...v, storyTitle: s.titleZh, day: d.day });
+                    });
+                });
+            });
+
+            container.innerHTML = allVocab.map(v => `
+                <div class="vault-card bg-white p-3 rounded-2xl border border-slate-200/80 text-xs space-y-1">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-slate-800 zh-font">${v.hanzi}</span>
+                        <span class="text-[10px] font-bold text-slate-400">Ngày ${v.day}</span>
+                    </div>
+                    <div class="text-blue-600 font-semibold">${v.pinyin} • <span class="text-purple-700">${v.hanviet}</span></div>
+                    <div class="text-slate-600 font-medium">${v.meaning}</div>
+                </div>
+            `).join('');
+        }
+
+        function filterVault() {
+            const query = document.getElementById('vault-search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.vault-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* ----------------------------------------------------
+           8. NAVIGATION SYSTEM
+        ---------------------------------------------------- */
+        function switchNavView(viewName) {
+            state.activeNav = viewName;
+            ['stories', 'vault', 'bookmarks', 'stats'].forEach(v => {
+                const navBtn = document.getElementById(`nav-${v}`);
+                const viewPanel = document.getElementById(`view-${v}`);
+                if (v === viewName) {
+                    navBtn.classList.add('active');
+                    viewPanel.classList.remove('hidden');
+                    viewPanel.classList.add('active');
+                } else {
+                    navBtn.classList.remove('active');
+                    viewPanel.classList.add('hidden');
+                    viewPanel.classList.remove('active');
+                }
+            });
+            // Scroll back to top on view change
+            document.getElementById('main-content-scroll').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
