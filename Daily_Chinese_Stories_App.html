@@ -1118,6 +1118,17 @@
             sleepTimerId: null
         };
 
+        function getCurrentDayObj() {
+            const dayNum = parseInt(state.currentDay) || 1;
+            return APP_DATA.find(d => d.day == dayNum) || APP_DATA[0];
+        }
+
+        function getCurrentStoryObj() {
+            const dayObj = getCurrentDayObj();
+            const storyIdx = parseInt(state.currentStoryIdx) || 0;
+            return (dayObj && dayObj.stories && dayObj.stories[storyIdx]) ? dayObj.stories[storyIdx] : (dayObj && dayObj.stories && dayObj.stories[0] ? dayObj.stories[0] : null);
+        }
+
         /* ----------------------------------------------------
            3. INITIALIZATION & RENDERERS
         ---------------------------------------------------- */
@@ -1130,15 +1141,17 @@
             renderHeatmap();
             updateBookmarkButtonUI();
             initSRSQueue();
+            showStorySection('story');
         });
 
         function renderDaySelector() {
             const container = document.getElementById('day-selector-container');
             container.innerHTML = '';
+            const currentDayNum = parseInt(state.currentDay) || 1;
             APP_DATA.forEach(d => {
                 const btn = document.createElement('button');
                 btn.className = `px-3 py-1.5 rounded-xl transition flex-shrink-0 flex items-center space-x-1 ${
-                    d.day === state.currentDay 
+                    d.day == currentDayNum 
                     ? 'bg-amber-400 text-slate-900 shadow-md font-bold' 
                     : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700'
                 }`;
@@ -1172,14 +1185,14 @@
         }
 
         function loadStoryContent() {
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay) || APP_DATA[0];
-            const story = dayObj.stories[state.currentStoryIdx] || dayObj.stories[0];
+            const story = getCurrentStoryObj();
+            if (!story) return;
 
-            document.getElementById('story-level-badge').innerText = story.level;
-            document.getElementById('story-read-time').innerText = story.readTime + " đọc";
-            document.getElementById('story-title-zh').innerText = story.titleZh;
-            document.getElementById('story-title-vi').innerText = story.titleVi;
-            document.getElementById('count-vocab').innerText = story.vocab.length;
+            document.getElementById('story-level-badge').innerText = story.level || 'HSK2';
+            document.getElementById('story-read-time').innerText = (story.readTime || '2 min') + " đọc";
+            document.getElementById('story-title-zh').innerText = story.titleZh || '';
+            document.getElementById('story-title-vi').innerText = story.titleVi || '';
+            document.getElementById('count-vocab').innerText = story.vocab ? story.vocab.length : 0;
 
             // Render Story HTML
             const contentBox = document.getElementById('story-content-box');
@@ -1314,8 +1327,8 @@
         let modalPinyinOn = true;
 
         function openAIVoiceModal() {
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
-            const story = dayObj.stories[state.currentStoryIdx];
+            const story = getCurrentStoryObj();
+            if (!story) return;
 
             const modalContentBox = document.getElementById('modal-target-html');
             modalContentBox.innerHTML = story.contentHtml;
@@ -1466,8 +1479,8 @@
             document.getElementById('modal-rec-status').innerText = "🤖 AI đang phân tích âm thanh & giọng đọc...";
             document.getElementById('modal-rec-status').className = "text-xs font-bold text-purple-700 animate-pulse";
 
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
-            const story = dayObj.stories[state.currentStoryIdx];
+            const story = getCurrentStoryObj();
+            if (!story) return;
 
             let volumeRMS = 0;
             let durationSec = 0;
@@ -1819,8 +1832,8 @@
         }
 
         function playFullAudio() {
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
-            const story = dayObj.stories[state.currentStoryIdx];
+            const story = getCurrentStoryObj();
+            if (!story) return;
             
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = story.contentHtml;
@@ -1917,8 +1930,8 @@
         }
 
         function toggleBookmarkCurrent() {
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
-            const story = dayObj.stories[state.currentStoryIdx];
+            const story = getCurrentStoryObj();
+            if (!story) return;
 
             const idx = state.bookmarks.findIndex(b => b.id === story.id);
             if (idx > -1) state.bookmarks.splice(idx, 1);
@@ -1930,12 +1943,14 @@
         }
 
         function updateBookmarkButtonUI() {
-            const dayObj = APP_DATA.find(d => d.day === state.currentDay);
-            const story = dayObj.stories[state.currentStoryIdx];
+            const story = getCurrentStoryObj();
+            if (!story) return;
             const isBookmarked = state.bookmarks.some(b => b.id === story.id);
             const icon = document.getElementById('icon-header-bookmark');
-            if (isBookmarked) icon.className = "ri-star-fill text-amber-400 text-lg";
-            else icon.className = "ri-star-line text-slate-300 text-lg";
+            if (icon) {
+                if (isBookmarked) icon.className = "ri-star-fill text-amber-400 text-lg";
+                else icon.className = "ri-star-line text-slate-300 text-lg";
+            }
         }
 
         function renderBookmarks() {
