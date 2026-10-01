@@ -1125,9 +1125,24 @@ var writers = {};
 
 function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => {
-        el.classList.add('hidden');
+        el.className = el.className.replace(/\bhidden\b/g, '').replace(/\s+/g, ' ').trim() + ' hidden';
         el.style.display = 'none';
     });
+    let targetSec = document.getElementById('sec-' + tabId);
+    if (targetSec) {
+        targetSec.className = targetSec.className.replace(/\bhidden\b/g, '').replace(/\s+/g, ' ').trim();
+        targetSec.style.display = 'block';
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900', 'active');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+    });
+    let activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+    }
+});
     let targetSec = document.getElementById('sec-' + tabId);
     if (targetSec) {
         targetSec.classList.remove('hidden');
