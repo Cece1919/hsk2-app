@@ -92,7 +92,7 @@
     
     <main class="max-w-7xl mx-auto px-4 py-8">
         
-        <div id="sec-overview" class="tab-content hidden">
+        <div id="sec-overview" class="tab-content">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
                 <h2 class="text-xl font-bold text-blue-950 mb-3 flex items-center gap-2">📌 Mục Tiêu Bài Học (Lesson Goals)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -879,176 +879,126 @@
         </div>
     </div>
 </div>
-<script>
+    <script>
 var writers = {};
 
-const items = [{"id": "waimian-1", "char": "外", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)", "key": "waimian"}, {"id": "waimian-2", "char": "面", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)", "key": "waimian"}, {"id": "zhunbei-1", "char": "准", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)", "key": "zhunbei"}, {"id": "zhunbei-2", "char": "备", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)", "key": "zhunbei"}, {"id": "jiu-1", "char": "就", "pinyin": "jiù", "meaning": "就 (Thì, chính, ngay)", "key": "jiu"}, {"id": "yu-1", "char": "鱼", "pinyin": "yú", "meaning": "鱼 (Con cá)", "key": "yu"}, {"id": "ba-1", "char": "吧", "pinyin": "ba", "meaning": "吧 (Nhé, đi (Đề nghị))", "key": "ba"}, {"id": "jian-1", "char": "件", "pinyin": "jiàn", "meaning": "件 (Chiếc, cái (Quần áo, việc))", "key": "jian"}, {"id": "hai-1", "char": "还", "pinyin": "hái", "meaning": "还 (Còn, vẫn, khá)", "key": "hai"}, {"id": "keyi-1", "char": "可", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)", "key": "keyi"}, {"id": "keyi-2", "char": "以", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)", "key": "keyi"}, {"id": "bucuo-1", "char": "不", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)", "key": "bucuo"}, {"id": "bucuo-2", "char": "错", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)", "key": "bucuo"}, {"id": "kaoshi-1", "char": "考", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)", "key": "kaoshi"}, {"id": "kaoshi-2", "char": "试", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)", "key": "kaoshi"}, {"id": "yisi-1", "char": "意", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)", "key": "yisi"}, {"id": "yisi-2", "char": "思", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)", "key": "yisi"}, {"id": "kafei-1", "char": "咖", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)", "key": "kafei"}, {"id": "kafei-2", "char": "啡", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)", "key": "kafei"}, {"id": "dui-1", "char": "对", "pinyin": "duì", "meaning": "对 (Đối với, đúng)", "key": "dui"}];
+        const VOCAB_AUDIO = {};
+        const TEXT_AUDIO = {};
 
+        const items = [{"id": "waimian-1", "char": "外", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)"}, {"id": "waimian-2", "char": "面", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)"}, {"id": "zhunbei-1", "char": "准", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)"}, {"id": "zhunbei-2", "char": "备", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)"}, {"id": "jiu-1", "char": "就", "pinyin": "jiù", "meaning": "就 (Thì, chính, ngay)"}, {"id": "yu-1", "char": "鱼", "pinyin": "yú", "meaning": "鱼 (Con cá)"}, {"id": "ba-1", "char": "吧", "pinyin": "ba", "meaning": "吧 (Nhé, đi (Đề nghị))"}, {"id": "jian-1", "char": "件", "pinyin": "jiàn", "meaning": "件 (Chiếc, cái (Quần áo, việc))"}, {"id": "hai-1", "char": "还", "pinyin": "hái", "meaning": "还 (Còn, vẫn, khá)"}, {"id": "keyi-1", "char": "可", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)"}, {"id": "keyi-2", "char": "以", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)"}, {"id": "bucuo-1", "char": "不", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)"}, {"id": "bucuo-2", "char": "错", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)"}, {"id": "kaoshi-1", "char": "考", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)"}, {"id": "kaoshi-2", "char": "试", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)"}, {"id": "yisi-1", "char": "意", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)"}, {"id": "yisi-2", "char": "思", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)"}, {"id": "kafei-1", "char": "咖", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)"}, {"id": "kafei-2", "char": "啡", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)"}, {"id": "dui-1", "char": "对", "pinyin": "duì", "meaning": "对 (Đối với, đúng)"}];
 
-function initWriters() {
-    if (typeof HanziWriter === 'undefined') return;
-    if (typeof items === 'undefined' || !items) return;
+        document.addEventListener('DOMContentLoaded', () => {
+            items.forEach(item => {
+                let el = document.getElementById('target-' + item.id);
+                if (el) {
+                    writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {
+                        width: 130,
+                        height: 130,
+                        padding: 5,
+                        strokeAnimationSpeed: 1,
+                        delayBetweenStrokes: 150,
+                        strokeColor: '#1e293b',
+                        radicalColor: '#2563eb',
+                        showOutline: true,
+                        outlineColor: '#cbd5e1'
+                    });
+                }
+                setupCanvas('pad-' + item.id);
+            });
+        });
 
-    items.forEach(item => {
-        const containerId = 'target-' + item.id;
-        const container = document.getElementById(containerId);
-        if (container && !writers[item.id]) {
-            try {
-                let writer = HanziWriter.create(containerId, item.char, {
-                    width: 100,
-                    height: 100,
-                    padding: 5,
-                    showOutline: true,
-                    strokeAnimationSpeed: 1,
-                    delayBetweenStrokes: 150,
-                    strokeColor: '#0f172a'
-                });
-                writers[item.id] = writer;
-            } catch(e) {
-                console.log('Error init writer for ' + item.id, e);
+        function animateChar(id) {
+            if (writers[id]) {
+                writers[id].animateCharacter();
             }
         }
-    });
 
-    items.forEach(item => {
-        const canvasId = 'pad-' + item.id;
-        initPad(canvasId);
-    });
-}
-
-function animateChar(id, charStr) {
-    if (writers[id]) {
-        writers[id].animateCharacter();
-    }
-}
-
-function loopChar(id, charStr) {
-    if (writers[id]) {
-        writers[id].loopCharacterAnimation();
-    }
-}
-
-function animateAllSims() {
-    if (typeof writers === 'undefined') return;
-    Object.keys(writers).forEach(key => {
-        if (writers[key]) {
-            writers[key].animateCharacter();
-        }
-    });
-}
-
-function initPad(canvasId) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas || canvas.dataset.inited) return;
-    canvas.dataset.inited = "true";
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-
-    ctx.lineWidth = 4;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#0f172a';
-
-    function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return {
-            x: clientX - rect.left,
-            y: clientY - rect.top
-        };
-    }
-
-    function startDraw(e) {
-        isDrawing = true;
-        const pos = getPos(e);
-        ctx.beginPath();
-        ctx.moveTo(pos.x, pos.y);
-    }
-
-    function draw(e) {
-        if (!isDrawing) return;
-        const pos = getPos(e);
-        ctx.lineTo(pos.x, pos.y);
-        ctx.stroke();
-    }
-
-    function stopDraw() {
-        isDrawing = false;
-    }
-
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('mouseleave', stopDraw);
-
-    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(e); });
-    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
-    canvas.addEventListener('touchend', stopDraw);
-}
-
-function clearPad(canvasId) {
-    const canvas = document.getElementById(canvasId);
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-}
-
-
-let currentAudio = null;
-let currentRate = 1.0;
-
-
-
-function setAudioPlaybackRate(rate) {
-    if (typeof currentRate !== 'undefined') currentRate = rate;
-    var btn075 = document.getElementById('rate-075');
-    var btn100 = document.getElementById('rate-100');
-    if (btn075 && btn100) {
-        if (rate === 0.75) {
-            btn075.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition";
-            btn100.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition";
-        } else {
-            btn075.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition";
-            btn100.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition";
-        }
-    }
-}
-
-function showTab(tabId) {
-    const tabs = ['overview', 'vocab', 'writing', 'grammar', 'text', 'practice', 'culture'];
-    document.querySelectorAll('.tab-content').forEach(el => {
-        el.classList.add('hidden');
-        el.style.display = 'none';
-    });
-    const targetSec = document.getElementById('sec-' + tabId);
-    if (targetSec) {
-        targetSec.classList.remove('hidden');
-        targetSec.style.display = 'block';
-    }
-    tabs.forEach(t => {
-        const btn = document.getElementById('tab-' + t);
-        if (btn) {
-            if (t === tabId) {
-                btn.className = "tab-btn active px-4 py-2.5 rounded-xl font-bold bg-blue-900 text-white shadow-sm transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
-            } else {
-                btn.className = "tab-btn px-4 py-2.5 rounded-xl font-medium text-slate-600 hover:text-blue-900 transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
+        function resetChar(id) {
+            if (writers[id]) {
+                writers[id].showCharacter();
             }
         }
-    });
-    if (tabId === 'writing' && typeof initWriters === 'function') {
-        setTimeout(initWriters, 100);
-    }
-    try { window.scrollTo(0, 0); } catch(e) {}
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    showTab('overview');
-});
-setTimeout(function() {
-    showTab('overview');
-}, 50);
+        function setupCanvas(canvasId) {
+            let canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            let ctx = canvas.getContext('2d');
+            let isDrawing = false;
 
+            function getPos(e) {
+                let rect = canvas.getBoundingClientRect();
+                let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (canvas.width / rect.width),
+                    y: (clientY - rect.top) * (canvas.height / rect.height)
+                };
+            }
+
+            function startDraw(e) {
+                e.preventDefault();
+                isDrawing = true;
+                let pos = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                let pos = getPos(e);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            }
+
+            function stopDraw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                isDrawing = false;
+            }
+
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDraw);
+            canvas.addEventListener('mouseleave', stopDraw);
+
+            canvas.addEventListener('touchstart', startDraw, {passive: false});
+            canvas.addEventListener('touchmove', draw, {passive: false});
+            canvas.addEventListener('touchend', stopDraw, {passive: false});
+        }
+
+        function clearCanvas(id) {
+            let canvas = document.getElementById('pad-' + id);
+            if (canvas) {
+                let ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.style.display = 'none';
+            });
+            let targetSec = document.getElementById('sec-' + tabId);
+            if (targetSec) {
+                targetSec.classList.remove('hidden');
+                targetSec.style.display = 'block';
+            }
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            let activeBtn = document.getElementById('tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+            }
+        }
 
 var currentAudio = null;
 var currentRate = 0.85;
@@ -1196,144 +1146,69 @@ function playSecondaryTTS(text) {
     } catch(e) {}
 }
 
-        function toggleElement(className) {
-    const el = document.getElementById(className) || document.querySelector('.' + className);
-    if (el) {
-        el.classList.toggle('hidden');
-        return;
-    }
-    const elements = document.getElementsByClassName(className);
-    for (let item of elements) {
-        item.classList.toggle('hidden');
-    }
-}
-
-function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
-    let btn = null;
-    let isCorrect = false;
-
-    if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
-        btn = btnOrQNum;
-        isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
-    }
-
-    if (btn) {
-        const parentDiv = btn.parentElement;
-        if (parentDiv) {
-            const siblings = parentDiv.querySelectorAll('button');
-            siblings.forEach(b => {
-                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
-                b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-            });
-        }
-
-        if (isCorrect) {
-            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-            btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
-        } else {
-            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-            btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
-        }
-
-        const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
-        if (card) {
-            let evalBox = card.querySelector('.ans-eval-box');
-            if (!evalBox) {
-                evalBox = document.createElement('div');
-                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
-                card.appendChild(evalBox);
-            }
-            evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
-            
-            if (isCorrect) {
-                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
-                evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
-            } else {
-                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
-                evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
-            }
-        }
-        return;
-    }
-
-    const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
-    if (!targetId) return;
-    const ansDiv = document.getElementById(targetId);
-    if (!ansDiv) return;
-    ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
-    ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
-    ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
-}
-
-function toggleAns(id) {
-    const el = document.getElementById(id) || document.querySelector('.' + id);
-    if (!el) return;
-
-    const parentBox = el.parentElement;
-    const inp = parentBox ? parentBox.querySelector('input') : null;
-    
-    const isHidden = el.classList.contains('hidden') || el.style.display === 'none';
-    if (!isHidden && inp && !inp.value.trim()) {
-        el.classList.add('hidden');
-        el.style.display = 'none';
-        return;
-    }
-    
-    el.classList.remove('hidden');
-    el.style.display = 'block';
-
-    if (inp) {
-        let fb = el.querySelector('.ans-feedback');
-        if (!fb) {
-            fb = document.createElement('div');
-            fb.className = 'ans-feedback mb-2 p-2.5 rounded-lg text-xs space-y-1 font-sans';
-            el.insertBefore(fb, el.firstChild);
-        }
-
-        const userText = inp.value.trim();
-        let correctText = "";
-        const targetP = el.querySelector('p.zh, p.font-bold');
-        if (targetP) {
-            const raw = targetP.textContent;
-            if (raw.includes('Đáp án:')) {
-                correctText = raw.split('Đáp án:')[1].trim();
-            } else if (raw.includes('Đáp án chuẩn:')) {
-                correctText = raw.split('Đáp án chuẩn:')[1].trim();
-            } else {
-                correctText = raw.trim();
+        function toggleAns(ansId) {
+            let el = document.getElementById(ansId);
+            if (el) {
+                el.classList.toggle('hidden');
             }
         }
 
-        if (!userText) {
-            fb.className = 'ans-feedback mb-2 p-2.5 bg-blue-50 border border-blue-200 rounded-lg text-blue-900 text-xs font-medium';
-            fb.innerHTML = 'ℹ️ <i>Bạn chưa nhập câu trả lời. Dưới đây là đáp án & giải thích chi tiết:</i>';
-            el.className = el.className.replace(/bg-\w+-\d+/, 'bg-slate-50').replace(/border-\w+-\d+/, 'border-slate-200');
-        } else {
-            const normUser = userText.replace(/[\s\.\,\!\?！。？，、`'"\(\)]/g, '');
-            const normCorrect = correctText.replace(/[\s\.\,\!\?！。？，、`'"\(\)]/g, '');
+        function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
+            let btn = null;
+            let isCorrect = false;
 
-            if (normUser === normCorrect) {
-                fb.className = 'ans-feedback mb-2 p-2.5 bg-emerald-100 border border-emerald-300 rounded-lg text-emerald-950 text-xs font-bold';
-                fb.innerHTML = '✅ <b>Chính xác 100%!</b> Bạn đã sắp xếp câu hoàn toàn đúng.';
-                el.className = el.className.replace(/bg-\w+-\d+/, 'bg-emerald-50').replace(/border-\w+-\d+/, 'border-emerald-200');
-            } else {
-                const safeUser = userText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                fb.className = 'ans-feedback mb-2 p-2.5 bg-amber-50 border border-amber-300 rounded-lg text-amber-950 text-xs space-y-1';
-                fb.innerHTML = '❌ <b>Chưa chính xác!</b><br>• Câu bạn đã nhập: <span class="font-bold text-rose-700 zh">' + safeUser + '</span><br>• <i>Hãy đối chiếu với đáp án chuẩn và phân tích giải thích ngữ pháp bên dưới để rút kinh nghiệm nhé!</i>';
-                el.className = el.className.replace(/bg-\w+-\d+/, 'bg-amber-50/60').replace(/border-\w+-\d+/, 'border-amber-200');
+            if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
+                btn = btnOrQNum;
+                isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
             }
+
+            if (btn) {
+                const parentDiv = btn.parentElement;
+                if (parentDiv) {
+                    const siblings = parentDiv.querySelectorAll('button');
+                    siblings.forEach(b => {
+                        b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
+                        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+                    });
+                }
+
+                if (isCorrect) {
+                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
+                } else {
+                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
+                }
+
+                const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
+                if (card) {
+                    let evalBox = card.querySelector('.ans-eval-box');
+                    if (!evalBox) {
+                        evalBox = document.createElement('div');
+                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
+                        card.appendChild(evalBox);
+                    }
+                    evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+                    
+                    if (isCorrect) {
+                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
+                        evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
+                    } else {
+                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
+                        evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
+                    }
+                }
+                return;
+            }
+
+            const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
+            if (!targetId) return;
+            const ansDiv = document.getElementById(targetId);
+            if (!ansDiv) return;
+            ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
+            ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+            ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
         }
-    }
-}
-
-window.onload = function() {
-    const defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
-    showTab(defaultTab);
-    if (typeof initWriters === 'function') {
-        setTimeout(initWriters, 300);
-    }
-};
-
-</script>
+    </script>
 </body>
 </html>
