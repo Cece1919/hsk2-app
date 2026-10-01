@@ -2548,16 +2548,29 @@ function setSpeed(rate) {
     }
 }
 
+var currentAudio = null;
+var currentRate = 0.85;
+
 function playVocab(key, fallbackText) {
-    const b64 = (typeof VOCAB_AUDIO !== 'undefined') ? VOCAB_AUDIO[key] : null;
-    if (b64) playB64(b64, fallbackText);
-    else speakText(fallbackText);
+    var textToSpeak = fallbackText || key || "";
+    var namespacedKey = (typeof currentLesson !== "undefined") ? ("d" + currentLesson + "_" + key) : key;
+    var b64 = null;
+    if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
+        b64 = VOCAB_AUDIO[namespacedKey] || VOCAB_AUDIO[key];
+    }
+    if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
+        b64 = TEXT_AUDIO[namespacedKey] || TEXT_AUDIO[key];
+    }
+
+    if (b64) {
+        playB64(b64, textToSpeak);
+    } else {
+        speakText(textToSpeak);
+    }
 }
 
 function playText(key, fallbackText) {
-    const b64 = (typeof TEXT_AUDIO !== 'undefined') ? TEXT_AUDIO[key] : null;
-    if (b64) playB64(b64, fallbackText);
-    else speakText(fallbackText);
+    playVocab(key, fallbackText);
 }
 
 function playB64(b64Data, fallbackText) {
@@ -2570,13 +2583,13 @@ function playB64(b64Data, fallbackText) {
             speakText(fallbackText);
             return;
         }
-        let src = (b64Data && b64Data.startsWith('data:audio/')) ? b64Data : ('data:audio/mp4;base64,' + (b64Data || ''));
+        var src = (b64Data && b64Data.startsWith && b64Data.startsWith("data:audio/")) ? b64Data : ("data:audio/mp4;base64," + (b64Data || ""));
         currentAudio = new Audio(src);
-        currentAudio.playbackRate = currentRate;
-        let playPromise = currentAudio.play();
+        currentAudio.playbackRate = currentRate || 0.85;
+        var playPromise = currentAudio.play();
         if (playPromise !== undefined) {
             playPromise.catch(function(err) {
-                console.log('Base64 audio playback failed, speaking text via TTS:', err);
+                console.log("Base64 audio playback failed, speaking text via TTS:", err);
                 speakText(fallbackText);
             });
         }
@@ -2586,19 +2599,102 @@ function playB64(b64Data, fallbackText) {
 }
 
 function speakText(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        let utter = new SpeechSynthesisUtterance(text);
-        utter.rate = currentRate;
-        utter.lang = 'zh-CN';
-        let voices = window.speechSynthesis.getVoices();
-        let zhVoice = voices.find(v => v.lang && (v.lang.includes('zh') || v.lang.includes('CN')));
-        if (zhVoice) utter.voice = zhVoice;
-        window.speechSynthesis.speak(utter);
+    if (!text) return;
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+    } catch(e) {}
+
+    var textClean = text.trim();
+    if (!textClean) return;
+
+    var speechFired = false;
+
+    if ("speechSynthesis" in window) {
+        try {
+            window.speechSynthesis.cancel();
+            
+            var utter = new SpeechSynthesisUtterance(textClean);
+            utter.lang = "zh-CN";
+            utter.rate = currentRate || 0.85;
+
+            var voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                var zhVoice = voices.find(function(v) {
+                    return v.lang && (v.lang.includes("zh") || v.lang.includes("CN") || v.lang.includes("ZH") || v.lang.includes("Chinese"));
+                });
+                if (zhVoice) utter.voice = zhVoice;
+            }
+
+            utter.onstart = function() {
+                speechFired = true;
+            };
+
+            utter.onerror = function(err) {
+                console.log("SpeechSynthesis error:", err);
+                if (!speechFired) {
+                    playOnlineTTS(textClean);
+                }
+            };
+
+            setTimeout(function() {
+                if (!speechFired) {
+                    try { window.speechSynthesis.cancel(); } catch(e) {}
+                    playOnlineTTS(textClean);
+                }
+            }, 350);
+
+            window.speechSynthesis.speak(utter);
+            return;
+        } catch(e) {
+            console.log("SpeechSynthesis exception:", e);
+        }
+    }
+
+    playOnlineTTS(textClean);
+}
+
+function playOnlineTTS(text) {
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encoded;
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        var playPromise = currentAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(err) {
+                console.log("Google TTS error, trying Youdao TTS:", err);
+                playSecondaryTTS(text);
+            });
+        }
+    } catch(e) {
+        playSecondaryTTS(text);
     }
 }
 
-function toggleElement(className) {
+function playSecondaryTTS(text) {
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) {
+            console.log("Secondary TTS play error:", err);
+        });
+    } catch(e) {}
+}
+
+        function toggleElement(className) {
     const el = document.getElementById(className) || document.querySelector('.' + className);
     if (el) {
         el.classList.toggle('hidden');
