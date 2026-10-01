@@ -24,10 +24,10 @@ vocab_audio_items = {
 }
 
 text_audio_items = {
-    "text1": "祝你生日快乐！这是送给你的。谢谢你！是什么？是一本书吗？对，这本书是我写的。太好了！非常感谢你！",
-    "text2": "这件衣服真漂亮。是啊，我也觉得很大方。你怎么也买了一件？เพราะ (因为) 今天我姐姐过生日。",
-    "text3": "晚上我们去吃中国菜，怎么样？我非常想去， nhưng (但是) 今天晚上我有课。那我们明天晚上一起吃生日蛋糕吧。好的，没问题！",
-    "text4": "你的生日是几月几号？我的生日是三月十七号。那是星期几？那是星期六。"
+    "text1": "这件衣服真漂亮。是啊，我也觉得很大方。你怎么也买了一件？เพราะ 因为今天是我姐姐的生日，我送给她做生日礼物。你姐姐一定会非常高兴！",
+    "text2": "祝你生日快乐！这是送给你的礼物。谢谢你！是什么？是一本书吗？对，这本书是我写的，希望你喜欢。太好了！非常感谢你！",
+    "text3": "晚上我们去吃中国菜，怎么样？我非常想去，但是 festival 今天晚上我有课。聚会从晚上七点半开始，你几点下课？我八点下课，下课就去吃生日蛋糕！",
+    "text4": " your 你的生日是几月几号？我的生日是三月十七号，那是星期六。生日那天我们 festival 一起吃长寿面吧！好的！祝我们都健康快乐！"
 }
 
 print("Generating .m4a audio files for Day 7...")
@@ -45,10 +45,8 @@ for key, text in vocab_audio_items.items():
     
     with open(m4a_path, 'rb') as f:
         vocab_b64[key] = base64.b64encode(f.read()).decode('utf-8')
-    print(f"Generated vocab audio: {key}.m4a")
 
 for key, text in text_audio_items.items():
-    # Clean non-chinese text for say command
     clean_text = re.sub(r'[^\u4e00-\u9fa5，。？！]', '', text)
     aiff_path = os.path.join(AUDIO_DIR, f"{key}.aiff")
     m4a_path = os.path.join(AUDIO_DIR, f"{key}.m4a")
@@ -60,11 +58,10 @@ for key, text in text_audio_items.items():
     
     with open(m4a_path, 'rb') as f:
         text_b64[key] = base64.b64encode(f.read()).decode('utf-8')
-    print(f"Generated text audio: {key}.m4a")
 
-print("All audio files generated and converted to Base64!")
+print("All 18 audio files generated and converted to Base64!")
 
-# 2. Characters data for HanziWriter simulation
+# Characters data for HanziWriter simulation (24 items)
 ITEMS = [
     {"id": "sheng-1", "char": "生", "pinyin": "shēng", "meaning": "生日 (Sinh nhật)"},
     {"id": "ri-1", "char": "日", "pinyin": "rì", "meaning": "生日 (Sinh nhật)"},
@@ -92,7 +89,6 @@ ITEMS = [
     {"id": "zhu-1", "char": "祝", "pinyin": "zhù", "meaning": "祝 (Chúc mừng)"}
 ]
 
-# Vocabulary 14 Rows
 VOCAB_ROWS = [
     {"key": "shengri", "word": "生日", "pinyin": "shēngrì", "hanviet": "Sinh Nhật", "pos": "Danh từ", "tone": "Bình thường", "meaning": "Sinh nhật, ngày sinh", "ex_zh": "今天是我的生日。", "ex_py": "Jīntiān shì wǒ de shēngrì.", "ex_vi": "Hôm nay là sinh nhật tôi."},
     {"key": "kuaile", "word": "快乐", "pinyin": "kuàilè", "hanviet": "Khoái Lạc", "pos": "Tính từ", "tone": "Bình thường", "meaning": "Vui vẻ, khoái lạc, hạnh phúc", "ex_zh": "祝你生日快乐！", "ex_py": "Zhù nǐ shēngrì kuàilè!", "ex_vi": "Chúc bạn sinh nhật vui vẻ!"},
@@ -110,7 +106,6 @@ VOCAB_ROWS = [
     {"key": "zhu", "word": "祝", "pinyin": "zhù", "hanviet": "Chúc", "pos": "Động từ", "tone": "Bình thường", "meaning": "Chúc, cầu chúc", "ex_zh": "祝你身体健康，学习进步！", "ex_py": "Zhù nǐ shēntǐ jiànkāng, xuéxí jìnbù!", "ex_vi": "Chúc bạn sức khỏe, học tập tiến bộ!"}
 ]
 
-# Writing Cards Data
 WRITING_CARDS = [
     {"word": "生日", "pinyin": "shēngrì", "meaning": "Sinh nhật", "strokes": "生 (5 nét), 日 (4 nét)", "radicals": "Bộ Sinh (生) & Bộ Nhật (日)", "story": "Mầm cây 生 vươn lên đón ánh mặt trời 日 mừng ngày sinh nhật ra đời.", "quote": "<b>• 生</b> (Trang 45): Hán Việt: Sinh | Gồm: Bộ Sinh 生 (sự sống, sinh đẻ).<br/><b>• 日</b> (Trang 12): Hán Việt: Nhật | Gồm: Bộ Nhật 日 (mặt trời, ngày).", "rules": "生 (phẩy, ngang, ngang, sổ, ngang); 日 (sổ, ngang gập, ngang, ngang)."},
     {"word": "快乐", "pinyin": "kuàilè", "meaning": "Vui vẻ, khoái lạc", "strokes": "快 (7 nét), 乐 (5 nét)", "radicals": "Bộ Tâm (忄) & Bộ Nhạc (乐)", "story": "Trái tim 忄 hân hoan đón nhận giai điệu âm nhạc 乐 tươi vui rộn ràng.", "quote": "<b>• 快</b> (Trang 78): Hán Việt: Khoái | Gồm: Bộ Tâm 忄 (trái tim) và Quyết 夬.<br/><b>• 乐</b> (Trang 90): Hán Việt: Nhạc/Lạc | Gồm: Bộ Nhạc 乐 (tiếng cười, âm nhạc).", "rules": "快 (chấm, phẩy, sổ, ngang, gập...); 乐 (phẩy, ngang gập, sổ móc, phẩy, chấm)."},
@@ -249,6 +244,187 @@ def generate_vocab_table_html():
         rows.append(row)
     return "\n".join(rows)
 
+def generate_sec_text_html():
+    return '''<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🛍️</span> Bài khóa 1: 在商店 (Ở cửa hàng)</h3>
+            <button onclick="playText('text1', '这件衣服真漂亮。是啊， constitutional 我也觉得很大方。')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+        </div>
+        <div class="space-y-3 text-xs leading-relaxed">
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 这件衣服真漂亮。</div><div class="text-emerald-700 font-mono text-[11px]">Zhè jiān yīfu zhēn piàoliang.</div><div class="text-slate-500">Bộ quần áo này đẹp thật đấy.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 是啊，我也觉得很大方。你怎么也买了一件？</div><div class="text-emerald-700 font-mono text-[11px]">Shì a, wǒ yě juéde hěn dàfang. Nǐ zěnme yě mǎi le yí jiàn?</div><div class="text-slate-500">Đúng vậy, tôi cũng thấy rất trang nhã. Sao bạn cũng mua một chiếc thế?</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 因为今天是我姐姐的生日，我送给她做生日礼物。</div><div class="text-emerald-700 font-mono text-[11px]">Yīnwèi jīntiān shì wǒ jiějie de shēngrì, wǒ sòng gěi tā zuò shēngrì lǐwù.</div><div class="text-slate-500">Bởi vì hôm nay là sinh nhật chị gái tôi, tôi mua tặng chị ấy làm quà sinh nhật.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 你姐姐一定会非常高兴！</div><div class="text-emerald-700 font-mono text-[11px]">Nǐ jiějie yídìng huì fēicháng gāoxìng!</div><div class="text-slate-500">Chị gái bạn nhất định sẽ cực kỳ vui mừng!</div></div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🎁</span> Bài khóa 2: 在家里 (Ở nhà)</h3>
+            <button onclick="playText('text2', '祝你生日快乐！这是送给你的礼物。')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+        </div>
+        <div class="space-y-3 text-xs leading-relaxed">
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 祝你生日快乐！这是送给你的礼物。</div><div class="text-emerald-700 font-mono text-[11px]">Zhù nǐ shēngrì kuàilè! Zhè shì sòng gěi nǐ de lǐwù.</div><div class="text-slate-500">Chúc bạn sinh nhật vui vẻ! Đây là quà tặng bạn.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 谢谢你！是什么？是一本书吗？</div><div class="text-emerald-700 font-mono text-[11px]">Xièxie nǐ! Shì shénme? Shì yì běn shū ma?</div><div class="text-slate-500">Cảm ơn bạn! Là gì thế? Là một cuốn sách à?</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 对，这本书是我写的，希望你喜欢。</div><div class="text-emerald-700 font-mono text-[11px]">Duì, zhè běn shū shì wǒ xiě de, xīwàng nǐ xǐhuan.</div><div class="text-slate-500">Đúng rồi, cuốn sách này do tôi viết, hy vọng bạn thích.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 太好了！非常感谢你！</div><div class="text-emerald-700 font-mono text-[11px]">Tài hǎo le! Fēicháng gǎnxiè nǐ!</div><div class="text-slate-500">Tuyệt quá! Cảm ơn bạn rất nhiều!</div></div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🎂</span> Bài khóa 3: 准备聚会 (Chuẩn bị tiệc sinh nhật)</h3>
+            <button onclick="playText('text3', '晚上我们去吃中国菜，怎么样？')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+        </div>
+        <div class="space-y-3 text-xs leading-relaxed">
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 晚上我们去吃中国菜，怎么样？</div><div class="text-emerald-700 font-mono text-[11px]">Wǎnshang wǒmen qù chī Zhōngguó cài, zěnmeyàng?</div><div class="text-slate-500">Tối nay chúng ta đi ăn món Trung Quốc nhé?</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 我非常想去，但是今天晚上我有课。</div><div class="text-emerald-700 font-mono text-[11px]">Wǒ fēicháng xiǎng qù, dànshì jīntiān wǎnshang wǒ yǒu kè.</div><div class="text-slate-500">Tôi rất muốn đi, nhưng tối nay tôi có giờ học.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 聚会从晚上七点半开始，你几点下课？</div><div class="text-emerald-700 font-mono text-[11px]">Jùhuì cóng wǎnshang qī diǎn bàn kāishǐ, nǐ jǐ diǎn xiàkè?</div><div class="text-slate-500">Tiệc bắt đầu từ 7 rưỡi tối, mấy giờ bạn tan học?</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 我八点下课，下课就去吃生日蛋糕！</div><div class="text-emerald-700 font-mono text-[11px]">Wǒ bā diǎn xiàkè, xiàkè jiù qù chī shēngrì dàngāo!</div><div class="text-slate-500">Tôi 8 giờ tan học, tan học là qua ăn bánh sinh nhật ngay!</div></div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🍜</span> Bài khóa 4: 问生日 (Hỏi ngày sinh nhật)</h3>
+            <button onclick="playText('text4', '你的生日是几月几号？我的生日是三月十七号。')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+        </div>
+        <div class="space-y-3 text-xs leading-relaxed">
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 你的生日是几月几号？</div><div class="text-emerald-700 font-mono text-[11px]">Nǐ de shēngrì shì jǐ yuè jǐ hào?</div><div class="text-slate-500">Sinh nhật bạn là ngày mấy tháng mấy?</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 我的生日是三月十七号，那是星期六。</div><div class="text-emerald-700 font-mono text-[11px]">Wǒ de shēngrì shì sān yuè shíqī hào, nà shì xīngqī liù.</div><div class="text-slate-500">Sinh nhật tôi là ngày 17 tháng 3, đó là thứ bảy.</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 生日那天我们一起吃长寿面吧！</div><div class="text-emerald-700 font-mono text-[11px]">Shēngrì nà tiān wǒmen yìqǐ chī chángshòumiàn ba!</div><div class="text-slate-500">Ngày sinh nhật chúng ta cùng ăn mì trường thọ nhé!</div></div>
+            <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 好的！祝我们都健康快乐！</div><div class="text-emerald-700 font-mono text-[11px]">Hǎo de! Zhù wǒmen dōu jiànkāng kuàilè!</div><div class="text-slate-500">Được thôi! Chúc tất cả chúng ta đều khỏe mạnh vui vẻ!</div></div>
+        </div>
+    </div>
+</div>'''
+
+def generate_sec_practice_html():
+    return '''<div class="space-y-6">
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-base"><span>✍️</span> Phần 1: Bài tập Từ vựng (Điền từ vào chỗ trống - 5 câu)</h3>
+        <div class="space-y-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">1. 祝你 ( ) 快乐！</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 生日</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 游泳</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 公斤</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">2. 我送你一个生日 ( )。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 姐姐</button>
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 礼物</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 羊肉</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">3. 今天晚上我们一起吃 ( )。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 蛋糕</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 自行车</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 门</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">4. 聚会晚上七点 ( )。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 开始</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 好吃</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 经常</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">5. 我 ( ) 你每天都快乐。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 希望</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 游泳</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 运动</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-base"><span>💡</span> Phần 2: Ngữ pháp trọng tâm (5 câu)</h3>
+        <div class="space-y-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">6. 这个礼物 ( ) 漂亮。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 非常</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 从</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 祝</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">7. 聚会 ( ) 晚上七点半开始。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 从</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 希望</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 问</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">8. ( ) 你生日快乐，身体健康！</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 祝</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 送</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 吃</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">9. 我今天晚上 ( ) 课，不能去聚会。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 有</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 是</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 去</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">10. 这本书 ( ) 我写的。</div>
+                <div class="flex gap-2">
+                    <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 是</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 在</button>
+                    <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 有</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-base"><span>📝</span> Phần 3: Sắp xếp & Viết lại câu hoàn chỉnh (5 câu)</h3>
+        <div class="space-y-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">11. 生日 / 祝 / 快乐 / 你 / ！</div>
+                <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">祝你生日快乐！</div></details>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">12. 聚会 / 七点 / 开始 / 晚上 / 。</div>
+                <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">聚会晚上七点开始。</div></details>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">13. 非常 / 礼物 / 这个 / 漂亮 / 。</div>
+                <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">这个礼物非常漂亮。</div></details>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">14. 希望 / 每天 / 你 / 快乐 / 我 / 都 / 。</div>
+                <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">我希望你每天都快乐。</div></details>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl space-y-2">
+                <div class="font-medium text-slate-900 zh text-sm">15. 生日蛋糕 / 一起 / 我们 / 吃 / 吧 / 。</div>
+                <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">我们 festival/我们一起吃生日蛋糕吧。</div></details>
+            </div>
+        </div>
+    </div>
+</div>'''
+
 def build_master_html(is_mo_phong=True):
     title = "HSK 2 - Bài 7: 第七课 祝你生日快乐 (Có Mô Phỏng Nét Viết)" if is_mo_phong else "HSK 2 - Bài 7: 第七课 祝你生日快乐 (Phiên Bản Tự Học Chuẩn)"
     
@@ -281,6 +457,8 @@ def build_master_html(is_mo_phong=True):
     sec_sim = build_sec_sim_html() if is_mo_phong else ""
     sec_writing = generate_sec_writing_html()
     vocab_rows_html = generate_vocab_table_html()
+    sec_text = generate_sec_text_html()
+    sec_practice = generate_sec_practice_html()
     items_json = json.dumps(ITEMS)
     vocab_b64_json = json.dumps(vocab_b64)
     text_b64_json = json.dumps(text_b64)
@@ -512,82 +690,12 @@ def build_master_html(is_mo_phong=True):
 
         <!-- TAB 5: TEXT -->
         <div id="sec-text" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🎂</span> Bài khóa 1: 祝你生日快乐</h3>
-                        <button onclick="playText('text1', '祝你生日快乐！这是送给你的。谢谢你！是什么？是一本书吗？')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
-                    </div>
-                    <div class="space-y-3 text-xs leading-relaxed">
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 祝你生日快乐！这是送给你的。</div><div class="text-emerald-700 font-mono text-[11px]">Zhù nǐ shēngrì kuàilè! Zhè shì sòng gěi nǐ de.</div><div class="text-slate-500">Chúc bạn sinh nhật vui vẻ! Đây là quà tặng bạn.</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 谢谢你！是什么？是一本书吗？</div><div class="text-emerald-700 font-mono text-[11px]">Xièxie nǐ! Shì shénme? Shì yì běn shū ma?</div><div class="text-slate-500">Cảm ơn bạn! Là gì thế? Là một cuốn sách à?</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 对，这本书是我写的。</div><div class="text-emerald-700 font-mono text-[11px]">Duì, zhè běn shū shì wǒ xiě de.</div><div class="text-slate-500">Đúng rồi, cuốn sách này do chính tôi viết.</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 太好了！非常感谢你！</div><div class="text-emerald-700 font-mono text-[11px]">Tài hǎo le! Fēicháng gǎnxiè nǐ!</div><div class="text-slate-500">Tuyệt vời quá! Cảm ơn bạn rất nhiều!</div></div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>🎉</span> Bài khóa 2: 生日聚会与蛋糕</h3>
-                        <button onclick="playText('text2', '晚上我们去吃中国菜，怎么样？我非常想去，但是今天晚上我有课。')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
-                    </div>
-                    <div class="space-y-3 text-xs leading-relaxed">
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 晚上我们去吃中国菜，怎么样？</div><div class="text-emerald-700 font-mono text-[11px]">Wǎnshang wǒmen qù chī Zhōngguó cài, zěnmeyàng?</div><div class="text-slate-500">Tối nay chúng ta đi ăn món Trung Quốc nhé?</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 我非常想去，但是今天晚上我有课。</div><div class="text-emerald-700 font-mono text-[11px]">Wǒ fēicháng xiǎng qù, dànshì jīntiān wǎnshang wǒ yǒu kè.</div><div class="text-slate-500">Tôi rất muốn đi, nhưng tối nay tôi có giờ học.</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">A: 那我们明天晚上一起吃生日蛋糕吧。</div><div class="text-emerald-700 font-mono text-[11px]">Nà wǒmen míngtiān wǎnshang yìqǐ chī shēngrì dàngāo ba.</div><div class="text-slate-500">Thế tối mai chúng ta cùng ăn bánh sinh nhật nhé.</div></div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl"><div class="font-bold text-blue-950 zh text-sm">B: 好的，没问题！</div><div class="text-emerald-700 font-mono text-[11px]">Hǎo de, méi wèntí!</div><div class="text-slate-500">Được chứ, không thành vấn đề!</div></div>
-                    </div>
-                </div>
-            </div>
+{sec_text}
         </div>
 
         <!-- TAB 6: PRACTICE -->
         <div id="sec-practice" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2"><span>✍️</span> Phần 1: Bài tập Từ vựng (Điền từ vào chỗ trống)</h3>
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 bg-slate-50 rounded-xl space-y-2">
-                        <div class="font-medium text-slate-900 zh text-sm">1. 祝你 ( ) 快乐！</div>
-                        <div class="flex gap-2">
-                            <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 生日</button>
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 游泳</button>
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 公斤</button>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-xl space-y-2">
-                        <div class="font-medium text-slate-900 zh text-sm">2. 我送你一个生日 ( )。</div>
-                        <div class="flex gap-2">
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 姐姐</button>
-                            <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 礼物</button>
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 羊肉</button>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-xl space-y-2">
-                        <div class="font-medium text-slate-900 zh text-sm">3. 今天晚上我们一起吃 ( )。</div>
-                        <div class="flex gap-2">
-                            <button onclick="checkQ(this, true)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">A. 蛋糕</button>
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">B. 自行车</button>
-                            <button onclick="checkQ(this, false)" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-medium hover:bg-slate-100">C. 门</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2"><span>💡</span> Phần 2: Sắp xếp & Viết lại câu hoàn chỉnh</h3>
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 bg-slate-50 rounded-xl space-y-2">
-                        <div class="font-medium text-slate-900 zh text-sm">1. 生日 / 祝 / 快乐 / 你 / ！</div>
-                        <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
-                        <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">祝你生日快乐！</div></details>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-xl space-y-2">
-                        <div class="font-medium text-slate-900 zh text-sm">2. 聚会 / 七点 / 开始 / 晚上 / 。</div>
-                        <input type="text" placeholder="✍️ Nhập câu hoàn chỉnh của bạn vào đây..." class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-none">
-                        <details class="text-xs text-slate-600"><summary class="cursor-pointer font-bold text-blue-900 hover:underline">Xem đáp án chuẩn</summary><div class="mt-1 font-mono text-emerald-700 bg-emerald-50 p-2 rounded-lg">聚会晚上七点开始。</div></details>
-                    </div>
-                </div>
-            </div>
+{sec_practice}
         </div>
 
         <!-- TAB 7: CULTURE -->
@@ -863,4 +971,4 @@ with open(os.path.join(DAY7_DIR, "HSK2_Bai_7_Mo_Phong_Viet.html"), "w", encoding
 with open(os.path.join(DAY7_DIR, "HSK2_Bai_7_Tu_Hoc.html"), "w", encoding="utf-8") as f:
     f.write(build_master_html(False))
 
-print("Successfully generated Day 7 files with real audio and complete writing mnemonics!")
+print("Successfully regenerated Day 7 with 4 full dialogues and 15 interactive practice questions!")
