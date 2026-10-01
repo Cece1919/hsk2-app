@@ -75,7 +75,7 @@ def update_mobile_app():
         for row in rows:
             tds = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
             if len(tds) >= 6:
-                hz = re.sub(r'<[^>]+>', '', tds[1]).strip()
+                hz = re.sub(r'<[^>]+>|🔊', '', tds[1]).strip()
                 py = re.sub(r'<[^>]+>', '', tds[2]).strip()
                 hv = re.sub(r'<[^>]+>', '', tds[3]).strip()
                 vi = re.sub(r'<[^>]+>', '', tds[5]).strip()

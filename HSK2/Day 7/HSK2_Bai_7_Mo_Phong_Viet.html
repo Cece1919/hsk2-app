@@ -829,11 +829,73 @@
 
         <!-- TAB 2: VOCABULARY -->
         <div id="sec-vocab" class="tab-content hidden space-y-6">
-            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
-                <span class="text-2xl">⚡</span>
-                <div>
-                    <h3 class="font-bold text-amber-950 text-base">QUY TẮC BIẾN ĐIỆU THANH ĐIỆU TRỌNG TÂM BÀI 7</h3>
-                    <p class="text-xs md:text-sm text-amber-900 mt-1">1. Biến điệu của <b>不 (bù)</b>: Khi đi trước từ mang Thanh 4, đọc thành Thanh 2 <b>bú</b> (Ví dụ: 非常不错 fēicháng búcuò).<br>2. Biến điệu của <b>一 (yī)</b>: Khi đi trước Thanh 4, đọc thành Thanh 2 <b>yí</b> (Ví dụ: 一个礼物 yí gè lǐwù).</p>
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/90 rounded-2xl p-5 shadow-sm space-y-4">
+                <div class="flex items-center gap-2.5 border-b border-amber-200/60 pb-2.5">
+                    <span class="text-2xl">⚡</span>
+                    <div>
+                        <h3 class="font-bold text-amber-950 text-base md:text-lg">QUY TẮC BIẾN ĐIỆU THANH ĐIỆU TRỌNG TÂM HSK 2</h3>
+                        <p class="text-xs text-amber-800/80">Học và luyện nghe 4 quy tắc biến điệu quan trọng để phát âm chuẩn tự nhiên</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm text-slate-800">
+                    <!-- Rule 1: Two 3rd Tones -->
+                    <div class="bg-white/90 p-3.5 rounded-xl border border-amber-200/80 shadow-2xs space-y-1.5">
+                        <div class="font-bold text-amber-950 flex items-center justify-between">
+                            <span>1. Biến điệu Hai Thanh 3 (3 + 3 → 2 + 3)</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-mono font-bold">∨ + ∨ → / + ∨</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Khi 2 âm tiết Thanh 3 đi liền nhau, âm tiết thứ nhất đọc thành <b>Thanh 2 (sắc)</b>.</p>
+                        <div class="flex flex-wrap items-center gap-2 text-xs bg-amber-50/70 p-2 rounded-lg border border-amber-100/80">
+                            <button onclick="playVocab('nǐhǎo', '你好')" class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1"><span>🔊</span> 你好</button>
+                            <span class="text-emerald-700 font-mono font-semibold">nǐ hǎo → <strong class="text-amber-700">ní</strong> hǎo</span>
+                            <span class="text-slate-500">(Xin chào)</span>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: Tone Sandhi of 不 -->
+                    <div class="bg-white/90 p-3.5 rounded-xl border border-amber-200/80 shadow-2xs space-y-1.5">
+                        <div class="font-bold text-amber-950 flex items-center justify-between">
+                            <span>2. Biến điệu của 不 (bù)</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-mono font-bold">bù + Thanh 4 → bú</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Khi <b>不 (bù)</b> đứng trước từ mang Thanh 4, <b>不</b> đọc thành <b>Thanh 2 (bú)</b>.</p>
+                        <div class="flex flex-wrap items-center gap-2 text-xs bg-amber-50/70 p-2 rounded-lg border border-amber-100/80">
+                            <button onclick="playVocab('búcuò', '不错')" class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1"><span>🔊</span> 不错</button>
+                            <span class="text-emerald-700 font-mono font-semibold">bù cuò → <strong class="text-amber-700">bú</strong> cuò</span>
+                            <span class="text-slate-500">(Rất tốt)</span>
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Tone Sandhi of 一 -->
+                    <div class="bg-white/90 p-3.5 rounded-xl border border-amber-200/80 shadow-2xs space-y-1.5">
+                        <div class="font-bold text-amber-950 flex items-center justify-between">
+                            <span>3. Biến điệu của 一 (yī)</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-mono font-bold">yī + T4 → yí | yī + T1/2/3 → yì</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Đứng trước Thanh 4 đọc <b>yí (Thanh 2)</b>; đứng trước Thanh 1, 2, 3 đọc <b>yì (Thanh 4)</b>.</p>
+                        <div class="flex flex-wrap items-center gap-2 text-xs bg-amber-50/70 p-2 rounded-lg border border-amber-100/80">
+                            <button onclick="playVocab('yígè', '一个')" class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1"><span>🔊</span> 一个</button>
+                            <span class="text-emerald-700 font-mono font-semibold">yī gè → <strong class="text-amber-700">yí</strong> gè</span>
+                            <span class="text-slate-300">|</span>
+                            <button onclick="playVocab('yìqǐ', '一起')" class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1"><span>🔊</span> 一起</button>
+                            <span class="text-emerald-700 font-mono font-semibold">yī qǐ → <strong class="text-amber-700">yì</strong> qǐ</span>
+                        </div>
+                    </div>
+
+                    <!-- Rule 4: Half 3rd Tone -->
+                    <div class="bg-white/90 p-3.5 rounded-xl border border-amber-200/80 shadow-2xs space-y-1.5">
+                        <div class="font-bold text-amber-950 flex items-center justify-between">
+                            <span>4. Quy tắc Nửa Thanh 3 (Half 3rd Tone)</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-mono font-bold">T3 + T1/2/4</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Khi Thanh 3 đứng trước Thanh 1, 2, 4, Thanh 3 chỉ đọc nửa âm trầm xuống (không vút lên).</p>
+                        <div class="flex flex-wrap items-center gap-2 text-xs bg-amber-50/70 p-2 rounded-lg border border-amber-100/80">
+                            <button onclick="playVocab('wǎnshang', '晚上')" class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1"><span>🔊</span> 晚上</button>
+                            <span class="text-emerald-700 font-mono font-semibold">wǎnshang</span>
+                            <span class="text-slate-500">(Buổi tối)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -858,7 +920,7 @@
                         <tbody class="divide-y divide-slate-100 text-slate-800">
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">1</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">生日</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>生日</span><button onclick="playVocab('shēngrì', '生日')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 生日">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">shēngrì</td>
                                 <td class="p-3 text-slate-500">Sinh Nhật</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Danh từ</td>
@@ -872,7 +934,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">2</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">快乐</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>快乐</span><button onclick="playVocab('kuàilè', '快乐')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 快乐">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">kuàilè</td>
                                 <td class="p-3 text-slate-500">Khoái Lạc</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Tính từ</td>
@@ -886,7 +948,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">3</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">送</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>送</span><button onclick="playVocab('sòng', '送')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 送">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">sòng</td>
                                 <td class="p-3 text-slate-500">Tống</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ</td>
@@ -900,7 +962,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">4</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">礼物</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>礼物</span><button onclick="playVocab('lǐwù', '礼物')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 礼物">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">lǐwù</td>
                                 <td class="p-3 text-slate-500">Lễ Vật</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Danh từ</td>
@@ -914,7 +976,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">5</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">晚上</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>晚上</span><button onclick="playVocab('wǎnshang', '晚上')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 晚上">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">wǎnshang</td>
                                 <td class="p-3 text-slate-500">Vãn Thượng</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Danh từ</td>
@@ -928,7 +990,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">6</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">蛋糕</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>蛋糕</span><button onclick="playVocab('dàngāo', '蛋糕')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 蛋糕">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">dàngāo</td>
                                 <td class="p-3 text-slate-500">Đản Cao</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Danh từ</td>
@@ -942,7 +1004,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">7</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">问</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>问</span><button onclick="playVocab('wèn', '问')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 问">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">wèn</td>
                                 <td class="p-3 text-slate-500">Vấn</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ</td>
@@ -956,7 +1018,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">8</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">非常</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>非常</span><button onclick="playVocab('fēicháng', '非常')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 非常">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">fēicháng</td>
                                 <td class="p-3 text-slate-500">Phi Thường</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Phó từ</td>
@@ -970,7 +1032,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">9</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">开始</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>开始</span><button onclick="playVocab('kāishǐ', '开始')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 开始">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">kāishǐ</td>
                                 <td class="p-3 text-slate-500">Khai Thủy</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ/DT</td>
@@ -984,7 +1046,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">10</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">长</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>长</span><button onclick="playVocab('cháng', '长')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 长">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">cháng / zhǎng</td>
                                 <td class="p-3 text-slate-500">Trường / Trưởng</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Tính từ/Đã</td>
@@ -998,7 +1060,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">11</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">希望</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>希望</span><button onclick="playVocab('xīwàng', '希望')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 希望">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">xīwàng</td>
                                 <td class="p-3 text-slate-500">Hi Vọng</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ/DT</td>
@@ -1012,7 +1074,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">12</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">参加</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>参加</span><button onclick="playVocab('cānjiā', '参加')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 参加">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">cānjiā</td>
                                 <td class="p-3 text-slate-500">Tham Gia</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ</td>
@@ -1026,7 +1088,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">13</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">聚会</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>聚会</span><button onclick="playVocab('jùhuì', '聚会')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 聚会">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">jùhuì</td>
                                 <td class="p-3 text-slate-500">Tụ Hội</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Danh từ/Đã</td>
@@ -1040,7 +1102,7 @@
                             </tr>
                             <tr>
                                 <td class="p-3 text-center font-bold text-slate-400">14</td>
-                                <td class="p-3 zh font-bold text-lg text-blue-950">祝</td>
+                                <td class="p-3 zh font-bold text-lg text-blue-950"><div class="flex items-center gap-2"><span>祝</span><button onclick="playVocab('zhù', '祝')" class="audio-btn p-1 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition shadow-sm" title="Nghe phát âm từ vựng 祝">🔊</button></div></td>
                                 <td class="p-3 font-semibold text-emerald-700">zhù</td>
                                 <td class="p-3 text-slate-500">Chúc</td>
                                 <td class="p-3 text-xs bg-slate-100 rounded px-2 py-0.5 w-fit">Động từ</td>
