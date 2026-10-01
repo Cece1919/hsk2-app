@@ -2291,35 +2291,50 @@ function playAudioStream(text) {
     }
 
     var encoded = encodeURIComponent(text);
-    var audioUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
-    
-    currentAudio = new Audio(audioUrl);
+    var youdaoUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
+    var baiduUrl = "https://fanyi.baidu.com/gettts?lan=zh&spd=3&source=web&text=" + encoded;
+
+    currentAudio = new Audio(youdaoUrl);
     currentAudio.playbackRate = currentRate || 0.85;
-    
+
     var playPromise = currentAudio.play();
     if (playPromise !== undefined) {
         playPromise.catch(function(err) {
-            if ('speechSynthesis' in window) {
-                try {
-                    window.speechSynthesis.cancel();
-                    var utterance = new SpeechSynthesisUtterance(text);
-                    utterance.lang = 'zh-CN';
-                    utterance.rate = currentRate || 0.85;
-                    window.speechSynthesis.speak(utterance);
-                } catch(e) {}
-            }
+            console.log("Youdao play error, trying Baidu TTS:", err);
+            currentAudio = new Audio(baiduUrl);
+            currentAudio.playbackRate = currentRate || 0.85;
+            currentAudio.play().catch(function(err2) {
+                console.log("Baidu play error, trying WebSpeech:", err2);
+                if ('speechSynthesis' in window) {
+                    try {
+                        window.speechSynthesis.cancel();
+                        var utterance = new SpeechSynthesisUtterance(text);
+                        utterance.lang = 'zh-CN';
+                        utterance.rate = currentRate || 0.85;
+                        window.speechSynthesis.speak(utterance);
+                    } catch(e) {}
+                }
+            });
         });
     }
 }
 
 function playVocab(key, fallbackText) {
-    var textToSpeak = fallbackText || key || "";
+    var textToSpeak = "";
+    if (fallbackText && /[\u4e00-\u9fff]/.test(fallbackText)) {
+        textToSpeak = fallbackText;
+    } else if (key && /[\u4e00-\u9fff]/.test(key)) {
+        textToSpeak = key;
+    } else {
+        textToSpeak = fallbackText || key || "";
+    }
+
     var b64 = null;
     if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
-        b64 = VOCAB_AUDIO[key];
+        b64 = VOCAB_AUDIO[key] || VOCAB_AUDIO[textToSpeak];
     }
     if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
-        b64 = TEXT_AUDIO[key];
+        b64 = TEXT_AUDIO[key] || TEXT_AUDIO[textToSpeak];
     }
 
     if (b64) {
