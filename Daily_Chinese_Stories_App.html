@@ -1085,20 +1085,29 @@
         ];
 
         /* ----------------------------------------------------
-           2. STATE & LOCAL STORAGE MANAGEMENT
+           2. STATE & LOCAL STORAGE MANAGEMENT (SAFE PARSING)
         ---------------------------------------------------- */
+        function safeJSONParse(key, fallback) {
+            try {
+                const val = localStorage.getItem(key);
+                return val ? JSON.parse(val) : fallback;
+            } catch (e) {
+                return fallback;
+            }
+        }
+
         let state = {
             currentDay: 1,
             currentStoryIdx: 0,
             showPinyin: true,
             showTranslation: true,
-            bookmarks: JSON.parse(localStorage.getItem('chinese_story_bookmarks') || '[]'),
+            bookmarks: safeJSONParse('chinese_story_bookmarks', []),
             streak: parseInt(localStorage.getItem('chinese_story_streak') || '1'),
             audioSpeed: 1.0,
-            srsData: JSON.parse(localStorage.getItem('chinese_story_srs_data') || '{}'),
-            vocabLevels: JSON.parse(localStorage.getItem('chinese_story_vocab_levels') || '{}'),
-            quizScores: JSON.parse(localStorage.getItem('chinese_story_quiz_scores') || '{}'),
-            heatmapLogs: JSON.parse(localStorage.getItem('chinese_story_heatmap') || '{}'),
+            srsData: safeJSONParse('chinese_story_srs_data', {}),
+            vocabLevels: safeJSONParse('chinese_story_vocab_levels', {}),
+            quizScores: safeJSONParse('chinese_story_quiz_scores', {}),
+            heatmapLogs: safeJSONParse('chinese_story_heatmap', {}),
             activeNav: 'stories',
             activeSection: 'story',
             srsIndex: 0,
@@ -1340,9 +1349,14 @@
             }
         }
 
+        let currentStream = null;
+
         function closeAIVoiceModal() {
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 try { mediaRecorder.stop(); } catch(e) {}
+            }
+            if (currentStream) {
+                try { currentStream.getTracks().forEach(t => t.stop()); } catch(e) {}
             }
             isAIRecording = false;
             document.getElementById('ai-voice-modal').classList.add('hidden');
