@@ -78,8 +78,8 @@
     </header>
 
     <!-- NAVIGATION TABS -->
-    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
-        <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
+        <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
             <button onclick="showTab('sim')" id="tab-sim" class="tab-btn active px-4 py-2.5 text-sm font-medium bg-blue-600 text-white font-bold active-tab transition flex items-center gap-1.5 shrink-0"><span>🎬</span> Mô phỏng nét viết</button>
             <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📌</span> Overview</button>
             <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📖</span> Từ vựng</button>
@@ -88,31 +88,8 @@
             <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🗣️</span> Bài khóa</button>
             <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📝</span> Luyện tập</button>
             <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎋</span> Góc văn hóa</button>
-        </nav>
+        </div>
     </div>
-
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
-
-        
-        <!-- TAB MÔ PHỎNG NẾT VIẾT -->
-        <div id="sec-sim" class="tab-content">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
-        <h2 class="text-xl font-bold text-blue-950 mb-2">✍️ Mô Phỏng Nét Viết & Luyện Vẽ Ô Tianzige (Bài 4)</h2>
-        <p class="text-sm text-slate-600">Bấm <b>▶ Chạy nét</b> để xem thứ tự nét chuẩn HanziWriter, hoặc vẽ trực tiếp bằng tay/chuột trên ô <b>田字格</b> cảm ứng bên phải.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
-            <div class="text-center">
-                <span class="text-2xl font-bold text-slate-800 zh">西</span>
-                <span class="text-xs text-slate-500 block">xīguā</span>
-                <span class="text-[11px] text-slate-400 block">西瓜 (Dưa hấu)</span>
-            </div>
-            <div class="flex items-center justify-center gap-2 w-full">
-                <div class="flex flex-col items-center">
-                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
-                    <div id="target-xigua-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
-                </div>
                 <div class="flex flex-col items-center">
                     <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
                     <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
@@ -1718,11 +1695,11 @@
 
     <!-- JAVASCRIPT ENGINE -->
 <script>
-var writers = {};
-
 const VOCAB_AUDIO = {};
 const TEXT_AUDIO = {};
 const items = [{"id": "xigua-1", "char": "西", "pinyin": "xīguā", "meaning": "西瓜 (Dưa hấu)", "key": "xigua"}, {"id": "xigua-2", "char": "瓜", "pinyin": "xīguā", "meaning": "西瓜 (Dưa hấu)", "key": "xigua"}, {"id": "tian-1", "char": "甜", "pinyin": "tián", "meaning": "甜 (Ngọt)", "key": "tian"}, {"id": "zhen-1", "char": "真", "pinyin": "zhēn", "meaning": "真 (Thật, thật là)", "key": "zhen"}, {"id": "tiao-1", "char": "条", "pinyin": "tiáo", "meaning": "条 (Chiếc, con, dải (vật dài))", "key": "tiao"}, {"id": "kuzi-1", "char": "裤", "pinyin": "kùzi", "meaning": "裤子 (Chiếc quần)", "key": "kuzi"}, {"id": "kuzi-2", "char": "子", "pinyin": "kùzi", "meaning": "裤子 (Chiếc quần)", "key": "kuzi"}, {"id": "chenshan-1", "char": "衬", "pinyin": "chènshān", "meaning": "衬衫 (Áo sơ mi)", "key": "chenshan"}, {"id": "chenshan-2", "char": "衫", "pinyin": "chènshān", "meaning": "衬衫 (Áo sơ mi)", "key": "chenshan"}, {"id": "yuan-1", "char": "元", "pinyin": "yuán", "meaning": "元 (Đồng (đơn vị tiền TQ))", "key": "yuan"}, {"id": "qipao-1", "char": "旗", "pinyin": "qípáo", "meaning": "旗袍 (Áo sườn xám)", "key": "qipao"}, {"id": "qipao-2", "char": "袍", "pinyin": "qípáo", "meaning": "旗袍 (Áo sườn xám)", "key": "qipao"}, {"id": "mai-1", "char": "买", "pinyin": "mǎi", "meaning": "买 (Mua)", "key": "mai"}, {"id": "shi-1", "char": "试", "pinyin": "shì", "meaning": "试 (Thử (quần áo, bài test))", "key": "shi"}, {"id": "heshi-1", "char": "合", "pinyin": "héshì", "meaning": "合适 (Thích hợp, vừa vặn)", "key": "heshi"}, {"id": "heshi-2", "char": "适", "pinyin": "héshì", "meaning": "合适 (Thích hợp, vừa vặn)", "key": "heshi"}, {"id": "zhong-1", "char": "重", "pinyin": "zhòng", "meaning": "重 (Nặng)", "key": "zhong"}, {"id": "qing-1", "char": "轻", "pinyin": "qīng", "meaning": "轻 (Nhẹ)", "key": "qing"}, {"id": "pianyi-1", "char": "便", "pinyin": "piányi", "meaning": "便宜 (Rẻ)", "key": "pianyi"}, {"id": "pianyi-2", "char": "宜", "pinyin": "piányi", "meaning": "便宜 (Rẻ)", "key": "pianyi"}, {"id": "gui-1", "char": "贵", "pinyin": "guì", "meaning": "贵 (Đắt, quý giá)", "key": "gui"}];
+
+var writers = {};
 
 function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => {

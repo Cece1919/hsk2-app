@@ -78,8 +78,8 @@
         </div>
     </header>
 
-    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
-        <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
+        <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
             <button onclick="showTab('sim')" id="tab-sim" class="tab-btn active px-4 py-2.5 text-sm font-medium bg-blue-600 text-white font-bold active-tab transition flex items-center gap-1.5 shrink-0"><span>🎬</span> Mô phỏng nét viết</button>
             <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📌</span> Overview</button>
             <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📖</span> Từ vựng</button>
@@ -88,28 +88,8 @@
             <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🗣️</span> Bài khóa</button>
             <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📝</span> Luyện tập</button>
             <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎋</span> Góc văn hóa</button>
-        </nav>
+        </div>
     </div>
-    
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        
-        <div id="sec-sim" class="tab-content">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
-        <h2 class="text-xl font-bold text-blue-950 mb-2">✍️ Mô Phỏng Nét Viết & Luyện Vẽ Ô Tianzige (Bài 6)</h2>
-        <p class="text-sm text-slate-600">Bấm <b>▶ Chạy nét</b> để xem thứ tự nét chuẩn HanziWriter, hoặc vẽ trực tiếp bằng tay/chuột trên ô <b>田字格</b> cảm ứng bên phải.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
-            <div class="text-center">
-                <span class="text-2xl font-bold text-slate-800 zh">门</span>
-                <span class="text-xs text-slate-500 block">mén</span>
-                <span class="text-[11px] text-slate-400 block">门 (Cửa, cổng, môn học)</span>
-            </div>
-            <div class="flex items-center justify-center gap-2 w-full">
-                <div class="flex flex-col items-center">
-                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
-                    <div id="target-men-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
-                </div>
                 <div class="flex flex-col items-center">
                     <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
                     <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
@@ -1616,11 +1596,11 @@
     </div>
 </div>
 <script>
-var writers = {};
-
 const VOCAB_AUDIO = {};
 const TEXT_AUDIO = {};
 const items = [{"id": "men-1", "char": "门", "pinyin": "mén", "meaning": "门 (Cửa, cổng, môn học)", "key": "men"}, {"id": "zixingche-1", "char": "自", "pinyin": "zìxíngchē", "meaning": "自行车 (Xe đạp)", "key": "zixingche"}, {"id": "zixingche-2", "char": "行", "pinyin": "zìxíngchē", "meaning": "自行车 (Xe đạp)", "key": "zixingche"}, {"id": "zixingche-3", "char": "车", "pinyin": "zìxíngchē", "meaning": "自行车 (Xe đạp)", "key": "zixingche"}, {"id": "yangrou-1", "char": "羊", "pinyin": "yángròu", "meaning": "羊肉 (Thịt dê, thịt cừu)", "key": "yangrou"}, {"id": "yangrou-2", "char": "肉", "pinyin": "yángròu", "meaning": "羊肉 (Thịt dê, thịt cừu)", "key": "yangrou"}, {"id": "haochi-1", "char": "好", "pinyin": "hǎochī", "meaning": "好吃 (Ngon (Thức ăn))", "key": "haochi"}, {"id": "haochi-2", "char": "吃", "pinyin": "hǎochī", "meaning": "好吃 (Ngon (Thức ăn))", "key": "haochi"}, {"id": "miantiao-1", "char": "面", "pinyin": "miàntiáo", "meaning": "面条 (Mì, sợi mì)", "key": "miantiao"}, {"id": "miantiao-2", "char": "条", "pinyin": "miàntiáo", "meaning": "面条 (Mì, sợi mì)", "key": "miantiao"}, {"id": "dalanqiu-1", "char": "打", "pinyin": "dǎ lánqiú", "meaning": "打篮球 (Chơi bóng rổ)", "key": "dalanqiu"}, {"id": "dalanqiu-2", "char": "篮", "pinyin": "dǎ lánqiú", "meaning": "打篮球 (Chơi bóng rổ)", "key": "dalanqiu"}, {"id": "dalanqiu-3", "char": "球", "pinyin": "dǎ lánqiú", "meaning": "打篮球 (Chơi bóng rổ)", "key": "dalanqiu"}, {"id": "yinwei-1", "char": "因", "pinyin": "yīnwèi", "meaning": "因为 (Bởi vì, vì)", "key": "yinwei"}, {"id": "yinwei-2", "char": "为", "pinyin": "yīnwèi", "meaning": "因为 (Bởi vì, vì)", "key": "yinwei"}, {"id": "suoyi-1", "char": "所", "pinyin": "suǒyǐ", "meaning": "所以 (Cho nên, nên)", "key": "suoyi"}, {"id": "suoyi-2", "char": "以", "pinyin": "suǒyǐ", "meaning": "所以 (Cho nên, nên)", "key": "suoyi"}, {"id": "youyong-1", "char": "游", "pinyin": "yóuyǒng", "meaning": "游泳 (Bơi lội, đi bơi)", "key": "youyong"}, {"id": "youyong-2", "char": "泳", "pinyin": "yóuyǒng", "meaning": "游泳 (Bơi lội, đi bơi)", "key": "youyong"}, {"id": "jingchang-1", "char": "经", "pinyin": "jīngcháng", "meaning": "经常 (Thường xuyên, thường)", "key": "jingchang"}, {"id": "jingchang-2", "char": "常", "pinyin": "jīngcháng", "meaning": "经常 (Thường xuyên, thường)", "key": "jingchang"}, {"id": "gongjin-1", "char": "公", "pinyin": "gōngjīn", "meaning": "公斤 (Cân, ki-lô-gam (kg))", "key": "gongjin"}, {"id": "gongjin-2", "char": "斤", "pinyin": "gōngjīn", "meaning": "公斤 (Cân, ki-lô-gam (kg))", "key": "gongjin"}, {"id": "jiejie-1", "char": "姐", "pinyin": "jiějie", "meaning": "姐姐 (Chị gái)", "key": "jiejie"}, {"id": "jiejie-2", "char": "姐", "pinyin": "jiějie", "meaning": "姐姐 (Chị gái)", "key": "jiejie"}];
+
+var writers = {};
 
 function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => {
