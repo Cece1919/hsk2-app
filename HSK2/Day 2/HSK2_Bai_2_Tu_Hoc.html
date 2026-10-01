@@ -95,15 +95,15 @@
     </header>
 
     <!-- NAVIGATION BAR -->
-    <div class="no-print flex space-x-2 md:space-x-3 border-b border-slate-200 mb-8 overflow-x-auto pb-1 text-xs md:text-sm font-medium">
-        <button onclick="showTab('overview')" id="tab-overview" class="tab-btn active tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">🎯 Mục tiêu</button>
-        <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📚 Từ vựng (17)</button>
-        <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
-        <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📖 Ngữ pháp (3)</button>
-        <button onclick="showTab('text')" id="tab-text" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa & Audio (4)</button>
-        <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
-        <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-3 py-2 text-slate-600 hover:text-blue-900 transition">🏛️ Góc Văn hóa</button>
-    </div>
+    <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📌 Overview</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📖 Từ vựng</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">💡 Ngữ pháp</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🎋 Góc văn hóa</button>
+        </nav>
 
     <div id="sec-overview" class="tab-content hidden space-y-6">
         <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
@@ -1394,121 +1394,9 @@
 <script>
 var writers = {};
 
+const VOCAB_AUDIO = {};
+const TEXT_AUDIO = {};
 const items = [{"id": "gongjiaoche-1", "char": "公", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-2", "char": "交", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-3", "char": "车", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "dan-1", "char": "但", "pinyin": "dàn", "meaning": "但 (Nhưng, nhưng mà)", "key": "dan"}, {"id": "chezhan-1", "char": "车", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "chezhan-2", "char": "站", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "yuan-1", "char": "远", "pinyin": "yuǎn", "meaning": "远 (Xa, xa xôi)", "key": "yuan"}, {"id": "dache-1", "char": "打", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "dache-2", "char": "车", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "haishi-1", "char": "还", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "haishi-2", "char": "是", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "beijingdaxue-1", "char": "北", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-2", "char": "京", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-3", "char": "大", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-4", "char": "学", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "a-1", "char": "啊", "pinyin": "a", "meaning": "啊 (À, nha, nhỉ)", "key": "a"}, {"id": "wan-1", "char": "万", "pinyin": "wàn", "meaning": "万 (Mười nghìn (10.000))", "key": "wan"}, {"id": "ming-1", "char": "名", "pinyin": "míng", "meaning": "名 (Vị, người (lượng từ))", "key": "ming"}, {"id": "wangshang-1", "char": "网", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "wangshang-2", "char": "上", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "waiguo-1", "char": "外", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "waiguo-2", "char": "国", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "jian-1", "char": "间", "pinyin": "jiān", "meaning": "间 (Căn, phòng)", "key": "jian"}, {"id": "jiaoshi-1", "char": "教", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "jiaoshi-2", "char": "室", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "piao-1", "char": "票", "pinyin": "piào", "meaning": "票 (Vé)", "key": "piao"}, {"id": "bie-1", "char": "别", "pinyin": "bié", "meaning": "别 (Đừng, không nên)", "key": "bie"}, {"id": "guolai-1", "char": "过", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}, {"id": "guolai-2", "char": "来", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}];
-
-
-function initWriters() {
-    if (typeof HanziWriter === 'undefined') return;
-    if (typeof items === 'undefined' || !items) return;
-
-    items.forEach(item => {
-        const containerId = 'target-' + item.id;
-        const container = document.getElementById(containerId);
-        if (container && !writers[item.id]) {
-            try {
-                let writer = HanziWriter.create(containerId, item.char, {
-                    width: 100,
-                    height: 100,
-                    padding: 5,
-                    showOutline: true,
-                    strokeAnimationSpeed: 1,
-                    delayBetweenStrokes: 150,
-                    strokeColor: '#0f172a'
-                });
-                writers[item.id] = writer;
-            } catch(e) {
-                console.log('Error init writer for ' + item.id, e);
-            }
-        }
-    });
-
-    items.forEach(item => {
-        const canvasId = 'pad-' + item.id;
-        initPad(canvasId);
-    });
-}
-
-function animateChar(id, charStr) {
-    if (writers[id]) {
-        writers[id].animateCharacter();
-    }
-}
-
-function loopChar(id, charStr) {
-    if (writers[id]) {
-        writers[id].loopCharacterAnimation();
-    }
-}
-
-function animateAllSims() {
-    if (typeof writers === 'undefined') return;
-    Object.keys(writers).forEach(key => {
-        if (writers[key]) {
-            writers[key].animateCharacter();
-        }
-    });
-}
-
-function initPad(canvasId) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas || canvas.dataset.inited) return;
-    canvas.dataset.inited = "true";
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-
-    ctx.lineWidth = 4;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#0f172a';
-
-    function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return {
-            x: clientX - rect.left,
-            y: clientY - rect.top
-        };
-    }
-
-    function startDraw(e) {
-        isDrawing = true;
-        const pos = getPos(e);
-        ctx.beginPath();
-        ctx.moveTo(pos.x, pos.y);
-    }
-
-    function draw(e) {
-        if (!isDrawing) return;
-        const pos = getPos(e);
-        ctx.lineTo(pos.x, pos.y);
-        ctx.stroke();
-    }
-
-    function stopDraw() {
-        isDrawing = false;
-    }
-
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('mouseleave', stopDraw);
-
-    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(e); });
-    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
-    canvas.addEventListener('touchend', stopDraw);
-}
-
-function clearPad(canvasId) {
-    const canvas = document.getElementById(canvasId);
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-}
-
-
-let currentAudio = null;
-let currentRate = 1.0;
 
 function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => {
@@ -1521,186 +1409,13 @@ function showTab(tabId) {
         targetSec.style.display = 'block';
     }
     document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active', 'bg-gradient-to-r', 'from-red-600', 'to-amber-600', 'text-white', 'shadow-md', 'bg-blue-900', 'active-tab');
-        btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+        btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900', 'active');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
     });
     let activeBtn = document.getElementById('tab-' + tabId);
     if (activeBtn) {
-        activeBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
-        activeBtn.classList.add('active', 'bg-gradient-to-r', 'from-red-600', 'to-amber-600', 'text-white', 'shadow-md');
-    }
-}
-
-function setSpeed(rate) {
-    currentRate = rate;
-    const btnSlow = document.getElementById('speed-slow');
-    const btnNormal = document.getElementById('speed-normal');
-    if (btnSlow && btnNormal) {
-        if (rate === 0.75) {
-            btnSlow.className = "px-2 py-0.5 rounded bg-blue-600 font-bold text-white";
-            btnNormal.className = "px-2 py-0.5 rounded text-slate-400";
-        } else {
-            btnSlow.className = "px-2 py-0.5 rounded text-slate-400";
-            btnNormal.className = "px-2 py-0.5 rounded bg-blue-600 font-bold text-white";
-        }
-    }
-}
-
-var currentAudio = null;
-var currentRate = 0.85;
-
-function playVocab(key, fallbackText) {
-    var textToSpeak = fallbackText || key || "";
-    var namespacedKey = (typeof currentLesson !== "undefined") ? ("d" + currentLesson + "_" + key) : key;
-    var b64 = null;
-    if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
-        b64 = VOCAB_AUDIO[namespacedKey] || VOCAB_AUDIO[key];
-    }
-    if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
-        b64 = TEXT_AUDIO[namespacedKey] || TEXT_AUDIO[key];
-    }
-
-    if (b64) {
-        playB64(b64, textToSpeak);
-    } else {
-        speakText(textToSpeak);
-    }
-}
-
-function playText(key, fallbackText) {
-    playVocab(key, fallbackText);
-}
-
-function playB64(b64Data, fallbackText) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        if (!b64Data) {
-            speakText(fallbackText);
-            return;
-        }
-        var src = (b64Data && b64Data.startsWith && b64Data.startsWith("data:audio/")) ? b64Data : ("data:audio/mp4;base64," + (b64Data || ""));
-        currentAudio = new Audio(src);
-        currentAudio.playbackRate = currentRate || 0.85;
-        var playPromise = currentAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(function(err) {
-                console.log("Base64 audio playback failed, speaking text via TTS:", err);
-                speakText(fallbackText);
-            });
-        }
-    } catch(e) {
-        speakText(fallbackText);
-    }
-}
-
-function speakText(text) {
-    if (!text) return;
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-    } catch(e) {}
-
-    var textClean = text.trim();
-    if (!textClean) return;
-
-    var speechFired = false;
-
-    if ("speechSynthesis" in window) {
-        try {
-            window.speechSynthesis.cancel();
-            
-            var utter = new SpeechSynthesisUtterance(textClean);
-            utter.lang = "zh-CN";
-            utter.rate = currentRate || 0.85;
-
-            var voices = window.speechSynthesis.getVoices();
-            if (voices && voices.length > 0) {
-                var zhVoice = voices.find(function(v) {
-                    return v.lang && (v.lang.includes("zh") || v.lang.includes("CN") || v.lang.includes("ZH") || v.lang.includes("Chinese"));
-                });
-                if (zhVoice) utter.voice = zhVoice;
-            }
-
-            utter.onstart = function() {
-                speechFired = true;
-            };
-
-            utter.onerror = function(err) {
-                console.log("SpeechSynthesis error:", err);
-                if (!speechFired) {
-                    playOnlineTTS(textClean);
-                }
-            };
-
-            setTimeout(function() {
-                if (!speechFired) {
-                    try { window.speechSynthesis.cancel(); } catch(e) {}
-                    playOnlineTTS(textClean);
-                }
-            }, 350);
-
-            window.speechSynthesis.speak(utter);
-            return;
-        } catch(e) {
-            console.log("SpeechSynthesis exception:", e);
-        }
-    }
-
-    playOnlineTTS(textClean);
-}
-
-function playOnlineTTS(text) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encoded;
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        var playPromise = currentAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(function(err) {
-                console.log("Google TTS error, trying Youdao TTS:", err);
-                playSecondaryTTS(text);
-            });
-        }
-    } catch(e) {
-        playSecondaryTTS(text);
-    }
-}
-
-function playSecondaryTTS(text) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) {
-            console.log("Secondary TTS play error:", err);
-        });
-    } catch(e) {}
-}
-
-        function toggleElement(className) {
-    const el = document.getElementById(className) || document.querySelector('.' + className);
-    if (el) {
-        el.classList.toggle('hidden');
-        return;
-    }
-    const elements = document.getElementsByClassName(className);
-    for (let item of elements) {
-        item.classList.toggle('hidden');
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
     }
 }
 
@@ -1711,31 +1426,36 @@ function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
     if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
         btn = btnOrQNum;
         isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
+    }
 
-        const parentCard = btn.closest('.bg-white') || btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.parentElement;
-        if (parentCard) {
-            const siblings = parentCard.querySelectorAll('button');
+    if (btn) {
+        const parentDiv = btn.parentElement;
+        if (parentDiv) {
+            const siblings = parentDiv.querySelectorAll('button');
             siblings.forEach(b => {
-                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm', 'bg-emerald-600');
+                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
                 b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
             });
         }
 
-        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
         if (isCorrect) {
-            btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
+            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+            btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
         } else {
+            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
             btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
         }
 
-        let evalBox = parentCard ? parentCard.querySelector('.ans-eval-box') : null;
-        if (!evalBox && parentCard) {
-            evalBox = document.createElement('div');
-            evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
-            parentCard.appendChild(evalBox);
-        }
-        if (evalBox) {
+        const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
+        if (card) {
+            let evalBox = card.querySelector('.ans-eval-box');
+            if (!evalBox) {
+                evalBox = document.createElement('div');
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
+                card.appendChild(evalBox);
+            }
             evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+            
             if (isCorrect) {
                 evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
                 evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
@@ -1756,71 +1476,80 @@ function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
     ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
 }
 
-function toggleAns(id) {
-    const el = document.getElementById(id) || document.querySelector('.' + id);
-    if (!el) return;
+var currentAudio = null;
+var currentRate = 0.85;
 
-    const parentBox = el.parentElement;
-    const inp = parentBox ? parentBox.querySelector('input') : null;
-    
-    const isHidden = el.classList.contains('hidden') || el.style.display === 'none';
-    if (!isHidden && inp && !inp.value.trim()) {
-        el.classList.add('hidden');
-        el.style.display = 'none';
-        return;
+function playVocab(key, fallbackText) {
+    var textToSpeak = fallbackText || key || "";
+    var b64 = null;
+    if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
+        b64 = VOCAB_AUDIO[key];
     }
-    
-    el.classList.remove('hidden');
-    el.style.display = 'block';
-
-    if (inp) {
-        let fb = el.querySelector('.ans-feedback');
-        if (!fb) {
-            fb = document.createElement('div');
-            fb.className = 'ans-feedback mb-2 p-2.5 rounded-lg text-xs space-y-1 font-sans';
-            el.insertBefore(fb, el.firstChild);
-        }
-
-        const userText = inp.value.trim();
-        let correctText = "";
-        const targetP = el.querySelector('p.zh, p.font-bold');
-        if (targetP) {
-            const raw = targetP.textContent;
-            if (raw.includes('Đáp án:')) {
-                correctText = raw.split('Đáp án:')[1].trim();
-            } else if (raw.includes('Đáp án chuẩn:')) {
-                correctText = raw.split('Đáp án chuẩn:')[1].trim();
-            } else {
-                correctText = raw.trim();
-            }
-        }
-
-        if (!userText) {
-            fb.className = 'ans-feedback mb-2 p-2.5 bg-blue-50 border border-blue-200 rounded-lg text-blue-900 text-xs font-medium';
-            fb.innerHTML = 'ℹ️ <i>Bạn chưa nhập câu trả lời. Dưới đây là đáp án & giải thích chi tiết:</i>';
-            el.className = el.className.replace(/bg-\w+-\d+/, 'bg-slate-50').replace(/border-\w+-\d+/, 'border-slate-200');
-        } else {
-            const normUser = userText.replace(/[\s\.\,\!\?！。？，、`'"\(\)]/g, '');
-            const normCorrect = correctText.replace(/[\s\.\,\!\?！。？，、`'"\(\)]/g, '');
-
-            if (normUser === normCorrect) {
-                fb.className = 'ans-feedback mb-2 p-2.5 bg-emerald-100 border border-emerald-300 rounded-lg text-emerald-950 text-xs font-bold';
-                fb.innerHTML = '✅ <b>Chính xác 100%!</b> Bạn đã sắp xếp câu hoàn toàn đúng.';
-                el.className = el.className.replace(/bg-\w+-\d+/, 'bg-emerald-50').replace(/border-\w+-\d+/, 'border-emerald-200');
-            } else {
-                const safeUser = userText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                fb.className = 'ans-feedback mb-2 p-2.5 bg-amber-50 border border-amber-300 rounded-lg text-amber-950 text-xs space-y-1';
-                fb.innerHTML = '❌ <b>Chưa chính xác!</b><br>• Câu bạn đã nhập: <span class="font-bold text-rose-700 zh">' + safeUser + '</span><br>• <i>Hãy đối chiếu với đáp án chuẩn và phân tích giải thích ngữ pháp bên dưới để rút kinh nghiệm nhé!</i>';
-                el.className = el.className.replace(/bg-\w+-\d+/, 'bg-amber-50/60').replace(/border-\w+-\d+/, 'border-amber-200');
-            }
-        }
+    if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
+        b64 = TEXT_AUDIO[key];
     }
+
+    if (b64) {
+        playB64(b64, textToSpeak);
+    } else {
+        speakText(textToSpeak);
+    }
+}
+
+function playTTS(text) {
+    speakText(text);
+}
+
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-CN';
+        utterance.rate = currentRate || 0.85;
+        utterance.onerror = function() { playOnlineTTS(text); };
+        window.speechSynthesis.speak(utterance);
+    } else {
+        playOnlineTTS(text);
+    }
+}
+
+function playOnlineTTS(text) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encoded + "&tl=zh-CN&client=tw-ob";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) { playSecondaryTTS(text); });
+    } catch(e) { playSecondaryTTS(text); }
+}
+
+function playSecondaryTTS(text) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) {});
+    } catch(e) {}
+}
+
+function playB64(base64Data, fallbackText) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        currentAudio = new Audio("data:audio/m4a;base64," + base64Data);
+        currentAudio.playbackRate = currentRate || 0.85;
+        var promise = currentAudio.play();
+        if (promise !== undefined) {
+            promise.catch(function() { speakText(fallbackText); });
+        }
+    } catch(e) { speakText(fallbackText); }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     showTab('overview');
 });
-
 </script>
 </body>
 </html>

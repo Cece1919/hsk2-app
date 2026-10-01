@@ -31,31 +31,14 @@
         </div>
 
         <!-- 8 TABS NAVIGATION BAR (INCLUDING TAB SIM) -->
-        <nav class="max-w-6xl mx-auto px-4 flex space-x-1 overflow-x-auto text-xs md:text-sm font-medium border-t border-slate-100 pt-1 pb-1">
-            <button id="tab-sim" onclick="showTab('sim')" class="tab-btn active-tab px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>🎬</span> Mô phỏng nét viết động
-            </button>
-            <button id="tab-overview" onclick="showTab('overview')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>📌</span> Overview / 🎯 Mục tiêu
-            </button>
-            <button id="tab-vocab" onclick="showTab('vocab')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>📖</span> Từ vựng
-            </button>
-            <button id="tab-writing" onclick="showTab('writing')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>✍️</span> Tập viết & Mẹo nhớ
-            </button>
-            <button id="tab-grammar" onclick="showTab('grammar')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>💡</span> Ngữ pháp
-            </button>
-            <button id="tab-text" onclick="showTab('text')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>🗣️</span> Bài khóa
-            </button>
-            <button id="tab-practice" onclick="showTab('practice')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>📝</span> Luyện tập
-            </button>
-            <button id="tab-culture" onclick="showTab('culture')" class="tab-btn px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 shrink-0">
-                <span>🎋</span> Góc văn hóa
-            </button>
+        <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📌 Overview</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📖 Từ vựng</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">💡 Ngữ pháp</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🎋 Góc văn hóa</button>
         </nav>
     </header>
 
@@ -1831,44 +1814,160 @@
     <script>
 var writers = {};
 
-        const VOCAB_AUDIO = {};
-        const TEXT_AUDIO = {};
+const VOCAB_AUDIO = {};
+const TEXT_AUDIO = {};
+const items = [{"id": "shengri-1", "char": "生", "pinyin": "shēngrì", "meaning": "生日 (Sinh nhật)"}, {"id": "shengri-2", "char": "日", "pinyin": "shēngrì", "meaning": "生日 (Sinh nhật)"}, {"id": "kuaile-1", "char": "快", "pinyin": "kuàilè", "meaning": "快乐 (Vui vẻ, hạnh phúc)"}, {"id": "kuaile-2", "char": "乐", "pinyin": "kuàilè", "meaning": "快乐 (Vui vẻ, hạnh phúc)"}, {"id": "song-1", "char": "送", "pinyin": "sòng", "meaning": "送 (Tặng, tiễn, đưa)"}, {"id": "liwu-1", "char": "礼", "pinyin": "lǐwù", "meaning": "礼物 (Món quà, quà tặng)"}, {"id": "liwu-2", "char": "物", "pinyin": "lǐwù", "meaning": "礼物 (Món quà, quà tặng)"}, {"id": "wanshang-1", "char": "晚", "pinyin": "wǎnshang", "meaning": "晚上 (Buổi tối)"}, {"id": "wanshang-2", "char": "上", "pinyin": "wǎnshang", "meaning": "晚上 (Buổi tối)"}, {"id": "dangao-1", "char": "蛋", "pinyin": "dàngāo", "meaning": "蛋糕 (Bánh kem)"}, {"id": "dangao-2", "char": "糕", "pinyin": "dàngāo", "meaning": "蛋糕 (Bánh kem)"}, {"id": "wen-1", "char": "问", "pinyin": "wèn", "meaning": "问 (Hỏi)"}, {"id": "feichang-1", "char": "非", "pinyin": "fēicháng", "meaning": "非常 (Cực kỳ, vô cùng)"}, {"id": "feichang-2", "char": "常", "pinyin": "fēicháng", "meaning": "非常 (Cực kỳ, vô cùng)"}, {"id": "kaishi-1", "char": "开", "pinyin": "kāishǐ", "meaning": "开始 (Bắt đầu)"}, {"id": "kaishi-2", "char": "始", "pinyin": "kāishǐ", "meaning": "开始 (Bắt đầu)"}, {"id": "chang-1", "char": "长", "pinyin": "cháng", "meaning": "长 (Dài / Lớn lên)"}, {"id": "xiwang-1", "char": "希", "pinyin": "xīwàng", "meaning": "希望 (Hy vọng)"}, {"id": "xiwang-2", "char": "望", "pinyin": "xīwàng", "meaning": "希望 (Hy vọng)"}, {"id": "canjia-1", "char": "参", "pinyin": "cānjiā", "meaning": "参加 (Tham gia)"}, {"id": "canjia-2", "char": "加", "pinyin": "cānjiā", "meaning": "参加 (Tham gia)"}, {"id": "juhui-1", "char": "聚", "pinyin": "jùhuì", "meaning": "聚会 (Tiệc liên hoan)"}, {"id": "juhui-2", "char": "会", "pinyin": "jùhuì", "meaning": "聚会 (Tiệc liên hoan)"}, {"id": "zhu-1", "char": "祝", "pinyin": "zhù", "meaning": "祝 (Chúc, chúc mừng)"}];
 
-                const items = [{"id": "shengri-1", "char": "生", "pinyin": "shēngrì", "meaning": "生日 (Sinh nhật)"}, {"id": "shengri-2", "char": "日", "pinyin": "shēngrì", "meaning": "生日 (Sinh nhật)"}, {"id": "kuaile-1", "char": "快", "pinyin": "kuàilè", "meaning": "快乐 (Vui vẻ, hạnh phúc)"}, {"id": "kuaile-2", "char": "乐", "pinyin": "kuàilè", "meaning": "快乐 (Vui vẻ, hạnh phúc)"}, {"id": "song-1", "char": "送", "pinyin": "sòng", "meaning": "送 (Tặng, tiễn, đưa)"}, {"id": "liwu-1", "char": "礼", "pinyin": "lǐwù", "meaning": "礼物 (Món quà, quà tặng)"}, {"id": "liwu-2", "char": "物", "pinyin": "lǐwù", "meaning": "礼物 (Món quà, quà tặng)"}, {"id": "wanshang-1", "char": "晚", "pinyin": "wǎnshang", "meaning": "晚上 (Buổi tối)"}, {"id": "wanshang-2", "char": "上", "pinyin": "wǎnshang", "meaning": "晚上 (Buổi tối)"}, {"id": "dangao-1", "char": "蛋", "pinyin": "dàngāo", "meaning": "蛋糕 (Bánh kem)"}, {"id": "dangao-2", "char": "糕", "pinyin": "dàngāo", "meaning": "蛋糕 (Bánh kem)"}, {"id": "wen-1", "char": "问", "pinyin": "wèn", "meaning": "问 (Hỏi)"}, {"id": "feichang-1", "char": "非", "pinyin": "fēicháng", "meaning": "非常 (Cực kỳ, vô cùng)"}, {"id": "feichang-2", "char": "常", "pinyin": "fēicháng", "meaning": "非常 (Cực kỳ, vô cùng)"}, {"id": "kaishi-1", "char": "开", "pinyin": "kāishǐ", "meaning": "开始 (Bắt đầu)"}, {"id": "kaishi-2", "char": "始", "pinyin": "kāishǐ", "meaning": "开始 (Bắt đầu)"}, {"id": "chang-1", "char": "长", "pinyin": "cháng", "meaning": "长 (Dài / Lớn lên)"}, {"id": "xiwang-1", "char": "希", "pinyin": "xīwàng", "meaning": "希望 (Hy vọng)"}, {"id": "xiwang-2", "char": "望", "pinyin": "xīwàng", "meaning": "希望 (Hy vọng)"}, {"id": "canjia-1", "char": "参", "pinyin": "cānjiā", "meaning": "参加 (Tham gia)"}, {"id": "canjia-2", "char": "加", "pinyin": "cānjiā", "meaning": "参加 (Tham gia)"}, {"id": "juhui-1", "char": "聚", "pinyin": "jùhuì", "meaning": "聚会 (Tiệc liên hoan)"}, {"id": "juhui-2", "char": "会", "pinyin": "jùhuì", "meaning": "聚会 (Tiệc liên hoan)"}, {"id": "zhu-1", "char": "祝", "pinyin": "zhù", "meaning": "祝 (Chúc, chúc mừng)"}];
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.style.display = 'none';
+    });
+    let targetSec = document.getElementById('sec-' + tabId);
+    if (targetSec) {
+        targetSec.classList.remove('hidden');
+        targetSec.style.display = 'block';
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900', 'active');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+    });
+    let activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+    }
+}
 
-        document.addEventListener('DOMContentLoaded', () => {
-            items.forEach(item => {
-                let el = document.getElementById('target-' + item.id);
-                if (el) {
-                    writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {
-                        width: 130,
-                        height: 130,
-                        padding: 5,
-                        strokeAnimationSpeed: 1,
-                        delayBetweenStrokes: 150,
-                        strokeColor: '#1e293b',
-                        radicalColor: '#2563eb',
-                        showOutline: true,
-                        outlineColor: '#cbd5e1'
-                    });
-                }
-                setupCanvas('pad-' + item.id);
+function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
+    let btn = null;
+    let isCorrect = false;
+
+    if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
+        btn = btnOrQNum;
+        isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
+    }
+
+    if (btn) {
+        const parentDiv = btn.parentElement;
+        if (parentDiv) {
+            const siblings = parentDiv.querySelectorAll('button');
+            siblings.forEach(b => {
+                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
+                b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
             });
-        });
-
-        function animateChar(id) {
-            if (writers[id]) {
-                writers[id].animateCharacter();
-            }
         }
 
-        function resetChar(id) {
-            if (writers[id]) {
-                writers[id].showCharacter();
-            }
+        if (isCorrect) {
+            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+            btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
+        } else {
+            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+            btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
         }
 
-        function animateChar(id) {
+        const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
+        if (card) {
+            let evalBox = card.querySelector('.ans-eval-box');
+            if (!evalBox) {
+                evalBox = document.createElement('div');
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
+                card.appendChild(evalBox);
+            }
+            evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+            
+            if (isCorrect) {
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
+                evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
+            } else {
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
+                evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
+            }
+        }
+        return;
+    }
+
+    const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
+    if (!targetId) return;
+    const ansDiv = document.getElementById(targetId);
+    if (!ansDiv) return;
+    ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
+    ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+    ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
+}
+
+var currentAudio = null;
+var currentRate = 0.85;
+
+function playVocab(key, fallbackText) {
+    var textToSpeak = fallbackText || key || "";
+    var b64 = null;
+    if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
+        b64 = VOCAB_AUDIO[key];
+    }
+    if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
+        b64 = TEXT_AUDIO[key];
+    }
+
+    if (b64) {
+        playB64(b64, textToSpeak);
+    } else {
+        speakText(textToSpeak);
+    }
+}
+
+function playTTS(text) {
+    speakText(text);
+}
+
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-CN';
+        utterance.rate = currentRate || 0.85;
+        utterance.onerror = function() { playOnlineTTS(text); };
+        window.speechSynthesis.speak(utterance);
+    } else {
+        playOnlineTTS(text);
+    }
+}
+
+function playOnlineTTS(text) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encoded + "&tl=zh-CN&client=tw-ob";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) { playSecondaryTTS(text); });
+    } catch(e) { playSecondaryTTS(text); }
+}
+
+function playSecondaryTTS(text) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) {});
+    } catch(e) {}
+}
+
+function playB64(base64Data, fallbackText) {
+    try {
+        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+        currentAudio = new Audio("data:audio/m4a;base64," + base64Data);
+        currentAudio.playbackRate = currentRate || 0.85;
+        var promise = currentAudio.play();
+        if (promise !== undefined) {
+            promise.catch(function() { speakText(fallbackText); });
+        }
+    } catch(e) { speakText(fallbackText); }
+}
+
+function animateChar(id) {
     if (writers[id]) {
         try { writers[id].animateCharacter(); } catch(e) {}
     }
@@ -1933,194 +2032,30 @@ function clearPad(canvasId) {
     }
 }
 
-function playText(key, fallbackText) {
-    playVocab(key, fallbackText);
-}
-
-function playB64(b64Data, fallbackText) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        if (!b64Data) {
-            speakText(fallbackText);
-            return;
-        }
-        var src = (b64Data && b64Data.startsWith && b64Data.startsWith("data:audio/")) ? b64Data : ("data:audio/mp4;base64," + (b64Data || ""));
-        currentAudio = new Audio(src);
-        currentAudio.playbackRate = currentRate || 0.85;
-        var playPromise = currentAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(function(err) {
-                console.log("Base64 audio playback failed, speaking text via TTS:", err);
-                speakText(fallbackText);
-            });
-        }
-    } catch(e) {
-        speakText(fallbackText);
-    }
-}
-
-function speakText(text) {
-    if (!text) return;
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-    } catch(e) {}
-
-    var textClean = text.trim();
-    if (!textClean) return;
-
-    var speechFired = false;
-
-    if ("speechSynthesis" in window) {
-        try {
-            window.speechSynthesis.cancel();
-            
-            var utter = new SpeechSynthesisUtterance(textClean);
-            utter.lang = "zh-CN";
-            utter.rate = currentRate || 0.85;
-
-            var voices = window.speechSynthesis.getVoices();
-            if (voices && voices.length > 0) {
-                var zhVoice = voices.find(function(v) {
-                    return v.lang && (v.lang.includes("zh") || v.lang.includes("CN") || v.lang.includes("ZH") || v.lang.includes("Chinese"));
-                });
-                if (zhVoice) utter.voice = zhVoice;
-            }
-
-            utter.onstart = function() {
-                speechFired = true;
-            };
-
-            utter.onerror = function(err) {
-                console.log("SpeechSynthesis error:", err);
-                if (!speechFired) {
-                    playOnlineTTS(textClean);
-                }
-            };
-
-            setTimeout(function() {
-                if (!speechFired) {
-                    try { window.speechSynthesis.cancel(); } catch(e) {}
-                    playOnlineTTS(textClean);
-                }
-            }, 350);
-
-            window.speechSynthesis.speak(utter);
-            return;
-        } catch(e) {
-            console.log("SpeechSynthesis exception:", e);
-        }
-    }
-
-    playOnlineTTS(textClean);
-}
-
-function playOnlineTTS(text) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encoded;
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        var playPromise = currentAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(function(err) {
-                console.log("Google TTS error, trying Youdao TTS:", err);
-                playSecondaryTTS(text);
-            });
-        }
-    } catch(e) {
-        playSecondaryTTS(text);
-    }
-}
-
-function playSecondaryTTS(text) {
-    try {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) {
-            console.log("Secondary TTS play error:", err);
-        });
-    } catch(e) {}
-}
-
-        function toggleAns(ansId) {
-            let el = document.getElementById(ansId);
-            if (el) {
-                el.classList.toggle('hidden');
-            }
-        }
-
-        function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
-            let btn = null;
-            let isCorrect = false;
-
-            if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
-                btn = btnOrQNum;
-                isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
-            }
-
-            if (btn) {
-                const parentDiv = btn.parentElement;
-                if (parentDiv) {
-                    const siblings = parentDiv.querySelectorAll('button');
-                    siblings.forEach(b => {
-                        b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
-                        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof items !== 'undefined' && Array.isArray(items)) {
+        items.forEach(item => {
+            let el = document.getElementById('target-' + item.id);
+            if (el && typeof HanziWriter !== 'undefined') {
+                try {
+                    writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {
+                        width: 130,
+                        height: 130,
+                        padding: 5,
+                        strokeAnimationSpeed: 1,
+                        delayBetweenStrokes: 150,
+                        strokeColor: '#1e293b',
+                        radicalColor: '#2563eb',
+                        showOutline: true,
+                        outlineColor: '#cbd5e1'
                     });
-                }
-
-                if (isCorrect) {
-                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
-                } else {
-                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
-                }
-
-                const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
-                if (card) {
-                    let evalBox = card.querySelector('.ans-eval-box');
-                    if (!evalBox) {
-                        evalBox = document.createElement('div');
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
-                        card.appendChild(evalBox);
-                    }
-                    evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
-                    
-                    if (isCorrect) {
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
-                        evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
-                    } else {
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
-                        evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
-                    }
-                }
-                return;
+                } catch(e) {}
             }
-
-            const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
-            if (!targetId) return;
-            const ansDiv = document.getElementById(targetId);
-            if (!ansDiv) return;
-            ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
-            ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
-            ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
-        }
-    </script>
+            setupCanvas('pad-' + item.id);
+        });
+    }
+    showTab('sim');
+});
+</script>
 </body>
 </html>
