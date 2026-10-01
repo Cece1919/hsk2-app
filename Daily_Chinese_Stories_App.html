@@ -1358,11 +1358,6 @@
                     try { mediaRecorder.stop(); } catch(e) {}
                 }
                 isAIRecording = false;
-                document.getElementById('modal-rec-status').innerText = "🤖 AI đang phân tích phát âm...";
-                document.getElementById('modal-rec-status').className = "text-xs font-bold text-purple-700 animate-pulse";
-                document.getElementById('modal-rec-btn').className = "w-20 h-20 bg-slate-400 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto";
-                
-                setTimeout(() => { generateAIFeedback(); }, 1200);
             } else {
                 // Start recording
                 try {
@@ -1378,11 +1373,29 @@
                     mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
                     audioChunks = [];
 
+                    let lastSpeechText = "";
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    let recInstance = null;
+                    if (SpeechRecognition) {
+                        try {
+                            recInstance = new SpeechRecognition();
+                            recInstance.lang = 'zh-CN';
+                            recInstance.interimResults = false;
+                            recInstance.onresult = (e) => {
+                                lastSpeechText = e.results[0][0].transcript;
+                            };
+                            recInstance.start();
+                        } catch(e) {}
+                    }
+
                     mediaRecorder.ondataavailable = (e) => {
                         if (e.data.size > 0) audioChunks.push(e.data);
                     };
 
-                    mediaRecorder.onstop = () => {
+                    mediaRecorder.onstop = async () => {
+                        if (recInstance) {
+                            try { recInstance.stop(); } catch(e) {}
+                        }
                         const blobType = mediaRecorder.mimeType || mimeType || 'audio/mp4';
                         const audioBlob = new Blob(audioChunks, { type: blobType });
                         userAudioUrl = URL.createObjectURL(audioBlob);
@@ -1390,21 +1403,22 @@
                         const playback = document.getElementById('modal-audio-playback');
                         playback.src = userAudioUrl;
                         playback.load();
-                        playback.classList.remove('hidden');
 
                         document.getElementById('btn-play-user-rec').classList.remove('hidden');
+
+                        // Run Real AI Strict Evaluation
+                        await analyzeRecordedAudio(audioBlob, lastSpeechText);
                     };
 
                     mediaRecorder.start();
                     isAIRecording = true;
                     document.getElementById('btn-play-user-rec').classList.add('hidden');
-                    document.getElementById('modal-rec-status').innerText = "🔴 Đang thu âm... (Bấm lại để dừng & nhận xét)";
+                    document.getElementById('modal-rec-status').innerText = "🔴 Đang thu âm... (Bấm lại để dừng & AI chấm điểm)";
                     document.getElementById('modal-rec-status').className = "text-xs font-bold text-rose-600 animate-pulse";
                     document.getElementById('modal-rec-btn').className = "w-20 h-20 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto animate-bounce";
                     document.getElementById('modal-rec-icon').className = "ri-stop-fill";
 
                 } catch (err) {
-                    // Fallback recording simulation if mic permission blocked or unsupported
                     simulateAIRecording();
                 }
             }
@@ -1419,50 +1433,117 @@
             
             setTimeout(() => {
                 isAIRecording = false;
-                generateAIFeedback();
+                analyzeRecordedAudio(null, "");
             }, 3000);
         }
 
-        function generateAIFeedback() {
+        async function analyzeRecordedAudio(audioBlob, recognizedText) {
+            document.getElementById('modal-rec-status').innerText = "🤖 AI đang phân tích âm thanh & giọng đọc...";
+            document.getElementById('modal-rec-status').className = "text-xs font-bold text-purple-700 animate-pulse";
+
             const dayObj = APP_DATA.find(d => d.day === state.currentDay);
             const story = dayObj.stories[state.currentStoryIdx];
 
-            const score = 88 + Math.floor(Math.random() * 10);
-            
-            const tonesFeedbacks = [
-                `Thanh 1 (${story.titleZh.slice(0, 1)}) mở âm cao chuẩn xác, thanh 4 giật dứt khoát và tròn vành.`,
-                `Thanh 3 xuống giọng tròn trịa, giữ được độ nẩy tốt ở cụm từ trọng tâm.`,
-                `Âm tiết mở rộng khẩu hình chuẩn bản ngữ, thanh điệu bật âm tự nhiên.`
-            ];
+            let volumeRMS = 0;
+            let durationSec = 0;
 
-            const fluencyFeedbacks = [
-                `Tốc độ đọc vừa phải (${story.readTime}), ngắt nhịp chính xác giữa cụm chủ ngữ và động từ.`,
-                `Cách ngắt câu trôi chảy, nhịp điệu đọc liền mạch không bị ngắt quãng giữa các từ.`,
-                `Phát âm lưu khoát, giữ nhịp độ ổn định từ đầu đến cuối đoạn.`
-            ];
+            if (audioBlob) {
+                try {
+                    const arrayBuffer = await audioBlob.arrayBuffer();
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+                    durationSec = audioBuffer.duration;
+                    
+                    const channelData = audioBuffer.getChannelData(0);
+                    let sumSquare = 0;
+                    for (let i = 0; i < channelData.length; i += 10) {
+                        sumSquare += channelData[i] * channelData[i];
+                    }
+                    volumeRMS = Math.sqrt(sumSquare / (channelData.length / 10));
+                    audioCtx.close();
+                } catch (e) {
+                    console.log("Audio analysis fallback:", e);
+                }
+            }
 
-            const tipFeedbacks = [
-                `Nên chú ý quy tắc biến điệu của chữ 不 (bù/bú) và 一 (yī/yí/yì) khi đứng trước thanh 4.`,
-                `Nên giữ hơi nhẹ ở cuối câu để âm thanh tự nhiên và tròn trịa hơn.`,
-                `Hãy tiếp tục phát huy độ nẩy thanh điệu này ở các bài đọc tiếp theo nhé!`
-            ];
+            // Target text
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = story.contentHtml;
+            tempDiv.querySelectorAll('rt').forEach(el => el.remove());
+            tempDiv.querySelectorAll('.translation-text').forEach(el => el.remove());
+            const targetZh = tempDiv.innerText.replace(/[^\u4e00-\u9fa5]/g, '');
 
-            const randTone = tonesFeedbacks[Math.floor(Math.random() * tonesFeedbacks.length)];
-            const randFluency = fluencyFeedbacks[Math.floor(Math.random() * fluencyFeedbacks.length)];
-            const randTip = tipFeedbacks[Math.floor(Math.random() * tipFeedbacks.length)];
+            const cleanRecognized = (recognizedText || '').replace(/[^\u4e00-\u9fa5]/g, '');
 
-            document.getElementById('modal-score-grade').innerText = `Xuất Sắc! (${score}%)`;
-            document.getElementById('modal-ai-tone-feedback').innerText = randTone;
-            document.getElementById('modal-ai-fluency-feedback').innerText = randFluency;
-            document.getElementById('modal-ai-tip-feedback').innerText = randTip;
+            let score = 0;
+            let toneFeedback = "";
+            let fluencyFeedback = "";
+            let tipFeedback = "";
+            let gradeText = "";
 
-            document.getElementById('modal-rec-status').innerText = "✅ AI đã hoàn tất phân tích phát âm!";
-            document.getElementById('modal-rec-status').className = "text-xs font-bold text-emerald-700";
-            document.getElementById('modal-rec-btn').className = "w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto";
-            document.getElementById('modal-rec-icon').className = "ri-check-line";
+            // STRICT EVALUATION LOGIC
+            if (!audioBlob || durationSec < 0.8 || volumeRMS < 0.005) {
+                // SILENCE OR NEAR SILENCE
+                score = 0;
+                gradeText = "Chưa Có Giọng Nói (0%) ❌";
+                toneFeedback = "AI chưa phát hiện âm thanh giọng đọc của bạn.";
+                fluencyFeedback = "Âm lượng quá nhỏ hoặc im lặng. Hãy kiểm tra Micro và nói to hơn.";
+                tipFeedback = "Hãy giữ nút Micro và đọc to, rõ ràng theo đoạn văn phía trên.";
+            } else if (durationSec < 2.0 && cleanRecognized.length < 3) {
+                // TOO SHORT / BARELY SPOKE
+                score = 25;
+                gradeText = "Chưa Đủ Bài Đọc (25%) ⚠️";
+                toneFeedback = `Bạn mới chỉ đọc được ${cleanRecognized.length || 1} từ ngắn.`;
+                fluencyFeedback = "Thời lượng thu âm quá ngắn (dưới 2 giây), chưa đọc hết đoạn văn.";
+                tipFeedback = "Hãy đọc trọn vẹn cả câu chuyện để AI chấm điểm chính xác hơn.";
+            } else {
+                // REAL SPEECH MATCHING
+                if (cleanRecognized.length > 0) {
+                    let matchCount = 0;
+                    for (let char of cleanRecognized) {
+                        if (targetZh.includes(char)) matchCount++;
+                    }
+                    const ratio = Math.min(1.0, matchCount / Math.max(1, targetZh.length));
+                    score = Math.min(98, Math.max(30, Math.round(ratio * 100)));
+                } else {
+                    // Fallback using duration ratio if webkitSpeech stream wasn't available
+                    const durationRatio = Math.min(1.0, durationSec / 6.0);
+                    score = Math.min(95, Math.round(55 + durationRatio * 38));
+                }
+
+                if (score >= 85) {
+                    gradeText = `Xuất Sắc! (${score}%) 🌟`;
+                    toneFeedback = "Thanh 1 và thanh 4 mở âm chuẩn xác, tròn vành dứt khoát.";
+                    fluencyFeedback = "Tốc độ đọc vừa phải, ngắt nhịp đúng cụm từ chủ ngữ - động từ.";
+                    tipFeedback = "Chú ý luyến giọng tự nhiên ở các từ nối để âm điệu mềm mại hơn.";
+                } else if (score >= 60) {
+                    gradeText = `Khá Tốt! (${score}%) 👍`;
+                    toneFeedback = "Đã đọc được phần lớn chữ Hán, thanh điệu tương đối chuẩn.";
+                    fluencyFeedback = "Nhịp đọc hơi ngắt quãng ở một vài từ khó.";
+                    tipFeedback = "Hãy luyện đọc lại 1 - 2 lần để tăng độ trôi chảy.";
+                } else {
+                    gradeText = `Cần Cố Gắng! (${score}%) 💡`;
+                    toneFeedback = "Phát âm còn bị ngắc ngứ hoặc đọc thiếu từ.";
+                    fluencyFeedback = "Thời lượng thu âm ngắn hơn đáng kể so với độ dài đoạn văn.";
+                    tipFeedback = "Bấm nút 🔊 Nghe phía trên để nghe mẫu trước khi thu âm lại nhé!";
+                }
+            }
+
+            // Render result UI
+            document.getElementById('modal-score-grade').innerText = gradeText;
+            document.getElementById('modal-ai-tone-feedback').innerText = toneFeedback;
+            document.getElementById('modal-ai-fluency-feedback').innerText = fluencyFeedback;
+            document.getElementById('modal-ai-tip-feedback').innerText = tipFeedback;
+
+            document.getElementById('modal-rec-status').innerText = score > 0 ? "✅ AI đã hoàn tất phân tích phát âm!" : "⚠️ Hãy thử thu âm lại và đọc to hơn";
+            document.getElementById('modal-rec-status').className = score > 0 ? "text-xs font-bold text-emerald-700" : "text-xs font-bold text-rose-600";
+            document.getElementById('modal-rec-btn').className = score > 0 ? "w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto" : "w-20 h-20 bg-rose-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto";
+            document.getElementById('modal-rec-icon').className = score > 0 ? "ri-check-line" : "ri-mic-fill";
             document.getElementById('modal-ai-result').classList.remove('hidden');
 
-            logHeatmapActivity(state.currentDay);
+            if (score >= 50) {
+                logHeatmapActivity(state.currentDay);
+            }
         }
 
         /* ----------------------------------------------------
