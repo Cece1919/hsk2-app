@@ -1728,32 +1728,61 @@ let writers = {};
 let currentAudio = null;
 let currentRate = 1.0;
 
+
+
+function setAudioPlaybackRate(rate) {
+    if (typeof currentRate !== 'undefined') currentRate = rate;
+    var btn075 = document.getElementById('rate-075');
+    var btn100 = document.getElementById('rate-100');
+    if (btn075 && btn100) {
+        if (rate === 0.75) {
+            btn075.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition";
+            btn100.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition";
+        } else {
+            btn075.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition";
+            btn100.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition";
+        }
+    }
+}
+
 function showTab(tabId) {
-    const tabs = ['sim', 'overview', 'vocab', 'writing', 'grammar', 'text', 'practice', 'culture'];
-    document.querySelectorAll('.tab-content').forEach(el => {
-        el.classList.add('hidden');
-        el.style.display = 'none';
-    });
-    const targetSec = document.getElementById('sec-' + tabId);
+    var contents = document.querySelectorAll('.tab-content');
+    for (var i = 0; i < contents.length; i++) {
+        contents[i].classList.add('hidden');
+        contents[i].style.display = 'none';
+    }
+    var targetSec = document.getElementById('sec-' + tabId);
     if (targetSec) {
         targetSec.classList.remove('hidden');
         targetSec.style.display = 'block';
     }
-    tabs.forEach(t => {
-        const btn = document.getElementById('tab-' + t);
-        if (btn) {
-            if (t === tabId) {
-                btn.className = "tab-btn active px-4 py-2.5 rounded-xl font-bold bg-blue-900 text-white shadow-sm transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
-            } else {
-                btn.className = "tab-btn px-4 py-2.5 rounded-xl font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
-            }
-        }
-    });
+    var btns = document.querySelectorAll('.tab-btn');
+    for (var j = 0; j < btns.length; j++) {
+        btns[j].classList.remove('bg-blue-900', 'bg-blue-600', 'text-white', 'font-bold', 'active', 'active-tab');
+        btns[j].classList.add('text-slate-600', 'bg-slate-100', 'font-medium');
+    }
+    var activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600', 'bg-slate-100', 'font-medium');
+        activeBtn.classList.add('bg-blue-900', 'text-white', 'font-bold', 'active', 'active-tab', 'shadow-sm');
+    }
     if ((tabId === 'writing' || tabId === 'sim') && typeof initWriters === 'function') {
         setTimeout(initWriters, 100);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+        window.scrollTo(0, 0);
+    } catch(e) {}
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
+    showTab(defaultTab);
+});
+setTimeout(function() {
+    var defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
+    showTab(defaultTab);
+}, 100);
+
 
 function setSpeed(rate) {
     currentRate = rate;
