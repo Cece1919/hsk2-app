@@ -20,6 +20,7 @@ html_content = """<!DOCTYPE html>
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/chinese-dragon.png">
     <title>Cece HSK SRS Vocab App - Chuẩn Claire Vu Template</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,7 +84,7 @@ html_content = """<!DOCTYPE html>
                         <span class="text-2xl">🧠</span>
                         <div>
                             <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cece SRS Journal</h1>
-                            <p class="text-[10px] text-blue-300 font-medium">Chuẩn Claire Vu Template • Day 1-2-4-7-14-30</p>
+                            <p class="text-[10px] text-blue-300 font-medium">Lộ Trình Từng Bước • Day 1 ➔ Day 2 ➔ Day 3...</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-1">
@@ -106,6 +107,34 @@ html_content = """<!DOCTYPE html>
 
                 <!-- VIEW 1: CLAIRE VU TEMPLATE ACTIVE RECALL SHEET -->
                 <div id="sec-template-view" class="space-y-4">
+
+                    <!-- Day-by-Day Journey Control Banner -->
+                    <div id="day-journey-banner" class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-3.5 rounded-2xl border border-blue-700 shadow-sm space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">🚩</span>
+                                <div>
+                                    <h3 id="journey-day-title" class="text-xs font-black text-amber-300 uppercase tracking-wider">NGÀY 1 • BÀI 5 (13 TỪ)</h3>
+                                    <p id="journey-day-sub" class="text-[10px] text-blue-200">Hoàn thành bài để tự động mở Ngày tiếp theo!</p>
+                                </div>
+                            </div>
+                            <span id="journey-status-pill" class="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full">
+                                ⏳ Đang Học
+                            </span>
+                        </div>
+
+                        <!-- Day Step Selector & Fast Switch -->
+                        <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-xl text-xs gap-1 border border-blue-900/50">
+                            <button onclick="changeDayStep(-1)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] active:scale-95 transition">
+                                ◀ Ngày Trước
+                            </button>
+                            <span id="journey-step-indicator" class="font-bold text-white text-xs">NGÀY 1 / 5</span>
+                            <button onclick="changeDayStep(1)" class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] active:scale-95 transition">
+                                Ngày Sau ▶
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- Control Bar for Hiding/Showing Columns (Active Recall Test) -->
                     <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs space-y-2">
                         <div class="flex items-center justify-between text-xs font-bold text-slate-700">
@@ -123,9 +152,9 @@ html_content = """<!DOCTYPE html>
                     <div class="flex items-center justify-between text-xs">
                         <span class="font-extrabold text-slate-800">DANH MỤC BÀI HỌC:</span>
                         <select id="template-lesson-filter" onchange="renderTemplateSheet()" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white font-bold text-blue-900 text-xs shadow-xs outline-none">
-                            <option value="hsk2-d5">★ HSK 2 • Bài 5 (Hôm nay - 13 từ)</option>
-                            <option value="hsk2-d6">★ HSK 2 • Bài 6 (13 từ)</option>
-                            <option value="hsk2-d7">★ HSK 2 • Bài 7 (14 từ)</option>
+                            <option value="hsk2-d5">★ HSK 2 • Bài 5 (Ngày 1 - 13 từ)</option>
+                            <option value="hsk2-d6">★ HSK 2 • Bài 6 (Ngày 2 - 12 từ)</option>
+                            <option value="hsk2-d7">★ HSK 2 • Bài 7 (Ngày 3 - 14 từ)</option>
                             <option value="hsk2-all">Tất cả HSK 2 (107 từ)</option>
                             <option value="hsk1-all">Toàn bộ HSK 1 (150 từ)</option>
                             <option value="all">TẤT CẢ TỪ VỰNG (257 từ)</option>
@@ -134,6 +163,14 @@ html_content = """<!DOCTYPE html>
 
                     <!-- Template Sheet Cards Container -->
                     <div id="template-sheet-container" class="space-y-3"></div>
+
+                    <!-- Bottom Complete Day Action Bar -->
+                    <div id="complete-day-bar" class="pt-2 pb-6">
+                        <button onclick="completeCurrentDayStep()" class="w-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3.5 px-4 rounded-2xl text-xs shadow-lg active:scale-95 transition flex items-center justify-center gap-2 border border-emerald-400">
+                            <span>✅ ĐÃ HỌC XONG BÀI NÀY ➔ SANG NGÀY TIẾP THEO 🚀</span>
+                        </button>
+                    </div>
+
                 </div>
 
                 <!-- VIEW 2: DAILY JOURNAL & STREAK TRACKER -->
@@ -171,13 +208,13 @@ html_content = """<!DOCTYPE html>
 
                         <div class="bg-white p-3.5 rounded-2xl border-2 border-blue-600 shadow-sm space-y-2">
                             <div class="flex items-center justify-between">
-                                <span class="bg-blue-900 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">NGÀY 1 (HÔM NAY) • BÀI 5</span>
+                                <span class="bg-blue-900 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">NGÀY 1 • BÀI 5</span>
                                 <span class="text-xs font-bold text-blue-900">28 Từ / Ngày</span>
                             </div>
                             <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 13 từ Bài 5 + 15 từ HSK 1 cũ</h4>
                             <p class="text-[11px] text-slate-600">từ mới: 准备, 考试, 意思, 咖啡, 不错, 外面, 鱼, 件, 还, 可以, 就, 吧, 对...</p>
                             <button onclick="startLessonPlan('hsk2-d5')" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs active:scale-95 transition">
-                                🚀 Bắt Đầu Học Bài 5 Ngay
+                                🚀 Học Bài 5 Ngay
                             </button>
                         </div>
 
@@ -186,8 +223,11 @@ html_content = """<!DOCTYPE html>
                                 <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full">NGÀY 2 • BÀI 6</span>
                                 <span class="text-xs font-bold text-slate-600">31 Từ / Ngày</span>
                             </div>
-                            <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 13 từ Bài 6 + Ôn mốc Day 2 Bài 5</h4>
+                            <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 12 từ Bài 6 + Ôn mốc Day 2 Bài 5</h4>
                             <p class="text-[11px] text-slate-500">từ mới: 自行车, 羊肉, 好吃, 面条, 打篮球, 因为...所以..., 游泳, 经常, 公斤, 姐姐...</p>
+                            <button onclick="startLessonPlan('hsk2-d6')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-xl text-xs shadow-xs active:scale-95 transition">
+                                🚀 Chuyển Đến Bài 6
+                            </button>
                         </div>
 
                         <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1.5 opacity-90">
@@ -197,6 +237,9 @@ html_content = """<!DOCTYPE html>
                             </div>
                             <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 14 từ Bài 7 + Ôn mốc Day 4 Bài 5 & Day 2 Bài 6</h4>
                             <p class="text-[11px] text-slate-500">từ mới: 生日, 快乐, 送, 礼物, 晚上, 蛋糕, 问, 非常, 开始, 长, 希望, 参加, 聚会, 祝...</p>
+                            <button onclick="startLessonPlan('hsk2-d7')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-xl text-xs shadow-xs active:scale-95 transition">
+                                🚀 Chuyển Đến Bài 7
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -217,16 +260,29 @@ html_content = """<!DOCTYPE html>
         let activeView = 'template';
         let maskState = { pinyin: false, meaning: false, hanzi: false };
 
-        let srsState = { cardState: {}, streak: 1, todayLearned: 0, lastDate: new Date().toISOString().split('T')[0] };
+        let srsState = { cardState: {}, streak: 1, todayLearned: 0, dayStep: 1, unlockedDayStep: 1, lastDate: new Date().toISOString().split('T')[0] };
         let srsQueue = [];
         let srsCurrentIdx = 0;
+
+        const DAY_STEP_MAP = {
+            1: { key: 'hsk2-d5', name: 'NGÀY 1 • BÀI 5', count: 13 },
+            2: { key: 'hsk2-d6', name: 'NGÀY 2 • BÀI 6', count: 12 },
+            3: { key: 'hsk2-d7', name: 'NGÀY 3 • BÀI 7', count: 14 },
+            4: { key: 'hsk2-all', name: 'NGÀY 4 • TẤT CẢ HSK 2', count: 107 },
+            5: { key: 'hsk1-all', name: 'NGÀY 5 • ÔN HSK 1 & HSK 2', count: 257 }
+        };
 
         function loadSrsState() {
             try {
                 const saved = localStorage.getItem('cece_srs_clairevu_v1');
-                if (saved) srsState = JSON.parse(saved);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    srsState = { ...srsState, ...parsed };
+                }
             } catch(e) { console.error("Failed to load SRS state", e); }
             if (!srsState.cardState) srsState.cardState = {};
+            if (!srsState.dayStep) srsState.dayStep = 1;
+            if (!srsState.unlockedDayStep) srsState.unlockedDayStep = 1;
 
             const today = new Date().toISOString().split('T')[0];
             if (srsState.lastDate !== today) {
@@ -238,6 +294,7 @@ html_content = """<!DOCTYPE html>
             if (streakBadge) streakBadge.textContent = '🔥 ' + (srsState.streak || 1) + ' Ngày';
 
             updateJournalProgress();
+            updateJourneyBanner();
         }
 
         function saveSrsState() {
@@ -245,6 +302,69 @@ html_content = """<!DOCTYPE html>
                 localStorage.setItem('cece_srs_clairevu_v1', JSON.stringify(srsState));
             } catch(e) { console.error("Failed to save SRS state", e); }
             updateJournalProgress();
+            updateJourneyBanner();
+        }
+
+        function updateJourneyBanner() {
+            const step = srsState.dayStep || 1;
+            const stepInfo = DAY_STEP_MAP[step] || DAY_STEP_MAP[1];
+
+            const title = document.getElementById('journey-day-title');
+            const sub = document.getElementById('journey-day-sub');
+            const pill = document.getElementById('journey-status-pill');
+            const indicator = document.getElementById('journey-step-indicator');
+
+            if (title) title.textContent = stepInfo.name + ' (' + stepInfo.count + ' TỪ)';
+            if (sub) sub.textContent = 'Học xong bấm nút "Đã học xong" bên dưới để sang Ngày tiếp theo!';
+            if (indicator) indicator.textContent = 'NGÀY ' + step + ' / 5';
+
+            if (pill) {
+                if (step <= srsState.unlockedDayStep && step > 1) {
+                    pill.className = "text-[10px] bg-emerald-400 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full";
+                    pill.textContent = "✅ Đã Mở Khóa";
+                } else if (step === 1) {
+                    pill.className = "text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full";
+                    pill.textContent = "🚀 Đang Học Ngày 1";
+                }
+            }
+
+            const filterSelect = document.getElementById('template-lesson-filter');
+            if (filterSelect && filterSelect.value !== stepInfo.key) {
+                filterSelect.value = stepInfo.key;
+            }
+        }
+
+        function changeDayStep(delta) {
+            let nextStep = (srsState.dayStep || 1) + delta;
+            if (nextStep < 1) nextStep = 1;
+            if (nextStep > 5) nextStep = 5;
+
+            srsState.dayStep = nextStep;
+            saveSrsState();
+            renderTemplateSheet();
+        }
+
+        function completeCurrentDayStep() {
+            const curStep = srsState.dayStep || 1;
+            if (curStep < 5) {
+                srsState.dayStep = curStep + 1;
+                if (srsState.dayStep > srsState.unlockedDayStep) {
+                    srsState.unlockedDayStep = srsState.dayStep;
+                }
+                srsState.streak = (srsState.streak || 1) + 1;
+                srsState.todayLearned = (srsState.todayLearned || 0) + 15;
+                saveSrsState();
+
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+                }
+
+                alert('🎉 CHÚC MỪNG CHỊ!\\n\\nChị đã hoàn thành xuất sắc ' + (DAY_STEP_MAP[curStep]?.name || ('Ngày ' + curStep)) + '!\\nApp đã tự động chuyển sang ' + (DAY_STEP_MAP[srsState.dayStep]?.name || ('Ngày ' + srsState.dayStep)) + ' để chị học tiếp!');
+
+                renderTemplateSheet();
+            } else {
+                alert('🎉 Tuyệt vời! Chị đã hoàn thành toàn bộ Lộ trình 5 Ngày HSK 2!');
+            }
         }
 
         function updateJournalProgress() {
@@ -293,14 +413,19 @@ html_content = """<!DOCTYPE html>
         }
 
         function startLessonPlan(lessonFilterKey) {
-            const select = document.getElementById('template-lesson-filter');
-            if (select) select.value = lessonFilterKey;
+            if (lessonFilterKey === 'hsk2-d5') srsState.dayStep = 1;
+            else if (lessonFilterKey === 'hsk2-d6') srsState.dayStep = 2;
+            else if (lessonFilterKey === 'hsk2-d7') srsState.dayStep = 3;
+            saveSrsState();
+
             switchView('template');
         }
 
         function renderTemplateSheet() {
             const container = document.getElementById('template-sheet-container');
             if (!container) return;
+
+            updateJourneyBanner();
 
             const filterVal = document.getElementById('template-lesson-filter').value;
             let items = FULL_SRS_BANK;
@@ -466,4 +591,5 @@ html_content = """<!DOCTYPE html>
 with open('/Users/trangngo95/Desktop/HSK/srs.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
 
-print("Generated srs.html with Claire Vu Template successfully!")
+print("Generated upgraded srs.html with Guided Day Progression successfully!")
+
