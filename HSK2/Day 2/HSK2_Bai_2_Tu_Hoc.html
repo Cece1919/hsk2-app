@@ -1928,45 +1928,13 @@ function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
 var currentAudio = null;
 var currentRate = 0.85;
 
-function playAudioStream(text) {
-    if (!text) return;
-    text = text.trim();
-    if (!text) return;
-
-    if (currentAudio) {
-        try {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        } catch(e) {}
+function extractChineseText(text) {
+    if (!text) return "";
+    var match = text.match(/[\u4e00-\u9fff]+/g);
+    if (match && match.length > 0) {
+        return match.join("");
     }
-
-    var encoded = encodeURIComponent(text);
-    var youdaoUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
-    var baiduUrl = "https://fanyi.baidu.com/gettts?lan=zh&spd=3&source=web&text=" + encoded;
-
-    currentAudio = new Audio(youdaoUrl);
-    currentAudio.playbackRate = currentRate || 0.85;
-
-    var playPromise = currentAudio.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(function(err) {
-            console.log("Youdao play error, trying Baidu TTS:", err);
-            currentAudio = new Audio(baiduUrl);
-            currentAudio.playbackRate = currentRate || 0.85;
-            currentAudio.play().catch(function(err2) {
-                console.log("Baidu play error, trying WebSpeech:", err2);
-                if ('speechSynthesis' in window) {
-                    try {
-                        window.speechSynthesis.cancel();
-                        var utterance = new SpeechSynthesisUtterance(text);
-                        utterance.lang = 'zh-CN';
-                        utterance.rate = currentRate || 0.85;
-                        window.speechSynthesis.speak(utterance);
-                    } catch(e) {}
-                }
-            });
-        });
-    }
+    return text.trim();
 }
 
 function playVocab(key, fallbackText) {
@@ -1979,47 +1947,146 @@ function playVocab(key, fallbackText) {
         textToSpeak = fallbackText || key || "";
     }
 
+    var namespacedKey = (typeof currentLesson !== "undefined") ? ("d" + currentLesson + "_" + key) : key;
     var b64 = null;
     if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
-        b64 = VOCAB_AUDIO[key] || VOCAB_AUDIO[textToSpeak];
+        b64 = VOCAB_AUDIO[namespacedKey] || VOCAB_AUDIO[key];
     }
     if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
-        b64 = TEXT_AUDIO[key] || TEXT_AUDIO[textToSpeak];
+        b64 = TEXT_AUDIO[namespacedKey] || TEXT_AUDIO[key];
     }
 
     if (b64) {
         playB64(b64, textToSpeak);
     } else {
-        playAudioStream(textToSpeak);
+        speakText(textToSpeak);
     }
 }
 
+function playText(key, fallbackText) {
+    playVocab(key, fallbackText);
+}
+
 function playTTS(text) {
-    playAudioStream(text);
+    speakText(text);
+}
+
+function playAudioStream(text) {
+    speakText(text);
+}
+
+function playB64(b64Data, fallbackText) {
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        if (!b64Data) {
+            speakText(fallbackText);
+            return;
+        }
+        var src = (b64Data && b64Data.startsWith && b64Data.startsWith("data:audio/")) ? b64Data : ("data:audio/mp4;base64," + (b64Data || ""));
+        currentAudio = new Audio(src);
+        currentAudio.playbackRate = currentRate || 0.85;
+        var playPromise = currentAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(err) {
+                console.log("Base64 audio playback failed, speaking text via TTS:", err);
+                speakText(fallbackText);
+            });
+        }
+    } catch(e) {
+        speakText(fallbackText);
+    }
 }
 
 function speakText(text) {
-    playAudioStream(text);
+    if (!text) return;
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+    } catch(e) {}
+
+    var textClean = extractChineseText(text);
+    if (!textClean) return;
+
+    var speechFired = false;
+
+    if ("speechSynthesis" in window) {
+        try {
+            window.speechSynthesis.cancel();
+            
+            var utter = new SpeechSynthesisUtterance(textClean);
+            utter.lang = "zh-CN";
+            utter.rate = currentRate || 0.85;
+
+            var voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                var zhVoice = voices.find(function(v) {
+                    return v.lang && (v.lang.includes("zh") || v.lang.includes("CN") || v.lang.includes("ZH") || v.lang.includes("Chinese"));
+                });
+                if (zhVoice) utter.voice = zhVoice;
+            }
+
+            utter.onstart = function() {
+                speechFired = true;
+            };
+
+            utter.onerror = function(err) {
+                console.log("SpeechSynthesis error:", err);
+                if (!speechFired) {
+                    playOnlineTTS(textClean);
+                }
+            };
+
+            window.speechSynthesis.speak(utter);
+            return;
+        } catch(e) {
+            console.log("SpeechSynthesis exception:", e);
+        }
+    }
+
+    playOnlineTTS(textClean);
 }
 
 function playOnlineTTS(text) {
-    playAudioStream(text);
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        var playPromise = currentAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(err) {
+                console.log("Youdao TTS error, trying Baidu TTS:", err);
+                playSecondaryTTS(text);
+            });
+        }
+    } catch(e) {
+        playSecondaryTTS(text);
+    }
 }
 
 function playSecondaryTTS(text) {
-    playAudioStream(text);
-}
-
-function playB64(base64Data, fallbackText) {
     try {
-        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
-        currentAudio = new Audio("data:audio/m4a;base64," + base64Data);
-        currentAudio.playbackRate = currentRate || 0.85;
-        var promise = currentAudio.play();
-        if (promise !== undefined) {
-            promise.catch(function() { playAudioStream(fallbackText); });
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
         }
-    } catch(e) { playAudioStream(fallbackText); }
+        var encoded = encodeURIComponent(text);
+        var ttsUrl = "https://fanyi.baidu.com/gettts?lan=zh&spd=3&source=web&text=" + encoded;
+        currentAudio = new Audio(ttsUrl);
+        currentAudio.playbackRate = currentRate || 0.85;
+        currentAudio.play().catch(function(err) {
+            console.log("Secondary TTS play error:", err);
+        });
+    } catch(e) {}
 }
 
 function animateChar(id) {
