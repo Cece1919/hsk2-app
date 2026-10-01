@@ -193,7 +193,7 @@
     "meaning": "To, lớn",
     "radical": "大 (Bộ Đại: Người dang rộng tay chân)",
     "mnemonic": "Hình người dơ hai tay rộng ra thể hiện sự to lớn ➔ To / Lớn (大).",
-    "example": "这个房间很大。(Zhè ge fángjiān hěn dà.)"
+    "example": " cái gian phòng này很大。(Zhè ge fángjiān hěn dà.)"
   },
   {
     "id": "hsk1-15",
@@ -711,7 +711,7 @@
     "meaning": "Đồng (đơn vị tiền), miếng",
     "radical": "土 (Thổ: Đất) + 夬",
     "mnemonic": "Cục đất (土) hay thỏi tiền ➔ Đồng tiền / Miếng (块).",
-    "example": "这个苹果三块钱。(Zhè ge píngguǒ sān kuài qián.)"
+    "example": " cái này苹果三块钱。(Zhè ge píngguǒ sān kuài qián.)"
   },
   {
     "id": "hsk1-52",
@@ -2917,13 +2917,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "外面",
-    "pinyin": "waimian",
+    "pinyin": "wàimian",
     "pinyin_clean": "waimian",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Ngoại diện",
+    "meaning": "Bên ngoài, ngoài",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "外面下雨了。🔊Wàimian xià yǔ le.Bên ngoài trời mưa rồi."
   },
   {
     "id": "hsk2-d5-2",
@@ -2931,13 +2931,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "准备",
-    "pinyin": "zhunbei",
+    "pinyin": "zhǔnbèi",
     "pinyin_clean": "zhunbei",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Chuẩn bị",
+    "meaning": "Chuẩn bị, dự định",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我准备考试呢。🔊Wǒ zhǔnbèi kǎoshì ne.Tôi đang chuẩn bị thi."
   },
   {
     "id": "hsk2-d5-3",
@@ -2945,13 +2945,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "就",
-    "pinyin": "jiu",
+    "pinyin": "jiù",
     "pinyin_clean": "jiu",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Tựu",
+    "meaning": "Thì, chính, ngay (Chỉ kết luận)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "就买这件吧。🔊Jiù mǎi zhè jiàn ba.Thì mua chiếc này đi."
   },
   {
     "id": "hsk2-d5-4",
@@ -2959,13 +2959,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "鱼",
-    "pinyin": "yu",
+    "pinyin": "yú",
     "pinyin_clean": "yu",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Ngư",
+    "meaning": "Cá",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我想做鱼。🔊Wǒ xiǎng zuò yú.Tôi muốn làm món cá."
   },
   {
     "id": "hsk2-d5-5",
@@ -2975,11 +2975,11 @@
     "hanzi": "吧",
     "pinyin": "ba",
     "pinyin_clean": "ba",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Ba",
+    "meaning": "Nhé, đi (Trợ từ đề nghị)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "在家吃吧。🔊Zàijiā chī ba.Ăn ở nhà nhé."
   },
   {
     "id": "hsk2-d5-6",
@@ -2987,13 +2987,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "件",
-    "pinyin": "jian",
+    "pinyin": "jiàn",
     "pinyin_clean": "jian",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Kiện",
+    "meaning": "Chiếc, cái (Quần áo, việc)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "这件衣服真漂亮。🔊Zhè jiàn yīfu zhēn piàoliang.Chiếc áo này thật đẹp!"
   },
   {
     "id": "hsk2-d5-7",
@@ -3001,13 +3001,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "还",
-    "pinyin": "hai",
+    "pinyin": "hái",
     "pinyin_clean": "hai",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Hoàn",
+    "meaning": "Còn, vẫn, khá (Chỉ trình độ)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "价格也还行。🔊Jiàgé yě hái xíng.Giá cả cũng khá tạm được."
   },
   {
     "id": "hsk2-d5-8",
@@ -3015,13 +3015,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "可以",
-    "pinyin": "keyi",
+    "pinyin": "kěyǐ",
     "pinyin_clean": "keyi",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Khả dĩ",
+    "meaning": "Có thể, khá tốt, tạm được",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "听和说还可以。🔊Tīng hé shuō hái kěyǐ.Nghe và nói cũng tạm ổn."
   },
   {
     "id": "hsk2-d5-9",
@@ -3029,13 +3029,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "不错",
-    "pinyin": "bucuo",
+    "pinyin": "búcuò",
     "pinyin_clean": "bucuo",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Bất thố",
+    "meaning": "Không tệ, khá tốt, chuẩn",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "颜色不错。🔊Yánsè búcuò.Màu sắc khá đẹp."
   },
   {
     "id": "hsk2-d5-10",
@@ -3043,13 +3043,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "考试",
-    "pinyin": "kaoshi",
+    "pinyin": "kǎoshì",
     "pinyin_clean": "kaoshi",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Khảo thí",
+    "meaning": "Thi, kỳ thi, kiểm tra",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "这次考试不太难。🔊Zhè cì kǎoshì bú tài nán.Lần thi này không khó lắm."
   },
   {
     "id": "hsk2-d5-11",
@@ -3057,13 +3057,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "意思",
-    "pinyin": "yisi",
+    "pinyin": "yìsi",
     "pinyin_clean": "yisi",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Ý tư",
+    "meaning": "Ý nghĩa, sự thú vị",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "这个词是什么意思？🔊Zhège cí shì shénme yìsi?Từ này có nghĩa là gì?"
   },
   {
     "id": "hsk2-d5-12",
@@ -3071,13 +3071,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "咖啡",
-    "pinyin": "kafei",
+    "pinyin": "kāfēi",
     "pinyin_clean": "kafei",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Kha phi",
+    "meaning": "Cà phê",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我想喝杯咖啡。🔊Wǒ xiǎng hē bēi kāfēi.Tôi muốn uống tách cà phê."
   },
   {
     "id": "hsk2-d5-13",
@@ -3085,13 +3085,13 @@
     "day": 5,
     "tag": "HSK 2 • Ngày 5",
     "hanzi": "对",
-    "pinyin": "dui",
+    "pinyin": "duì",
     "pinyin_clean": "dui",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Đối",
+    "meaning": "Đối với, đúng (Giới từ chỉ đối tượng)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "喝牛奶对身体很好。🔊Hē niúnǎi duì shēntǐ hěn hǎo.Uống sữa rất tốt cho sức khỏe."
   },
   {
     "id": "hsk2-d6-1",
@@ -3099,181 +3099,167 @@
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
     "hanzi": "门",
-    "pinyin": "men",
+    "pinyin": "mén",
     "pinyin_clean": "men",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Môn",
+    "meaning": "Cửa, cổng, môn học",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "门外是谁？🔊Mén wài shì shéi?Bên ngoài cửa là ai thế?"
   },
   {
     "id": "hsk2-d6-2",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "外",
-    "pinyin": "wai",
-    "pinyin_clean": "wai",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "自行车",
+    "pinyin": "zìxíngchē",
+    "pinyin_clean": "zixingche",
+    "hanviet": "Tự hành xa",
+    "meaning": "Xe đạp",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我今天骑自行车去学校。🔊Wǒ jīntiān qí zìxíngchē qù xuéxiào.Hôm nay tôi đi xe đạp đến trường."
   },
   {
     "id": "hsk2-d6-3",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "自行车",
-    "pinyin": "zixingche",
-    "pinyin_clean": "zixingche",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "羊肉",
+    "pinyin": "yángròu",
+    "pinyin_clean": "yangrou",
+    "hanviet": "Dương nhục",
+    "meaning": "Thịt dê, thịt cừu",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "今天的羊肉很好吃。🔊Jīntiān de yángròu hěn hǎochī.Thịt dê hôm nay rất ngon."
   },
   {
     "id": "hsk2-d6-4",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "羊肉",
-    "pinyin": "yangrou",
-    "pinyin_clean": "yangrou",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "好吃",
+    "pinyin": "hǎochī",
+    "pinyin_clean": "haochi",
+    "hanviet": "Hảo ngật",
+    "meaning": "Ngon (Thức ăn)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "这个菜很好吃。🔊Zhège cài hěn hǎochī.Món ăn này rất ngon."
   },
   {
     "id": "hsk2-d6-5",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "好吃",
-    "pinyin": "haochi",
-    "pinyin_clean": "haochi",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "面条",
+    "pinyin": "miàntiáo",
+    "pinyin_clean": "miantiao",
+    "hanviet": "Diện điều",
+    "meaning": "Mì, sợi mì",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "再吃一点儿面条吧。🔊Zài chī yìdiǎnr miàntiáo ba.Ăn thêm chút mì nhé."
   },
   {
     "id": "hsk2-d6-6",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "面条",
-    "pinyin": "miantiao",
-    "pinyin_clean": "miantiao",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "打篮球",
+    "pinyin": "dǎ lánqiú",
+    "pinyin_clean": "dalanqiu",
+    "hanviet": "Đả lam cầu",
+    "meaning": "Chơi bóng rổ",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我非常喜欢打篮球。🔊Wǒ fēicháng xǐhuan dǎ lánqiú.Tôi vô cùng thích chơi bóng rổ."
   },
   {
     "id": "hsk2-d6-7",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "打篮球",
-    "pinyin": "dalanqiu",
-    "pinyin_clean": "dalanqiu",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "因为",
+    "pinyin": "yīnwèi",
+    "pinyin_clean": "yinwei",
+    "hanviet": "Nhân vi",
+    "meaning": "Bởi vì, vì (Chỉ nguyên nhân)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "因为天气不好...🔊Yīnwèi tiānqì bù hǎo...Bởi vì thời tiết không tốt..."
   },
   {
     "id": "hsk2-d6-8",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "因为",
-    "pinyin": "yinwei",
-    "pinyin_clean": "yinwei",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "所以",
+    "pinyin": "suǒyǐ",
+    "pinyin_clean": "suoyi",
+    "hanviet": "Sở dĩ",
+    "meaning": "Cho nên, nên (Chỉ kết quả)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "所以我们没去。🔊Suǒyǐ wǒmen méi qù.Cho nên chúng tôi không đi."
   },
   {
     "id": "hsk2-d6-9",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "所以",
-    "pinyin": "suoyi",
-    "pinyin_clean": "suoyi",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "游泳",
+    "pinyin": "yóuyǒng",
+    "pinyin_clean": "youyong",
+    "hanviet": "Du vịnh",
+    "meaning": "Bơi lội, đi bơi",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我每个星期去游泳。🔊Wǒ měi ge xīngqī qù yóuyǒng.Mỗi tuần tôi đều đi bơi."
   },
   {
     "id": "hsk2-d6-10",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "游泳",
-    "pinyin": "youyong",
-    "pinyin_clean": "youyong",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "经常",
+    "pinyin": "jīngcháng",
+    "pinyin_clean": "jingchang",
+    "hanviet": "Kinh thường",
+    "meaning": "Thường xuyên, thường",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "他经常去打球。🔊Tā jīngcháng qù dǎqiú.Cậu ấy thường xuyên đi chơi bóng."
   },
   {
     "id": "hsk2-d6-11",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "经常",
-    "pinyin": "jingchang",
-    "pinyin_clean": "jingchang",
-    "hanviet": "",
-    "meaning": "",
+    "hanzi": "公斤",
+    "pinyin": "gōngjīn",
+    "pinyin_clean": "gongjin",
+    "hanviet": "Công cân",
+    "meaning": "Cân, ki-lô-gam (kg)",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "我瘦了两公斤。🔊Wǒ shòu le liǎng gōngjīn.Tôi đã gầy đi 2 kg."
   },
   {
     "id": "hsk2-d6-12",
     "level": "HSK 2",
     "day": 6,
     "tag": "HSK 2 • Ngày 6",
-    "hanzi": "公斤",
-    "pinyin": "gongjin",
-    "pinyin_clean": "gongjin",
-    "hanviet": "",
-    "meaning": "",
-    "radical": "",
-    "mnemonic": "",
-    "example": ""
-  },
-  {
-    "id": "hsk2-d6-13",
-    "level": "HSK 2",
-    "day": 6,
-    "tag": "HSK 2 • Ngày 6",
     "hanzi": "姐姐",
-    "pinyin": "jiejie",
+    "pinyin": "jiějie",
     "pinyin_clean": "jiejie",
-    "hanviet": "",
-    "meaning": "",
+    "hanviet": "Tỷ tỷ",
+    "meaning": "Chị gái",
     "radical": "",
     "mnemonic": "",
-    "example": ""
+    "example": "这是我姐姐。🔊Zhè shì wǒ jiějie.Đây là chị gái tôi."
   },
   {
     "id": "hsk2-d7-1",
