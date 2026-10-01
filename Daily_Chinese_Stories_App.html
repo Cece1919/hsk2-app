@@ -480,11 +480,15 @@
                     <span>AI Thẩm Âm & Nhận Xét Phát Âm</span>
                 </div>
 
-                <!-- Target Sentence Card -->
-                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1">
-                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Bài đọc cần luyện:</div>
-                    <div id="modal-target-zh" class="text-base font-black text-slate-800 zh-font leading-relaxed"></div>
-                    <div id="modal-target-vi" class="text-xs text-slate-500 italic"></div>
+                <!-- Target Story Text Card -->
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-2">
+                    <div class="flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                        <span>Văn bản bài đọc cần luyện:</span>
+                        <button onclick="toggleModalPinyin()" id="btn-modal-pinyin" class="text-blue-600 font-bold hover:underline bg-blue-50 px-2 py-0.5 rounded-md">🔤 Pinyin: Bật</button>
+                    </div>
+                    <div id="modal-target-html" class="max-h-44 overflow-y-auto p-3 bg-white rounded-xl border border-slate-200 text-xs leading-relaxed text-slate-800 zh-font space-y-3 shadow-inner">
+                        <!-- Rendered full story HTML with ruby pinyin -->
+                    </div>
                 </div>
 
                 <!-- Recording Control Area -->
@@ -1281,14 +1285,22 @@
         let mediaRecorder = null;
         let audioChunks = [];
         let isAIRecording = false;
+        let modalPinyinOn = true;
 
         function openAIVoiceModal() {
             const dayObj = APP_DATA.find(d => d.day === state.currentDay);
             const story = dayObj.stories[state.currentStoryIdx];
 
-            document.getElementById('modal-target-zh').innerText = story.titleZh;
-            document.getElementById('modal-target-vi').innerText = story.titleVi;
-            document.getElementById('modal-rec-status').innerText = "Bấm nút Micro để bắt đầu đọc";
+            const modalContentBox = document.getElementById('modal-target-html');
+            modalContentBox.innerHTML = story.contentHtml;
+            
+            if (modalPinyinOn) {
+                modalContentBox.classList.remove('hide-pinyin');
+            } else {
+                modalContentBox.classList.add('hide-pinyin');
+            }
+
+            document.getElementById('modal-rec-status').innerText = "Vừa nhìn văn bản vừa bấm nút Micro để đọc";
             document.getElementById('modal-rec-status').className = "text-xs font-bold text-slate-600";
             document.getElementById('modal-rec-btn').className = "w-20 h-20 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto transition active:scale-95";
             document.getElementById('modal-rec-icon').className = "ri-mic-fill";
@@ -1296,6 +1308,19 @@
             document.getElementById('modal-ai-result').classList.add('hidden');
 
             document.getElementById('ai-voice-modal').classList.remove('hidden');
+        }
+
+        function toggleModalPinyin() {
+            modalPinyinOn = !modalPinyinOn;
+            const modalContentBox = document.getElementById('modal-target-html');
+            const btn = document.getElementById('btn-modal-pinyin');
+            if (modalPinyinOn) {
+                modalContentBox.classList.remove('hide-pinyin');
+                btn.innerText = "🔤 Pinyin: Bật";
+            } else {
+                modalContentBox.classList.add('hide-pinyin');
+                btn.innerText = "🔤 Pinyin: Tắt";
+            }
         }
 
         function closeAIVoiceModal() {
