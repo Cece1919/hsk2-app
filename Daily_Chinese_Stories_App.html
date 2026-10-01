@@ -510,24 +510,35 @@
                 <div id="modal-ai-result" class="hidden space-y-2.5 pt-2 border-t border-slate-100">
                     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
                         <div>
-                            <div class="text-[10px] text-purple-200 uppercase font-bold tracking-wider">Đánh giá phát âm từ AI</div>
+                            <div class="text-[10px] text-purple-200 uppercase font-bold tracking-wider">Phiếu Đánh Giá Phát Âm AI</div>
                             <div id="modal-score-grade" class="text-base font-black text-amber-300">Xuất Sắc! (94%)</div>
                         </div>
-                        <div class="text-2xl">🌟</div>
+                        <div id="modal-badge-icon" class="text-2xl">🌟</div>
                     </div>
 
                     <div class="space-y-2 text-xs">
-                        <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-emerald-900 font-medium">
-                            <span class="font-bold">🎯 Thanh điệu & Âm chuẩn:</span>
-                            <span id="modal-ai-tone-feedback" class="block mt-0.5 text-[11px] text-emerald-800">Thanh 1 mở rộng khẩu hình chuẩn, thanh 4 giật dứt khoát.</span>
+                        <!-- Điểm Tốt -->
+                        <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-emerald-900 font-medium space-y-0.5">
+                            <span class="font-extrabold flex items-center space-x-1 text-emerald-900">
+                                <span>🟢 Điểm Tốt (Thế Mạnh):</span>
+                            </span>
+                            <div id="modal-ai-good-points" class="text-[11px] text-emerald-800 leading-relaxed font-medium"></div>
                         </div>
-                        <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200 text-blue-900 font-medium">
-                            <span class="font-bold">🗣️ Ngắt nghỉ & Trôi chảy:</span>
-                            <span id="modal-ai-fluency-feedback" class="block mt-0.5 text-[11px] text-blue-800">Tốc độ đọc vừa phải, ngắt nhịp đúng cụm từ chủ ngữ - động từ.</span>
+
+                        <!-- Điểm Chưa Tốt -->
+                        <div class="bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-rose-900 font-medium space-y-0.5">
+                            <span class="font-extrabold flex items-center space-x-1 text-rose-900">
+                                <span>🔴 Điểm Chưa Tốt (Cần Cải Thiện):</span>
+                            </span>
+                            <div id="modal-ai-bad-points" class="text-[11px] text-rose-800 leading-relaxed font-medium"></div>
                         </div>
-                        <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 font-medium">
-                            <span class="font-bold">💡 Lời khuyên cải thiện từ AI:</span>
-                            <span id="modal-ai-tip-feedback" class="block mt-0.5 text-[11px] text-amber-800">Nên thả lỏng cơ miệng khi nối chữ để âm phát ra tự nhiên hơn.</span>
+
+                        <!-- Lời Khuyên -->
+                        <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 font-medium space-y-0.5">
+                            <span class="font-extrabold flex items-center space-x-1 text-amber-900">
+                                <span>💡 Lời Khuyên Luyện Tập Nhanh:</span>
+                            </span>
+                            <div id="modal-ai-action-tip" class="text-[11px] text-amber-800 leading-relaxed font-medium"></div>
                         </div>
                     </div>
                 </div>
@@ -1481,21 +1492,30 @@
             let tipFeedback = "";
             let gradeText = "";
 
-            // STRICT EVALUATION LOGIC
+            let score = 0;
+            let goodPoints = "";
+            let badPoints = "";
+            let actionTip = "";
+            let gradeText = "";
+            let badgeIcon = "🌟";
+
+            // STRICT EVALUATION LOGIC & DETAILED BREAKDOWN
             if (!audioBlob || durationSec < 0.8 || volumeRMS < 0.005) {
                 // SILENCE OR NEAR SILENCE
                 score = 0;
-                gradeText = "Chưa Có Giọng Nói (0%) ❌";
-                toneFeedback = "AI chưa phát hiện âm thanh giọng đọc của bạn.";
-                fluencyFeedback = "Âm lượng quá nhỏ hoặc im lặng. Hãy kiểm tra Micro và nói to hơn.";
-                tipFeedback = "Hãy giữ nút Micro và đọc to, rõ ràng theo đoạn văn phía trên.";
-            } else if (durationSec < 2.0 && cleanRecognized.length < 3) {
+                gradeText = "Chưa Có Giọng Nói (0/100) ❌";
+                badgeIcon = "🔇";
+                goodPoints = "• Chưa ghi nhận được âm thanh giọng đọc nào từ micro.";
+                badPoints = "• Im lặng hoặc âm lượng thu âm quá nhỏ (Volume RMS < 0.005).<br>• Chưa phát âm được từ Hán tự nào trong bài đọc.";
+                actionTip = "Hãy kiểm tra quyền mở Micro trên trình duyệt Safari/Chrome, bấm giữ nút Micro và đọc to câu chuyện.";
+            } else if (durationSec < 2.2 && cleanRecognized.length < 3) {
                 // TOO SHORT / BARELY SPOKE
                 score = 25;
-                gradeText = "Chưa Đủ Bài Đọc (25%) ⚠️";
-                toneFeedback = `Bạn mới chỉ đọc được ${cleanRecognized.length || 1} từ ngắn.`;
-                fluencyFeedback = "Thời lượng thu âm quá ngắn (dưới 2 giây), chưa đọc hết đoạn văn.";
-                tipFeedback = "Hãy đọc trọn vẹn cả câu chuyện để AI chấm điểm chính xác hơn.";
+                gradeText = "Chưa Đủ Bài Đọc (25/100) ⚠️";
+                badgeIcon = "⏱️";
+                goodPoints = `• Đã bật được micro và phát âm được ${cleanRecognized.length || 1} từ ngắn.`;
+                badPoints = "• Thời lượng thu âm quá ngắn (dưới 2 giây).<br>• Mới chỉ nói được 1 - 2 từ, chưa đọc được đoạn văn.";
+                actionTip = "Hãy cố gắng đọc liên tục trọn vẹn cả câu chuyện để AI đánh giá đầy đủ phát âm nhé!";
             } else {
                 // REAL SPEECH MATCHING
                 if (cleanRecognized.length > 0) {
@@ -1506,36 +1526,39 @@
                     const ratio = Math.min(1.0, matchCount / Math.max(1, targetZh.length));
                     score = Math.min(98, Math.max(30, Math.round(ratio * 100)));
                 } else {
-                    // Fallback using duration ratio if webkitSpeech stream wasn't available
                     const durationRatio = Math.min(1.0, durationSec / 6.0);
                     score = Math.min(95, Math.round(55 + durationRatio * 38));
                 }
 
                 if (score >= 85) {
-                    gradeText = `Xuất Sắc! (${score}%) 🌟`;
-                    toneFeedback = "Thanh 1 và thanh 4 mở âm chuẩn xác, tròn vành dứt khoát.";
-                    fluencyFeedback = "Tốc độ đọc vừa phải, ngắt nhịp đúng cụm từ chủ ngữ - động từ.";
-                    tipFeedback = "Chú ý luyến giọng tự nhiên ở các từ nối để âm điệu mềm mại hơn.";
+                    gradeText = `Xuất Sắc! (${score}/100)`;
+                    badgeIcon = "🏆";
+                    goodPoints = "• Thanh 1 mở âm cao tròn vành, thanh 4 giật dứt khoát chuẩn khẩu hình.<br>• Âm lượng thu âm to rõ, tốc độ đọc vừa phải trôi chảy.<br>• Phát âm đầy đủ Hán tự trong đoạn văn.";
+                    badPoints = "• Chú ý nhẹ quy tắc biến điệu của chữ 不 (bù/bú) và 一 (yī/yí/yì) khi đứng trước thanh 4.";
+                    actionTip = "Phát âm của bạn rất chuẩn xác! Hãy tiếp tục phát huy phong độ mượt mà này ở các bài đọc tiếp theo.";
                 } else if (score >= 60) {
-                    gradeText = `Khá Tốt! (${score}%) 👍`;
-                    toneFeedback = "Đã đọc được phần lớn chữ Hán, thanh điệu tương đối chuẩn.";
-                    fluencyFeedback = "Nhịp đọc hơi ngắt quãng ở một vài từ khó.";
-                    tipFeedback = "Hãy luyện đọc lại 1 - 2 lần để tăng độ trôi chảy.";
+                    gradeText = `Khá Tốt! (${score}/100)`;
+                    badgeIcon = "🎯";
+                    goodPoints = "• Âm lượng to rõ, đọc được hơn 50% số từ Hán tự trong bài đọc.<br>• Thanh 1 và thanh 2 phát âm tương đối chuẩn xác.";
+                    badPoints = "• Thanh 3 (xuống giọng) đọc chưa đủ độ trầm ở giữa câu.<br>• Nhịp đọc còn hơi ngắc ngứ giữa các từ ghép 2 - 3 âm tiết.";
+                    actionTip = "Bấm nút 🔊 Nghe phía trên để nghe mẫu 1 - 2 lần, thả lỏng cơ miệng khi phát âm thanh 3 và thu âm lại nhé!";
                 } else {
-                    gradeText = `Cần Cố Gắng! (${score}%) 💡`;
-                    toneFeedback = "Phát âm còn bị ngắc ngứ hoặc đọc thiếu từ.";
-                    fluencyFeedback = "Thời lượng thu âm ngắn hơn đáng kể so với độ dài đoạn văn.";
-                    tipFeedback = "Bấm nút 🔊 Nghe phía trên để nghe mẫu trước khi thu âm lại nhé!";
+                    gradeText = `Cần Cố Gắng! (${score}/100)`;
+                    badgeIcon = "💡";
+                    goodPoints = "• Đã có tinh thần luyện đọc trọn vẹn đoạn văn.";
+                    badPoints = "• Nhiều từ Hán tự phát âm chưa rõ hoặc bị bỏ sót.<br>• Nhịp điệu câu đọc bị ngắt quãng nhiều lần.";
+                    actionTip = "Hãy nhìn từng chữ Hán kèm Pinyin phía trên, bấm nghe audio mẫu trước rồi thu âm lại lần nữa.";
                 }
             }
 
             // Render result UI
             document.getElementById('modal-score-grade').innerText = gradeText;
-            document.getElementById('modal-ai-tone-feedback').innerText = toneFeedback;
-            document.getElementById('modal-ai-fluency-feedback').innerText = fluencyFeedback;
-            document.getElementById('modal-ai-tip-feedback').innerText = tipFeedback;
+            document.getElementById('modal-badge-icon').innerText = badgeIcon;
+            document.getElementById('modal-ai-good-points').innerHTML = goodPoints;
+            document.getElementById('modal-ai-bad-points').innerHTML = badPoints;
+            document.getElementById('modal-ai-action-tip').innerHTML = actionTip;
 
-            document.getElementById('modal-rec-status').innerText = score > 0 ? "✅ AI đã hoàn tất phân tích phát âm!" : "⚠️ Hãy thử thu âm lại và đọc to hơn";
+            document.getElementById('modal-rec-status').innerText = score > 0 ? "✅ AI đã xuất bản phiếu nhận xét chi tiết!" : "⚠️ Hãy thử thu âm lại và đọc to hơn";
             document.getElementById('modal-rec-status').className = score > 0 ? "text-xs font-bold text-emerald-700" : "text-xs font-bold text-rose-600";
             document.getElementById('modal-rec-btn').className = score > 0 ? "w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto" : "w-20 h-20 bg-rose-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto";
             document.getElementById('modal-rec-icon').className = score > 0 ? "ri-check-line" : "ri-mic-fill";
