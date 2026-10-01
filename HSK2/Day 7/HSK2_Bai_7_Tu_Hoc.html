@@ -1129,44 +1129,23 @@ var writers = {};
         const TEXT_AUDIO = {};
 
         function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.add('hidden');
-                el.style.display = 'none';
-            });
-            let targetSec = document.getElementById('sec-' + tabId);
-            if (targetSec) {
-                targetSec.classList.remove('hidden');
-                targetSec.style.display = 'block';
-            }
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
-            });
-            let activeBtn = document.getElementById('tab-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
-                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
-            }
-        }
-
-        var currentAudio = null;
-var currentRate = 0.85;
-
-function playVocab(key, fallbackText) {
-    var textToSpeak = fallbackText || key || "";
-    var namespacedKey = (typeof currentLesson !== "undefined") ? ("d" + currentLesson + "_" + key) : key;
-    var b64 = null;
-    if (typeof VOCAB_AUDIO !== "undefined" && VOCAB_AUDIO) {
-        b64 = VOCAB_AUDIO[namespacedKey] || VOCAB_AUDIO[key];
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.style.display = 'none';
+    });
+    let targetSec = document.getElementById('sec-' + tabId);
+    if (targetSec) {
+        targetSec.classList.remove('hidden');
+        targetSec.style.display = 'block';
     }
-    if (!b64 && typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
-        b64 = TEXT_AUDIO[namespacedKey] || TEXT_AUDIO[key];
-    }
-
-    if (b64) {
-        playB64(b64, textToSpeak);
-    } else {
-        speakText(textToSpeak);
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-gradient-to-r', 'from-red-600', 'to-amber-600', 'text-white', 'shadow-md', 'bg-blue-900', 'active-tab');
+        btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+    });
+    let activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        activeBtn.classList.add('active', 'bg-gradient-to-r', 'from-red-600', 'to-amber-600', 'text-white', 'shadow-md');
     }
 }
 
@@ -1303,61 +1282,58 @@ function playSecondaryTTS(text) {
         }
 
         function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
-            let btn = null;
-            let isCorrect = false;
+    let btn = null;
+    let isCorrect = false;
 
-            if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
-                btn = btnOrQNum;
-                isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
-            }
+    if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
+        btn = btnOrQNum;
+        isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
 
-            if (btn) {
-                const parentDiv = btn.parentElement;
-                if (parentDiv) {
-                    const siblings = parentDiv.querySelectorAll('button');
-                    siblings.forEach(b => {
-                        b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
-                        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-                    });
-                }
-
-                if (isCorrect) {
-                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
-                } else {
-                    btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
-                }
-
-                const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
-                if (card) {
-                    let evalBox = card.querySelector('.ans-eval-box');
-                    if (!evalBox) {
-                        evalBox = document.createElement('div');
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
-                        card.appendChild(evalBox);
-                    }
-                    evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
-                    
-                    if (isCorrect) {
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
-                        evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
-                    } else {
-                        evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
-                        evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
-                    }
-                }
-                return;
-            }
-
-            const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
-            if (!targetId) return;
-            const ansDiv = document.getElementById(targetId);
-            if (!ansDiv) return;
-            ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
-            ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
-            ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
+        const parentCard = btn.closest('.bg-white') || btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.parentElement;
+        if (parentCard) {
+            const siblings = parentCard.querySelectorAll('button');
+            siblings.forEach(b => {
+                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm', 'bg-emerald-600');
+                b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+            });
         }
-    </script>
+
+        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
+        if (isCorrect) {
+            btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
+        } else {
+            btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
+        }
+
+        let evalBox = parentCard ? parentCard.querySelector('.ans-eval-box') : null;
+        if (!evalBox && parentCard) {
+            evalBox = document.createElement('div');
+            evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
+            parentCard.appendChild(evalBox);
+        }
+        if (evalBox) {
+            evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+            if (isCorrect) {
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
+                evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
+            } else {
+                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-rose-50 border border-rose-200 text-rose-900 flex items-center gap-2';
+                evalBox.innerHTML = '<span>❌</span> <div><strong>Chưa chính xác!</strong> Đáp án này chưa đúng, chị hãy thử chọn lại đáp án khác nhé!</div>';
+            }
+        }
+        return;
+    }
+
+    const targetId = ansId || (typeof btnOrQNum === 'string' ? ('ans-' + btnOrQNum) : null);
+    if (!targetId) return;
+    const ansDiv = document.getElementById(targetId);
+    if (!ansDiv) return;
+    ansDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-blue-100', 'text-blue-900');
+    ansDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+    ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
+}
+document.addEventListener('DOMContentLoaded', () => {
+    showTab('overview');
+});</script>
 </body>
 </html>
