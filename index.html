@@ -380,16 +380,14 @@ function setSpeed(rate) {
 
 function selectLesson(num, updateTab) {
     currentLesson = num;
-    for (let i = 1; i <= 6; i++) {
-        const btn = document.getElementById('btn-lesson-' + i);
-        if (btn) {
-            if (i === num) {
-                btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition";
-            } else {
-                btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition";
-            }
+    document.querySelectorAll('.lesson-pill').forEach(btn => {
+        const bId = btn.id;
+        if (bId === 'btn-lesson-' + num) {
+            btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-bold bg-white text-blue-950 shadow-sm whitespace-nowrap transition";
+        } else {
+            btn.className = "lesson-pill px-3.5 py-1.5 rounded-xl font-medium bg-slate-800/70 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition";
         }
-    }
+    });
     const data = LESSON_CONTENT[num] || LESSON_CONTENT["" + num];
     if (data) {
         const titleEl = document.getElementById('home-lesson-title');
@@ -584,6 +582,49 @@ function playAudioStream(text) {
             });
         });
     }
+}
+
+
+function showTab(tabId) {
+    if (tabId === 'writing' || tabId === 'sim') {
+        showAppNav('writing');
+    } else if (tabId === 'vocab') {
+        showAppNav('vocab');
+        switchVocabMode('list');
+    } else if (tabId === 'grammar') {
+        showAppNav('lesson');
+        switchLessonSub('grammar');
+    } else if (tabId === 'text') {
+        showAppNav('lesson');
+        switchLessonSub('text');
+    } else if (tabId === 'practice' || tabId === 'quiz') {
+        showAppNav('quiz');
+    } else if (tabId === 'overview' || tabId === 'home') {
+        showAppNav('home');
+    } else {
+        showAppNav('lesson');
+    }
+}
+
+function playText(key, text) {
+    var textToSpeak = text || key || "";
+    var b64 = null;
+    if (typeof TEXT_AUDIO !== "undefined" && TEXT_AUDIO) {
+        b64 = TEXT_AUDIO[key] || TEXT_AUDIO[textToSpeak];
+    }
+    if (b64) {
+        playB64(b64, textToSpeak);
+    } else {
+        playAudioStream(textToSpeak);
+    }
+}
+
+function resetChar(id) {
+    if (writers && writers[id]) writers[id].animateCharacter();
+}
+
+function clearCanvas(id) {
+    clearPad('pad-' + id);
 }
 
 function playVocab(key, fallbackText) {
