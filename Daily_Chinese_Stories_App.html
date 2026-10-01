@@ -120,11 +120,14 @@
                     </div>
                 </div>
                 <!-- Top Right Badges -->
-                <div class="flex items-center space-x-2">
-                    <button onclick="switchNavView('podcast')" class="bg-indigo-700/80 hover:bg-indigo-600 border border-indigo-500/60 text-indigo-200 px-2.5 py-1 rounded-full text-xs font-bold flex items-center space-x-1 shadow-xs">
+                <div class="flex items-center space-x-1.5">
+                    <button onclick="forceRefreshApp()" title="Nạp mới dữ liệu ứng dụng" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-2 py-1 rounded-full text-[11px] flex items-center space-x-0.5 shadow-md active:scale-95 transition">
+                        <span>🔄 Nạp mới</span>
+                    </button>
+                    <button onclick="switchNavView('podcast')" class="bg-indigo-700/80 hover:bg-indigo-600 border border-indigo-500/60 text-indigo-200 px-2 py-1 rounded-full text-xs font-bold flex items-center space-x-1 shadow-xs">
                         <span>🎧 Podcast</span>
                     </button>
-                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-full px-2.5 py-1 flex items-center space-x-1 text-xs font-semibold text-amber-400">
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-full px-2 py-1 flex items-center space-x-1 text-xs font-semibold text-amber-400">
                         <span>🔥</span>
                         <span id="streak-count">1 Ngày</span>
                     </div>
@@ -1645,6 +1648,15 @@
             switchNavView('stories');
             selectDay(dayNum);
             switchStory(storyIdx + 1);
+        }
+
+        function forceRefreshApp() {
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => caches.delete(name));
+                });
+            }
+            window.location.href = window.location.pathname + '?v=' + Date.now();
         }
     </script>
 </body>
