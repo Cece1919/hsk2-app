@@ -2372,36 +2372,7 @@ var writers = {};
 const items = [{"id": "gongjiaoche-1", "char": "公", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-2", "char": "交", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-3", "char": "车", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "dan-1", "char": "但", "pinyin": "dàn", "meaning": "但 (Nhưng, nhưng mà)", "key": "dan"}, {"id": "chezhan-1", "char": "车", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "chezhan-2", "char": "站", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "yuan-1", "char": "远", "pinyin": "yuǎn", "meaning": "远 (Xa, xa xôi)", "key": "yuan"}, {"id": "dache-1", "char": "打", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "dache-2", "char": "车", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "haishi-1", "char": "还", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "haishi-2", "char": "是", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "beijingdaxue-1", "char": "北", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-2", "char": "京", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-3", "char": "大", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-4", "char": "学", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "a-1", "char": "啊", "pinyin": "a", "meaning": "啊 (À, nha, nhỉ)", "key": "a"}, {"id": "wan-1", "char": "万", "pinyin": "wàn", "meaning": "万 (Mười nghìn (10.000))", "key": "wan"}, {"id": "ming-1", "char": "名", "pinyin": "míng", "meaning": "名 (Vị, người (lượng từ))", "key": "ming"}, {"id": "wangshang-1", "char": "网", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "wangshang-2", "char": "上", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "waiguo-1", "char": "外", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "waiguo-2", "char": "国", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "jian-1", "char": "间", "pinyin": "jiān", "meaning": "间 (Căn, phòng)", "key": "jian"}, {"id": "jiaoshi-1", "char": "教", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "jiaoshi-2", "char": "室", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "piao-1", "char": "票", "pinyin": "piào", "meaning": "票 (Vé)", "key": "piao"}, {"id": "bie-1", "char": "别", "pinyin": "bié", "meaning": "别 (Đừng, không nên)", "key": "bie"}, {"id": "guolai-1", "char": "过", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}, {"id": "guolai-2", "char": "来", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}];
 
 
-function initWriters() {
-    if (typeof HanziWriter === 'undefined') return;
-    if (typeof items === 'undefined' || !items) return;
 
-    items.forEach(item => {
-        const containerId = 'target-' + item.id;
-        const container = document.getElementById(containerId);
-        if (container && !writers[item.id]) {
-            try {
-                let writer = HanziWriter.create(containerId, item.char, {
-                    width: 100,
-                    height: 100,
-                    padding: 5,
-                    showOutline: true,
-                    strokeAnimationSpeed: 1,
-                    delayBetweenStrokes: 150,
-                    strokeColor: '#0f172a'
-                });
-                writers[item.id] = writer;
-            } catch(e) {
-                console.log('Error init writer for ' + item.id, e);
-            }
-        }
-    });
-
-    items.forEach(item => {
-        const canvasId = 'pad-' + item.id;
-        initPad(canvasId);
-    });
-}
 
 function animateChar(id, charStr) {
     if (writers[id]) {
@@ -2486,30 +2457,24 @@ let currentAudio = null;
 let currentRate = 1.0;
 
 function showTab(tabId) {
-    const tabs = ['sim', 'overview', 'vocab', 'writing', 'grammar', 'text', 'practice', 'culture'];
     document.querySelectorAll('.tab-content').forEach(el => {
         el.classList.add('hidden');
         el.style.display = 'none';
     });
-    const targetSec = document.getElementById('sec-' + tabId);
+    let targetSec = document.getElementById('sec-' + tabId);
     if (targetSec) {
         targetSec.classList.remove('hidden');
         targetSec.style.display = 'block';
     }
-    tabs.forEach(t => {
-        const btn = document.getElementById('tab-' + t);
-        if (btn) {
-            if (t === tabId) {
-                btn.className = "tab-btn active px-4 py-2.5 rounded-xl font-bold bg-blue-900 text-white shadow-sm transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
-            } else {
-                btn.className = "tab-btn px-4 py-2.5 rounded-xl font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
-            }
-        }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900', 'active');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
     });
-    if ((tabId === 'writing' || tabId === 'sim') && typeof initWriters === 'function') {
-        setTimeout(initWriters, 100);
+    let activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'font-bold', 'active-tab');
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setSpeed(rate) {
@@ -2692,36 +2657,31 @@ function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
     if (btnOrQNum && typeof btnOrQNum === 'object' && btnOrQNum.tagName) {
         btn = btnOrQNum;
         isCorrect = (isCorrectOrOpt === true || isCorrectOrOpt === 'true');
-    }
 
-    if (btn) {
-        const parentDiv = btn.parentElement;
-        if (parentDiv) {
-            const siblings = parentDiv.querySelectorAll('button');
+        const parentCard = btn.closest('.bg-white') || btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.parentElement;
+        if (parentCard) {
+            const siblings = parentCard.querySelectorAll('button');
             siblings.forEach(b => {
-                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm');
+                b.classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white', 'border-emerald-600', 'border-rose-600', 'font-bold', 'shadow-sm', 'bg-emerald-600');
                 b.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
             });
         }
 
+        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
         if (isCorrect) {
-            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
-            btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
+            btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'font-bold', 'shadow-sm');
         } else {
-            btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'font-normal');
             btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'font-bold', 'shadow-sm');
         }
 
-        const card = btn.closest('.p-4') || btn.closest('.bg-slate-50') || btn.closest('.card') || (parentDiv ? parentDiv.parentElement : null);
-        if (card) {
-            let evalBox = card.querySelector('.ans-eval-box');
-            if (!evalBox) {
-                evalBox = document.createElement('div');
-                evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
-                card.appendChild(evalBox);
-            }
+        let evalBox = parentCard ? parentCard.querySelector('.ans-eval-box') : null;
+        if (!evalBox && parentCard) {
+            evalBox = document.createElement('div');
+            evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm';
+            parentCard.appendChild(evalBox);
+        }
+        if (evalBox) {
             evalBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
-            
             if (isCorrect) {
                 evalBox.className = 'ans-eval-box mt-3 p-3 rounded-xl text-xs md:text-sm font-medium transition-all shadow-sm bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-2';
                 evalBox.innerHTML = '<span>✨</span> <div><strong>Chính xác!</strong> Chị đã chọn đúng đáp án rồi ạ. 🎉</div>';
@@ -2803,14 +2763,95 @@ function toggleAns(id) {
     }
 }
 
-window.onload = function() {
-    const defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
-    showTab(defaultTab);
-    if (typeof initWriters === 'function') {
-        setTimeout(initWriters, 300);
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof items !== 'undefined' && Array.isArray(items)) {
+        items.forEach(item => {
+            let el = document.getElementById('target-' + item.id);
+            if (el && typeof HanziWriter !== 'undefined') {
+                try {
+                    writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {
+                        width: 130,
+                        height: 130,
+                        padding: 5,
+                        strokeAnimationSpeed: 1,
+                        delayBetweenStrokes: 150,
+                        strokeColor: '#1e293b',
+                        radicalColor: '#2563eb',
+                        showOutline: true,
+                        outlineColor: '#cbd5e1'
+                    });
+                } catch(e) {}
+            }
+            setupCanvas('pad-' + item.id);
+        });
     }
-};
+    showTab('sim');
+});
 
-</script>
+
+function animateChar(id) {
+    if (writers[id]) {
+        try { writers[id].animateCharacter(); } catch(e) {}
+    }
+}
+
+function resetChar(id) {
+    if (writers[id]) {
+        try { writers[id].showCharacter(); } catch(e) {}
+    }
+}
+
+function setupCanvas(canvasId) {
+    let canvas = document.getElementById(canvasId);
+    if (!canvas || canvas.dataset.inited) return;
+    canvas.dataset.inited = "true";
+    let ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    let isDrawing = false;
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#0f172a';
+
+    function getPos(e) {
+        let rect = canvas.getBoundingClientRect();
+        let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDraw(e) {
+        isDrawing = true;
+        let pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        let pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+
+    function stopDraw() { isDrawing = false; }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(e); });
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+    canvas.addEventListener('touchend', stopDraw);
+}
+
+function clearPad(canvasId) {
+    let canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    let ctx = canvas.getContext('2d');
+    if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}</script>
 </body>
 </html>

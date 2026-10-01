@@ -33,7 +33,7 @@ def update_mobile_app():
             continue
         lesson_num = int(match_day.group(1))
 
-        html_files = glob.glob(os.path.join(folder, "*_Mo_Phong_Viet.html"))
+        html_files = glob.glob(os.path.join(folder, "*_Tu_Hoc.html")) or glob.glob(os.path.join(folder, "*_Mo_Phong_Viet.html"))
         if not html_files:
             continue
         html_path = html_files[0]
