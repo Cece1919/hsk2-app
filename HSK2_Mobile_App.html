@@ -148,6 +148,33 @@
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
         }
+    
+        @media (max-width: 768px) {
+            body {
+                background-color: #f8fafc !important;
+            }
+            .phone-frame {
+                border: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                height: auto !important;
+                min-height: 100vh !important;
+                max-height: none !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+            }
+            .phone-frame .app-container {
+                min-height: 100vh !important;
+                height: auto !important;
+                overflow-y: visible !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+            }
+            .fake-status-bar {
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
 <body class="bg-slate-900 text-slate-800">
@@ -155,7 +182,7 @@
     <div id="wrapper-frame" class="phone-frame shadow-2xl">
         <div class="app-container">
 
-            <div class="bg-slate-900 text-white px-5 pt-3 pb-2 flex items-center justify-between text-xs sticky top-0 z-50 select-none">
+            <div class="fake-status-bar bg-slate-900 text-white px-5 pt-3 pb-2 flex items-center justify-between text-xs sticky top-0 z-50 select-none">
                 <span class="font-semibold tracking-tight text-slate-200">09:41</span>
                 <div class="w-20 h-4 bg-black rounded-full mx-auto flex items-center justify-center gap-1 opacity-90">
                     <div class="w-2 h-2 rounded-full bg-slate-800"></div>
@@ -436,6 +463,11 @@ function showAppNav(view, switchTab) {
             }
         }
     });
+    if (view === 'vocab' && switchTab === true) {
+        switchVocabMode('srs');
+    } else if (view === 'vocab' && switchTab === false) {
+        switchVocabMode('list');
+    }
     if (view === 'writing') {
         setTimeout(initLessonWriters, 100);
     }
