@@ -40,10 +40,46 @@ DAYS_DATA = {
             {"id": "dong-1", "char": "懂", "pinyin": "dǒng", "meaning": "懂 (Hiểu)"}
         ],
         "text": {
-            "text1": "九月去北京旅游最好。为什么？九月的北京天气最好，不冷也不热。",
-            "text2": "你喜欢什么运动？我最喜欢踢足球。下午我们一起去踢足球吧。好啊！",
-            "text3": "让我想想。我们什么时候去？下个星期六去吧。",
-            "text4": "我已经买好机票了。我们几点去机场？下午两点去。"
+            "text1": {
+                "title": "在学校 (Ở trường)",
+                "icon": "🏫",
+                "lines": [
+                    {"spk": "A", "zh": "我想去中国旅游，几月去最好？", "py": "Wǒ xiǎng qù Zhōngguó lǚyóu, jǐ yuè qù zuì hǎo?", "vi": "Tôi muốn đi Trung Quốc du lịch, đi tháng mấy là tốt nhất?"},
+                    {"spk": "B", "zh": "九月去北京旅游最好。", "py": "Jiǔyuè qù Běijīng lǚyóu zuì hǎo.", "vi": "Đi Bắc Kinh du lịch tháng 9 là tốt nhất."},
+                    {"spk": "A", "zh": "为什么？", "py": "Wèishénme?", "vi": "Tại sao?"},
+                    {"spk": "B", "zh": "九月的北京天气最好，不冷也不热。", "py": "Jiǔyuè de Běijīng tiānqì zuì hǎo, bù lěng yě bù rè.", "vi": "Thời tiết Bắc Kinh tháng 9 tốt nhất, không lạnh cũng không nóng."}
+                ]
+            },
+            "text2": {
+                "title": "在运动场 (Ở sân vận động)",
+                "icon": "⚽",
+                "lines": [
+                    {"spk": "A", "zh": "你喜欢什么运动？", "py": "Nǐ xǐhuan shénme yùndòng?", "vi": "Bạn thích môn thể thao gì?"},
+                    {"spk": "B", "zh": "我最喜欢踢足球。", "py": "Wǒ zuì xǐhuan tī zúqiú.", "vi": "Tôi thích nhất là đá bóng."},
+                    {"spk": "A", "zh": "下午我们一起去踢足球吧。", "py": "Xiàwǔ wǒmen yìqǐ qù tī zúqiú ba.", "vi": "Chiều nay chúng ta cùng đi đá bóng nhé."},
+                    {"spk": "B", "zh": "好啊！几点去？", "py": "Hǎo a! Jǐ diǎn qù?", "vi": "Được thôi! Mấy giờ đi?"}
+                ]
+            },
+            "text3": {
+                "title": "在公司 (Ở công ty)",
+                "icon": "🏢",
+                "lines": [
+                    {"spk": "A", "zh": "我们可以什么时候去北京？", "py": "Wǒmen kěyǐ shénme shíhou qù Běijīng?", "vi": "Khi nào chúng ta có thể đi Bắc Kinh?"},
+                    {"spk": "B", "zh": "让我想想，下个星期六去吧。", "py": "Ràng wǒ xiǎngxiang, xià gè xīngqīliù qù ba.", "vi": "Để tôi suy nghĩ một chút, thứ 7 tuần sau đi nhé."},
+                    {"spk": "A", "zh": "那太好了，我给你买机票。", "py": "Nà tài hǎo le, wǒ gěi nǐ mǎi jīpiào.", "vi": "Thế thì tốt quá, tôi mua vé máy bay cho bạn."},
+                    {"spk": "B", "zh": "谢谢你！真不好意思，让你帮忙。", "py": "Xièxie nǐ! Zhēn bù hǎoyìsi, ràng nǐ bāngmáng.", "vi": "Cảm ơn bạn! Thật ngại quá, lại nhờ bạn giúp đỡ."}
+                ]
+            },
+            "text4": {
+                "title": "在机场 (Ở sân bay)",
+                "icon": "✈️",
+                "lines": [
+                    {"spk": "A", "zh": "你去机场做什么？", "py": "Nǐ qù jīchǎng zuò shénme?", "vi": "Bạn đi sân bay làm gì?"},
+                    {"spk": "B", "zh": "我去机场接朋友，他第一次来北京。", "py": "Wǒ qù jīchǎng jiē péngyou, tā dì yī cì lái Běijīng.", "vi": "Tôi đi sân bay đón bạn, cậu ấy lần đầu tiên đến Bắc Kinh."},
+                    {"spk": "A", "zh": "我给你介绍一下，这是我的朋友小明。", "py": "Wǒ gěi nǐ jièshào yíxià, zhè shì wǒ de péngyou Xiǎomíng.", "vi": "Tôi giới thiệu với bạn một chút, đây là bạn tôi Tiểu Minh."},
+                    {"spk": "B", "zh": "你好！欢迎你来北京！", "py": "Nǐ hǎo! Huānyíng nǐ lái Běijīng!", "vi": "Xin chào! Chào mừng bạn đến Bắc Kinh!"}
+                ]
+            }
         },
         "grammar": [
             {"title": "1. Phó từ mức độ '最' (Thích nhất, tốt nhất)", "desc": "Diễn đạt mức độ cao nhất trong các lựa chọn.", "struct": "最 + Tính từ / Động từ", "ex": "九月去北京旅游<b>最</b>好。(Đi Bắc Kinh tháng 9 tốt nhất.) / 我<b>最</b>喜欢踢足球。(Tôi thích đá bóng nhất.)"},
@@ -92,10 +128,46 @@ DAYS_DATA = {
             {"id": "bie-1", "char": "别", "pinyin": "bié", "meaning": "别 (Đừng)"}
         ],
         "text": {
-            "text1": "你每天几点起床？我每天六点起床。你怎么起得这么早？因为我每天早上去跑步。",
-            "text2": "你怎么去学校？我坐公交车去。车站远不远？不太远，走五分钟就到了。",
-            "text3": "今天晚上你想吃什么？吃中国菜还是吃西餐？吃中国菜吧！",
-            "text4": "别忘了明天早上八点有考试。我知道了，我一定准时到。"
+            "text1": {
+                "title": "在运动场 (Ở sân vận động)",
+                "icon": "🏃",
+                "lines": [
+                    {"spk": "A", "zh": "你每天几点起床？", "py": "Nǐ měitiān jǐ diǎn qǐchuáng?", "vi": "Mỗi ngày bạn dậy lúc mấy giờ?"},
+                    {"spk": "B", "zh": "我每天六点起床。", "py": "Wǒ měitiān liù diǎn qǐchuáng.", "vi": "Tôi thức dậy lúc 6 giờ mỗi ngày."},
+                    {"spk": "A", "zh": "你怎么起得这么早？", "py": "Nǐ zěnme qǐ de zhème zǎo?", "vi": "Sao bạn thức dậy sớm thế?"},
+                    {"spk": "B", "zh": "因为我每天早上去跑步。", "py": "Yīnwèi wǒ měitiān zǎoshang qù pǎobù.", "vi": "Vì tôi sáng nào cũng đi chạy bộ."}
+                ]
+            },
+            "text2": {
+                "title": "在路上 (Trên đường)",
+                "icon": "🚌",
+                "lines": [
+                    {"spk": "A", "zh": "你怎么去学校？坐公交车还是打车？", "py": "Nǐ zěnme qù xuéxiào? Zuò gōngjiāochē háishì dǎchē?", "vi": "Bạn đi đến trường bằng gì? Đi xe buýt hay bắt taxi?"},
+                    {"spk": "B", "zh": "我坐公交车去。车站离我家不远。", "py": "Wǒ zuò gōngjiāochē qù. Chēzhàn lí wǒ jiā bù yuǎn.", "vi": "Tôi đi xe buýt. Trạm xe cách nhà tôi không xa."},
+                    {"spk": "A", "zh": "走过去要几分钟？", "py": "Zǒu guòqù yào jǐ fēnzhōng?", "vi": "Đi bộ qua đó mất mấy phút?"},
+                    {"spk": "B", "zh": "不远，走五分钟就到了。", "py": "Bù yuǎn, zǒu wǔ fēnzhōng jiù dào le.", "vi": "Không xa, đi bộ 5 phút là tới rồi."}
+                ]
+            },
+            "text3": {
+                "title": "在北京大学 (Ở Đại học Bắc Kinh)",
+                "icon": "🎓",
+                "lines": [
+                    {"spk": "A", "zh": "这间教室里有多少名学生？", "py": "Zhè jiān jiàoshì li yǒu duōshao míng xuésheng?", "vi": "Trong phòng học này có bao nhiêu học sinh?"},
+                    {"spk": "B", "zh": "这里有三万名学生，很多是外国留学生。", "py": "Zhèlǐ yǒu sān wàn míng xuésheng, hěn duō shì wàiguó liúxuéshēng.", "vi": "Ở đây có 30.000 học sinh, rất nhiều là lưu học sinh nước ngoài."},
+                    {"spk": "A", "zh": "我可以在网上买车票吗？", "py": "Wǒ kěyǐ zài wǎngshang mǎi chēpiào ma?", "vi": "Tôi có thể mua vé xe trên mạng được không?"},
+                    {"spk": "B", "zh": "可以啊，在网上买票很方便。", "py": "Kěyǐ a, zài wǎngshang mǎi piào hěn fāngbiàn.", "vi": "Được chứ, mua vé trên mạng rất tiện lợi."}
+                ]
+            },
+            "text4": {
+                "title": "在教室 (Trong phòng học)",
+                "icon": "📚",
+                "lines": [
+                    {"spk": "A", "zh": "别说话了，老师过来了！", "py": "Bié shuōhuà le, lǎoshī guòlái le!", "vi": "Đừng nói chuyện nữa, thầy giáo đi qua đây rồi!"},
+                    {"spk": "B", "zh": "好的，别忘了明天早上八点有考试。", "py": "Hǎo de, bié wàng le míngtiān zǎoshang bā diǎn yǒu kǎoshì.", "vi": "Được rồi, đừng quên sáng mai 8 giờ có bài kiểm tra nhé."},
+                    {"spk": "A", "zh": "我知道了，我一定准时到教室。", "py": "Wǒ zhīdào le, wǒ yídìng zhǔnshí dào jiàoshì.", "vi": "Tôi biết rồi, tôi nhất định sẽ đến lớp đúng giờ."},
+                    {"spk": "B", "zh": "那我们就认真复习吧！", "py": "Nà wǒmen jiù rènzhēn fùxí ba!", "vi": "Thế thì chúng ta ôn tập chăm chỉ thôi!"}
+                ]
+            }
         },
         "grammar": [
             {"title": "1. Giới từ chỉ khoảng cách '离' (Cách)", "desc": "Dùng để biểu thị khoảng cách giữa hai địa điểm hoặc thời gian.", "struct": "A + 离 + B + 远 / 近 / [Khoảng cách]", "ex": "我家<b>离</b>学校很近。(Nhà tôi cách trường rất gần.)"},
@@ -141,10 +213,46 @@ DAYS_DATA = {
             {"id": "lei-1", "char": "累", "pinyin": "lèi", "meaning": "累 (Mệt mỏi)"}
         ],
         "text": {
-            "text1": "左边那个红色的杯子是谁的？是我的。那个黑色的呢？也是我的。",
-            "text2": "你看完这本书了吗？还没看完，还有几页。",
-            "text3": "你什么时候回来？我吃完饭就回去。",
-            "text4": "你累不累？不累，我自己能拿这个包。"
+            "text1": {
+                "title": "在家里 (Ở nhà)",
+                "icon": "☕",
+                "lines": [
+                    {"spk": "A", "zh": "左边那个红色的杯子是谁的？", "py": "Zuǒbiān nà gè hóngsè de bēizi shì shéi de?", "vi": "Cái cốc màu đỏ bên trái là của ai thế?"},
+                    {"spk": "B", "zh": "是我的。那个黑色的呢？", "py": "Shì wǒ de. Nà gè hēisè de ne?", "vi": "Là của tôi. Còn cái màu đen thì sao?"},
+                    {"spk": "A", "zh": "那个黑色的也是我的，是我朋友送给我的。", "py": "Nà gè hēisè de yě shì wǒ de, shì wǒ péngyou sòng gěi wǒ de.", "vi": "Cái màu đen đó cũng là của tôi, là bạn tôi tặng tôi."},
+                    {"spk": "B", "zh": "颜色真不错！", "py": "Yánsè zhēn búcuò!", "vi": "Màu sắc thật không tệ!"}
+                ]
+            },
+            "text2": {
+                "title": "在房间 (Trong phòng)",
+                "icon": "📖",
+                "lines": [
+                    {"spk": "A", "zh": "你看完这本书了吗？", "py": "Nǐ kàn wán zhè běn shū le ma?", "vi": "Bạn đã đọc xong cuốn sách này chưa?"},
+                    {"spk": "B", "zh": "还没看完，还有几页。", "py": "Hái méi kàn wán, hái yǒu jǐ yè.", "vi": "Vẫn chưa đọc xong, còn vài trang nữa."},
+                    {"spk": "A", "zh": "你看完以后，拿给我看看吧。", "py": "Nǐ kàn wán yǐhòu, ná gěi wǒ kànkan ba.", "vi": "Sau khi xem xong, cầm cho tôi xem với nhé."},
+                    {"spk": "B", "zh": "没问题，我今天晚上就能看完。", "py": "Méi wèntí, wǒ jīntiān wǎnshang jiù néng kàn wán.", "vi": "Không vấn đề gì, tối nay tôi có thể đọc xong."}
+                ]
+            },
+            "text3": {
+                "title": "在公司 (Ở công ty)",
+                "icon": "🚶",
+                "lines": [
+                    {"spk": "A", "zh": "你要出去吗？什么时候回来？", "py": "Nǐ yào chūqù ma? Shénme shíhou huílái?", "vi": "Bạn muốn đi ra ngoài à? Khi nào trở về?"},
+                    {"spk": "B", "zh": "我出去洗手，一会就回来。", "py": "Wǒ chūqù xǐ shǒu, yíhuì jiù huílái.", "vi": "Tôi ra ngoài rửa tay, một lát nữa về ngay."},
+                    {"spk": "A", "zh": "那我们完事后一起去西安旅游吧。", "py": "Nà wǒmen wán shì hòu yìqǐ qù Xī'ān lǚyóu ba.", "vi": "Thế sau khi xong việc chúng ta cùng đi du lịch Tây An nhé."},
+                    {"spk": "B", "zh": "太好了！我早就想去西安了。", "py": "Tài hǎo le! Wǒ zǎo jiù xiǎng qù Xī'ān le.", "vi": "Tuyệt quá! Tôi từ lâu đã muốn đi Tây An rồi."}
+                ]
+            },
+            "text4": {
+                "title": "在路上 (Trên đường)",
+                "icon": "🎒",
+                "lines": [
+                    {"spk": "A", "zh": "你拿着这么重的东西，累不累？", "py": "Nǐ ná zhe zhème zhòng de dōngxi, lèi bú lèi?", "vi": "Bạn cầm đồ nặng thế này, có mệt không?"},
+                    {"spk": "B", "zh": "不累，我自己能拿这个包。", "py": "Bù lèi, wǒ zìjǐ néng ná zhè gè bāo.", "vi": "Không mệt, tự tôi có thể cầm cái túi này."},
+                    {"spk": "A", "zh": "时间不早了，我们赶紧回去吧。", "py": "Shíjiān bù zǎo le, wǒmen gǎnjǐn huíqù ba.", "vi": "Thời gian không còn sớm nữa, chúng ta mau về thôi."},
+                    {"spk": "B", "zh": "好的，回到家我要好好休息。", "py": "Hǎo de, huí dào jiā wǒ yào hǎohǎo xiūxi.", "vi": "Được thôi, về đến nhà tôi phải nghỉ ngơi thật tốt."}
+                ]
+            }
         },
         "grammar": [
             {"title": "1. Kết cấu sở hữu với trợ từ '的'", "desc": "Lược bỏ danh từ phía sau khi ngữ cảnh đã rõ ràng.", "struct": "Tính từ / Danh từ / Đại từ + 的", "ex": "左边那个红色的（杯子）是我的。(Cái màu đỏ bên trái là của tôi.)"},
@@ -189,10 +297,46 @@ DAYS_DATA = {
             {"id": "gui-1", "char": "贵", "pinyin": "guì", "meaning": "贵 (Đắt tiền)"}
         ],
         "text": {
-            "text1": "这个工作是谁帮你介绍的？是他帮我介绍的。",
-            "text2": "你看见我的手机了吗？没看见，是不是在桌子上？",
-            "text3": "这件衣服多少钱？两百元。太贵了，便宜一点吧。",
-            "text4": "你要买西瓜吗？是的，这里的西瓜真甜！"
+            "text1": {
+                "title": "在公司 (Ở công ty)",
+                "icon": "💼",
+                "lines": [
+                    {"spk": "A", "zh": "这个工作是谁帮你介绍的？", "py": "Zhè gè gōngzuò shì shéi bāng nǐ jièshào de?", "vi": "Công việc này là do ai giới thiệu cho bạn thế?"},
+                    {"spk": "B", "zh": "是我大学同学帮我介绍的。", "py": "Shì wǒ dàxué tóngxué bāng wǒ jièshào de.", "vi": "Là do bạn học đại học giúp tôi giới thiệu."},
+                    {"spk": "A", "zh": "你觉得这个工作怎么样？", "py": "Nǐ juéde zhè gè gōngzuò zěnmeyàng?", "vi": "Bạn thấy công việc này thế nào?"},
+                    {"spk": "B", "zh": "很不错，同事们都很好。", "py": "Hěn búcuò, tóngshìmen dōu hěn hǎo.", "vi": "Rất tốt, các đồng nghiệp đều rất tốt."}
+                ]
+            },
+            "text2": {
+                "title": "在水果店 (Ở cửa hàng hoa quả)",
+                "icon": "🍉",
+                "lines": [
+                    {"spk": "A", "zh": "你要买西瓜吗？", "py": "Nǐ yào mǎi xīguā ma?", "vi": "Bạn muốn mua dưa hấu không?"},
+                    {"spk": "B", "zh": "是的，这里的西瓜真甜！", "py": "Shì de, zhèlǐ de xīguā zhēn tián!", "vi": "Đúng vậy, dưa hấu ở đây ngọt thật đấy!"},
+                    {"spk": "A", "zh": "这个西瓜多少钱一斤？", "py": "Zhè gè xīguā duōshao qián yì jīn?", "vi": "Dưa hấu này bao nhiêu tiền một cân?"},
+                    {"spk": "B", "zh": "三元一斤，很便宜！", "py": "Sān yuán yì jīn, hěn piányi!", "vi": "3 tệ một cân, rất rẻ!"}
+                ]
+            },
+            "text3": {
+                "title": "在服装店 (Ở cửa hàng quần áo)",
+                "icon": "👔",
+                "lines": [
+                    {"spk": "A", "zh": "这条裤子和这件衬衫多少钱？", "py": "Zhè tiáo kùzi hé zhè jiàn chènshān duōshao qián?", "vi": "Chiếc quần này và chiếc áo sơ mi này bao nhiêu tiền?"},
+                    {"spk": "B", "zh": "一共两百元。", "py": "Yígòng liǎng bǎi yuán.", "vi": "Tổng cộng 200 tệ."},
+                    {"spk": "A", "zh": "太贵了，便宜一点吧！", "py": "Tài guì le, piányi yìdiǎn ba!", "vi": "Đắt quá, rẻ một chút đi!"},
+                    {"spk": "B", "zh": "那给你一百八十元吧。", "py": "Nà gěi nǐ yì bǎi bāshí yuán ba.", "vi": "Thế bớt cho bạn còn 180 tệ nhé."}
+                ]
+            },
+            "text4": {
+                "title": "在试衣间 (Ở phòng thử đồ)",
+                "icon": "👗",
+                "lines": [
+                    {"spk": "A", "zh": "你试了这件旗袍吗？合适不合适？", "py": "Nǐ shì le zhè jiàn qípáo ma? Héshì bù héshì?", "vi": "Bạn đã thử chiếc áo sườn xám này chưa? Có vừa vặn không?"},
+                    {"spk": "B", "zh": "我试了一下，非常合适，而且很轻。", "py": "Wǒ shì le yíxià, fēicháng héshì, érqiě hěn qīng.", "vi": "Tôi thử rồi, rất vừa vặn, hơn nữa còn rất nhẹ."},
+                    {"spk": "A", "zh": "真漂亮！价格贵不贵？", "py": "Zhēn piàoliang! Jiàgé guì bú guì?", "vi": "Đẹp thật đấy! Giá có đắt không?"},
+                    {"spk": "B", "zh": "不算贵，我很喜欢，就买这件了！", "py": "Bú suàn guì, wǒ hěn xǐhuan, jiù mǎi zhè jiàn le!", "vi": "Không tính là đắt, tôi rất thích, mua chiếc này luôn!"}
+                ]
+            }
         },
         "grammar": [
             {"title": "1. Cấu trúc nhấn mạnh '是...的'", "desc": "Dùng để nhấn mạnh thời gian, địa điểm, cách thức hoặc người thực hiện hành động đã xảy ra.", "struct": "主语 + 是 + [Đối tượng / Thời gian / Địa điểm] + 动作 + 的", "ex": "这个工作<b>是</b>他帮我介绍<b>的</b>。(Công việc này là do anh ấy giới thiệu cho tôi.)"},
@@ -234,8 +378,12 @@ def build_lesson(day_num):
         with open(m4a_path, 'rb') as f:
             vocab_b64[key] = base64.b64encode(f.read()).decode('utf-8')
 
-    for key, text in data["text"].items():
-        clean_text = re.sub(r'[^\u4e00-\u9fa5，。？！]', '', text)
+    for key, item in data["text"].items():
+        if isinstance(item, dict) and "lines" in item:
+            full_text = "".join([l["zh"] for l in item["lines"]])
+        else:
+            full_text = str(item)
+        clean_text = re.sub(r'[^\u4e00-\u9fa5，。？！]', '', full_text)
         aiff_path = os.path.join(audio_dir, f"{key}.aiff")
         m4a_path = os.path.join(audio_dir, f"{key}.m4a")
         cmd_say = f'say -v Tingting "{clean_text}" -o "{aiff_path}"'
@@ -368,37 +516,43 @@ def build_lesson(day_num):
         return "\n".join(rows)
 
     def build_sec_text():
-        t = data["text"]
-        return f'''<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        cards = []
+        for idx, (key, item) in enumerate(data["text"].items(), 1):
+            if isinstance(item, dict):
+                title = item.get("title", f"Bài khóa {idx}")
+                icon = item.get("icon", "💬")
+                lines_data = item.get("lines", [])
+                full_zh = "".join([l["zh"] for l in lines_data])
+                js_zh = full_zh.replace("'", "\\'")
+                
+                lines_html = []
+                for l in lines_data:
+                    lines_html.append(
+                        f'            <div class="p-2.5 bg-slate-50 rounded-xl">'
+                        f'<div class="font-bold text-blue-950 zh text-sm">{l["spk"]}: {l["zh"]}</div>'
+                        f'<div class="text-emerald-700 font-mono text-[11px]">{l["py"]}</div>'
+                        f'<div class="text-slate-500">{l["vi"]}</div></div>'
+                    )
+                lines_str = "\n".join(lines_html)
+                card = f'''    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
         <div class="flex justify-between items-center border-b pb-3">
-            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>💬</span> Bài khóa 1</h3>
-            <button onclick="playText('text1', '{t["text1"]}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>{icon}</span> Bài khóa {idx}: {title}</h3>
+            <button onclick="playText('{key}', '{js_zh}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
         </div>
-        <div class="p-3 bg-slate-50 rounded-xl font-medium text-slate-900 zh text-sm leading-relaxed">{t["text1"]}</div>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="space-y-3 text-xs leading-relaxed">
+{lines_str}
+        </div>
+    </div>'''
+            else:
+                card = f'''    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
         <div class="flex justify-between items-center border-b pb-3">
-            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>💬</span> Bài khóa 2</h3>
-            <button onclick="playText('text2', '{t["text2"]}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
+            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>💬</span> Bài khóa {idx}</h3>
+            <button onclick="playText('{key}', '{item}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
         </div>
-        <div class="p-3 bg-slate-50 rounded-xl font-medium text-slate-900 zh text-sm leading-relaxed">{t["text2"]}</div>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <div class="flex justify-between items-center border-b pb-3">
-            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>💬</span> Bài khóa 3</h3>
-            <button onclick="playText('text3', '{t["text3"]}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
-        </div>
-        <div class="p-3 bg-slate-50 rounded-xl font-medium text-slate-900 zh text-sm leading-relaxed">{t["text3"]}</div>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <div class="flex justify-between items-center border-b pb-3">
-            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span>💬</span> Bài khóa 4</h3>
-            <button onclick="playText('text4', '{t["text4"]}')" class="bg-blue-900 text-white hover:bg-blue-800 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1">▶ Nghe bài khóa</button>
-        </div>
-        <div class="p-3 bg-slate-50 rounded-xl font-medium text-slate-900 zh text-sm leading-relaxed">{t["text4"]}</div>
-    </div>
-</div>'''
+        <div class="p-3 bg-slate-50 rounded-xl font-medium text-slate-900 zh text-sm leading-relaxed">{item}</div>
+    </div>'''
+            cards.append(card)
+        return '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">\n' + "\n".join(cards) + '\n</div>'
 
     def build_sec_grammar():
         cards = []
