@@ -31,13 +31,14 @@
 
         <!-- 7 TABS NAVIGATION BAR -->
         <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
-            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📌 Overview</button>
-            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📖 Từ vựng</button>
-            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
-            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">💡 Ngữ pháp</button>
-            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa</button>
-            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
-            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🎋 Góc văn hóa</button>
+            <button onclick="showTab('sim')" id="tab-sim" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎬</span> Mô phỏng nét viết</button>
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn active px-4 py-2.5 text-sm font-medium bg-blue-600 text-white font-bold active-tab transition flex items-center gap-1.5 shrink-0"><span>📌</span> Overview</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📖</span> Từ vựng</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>✍️</span> Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>💡</span> Ngữ pháp</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🗣️</span> Bài khóa</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📝</span> Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎋</span> Góc văn hóa</button>
         </nav>
     </header>
 
@@ -45,7 +46,15 @@
     <main class="max-w-6xl mx-auto px-4 mt-6">
 
         <!-- TAB 1: OVERVIEW -->
-        <div id="sec-overview" class="tab-content space-y-6">
+        <div id="sec-sim" class="tab-content hidden">
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
+        <h2 class="text-xl font-bold text-blue-950 mb-2">✍️ Mô Phỏng Nét Viết & Luyện Vẽ Ô Tianzige (Bài 7)</h2>
+        <p class="text-sm text-slate-600">Bấm <b>▶ Chạy nét</b> để xem thứ tự nét chuẩn HanziWriter, hoặc vẽ trực tiếp bằng tay/chuột trên ô <b>田字格</b> cảm ứng bên phải.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    </div>
+</div>
+<div id="sec-overview" class="tab-content space-y-6">
             <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-200/90">
                 <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <span class="text-blue-800">🎯</span> Mục tiêu bài học hôm nay (Bài 7)
@@ -1224,27 +1233,34 @@ function playTTS(text) {
 }
 
 function speakText(text) {
+    if (!text) return;
+    text = text.trim();
     if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        var utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'zh-CN';
-        utterance.rate = currentRate || 0.85;
-        utterance.onerror = function() { playOnlineTTS(text); };
-        window.speechSynthesis.speak(utterance);
+        try {
+            window.speechSynthesis.cancel();
+            var utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = currentRate || 0.85;
+            var spoken = false;
+            utterance.onend = function() { spoken = true; };
+            utterance.onerror = function() { playSecondaryTTS(text); };
+            window.speechSynthesis.speak(utterance);
+            setTimeout(function() {
+                if (!spoken && window.speechSynthesis.speaking === false) {
+                    playSecondaryTTS(text);
+                }
+            }, 300);
+            return;
+        } catch(e) {
+            playSecondaryTTS(text);
+        }
     } else {
-        playOnlineTTS(text);
+        playSecondaryTTS(text);
     }
 }
 
 function playOnlineTTS(text) {
-    try {
-        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encoded + "&tl=zh-CN&client=tw-ob";
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) { playSecondaryTTS(text); });
-    } catch(e) { playSecondaryTTS(text); }
+    playSecondaryTTS(text);
 }
 
 function playSecondaryTTS(text) {
@@ -1254,7 +1270,9 @@ function playSecondaryTTS(text) {
         var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
         currentAudio = new Audio(ttsUrl);
         currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) {});
+        currentAudio.play().catch(function(err) {
+            console.log("Youdao TTS fallback error:", err);
+        });
     } catch(e) {}
 }
 
@@ -1270,7 +1288,93 @@ function playB64(base64Data, fallbackText) {
     } catch(e) { speakText(fallbackText); }
 }
 
+function animateChar(id) {
+    if (writers[id]) {
+        try { writers[id].animateCharacter(); } catch(e) {}
+    }
+}
+
+function resetChar(id) {
+    if (writers[id]) {
+        try { writers[id].showCharacter(); } catch(e) {}
+    }
+}
+
+function setupCanvas(canvasId) {
+    let canvas = document.getElementById(canvasId);
+    if (!canvas || canvas.dataset.inited) return;
+    canvas.dataset.inited = "true";
+    let ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    let isDrawing = false;
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#0f172a';
+
+    function getPos(e) {
+        let rect = canvas.getBoundingClientRect();
+        let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDraw(e) {
+        isDrawing = true;
+        let pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        let pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+
+    function stopDraw() { isDrawing = false; }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(e); });
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+    canvas.addEventListener('touchend', stopDraw);
+}
+
+function clearCanvas(canvasId) {
+    let canvas = document.getElementById('pad-' + canvasId) || document.getElementById(canvasId);
+    if (!canvas) return;
+    let ctx = canvas.getContext('2d');
+    if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof items !== 'undefined' && Array.isArray(items)) {
+        items.forEach(item => {
+            let el = document.getElementById('target-' + item.id);
+            if (el && typeof HanziWriter !== 'undefined') {
+                try {
+                    writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {
+                        width: 130,
+                        height: 130,
+                        padding: 5,
+                        strokeAnimationSpeed: 1,
+                        delayBetweenStrokes: 150,
+                        strokeColor: '#1e293b',
+                        radicalColor: '#2563eb',
+                        showOutline: true,
+                        outlineColor: '#cbd5e1'
+                    });
+                } catch(e) {}
+            }
+            setupCanvas('pad-' + item.id);
+        });
+    }
     showTab('overview');
 });
 </script>

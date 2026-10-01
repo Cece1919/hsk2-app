@@ -32,13 +32,14 @@
 
         <!-- 8 TABS NAVIGATION BAR (INCLUDING TAB SIM) -->
         <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
-            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📌 Overview</button>
-            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📖 Từ vựng</button>
-            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
-            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">💡 Ngữ pháp</button>
-            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa</button>
-            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
-            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🎋 Góc văn hóa</button>
+            <button onclick="showTab('sim')" id="tab-sim" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎬</span> Mô phỏng nét viết</button>
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn active px-4 py-2.5 text-sm font-medium bg-blue-600 text-white font-bold active-tab transition flex items-center gap-1.5 shrink-0"><span>📌</span> Overview</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📖</span> Từ vựng</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>✍️</span> Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>💡</span> Ngữ pháp</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🗣️</span> Bài khóa</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📝</span> Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎋</span> Góc văn hóa</button>
         </nav>
     </header>
 
@@ -46,24 +47,734 @@
     <main class="max-w-6xl mx-auto px-4 mt-6">
 
         <!-- TAB SIM: WRITING SIMULATION & TIANZIGE -->
-        <div id="sec-sim" class="tab-content space-y-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold text-blue-950 mb-2">✍️ Mô Phỏng Nét Viết & Luyện Vẽ Ô Tianzige (Bài 7)</h2>
-                <p class="text-sm text-slate-600">Bấm <b>▶ Chạy nét</b> để xem thứ tự nét chuẩn HanziWriter, hoặc vẽ trực tiếp bằng tay/chuột trên ô <b>田字格</b> cảm ứng bên phải.</p>
+        <div id="sec-sim" class="tab-content hidden">
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
+        <h2 class="text-xl font-bold text-blue-950 mb-2">✍️ Mô Phỏng Nét Viết & Luyện Vẽ Ô Tianzige (Bài 7)</h2>
+        <p class="text-sm text-slate-600">Bấm <b>▶ Chạy nét</b> để xem thứ tự nét chuẩn HanziWriter, hoặc vẽ trực tiếp bằng tay/chuột trên ô <b>田字格</b> cảm ứng bên phải.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">生</span>
+                <span class="text-xs text-slate-500 block">shēngrì</span>
+                <span class="text-[11px] text-slate-400 block">生日 (Sinh nhật)</span>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
-                <div class="text-center">
-                    <span class="text-2xl font-bold text-slate-800 zh">生</span>
-                    <span class="text-xs text-slate-500 block">shēngrì</span>
-                    <span class="text-[11px] text-slate-400 block">生日 (Sinh nhật)</span>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-shengri-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
                 </div>
-                <div class="flex items-center justify-center gap-2 w-full">
-                    <div class="flex flex-col items-center">
-                        <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
-                        <div id="target-shengri-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-shengri-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
                     </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('shengri-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('shengri-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('shengri-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">日</span>
+                <span class="text-xs text-slate-500 block">shēngrì</span>
+                <span class="text-[11px] text-slate-400 block">生日 (Sinh nhật)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-shengri-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-shengri-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('shengri-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('shengri-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('shengri-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">快</span>
+                <span class="text-xs text-slate-500 block">kuàilè</span>
+                <span class="text-[11px] text-slate-400 block">快乐 (Vui vẻ, hạnh phúc)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-kuaile-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-kuaile-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('kuaile-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('kuaile-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('kuaile-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">乐</span>
+                <span class="text-xs text-slate-500 block">kuàilè</span>
+                <span class="text-[11px] text-slate-400 block">快乐 (Vui vẻ, hạnh phúc)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-kuaile-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-kuaile-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('kuaile-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('kuaile-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('kuaile-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">送</span>
+                <span class="text-xs text-slate-500 block">sòng</span>
+                <span class="text-[11px] text-slate-400 block">送 (Tặng, tiễn, đưa)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-song-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-song-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('song-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('song-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('song-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">礼</span>
+                <span class="text-xs text-slate-500 block">lǐwù</span>
+                <span class="text-[11px] text-slate-400 block">礼物 (Món quà, quà tặng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-liwu-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-liwu-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('liwu-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('liwu-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('liwu-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">物</span>
+                <span class="text-xs text-slate-500 block">lǐwù</span>
+                <span class="text-[11px] text-slate-400 block">礼物 (Món quà, quà tặng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-liwu-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-liwu-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('liwu-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('liwu-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('liwu-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">晚</span>
+                <span class="text-xs text-slate-500 block">wǎnshang</span>
+                <span class="text-[11px] text-slate-400 block">晚上 (Buổi tối)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-wanshang-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-wanshang-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('wanshang-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('wanshang-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('wanshang-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">上</span>
+                <span class="text-xs text-slate-500 block">wǎnshang</span>
+                <span class="text-[11px] text-slate-400 block">晚上 (Buổi tối)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-wanshang-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-wanshang-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('wanshang-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('wanshang-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('wanshang-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">蛋</span>
+                <span class="text-xs text-slate-500 block">dàngāo</span>
+                <span class="text-[11px] text-slate-400 block">蛋糕 (Bánh kem)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-dangao-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-dangao-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('dangao-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('dangao-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('dangao-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">糕</span>
+                <span class="text-xs text-slate-500 block">dàngāo</span>
+                <span class="text-[11px] text-slate-400 block">蛋糕 (Bánh kem)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-dangao-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-dangao-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('dangao-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('dangao-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('dangao-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">问</span>
+                <span class="text-xs text-slate-500 block">wèn</span>
+                <span class="text-[11px] text-slate-400 block">问 (Hỏi)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-wen-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-wen-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('wen-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('wen-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('wen-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">非</span>
+                <span class="text-xs text-slate-500 block">fēicháng</span>
+                <span class="text-[11px] text-slate-400 block">非常 (Cực kỳ, vô cùng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-feichang-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-feichang-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('feichang-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('feichang-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('feichang-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">常</span>
+                <span class="text-xs text-slate-500 block">fēicháng</span>
+                <span class="text-[11px] text-slate-400 block">非常 (Cực kỳ, vô cùng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-feichang-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-feichang-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('feichang-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('feichang-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('feichang-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">开</span>
+                <span class="text-xs text-slate-500 block">kāishǐ</span>
+                <span class="text-[11px] text-slate-400 block">开始 (Bắt đầu)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-kaishi-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-kaishi-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('kaishi-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('kaishi-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('kaishi-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">始</span>
+                <span class="text-xs text-slate-500 block">kāishǐ</span>
+                <span class="text-[11px] text-slate-400 block">开始 (Bắt đầu)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-kaishi-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-kaishi-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('kaishi-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('kaishi-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('kaishi-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">长</span>
+                <span class="text-xs text-slate-500 block">cháng</span>
+                <span class="text-[11px] text-slate-400 block">长 (Dài / Lớn lên)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-chang-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-chang-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('chang-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('chang-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('chang-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">希</span>
+                <span class="text-xs text-slate-500 block">xīwàng</span>
+                <span class="text-[11px] text-slate-400 block">希望 (Hy vọng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-xiwang-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-xiwang-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('xiwang-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('xiwang-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('xiwang-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">望</span>
+                <span class="text-xs text-slate-500 block">xīwàng</span>
+                <span class="text-[11px] text-slate-400 block">希望 (Hy vọng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-xiwang-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-xiwang-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('xiwang-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('xiwang-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('xiwang-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">参</span>
+                <span class="text-xs text-slate-500 block">cānjiā</span>
+                <span class="text-[11px] text-slate-400 block">参加 (Tham gia)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-canjia-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-canjia-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('canjia-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('canjia-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('canjia-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">加</span>
+                <span class="text-xs text-slate-500 block">cānjiā</span>
+                <span class="text-[11px] text-slate-400 block">参加 (Tham gia)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-canjia-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-canjia-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('canjia-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('canjia-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('canjia-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">聚</span>
+                <span class="text-xs text-slate-500 block">jùhuì</span>
+                <span class="text-[11px] text-slate-400 block">聚会 (Tiệc liên hoan)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-juhui-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-juhui-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('juhui-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('juhui-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('juhui-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">会</span>
+                <span class="text-xs text-slate-500 block">jùhuì</span>
+                <span class="text-[11px] text-slate-400 block">聚会 (Tiệc liên hoan)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-juhui-2" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-juhui-2" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('juhui-2')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('juhui-2')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('juhui-2')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center gap-3">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-slate-800 zh">祝</span>
+                <span class="text-xs text-slate-500 block">zhù</span>
+                <span class="text-[11px] text-slate-400 block">祝 (Chúc, chúc mừng)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 w-full">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
+                    <div id="target-zhu-1" class="w-[140px] h-[140px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
+                    <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
+                        </svg>
+                        <canvas id="pad-zhu-1" width="140" height="140" class="relative z-10 w-full h-full cursor-crosshair"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 w-full pt-1">
+                <button onclick="animateChar('zhu-1')" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-sm transition">▶ Chạy nét</button>
+                <button onclick="resetChar('zhu-1')" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition">🔄</button>
+                <button onclick="clearCanvas('zhu-1')" class="py-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-medium border border-rose-200 transition">🗑️</button>
+            </div>
+        </div>
+    </div>
+</div>
                     <div class="flex flex-col items-center">
                         <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
                         <div class="relative w-[140px] h-[140px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
@@ -1921,27 +2632,34 @@ function playTTS(text) {
 }
 
 function speakText(text) {
+    if (!text) return;
+    text = text.trim();
     if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        var utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'zh-CN';
-        utterance.rate = currentRate || 0.85;
-        utterance.onerror = function() { playOnlineTTS(text); };
-        window.speechSynthesis.speak(utterance);
+        try {
+            window.speechSynthesis.cancel();
+            var utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = currentRate || 0.85;
+            var spoken = false;
+            utterance.onend = function() { spoken = true; };
+            utterance.onerror = function() { playSecondaryTTS(text); };
+            window.speechSynthesis.speak(utterance);
+            setTimeout(function() {
+                if (!spoken && window.speechSynthesis.speaking === false) {
+                    playSecondaryTTS(text);
+                }
+            }, 300);
+            return;
+        } catch(e) {
+            playSecondaryTTS(text);
+        }
     } else {
-        playOnlineTTS(text);
+        playSecondaryTTS(text);
     }
 }
 
 function playOnlineTTS(text) {
-    try {
-        if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
-        var encoded = encodeURIComponent(text);
-        var ttsUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encoded + "&tl=zh-CN&client=tw-ob";
-        currentAudio = new Audio(ttsUrl);
-        currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) { playSecondaryTTS(text); });
-    } catch(e) { playSecondaryTTS(text); }
+    playSecondaryTTS(text);
 }
 
 function playSecondaryTTS(text) {
@@ -1951,7 +2669,9 @@ function playSecondaryTTS(text) {
         var ttsUrl = "https://dict.youdao.com/dictvoice?audio=" + encoded + "&type=1";
         currentAudio = new Audio(ttsUrl);
         currentAudio.playbackRate = currentRate || 0.85;
-        currentAudio.play().catch(function(err) {});
+        currentAudio.play().catch(function(err) {
+            console.log("Youdao TTS fallback error:", err);
+        });
     } catch(e) {}
 }
 
@@ -2023,8 +2743,8 @@ function setupCanvas(canvasId) {
     canvas.addEventListener('touchend', stopDraw);
 }
 
-function clearPad(canvasId) {
-    let canvas = document.getElementById(canvasId);
+function clearCanvas(canvasId) {
+    let canvas = document.getElementById('pad-' + canvasId) || document.getElementById(canvasId);
     if (!canvas) return;
     let ctx = canvas.getContext('2d');
     if (ctx) {
