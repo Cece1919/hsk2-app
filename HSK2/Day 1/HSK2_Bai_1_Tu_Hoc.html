@@ -2389,6 +2389,8 @@
 
     <!-- BASE64 AUDIO DATA & HANZI WRITER INITIALIZER -->
 <script>
+var writers = {};
+
 const items = [{"id": "jiu-1", "char": "就", "pinyin": "jiù", "meaning": "就 (Chính là (nhấn mạnh))", "key": "jiu"}, {"id": "gei-1", "char": "给", "pinyin": "gěi", "meaning": "给 (Cho, đối với)", "key": "gei"}, {"id": "rang-1", "char": "让", "pinyin": "ràng", "meaning": "让 (Bảo, nhường, cho phép)", "key": "rang"}, {"id": "jie-1", "char": "接", "pinyin": "jiē", "meaning": "接 (Đón (người), nhận (cuộc gọi))", "key": "jie"}, {"id": "ci-1", "char": "次", "pinyin": "cì", "meaning": "次 (Lần (số lần))", "key": "ci"}, {"id": "lvyou-1", "char": "旅", "pinyin": "lǚyóu", "meaning": "旅游 (Đi du lịch)", "key": "lvyou"}, {"id": "lvyou-2", "char": "游", "pinyin": "lǚyóu", "meaning": "旅游 (Đi du lịch)", "key": "lvyou"}, {"id": "bangmang-1", "char": "帮", "pinyin": "bāngmáng", "meaning": "帮忙 (Giúp đỡ, nhờ giúp)", "key": "bangmang"}, {"id": "bangmang-2", "char": "忙", "pinyin": "bāngmáng", "meaning": "帮忙 (Giúp đỡ, nhờ giúp)", "key": "bangmang"}, {"id": "buhaoyisi-1", "char": "不", "pinyin": "bù hǎoyìsi", "meaning": "不好意思 (Ngại quá, xin lỗi)", "key": "buhaoyisi"}, {"id": "buhaoyisi-2", "char": "好", "pinyin": "bù hǎoyìsi", "meaning": "不好意思 (Ngại quá, xin lỗi)", "key": "buhaoyisi"}, {"id": "buhaoyisi-3", "char": "意", "pinyin": "bù hǎoyìsi", "meaning": "不好意思 (Ngại quá, xin lỗi)", "key": "buhaoyisi"}, {"id": "buhaoyisi-4", "char": "思", "pinyin": "bù hǎoyìsi", "meaning": "不好意思 (Ngại quá, xin lỗi)", "key": "buhaoyisi"}, {"id": "yijing-1", "char": "已", "pinyin": "yǐjīng", "meaning": "已经 (Đã, rồi)", "key": "yijing"}, {"id": "yijing-2", "char": "经", "pinyin": "yǐjīng", "meaning": "已经 (Đã, rồi)", "key": "yijing"}, {"id": "na-1", "char": "那", "pinyin": "nà", "meaning": "那 (Thế thì, vậy thì)", "key": "na"}, {"id": "jieshao-1", "char": "介", "pinyin": "jièshào", "meaning": "介绍 (Giới thiệu)", "key": "jieshao"}, {"id": "jieshao-2", "char": "绍", "pinyin": "jièshào", "meaning": "介绍 (Giới thiệu)", "key": "jieshao"}, {"id": "youshi-1", "char": "有", "pinyin": "yǒushí", "meaning": "有时 (Thỉnh thoảng, có lúc)", "key": "youshi"}, {"id": "youshi-2", "char": "时", "pinyin": "yǒushí", "meaning": "有时 (Thỉnh thoảng, có lúc)", "key": "youshi"}, {"id": "dong-1", "char": "懂", "pinyin": "dǒng", "meaning": "懂 (Hiểu, biết)", "key": "dong"}, {"id": "yisi-1", "char": "意", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, ý kiến)", "key": "yisi"}, {"id": "yisi-2", "char": "思", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, ý kiến)", "key": "yisi"}];
 
 
@@ -2502,7 +2504,6 @@ function clearPad(canvasId) {
 }
 
 
-let writers = {};
 let currentAudio = null;
 let currentRate = 1.0;
 

@@ -2367,6 +2367,8 @@
 
     <!-- JAVASCRIPT ENGINE & BASE64 AUDIO DATA -->
 <script>
+var writers = {};
+
 const items = [{"id": "gongjiaoche-1", "char": "公", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-2", "char": "交", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "gongjiaoche-3", "char": "车", "pinyin": "gōngjiāochē", "meaning": "公交车 (Xe buýt)", "key": "gongjiaoche"}, {"id": "dan-1", "char": "但", "pinyin": "dàn", "meaning": "但 (Nhưng, nhưng mà)", "key": "dan"}, {"id": "chezhan-1", "char": "车", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "chezhan-2", "char": "站", "pinyin": "chēzhàn", "meaning": "车站 (Trạm xe, bến xe)", "key": "chezhan"}, {"id": "yuan-1", "char": "远", "pinyin": "yuǎn", "meaning": "远 (Xa, xa xôi)", "key": "yuan"}, {"id": "dache-1", "char": "打", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "dache-2", "char": "车", "pinyin": "dǎchē", "meaning": "打车 (Bắt xe taxi)", "key": "dache"}, {"id": "haishi-1", "char": "还", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "haishi-2", "char": "是", "pinyin": "háishì", "meaning": "还是 (Hay là, nên)", "key": "haishi"}, {"id": "beijingdaxue-1", "char": "北", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-2", "char": "京", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-3", "char": "大", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "beijingdaxue-4", "char": "学", "pinyin": "Běijīng Dàxué", "meaning": "北京大学 (Đại học Bắc Kinh)", "key": "beijingdaxue"}, {"id": "a-1", "char": "啊", "pinyin": "a", "meaning": "啊 (À, nha, nhỉ)", "key": "a"}, {"id": "wan-1", "char": "万", "pinyin": "wàn", "meaning": "万 (Mười nghìn (10.000))", "key": "wan"}, {"id": "ming-1", "char": "名", "pinyin": "míng", "meaning": "名 (Vị, người (lượng từ))", "key": "ming"}, {"id": "wangshang-1", "char": "网", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "wangshang-2", "char": "上", "pinyin": "wǎngshang", "meaning": "网上 (Trên mạng)", "key": "wangshang"}, {"id": "waiguo-1", "char": "外", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "waiguo-2", "char": "国", "pinyin": "wàiguó", "meaning": "外国 (Nước ngoài)", "key": "waiguo"}, {"id": "jian-1", "char": "间", "pinyin": "jiān", "meaning": "间 (Căn, phòng)", "key": "jian"}, {"id": "jiaoshi-1", "char": "教", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "jiaoshi-2", "char": "室", "pinyin": "jiàoshì", "meaning": "教室 (Phòng học, lớp học)", "key": "jiaoshi"}, {"id": "piao-1", "char": "票", "pinyin": "piào", "meaning": "票 (Vé)", "key": "piao"}, {"id": "bie-1", "char": "别", "pinyin": "bié", "meaning": "别 (Đừng, không nên)", "key": "bie"}, {"id": "guolai-1", "char": "过", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}, {"id": "guolai-2", "char": "来", "pinyin": "guòlái", "meaning": "过来 (Qua đây, sang đây)", "key": "guolai"}];
 
 
@@ -2480,7 +2482,6 @@ function clearPad(canvasId) {
 }
 
 
-let writers = {};
 let currentAudio = null;
 let currentRate = 1.0;
 

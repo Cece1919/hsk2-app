@@ -880,6 +880,8 @@
     </div>
 </div>
 <script>
+var writers = {};
+
 const items = [{"id": "waimian-1", "char": "外", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)", "key": "waimian"}, {"id": "waimian-2", "char": "面", "pinyin": "wàimian", "meaning": "外面 (Bên ngoài, ngoài)", "key": "waimian"}, {"id": "zhunbei-1", "char": "准", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)", "key": "zhunbei"}, {"id": "zhunbei-2", "char": "备", "pinyin": "zhǔnbèi", "meaning": "准备 (Chuẩn bị, dự định)", "key": "zhunbei"}, {"id": "jiu-1", "char": "就", "pinyin": "jiù", "meaning": "就 (Thì, chính, ngay)", "key": "jiu"}, {"id": "yu-1", "char": "鱼", "pinyin": "yú", "meaning": "鱼 (Con cá)", "key": "yu"}, {"id": "ba-1", "char": "吧", "pinyin": "ba", "meaning": "吧 (Nhé, đi (Đề nghị))", "key": "ba"}, {"id": "jian-1", "char": "件", "pinyin": "jiàn", "meaning": "件 (Chiếc, cái (Quần áo, việc))", "key": "jian"}, {"id": "hai-1", "char": "还", "pinyin": "hái", "meaning": "还 (Còn, vẫn, khá)", "key": "hai"}, {"id": "keyi-1", "char": "可", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)", "key": "keyi"}, {"id": "keyi-2", "char": "以", "pinyin": "kěyǐ", "meaning": "可以 (Có thể, khá tốt, tạm được)", "key": "keyi"}, {"id": "bucuo-1", "char": "不", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)", "key": "bucuo"}, {"id": "bucuo-2", "char": "错", "pinyin": "búcuò", "meaning": "不错 (Không tệ, khá tốt, chuẩn)", "key": "bucuo"}, {"id": "kaoshi-1", "char": "考", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)", "key": "kaoshi"}, {"id": "kaoshi-2", "char": "试", "pinyin": "kǎoshì", "meaning": "考试 (Kỳ thi, kiểm tra)", "key": "kaoshi"}, {"id": "yisi-1", "char": "意", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)", "key": "yisi"}, {"id": "yisi-2", "char": "思", "pinyin": "yìsi", "meaning": "意思 (Ý nghĩa, sự thú vị)", "key": "yisi"}, {"id": "kafei-1", "char": "咖", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)", "key": "kafei"}, {"id": "kafei-2", "char": "啡", "pinyin": "kāfēi", "meaning": "咖啡 (Cà phê)", "key": "kafei"}, {"id": "dui-1", "char": "对", "pinyin": "duì", "meaning": "对 (Đối với, đúng)", "key": "dui"}];
 
 
@@ -993,7 +995,6 @@ function clearPad(canvasId) {
 }
 
 
-let writers = {};
 let currentAudio = null;
 let currentRate = 1.0;
 
