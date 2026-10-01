@@ -1016,58 +1016,39 @@ function setAudioPlaybackRate(rate) {
 }
 
 function showTab(tabId) {
-    var contents = document.querySelectorAll('.tab-content');
-    for (var i = 0; i < contents.length; i++) {
-        contents[i].classList.add('hidden');
-        contents[i].style.display = 'none';
-    }
-    var targetSec = document.getElementById('sec-' + tabId);
+    const tabs = ['overview', 'vocab', 'writing', 'grammar', 'text', 'practice', 'culture'];
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.style.display = 'none';
+    });
+    const targetSec = document.getElementById('sec-' + tabId);
     if (targetSec) {
         targetSec.classList.remove('hidden');
         targetSec.style.display = 'block';
     }
-    var btns = document.querySelectorAll('.tab-btn');
-    for (var j = 0; j < btns.length; j++) {
-        btns[j].classList.remove('bg-blue-900', 'bg-blue-600', 'text-white', 'font-bold', 'active', 'active-tab');
-        btns[j].classList.add('text-slate-600', 'bg-slate-100', 'font-medium');
-    }
-    var activeBtn = document.getElementById('tab-' + tabId);
-    if (activeBtn) {
-        activeBtn.classList.remove('text-slate-600', 'bg-slate-100', 'font-medium');
-        activeBtn.classList.add('bg-blue-900', 'text-white', 'font-bold', 'active', 'active-tab', 'shadow-sm');
-    }
-    if ((tabId === 'writing' || tabId === 'sim') && typeof initWriters === 'function') {
+    tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (btn) {
+            if (t === tabId) {
+                btn.className = "tab-btn active px-4 py-2.5 rounded-xl font-bold bg-blue-900 text-white shadow-sm transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
+            } else {
+                btn.className = "tab-btn px-4 py-2.5 rounded-xl font-medium text-slate-600 hover:text-blue-900 transition whitespace-nowrap text-xs md:text-sm cursor-pointer";
+            }
+        }
+    });
+    if (tabId === 'writing' && typeof initWriters === 'function') {
         setTimeout(initWriters, 100);
     }
-    try {
-        window.scrollTo(0, 0);
-    } catch(e) {}
+    try { window.scrollTo(0, 0); } catch(e) {}
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
-    showTab(defaultTab);
+    showTab('overview');
 });
 setTimeout(function() {
-    var defaultTab = document.getElementById('sec-sim') ? 'sim' : (document.getElementById('sec-overview') ? 'overview' : 'vocab');
-    showTab(defaultTab);
-}, 100);
+    showTab('overview');
+}, 50);
 
-
-function setSpeed(rate) {
-    currentRate = rate;
-    const btnSlow = document.getElementById('speed-slow');
-    const btnNormal = document.getElementById('speed-normal');
-    if (btnSlow && btnNormal) {
-        if (rate === 0.75) {
-            btnSlow.className = "px-2 py-0.5 rounded bg-blue-600 font-bold text-white";
-            btnNormal.className = "px-2 py-0.5 rounded text-slate-400";
-        } else {
-            btnSlow.className = "px-2 py-0.5 rounded text-slate-400";
-            btnNormal.className = "px-2 py-0.5 rounded bg-blue-600 font-bold text-white";
-        }
-    }
-}
 
 var currentAudio = null;
 var currentRate = 0.85;
