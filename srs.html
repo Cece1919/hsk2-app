@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cece SRS Vocab">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/chinese-dragon.png">
-    <title>Cece HSK SRS Vocab App - Học Từ Vựng Lặp Lại Ngắt Quãng</title>
+    <title>Cece HSK SRS Vocab App - Chuẩn Claire Vu Template</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -48,6 +48,8 @@
         button, input { touch-action: manipulation; }
         .scrollbar-none::-webkit-scrollbar { display: none; }
         .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+        .hide-text { filter: blur(6px); user-select: none; transition: filter 0.2s; }
+        .hide-text:hover { filter: none; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-800">
@@ -62,7 +64,7 @@
                     <div class="w-2 h-2 rounded-full bg-slate-800"></div>
                 </div>
                 <div class="flex items-center gap-1.5 text-slate-300">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                    <span id="streak-badge" class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold text-[10px] border border-amber-500/30">🔥 1 Ngày</span>
                 </div>
             </div>
 
@@ -72,74 +74,128 @@
                     <div class="flex items-center gap-2.5">
                         <span class="text-2xl">🧠</span>
                         <div>
-                            <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cece SRS Vocab</h1>
-                            <p class="text-[10px] text-blue-300 font-medium">Học Từ Vựng Lặp Lại Ngắt Quãng • Spaced Repetition</p>
+                            <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cece SRS Journal</h1>
+                            <p class="text-[10px] text-blue-300 font-medium">Chuẩn Claire Vu Template • Day 1-2-4-7-14-30</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-1.5">
+                    <div class="flex items-center gap-1">
                         <button onclick="window.location.reload()" class="px-2 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[10px] active:scale-95 transition flex items-center gap-1 shadow-xs">
-                            🔄 Tải lại
+                            🔄 Nạp lại
                         </button>
                     </div>
                 </div>
 
-                <!-- Navigation Modes (SRS Flashcard vs Search Dictionary) -->
-                <div class="flex bg-slate-900/80 p-1 rounded-xl text-xs font-semibold gap-1 border border-slate-800">
-                    <button onclick="switchView('srs')" id="nav-btn-srs" class="flex-1 py-1.5 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition">🎴 Thẻ SRS & Luyện Gõ</button>
-                    <button onclick="switchView('dict')" id="nav-btn-dict" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition">📖 Tra Cứu (257 Từ)</button>
+                <!-- Navigation Modes (3 Tabs) -->
+                <div class="flex bg-slate-900/80 p-1 rounded-xl text-xs font-semibold gap-1 border border-slate-800 overflow-x-auto scrollbar-none">
+                    <button onclick="switchView('template')" id="nav-btn-template" class="flex-1 py-1.5 px-2 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition whitespace-nowrap">📋 Bảng Điền Từ</button>
+                    <button onclick="switchView('journal')" id="nav-btn-journal" class="flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">📔 Nhật Ký Học</button>
+                    <button onclick="switchView('srs')" id="nav-btn-srs" class="flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">🎴 Thẻ SRS & Gõ</button>
                 </div>
             </div>
 
             <!-- Main Content Area -->
             <div class="flex-1 p-4 bg-slate-50 space-y-4">
 
-                <!-- VIEW 1: SRS PRACTICE VIEW -->
-                <div id="sec-srs-view" class="space-y-4">
-                    <!-- Dashboard Statistics -->
-                    <div class="bg-gradient-to-r from-indigo-900 via-blue-900 to-slate-900 rounded-2xl p-4 text-white shadow-md border border-indigo-700 space-y-3">
+                <!-- VIEW 1: CLAIRE VU TEMPLATE ACTIVE RECALL SHEET -->
+                <div id="sec-template-view" class="space-y-4">
+                    <!-- Control Bar for Hiding/Showing Columns (Active Recall Test) -->
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+                            <span>👁️ Ẩn/Hiện Để Tự Điền (Active Recall):</span>
+                            <span class="text-[10px] text-blue-800 bg-blue-50 px-2 py-0.5 rounded-full">Bấm để lật nghĩa</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5 text-[11px] font-semibold">
+                            <button onclick="toggleMask('pinyin')" id="btn-mask-py" class="py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300">👁️ Pinyin</button>
+                            <button onclick="toggleMask('meaning')" id="btn-mask-vi" class="py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300">👁️ Nghĩa Việt</button>
+                            <button onclick="toggleMask('hanzi')" id="btn-mask-hz" class="py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300">👁️ Chữ Hán</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson Filter Selector -->
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="font-extrabold text-slate-800">DANH MỤC BÀI HỌC:</span>
+                        <select id="template-lesson-filter" onchange="renderTemplateSheet()" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white font-bold text-blue-900 text-xs shadow-xs outline-none">
+                            <option value="hsk2-d5">★ HSK 2 • Bài 5 (Hôm nay - 13 từ)</option>
+                            <option value="hsk2-d6">★ HSK 2 • Bài 6 (13 từ)</option>
+                            <option value="hsk2-d7">★ HSK 2 • Bài 7 (14 từ)</option>
+                            <option value="hsk2-all">Tất cả HSK 2 (107 từ)</option>
+                            <option value="hsk1-all">Toàn bộ HSK 1 (150 từ)</option>
+                            <option value="all">TẤT CẢ TỪ VỰNG (257 từ)</option>
+                        </select>
+                    </div>
+
+                    <!-- Template Sheet Cards Container -->
+                    <div id="template-sheet-container" class="space-y-3"></div>
+                </div>
+
+                <!-- VIEW 2: DAILY JOURNAL & STREAK TRACKER -->
+                <div id="sec-journal-view" class="space-y-4 hidden">
+                    <!-- Daily Target Progress Card -->
+                    <div class="bg-gradient-to-r from-indigo-950 via-blue-900 to-slate-900 rounded-2xl p-4 text-white shadow-md border border-indigo-700 space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs text-blue-200 font-bold uppercase tracking-wider">🎯 TIẾN ĐỘ HÔM NAY</span>
-                            <button onclick="confirmResetSrs()" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-600">
-                                🔄 Đặt lại SRS
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">🏆</span>
+                                <div>
+                                    <h3 class="text-sm font-black text-amber-300">CHỈ TIÊU HỌC HÔM NAY</h3>
+                                    <p class="text-[10px] text-blue-200">Mục tiêu: 25 - 30 từ / ngày</p>
+                                </div>
+                            </div>
+                            <span id="journal-stamp" class="hidden text-xs bg-emerald-500 text-white font-extrabold px-2.5 py-1 rounded-full shadow-md animate-bounce">
+                                ✅ ĐÃ HOÀN THÀNH
+                            </span>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold">
+                                <span>Tiến độ học trong ngày:</span>
+                                <span id="journal-progress-text" class="text-amber-300 font-mono">0 / 30 từ</span>
+                            </div>
+                            <div class="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                                <div id="journal-progress-bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5-Day Accelerated Roadmap Cards -->
+                    <div class="space-y-2.5">
+                        <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">📅 LỘ TRÌNH TĂNG TỐC TỪ BÀI 5:</h3>
+
+                        <div class="bg-white p-3.5 rounded-2xl border-2 border-blue-600 shadow-sm space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-blue-900 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">NGÀY 1 (HÔM NAY) • BÀI 5</span>
+                                <span class="text-xs font-bold text-blue-900">28 Từ / Ngày</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 13 từ Bài 5 + 15 từ HSK 1 cũ</h4>
+                            <p class="text-[11px] text-slate-600">từ mới: 准备, 考试, 意思, 咖啡, 不错, 外面, 鱼, 件, 还, 可以, 就, 吧, 对...</p>
+                            <button onclick="startLessonPlan('hsk2-d5')" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs active:scale-95 transition">
+                                🚀 Bắt Đầu Học Bài 5 Ngay
                             </button>
                         </div>
 
-                        <!-- Scope Filter Pills -->
-                        <div class="flex bg-slate-950/70 p-1 rounded-xl text-xs gap-1 border border-slate-800">
-                            <button onclick="setSrsFilter('all')" id="srs-flt-all" class="flex-1 py-1 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition">Tất cả (257)</button>
-                            <button onclick="setSrsFilter('hsk1')" id="srs-flt-hsk1" class="flex-1 py-1 rounded-lg text-slate-300 hover:bg-slate-800 transition">HSK 1 (150)</button>
-                            <button onclick="setSrsFilter('hsk2')" id="srs-flt-hsk2" class="flex-1 py-1 rounded-lg text-slate-300 hover:bg-slate-800 transition">HSK 2 (107)</button>
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1.5 opacity-90">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full">NGÀY 2 • BÀI 6</span>
+                                <span class="text-xs font-bold text-slate-600">31 Từ / Ngày</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 13 từ Bài 6 + Ôn mốc Day 2 Bài 5</h4>
+                            <p class="text-[11px] text-slate-500">từ mới: 自行车, 羊肉, 好吃, 面条, 打篮球, 因为...所以..., 游泳, 经常, 公斤, 姐姐...</p>
                         </div>
 
-                        <!-- Counter Cards -->
-                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
-                            <div class="bg-blue-950/80 p-2 rounded-xl border border-blue-700">
-                                <div class="text-[10px] text-amber-300 uppercase font-extrabold">Cần ôn</div>
-                                <div id="srs-cnt-due" class="text-lg font-black text-amber-300">0</div>
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-1.5 opacity-90">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full">NGÀY 3 • BÀI 7</span>
+                                <span class="text-xs font-bold text-slate-600">28 Từ / Ngày</span>
                             </div>
-                            <div class="bg-indigo-950/80 p-2 rounded-xl border border-indigo-700">
-                                <div class="text-[10px] text-blue-300 uppercase font-extrabold">Từ mới</div>
-                                <div id="srs-cnt-new" class="text-lg font-black text-blue-300">0</div>
-                            </div>
-                            <div class="bg-emerald-950/80 p-2 rounded-xl border border-emerald-700">
-                                <div class="text-[10px] text-emerald-300 uppercase font-extrabold">Đã thuộc</div>
-                                <div id="srs-cnt-mastered" class="text-lg font-black text-emerald-300">0</div>
-                            </div>
+                            <h4 class="text-xs font-bold text-slate-800">Trọn vẹn 14 từ Bài 7 + Ôn mốc Day 4 Bài 5 & Day 2 Bài 6</h4>
+                            <p class="text-[11px] text-slate-500">từ mới: 生日, 快乐, 送, 礼物, 晚上, 蛋糕, 问, 非常, 开始, 长, 希望, 参加, 聚会, 祝...</p>
                         </div>
                     </div>
-
-                    <!-- SRS Card Box Container -->
-                    <div id="srs-card-box" class="space-y-4"></div>
                 </div>
 
-                <!-- VIEW 2: DICTIONARY SEARCH VIEW -->
-                <div id="sec-dict-view" class="space-y-4 hidden">
-                    <div class="relative">
-                        <input type="text" id="dict-search-input" onkeyup="filterDictionary()" placeholder="🔍 Tìm kiếm Chữ Hán, Pinyin hoặc Tiếng Việt..." class="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-sm font-medium outline-none transition shadow-xs pr-10">
-                        <span class="absolute right-3 top-3 text-slate-400">🔍</span>
-                    </div>
-
-                    <div id="dict-list-container" class="space-y-3"></div>
+                <!-- VIEW 3: SRS PRACTICE VIEW -->
+                <div id="sec-srs-view" class="space-y-4 hidden">
+                    <div id="srs-card-box" class="space-y-4"></div>
                 </div>
 
             </div>
@@ -150,106 +206,163 @@
     <script>
         const FULL_SRS_BANK = [{"id": "hsk1-1", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "爱", "pinyin": "ài", "pinyin_clean": "ai", "hanviet": "Ái", "meaning": "Yêu, thích", "radical": "爪 (Bộ Trảo) + 宀 + 心 (Tâm)", "mnemonic": "Tấm lòng (心) che chở (宀) gửi gắm đến người mình thương ➔ Yêu (爱).", "example": "我爱吃中国菜。(Wǒ ài chī Zhōngguó cài.)"}, {"id": "hsk1-2", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "八", "pinyin": "bā", "pinyin_clean": "ba", "hanviet": "Bát", "meaning": "Số 8", "radical": "八 (Bộ Bát: Số 8)", "mnemonic": "Hai nét phẩy mác xòe ra hai bên tượng hình số 8.", "example": "我有八本书。(Wǒ yǒu bā běn shū.)"}, {"id": "hsk1-3", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "爸爸", "pinyin": "bàba", "pinyin_clean": "baba", "hanviet": "Bát bát", "meaning": "Bố, cha", "radical": "父 (Bộ Phụ: Bố)", "mnemonic": "Người cha (父) trụ cột che chở cho gia đình ➔ Bố (爸爸).", "example": "爸爸在看报纸。(Bàba zài kàn bàozhǐ.)"}, {"id": "hsk1-4", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "杯子", "pinyin": "bēizi", "pinyin_clean": "beizi", "hanviet": "Bôi tử", "meaning": "Cái cốc, cái ly", "radical": "木 (Bộ Mộc: Gỗ) + 不 (Bất)", "mnemonic": "Cốc ngày xưa làm từ gỗ (木) ➔ Cái cốc (杯子).", "example": "杯子里有茶。(Bēizi li yǒu chá.)"}, {"id": "hsk1-5", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "北京", "pinyin": "Běijīng", "pinyin_clean": "beijing", "hanviet": "Bắc Kinh", "meaning": "Bắc Kinh (thủ đô Trung Quốc)", "radical": "北 (Bắc) + 京 (Kinh: Kinh đô)", "mnemonic": "Kinh thành nằm ở phương Bắc ➔ Bắc Kinh (北京).", "example": "我想去北京旅游。(Wǒ xiǎng qù Běijīng lǚyóu.)"}, {"id": "hsk1-6", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "本", "pinyin": "běn", "pinyin_clean": "ben", "hanviet": "Bổn / Bản", "meaning": "Quyển, cuốn (lượng từ cho sách)", "radical": "木 (Bộ Mộc: Cây gỗ)", "mnemonic": "Đánh dấu gốc rễ cây gỗ (木) ➔ Cuốn / Quyển (本).", "example": "桌子上有三本书。(Zhuōzi shang yǒu sān běn shū.)"}, {"id": "hsk1-7", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "不客气", "pinyin": "bú kèqi", "pinyin_clean": "bukeqi", "hanviet": "Bất khách khí", "meaning": "Đừng khách khí, không có gì", "radical": "不 (Bất) + 客 (Khách) + 气 (Khí)", "mnemonic": "Lời đáp xã giao khi được cảm ơn ➔ Không có gì (不客气).", "example": "A: 谢谢你！ B: 不客气！"}, {"id": "hsk1-8", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "不", "pinyin": "bù", "pinyin_clean": "bu", "hanviet": "Bất", "meaning": "Không (phó từ phủ định)", "radical": "一 (Nhất) + 丨", "mnemonic": "Hình mầm cây chưa nhú lên mặt đất ➔ Không / Chưa (不).", "example": "我不是老师。(Wǒ bú shì lǎoshī.)"}, {"id": "hsk1-9", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "菜", "pinyin": "cài", "pinyin_clean": "cai", "hanviet": "Thái", "meaning": "Rau, món ăn", "radical": "艹 (Bộ Thảo: Cỏ) + 采 (Thái)", "mnemonic": "Hái thảo mộc rau cỏ (艹) về làm thức ăn ➔ Món ăn (菜).", "example": "今天的菜很好吃。(Jīntiān de cài hěn hǎochī.)"}, {"id": "hsk1-10", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "茶", "pinyin": "chá", "pinyin_clean": "cha", "hanviet": "Trà", "meaning": "Trà, nước chè", "radical": "艹 (Thảo: Cỏ) + 人 (Nhân) + 木 (Mộc)", "mnemonic": "Con người (人) hái lá cây (艹) hái từ cây gỗ (木) ➔ Uống trà (茶).", "example": "请喝茶。(Qǐng hē chá.)"}, {"id": "hsk1-11", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "吃", "pinyin": "chī", "pinyin_clean": "chi", "hanviet": "Cật", "meaning": "Ăn", "radical": "口 (Bộ Khẩu: Miệng) + 乞 (Khất)", "mnemonic": "Dùng miệng (口) đưa thức ăn vào ➔ Ăn (吃).", "example": "你想吃什么？(Nǐ xiǎng chī shénme?)"}, {"id": "hsk1-12", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "出租车", "pinyin": "chūzūchē", "pinyin_clean": "chuzuche", "hanviet": "Xuất tô xa", "meaning": "Xe taxi", "radical": "出 (Xuất) + 租 (Tô: Thuê) + 车 (Xa: Xe)", "mnemonic": "Loại xe (车) đi ra ngoài (出) trả tiền thuê (租) ➔ Xe taxi (出租车).", "example": "我们打出租车去吧。(Wǒmen dǎ chūzūchē qù ba.)"}, {"id": "hsk1-13", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "打电话", "pinyin": "dǎ diànhuà", "pinyin_clean": "dadianhua", "hanviet": "Đả điện thoại", "meaning": "Gọi điện thoại", "radical": "打 (Đả: Đập/Bấm) + 电 (Điện) + 话 (Thoại: Lời nói)", "mnemonic": "Bấm máy (打) truyền sóng điện (电) phát ra lời nói (话) ➔ Gọi điện (打电话).", "example": "他在打电话。(Tā zài dǎ diànhuà.)"}, {"id": "hsk1-14", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "大", "pinyin": "dà", "pinyin_clean": "da", "hanviet": "Đại", "meaning": "To, lớn", "radical": "大 (Bộ Đại: Người dang rộng tay chân)", "mnemonic": "Hình người dơ hai tay rộng ra thể hiện sự to lớn ➔ To / Lớn (大).", "example": "这个房间很大。(Zhè ge fángjiān hěn dà.)"}, {"id": "hsk1-15", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "的", "pinyin": "de", "pinyin_clean": "de", "hanviet": "Đích", "meaning": "Của (trợ từ sở hữu / định ngữ)", "radical": "白 (Bạch: Trắng) + 勺 (Chược: Thìa)", "mnemonic": "Điểm mốc ngắm bắn trúng đích ➔ Của (的).", "example": "这是我的书。(Zhè shì wǒ de shū.)"}, {"id": "hsk1-16", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "点", "pinyin": "diǎn", "pinyin_clean": "dian", "hanviet": "Điểm", "meaning": "Giờ, chút ít", "radical": "占 (Chiêm) + 灬 (Bộ Hỏa: 4 chấm lửa)", "mnemonic": "Các giọt nước nhỏ rơi xuống giọt một ➔ Giờ / Chút (点).", "example": "现在几点了？(Xiànzài jǐ diǎn le?)"}, {"id": "hsk1-17", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "电脑", "pinyin": "diànnǎo", "pinyin_clean": "diannao", "hanviet": "Điện não", "meaning": "Máy tính, máy vi tính", "radical": "电 (Điện: Điện năng) + 脑 (Bộ Não: Bộ óc)", "mnemonic": "Bộ óc (脑) điện tử thông minh xử lý dữ liệu ➔ Máy tính (电脑).", "example": "我买了一台新电脑。(Wǒ mǎi le yì tái xīn diànnǎo.)"}, {"id": "hsk1-18", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "电视", "pinyin": "diànshì", "pinyin_clean": "dianshi", "hanviet": "Điện thị", "meaning": "Tivi, truyền hình", "radical": "电 (Điện) + 视 (Thị: Nhìn)", "mnemonic": "Màn hình điện (电) để thị giác (视) quan sát ➔ Tivi (电视).", "example": "爸爸在看电视。(Bàba zài kàn diànshì.)"}, {"id": "hsk1-19", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "电影", "pinyin": "diànyǐng", "pinyin_clean": "dianying", "hanviet": "Điện ảnh", "meaning": "Phim, phim ảnh", "radical": "电 (Điện) + 影 (Ảnh: Hình ảnh)", "mnemonic": "Hình ảnh (影) phát ra nhờ dòng điện ➔ Phim ảnh (电影).", "example": "今晚我们看电影吧。(Jīnwǎn wǒmen kàn diànyǐng ba.)"}, {"id": "hsk1-20", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "东西", "pinyin": "dōngxi", "pinyin_clean": "dongxi", "hanviet": "Đông tây", "meaning": "Đồ đạc, vật dụng", "radical": "东 (Đông) + 西 (Tây)", "mnemonic": "Đi từ phương Đông sang phương Tây mua đồ ➔ Đồ đạc (东西).", "example": "你买什么东西？(Nǐ mǎi shénme dōngxi?)"}, {"id": "hsk1-21", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "都", "pinyin": "dōu", "pinyin_clean": "dou", "hanviet": "Đô", "meaning": "Đều, tất cả", "radical": "者 (Giả) + 阝 (Bộ Phụ: Thành quách)", "mnemonic": "Mọi người ở thành đô (都) tụ họp lại ➔ Đều / Tất cả (都).", "example": "我们都是留学生。(Wǒmen dōu shì liúxuéshēng.)"}, {"id": "hsk1-22", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "读", "pinyin": "dú", "pinyin_clean": "du", "hanviet": "Độc", "meaning": "Đọc", "radical": "讠 (Bộ Ngôn: Lời nói) + 卖 (Mại)", "mnemonic": "Dùng lời nói (讠) đọc to bài văn ➔ Đọc (读).", "example": "请读课文。(Qǐng dú kèwén.)"}, {"id": "hsk1-23", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "对不起", "pinyin": "duìbuqǐ", "pinyin_clean": "duibuqi", "hanviet": "Đối bất khởi", "meaning": "Xin lỗi", "radical": "对 (Đối) + 不 (Bất) + 起 (Khởi)", "mnemonic": "Lời xin lỗi khi làm sai ➔ Xin lỗi (对不起).", "example": "A: 对不起！ B: 没关系！"}, {"id": "hsk1-24", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "多", "pinyin": "duō", "pinyin_clean": "duo", "hanviet": "Đa", "meaning": "Nhiều", "radical": "夕 (Tịch: Buổi tối) + 夕", "mnemonic": "Hai buổi tối (夕) chồng lên nhau ➔ Nhiều (多).", "example": "这里的人很多。(Zhèlǐ de rén hěn duō.)"}, {"id": "hsk1-25", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "多少", "pinyin": "duōshao", "pinyin_clean": "duoshao", "hanviet": "Đa thiếu", "meaning": "Bao nhiêu", "radical": "多 (Nhiều) + 少 (Ít)", "mnemonic": "Hỏi về số lượng nhiều hay ít ➔ Bao nhiêu (多少).", "example": " cái này多少钱？(Zhè ge duōshao qián?)"}, {"id": "hsk1-26", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "儿子", "pinyin": "érzi", "pinyin_clean": "erzi", "hanviet": "Nhi tử", "meaning": "Con trai", "radical": "儿 (Nhi) + 子 (Tử)", "mnemonic": "Người đứa con trai nhỏ trong nhà ➔ Con trai (儿子).", "example": "他的儿子六岁了。(Tā de érzi liù suì le.)"}, {"id": "hsk1-27", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "二", "pinyin": "èr", "pinyin_clean": "er", "hanviet": "Nhị", "meaning": "Số 2", "radical": "二 (Bộ Nhị)", "mnemonic": "Hai nét ngang song song ➔ Số 2 (二).", "example": "现在二点了。(Xiànzài èr diǎn le.)"}, {"id": "hsk1-28", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "饭店", "pinyin": "fàndiàn", "pinyin_clean": "fandian", "hanviet": "Phạn điếm", "meaning": "Nhà hàng, khách sạn", "radical": "饭 (Phạn: Cơm) + 店 (Điếm: Cửa hàng)", "mnemonic": "Cửa hàng (店) bán cơm thức ăn (饭) ➔ Nhà hàng (饭店).", "example": "我们在饭店吃饭。(Wǒmen zài fàndiàn chīfàn.)"}, {"id": "hsk1-29", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "飞机", "pinyin": "fēijī", "pinyin_clean": "feiji", "hanviet": "Phi cơ", "meaning": "Máy bay", "radical": "飞 (Phi: Bay) + 机 (Cơ: Máy móc)", "mnemonic": "Cỗ máy (机) bay (飞) trên bầu trời ➔ Máy bay (飞机).", "example": "坐飞机去上海。(Zuò fēijī qù Shànghǎi.)"}, {"id": "hsk1-30", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "分钟", "pinyin": "fēnzhōng", "pinyin_clean": "fenzhong", "hanviet": "Phân chung", "meaning": "Phút (thời gian)", "radical": "分 (Phân: Chia) + 钟 (Chung: Đồng hồ)", "mnemonic": "Một phần chia trên mặt đồng hồ (钟) ➔ Phút (分钟).", "example": "等我五分钟。(Děng wǒ wǔ fēnzhōng.)"}, {"id": "hsk1-31", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "高兴", "pinyin": "gāoxìng", "pinyin_clean": "gaoxing", "hanviet": "Cao hưng", "meaning": "Vui mừng, phấn khởi", "radical": "高 (Cao) + 兴 (Hưng)", "mnemonic": "Tâm trạng hưng phấn (兴) dâng cao (高) ➔ Vui mừng (高兴).", "example": "认识你很高兴！(Rènshi nǐ hěn gāoxìng!)"}, {"id": "hsk1-32", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "个", "pinyin": "gè", "pinyin_clean": "ge", "hanviet": "Cá", "meaning": "Cái, con (lượng từ chung)", "radical": "人 (Nhân: Người) + 丨", "mnemonic": "Lượng từ phổ biến nhất cho người và vật ➔ Cái / Con (个).", "example": "我有一个哥哥。(Wǒ yǒu yí ge gēge.)"}, {"id": "hsk1-33", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "工作", "pinyin": "gōngzuò", "pinyin_clean": "gongzuo", "hanviet": "Công tác", "meaning": "Làm việc, công việc", "radical": "工 (Công: Công việc) + 作 (Tác: Làm)", "mnemonic": "Công việc (工) làm ra (作) thành quả ➔ Làm việc (工作).", "example": "你在哪儿工作？(Nǐ zài nǎr gōngzuò?)"}, {"id": "hsk1-34", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "狗", "pinyin": "gǒu", "pinyin_clean": "gou", "hanviet": "Cẩu", "meaning": "Con chó", "radical": "犭 (Bộ Khuyển: Con chó) + 句 (Cú)", "mnemonic": "Loài động vật bốn chân (犭) trung thành ➔ Con chó (狗).", "example": "我家有一只小狗。(Wǒ jiā yǒu yì zhī xiǎogǒu.)"}, {"id": "hsk1-35", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "汉语", "pinyin": "Hànyǔ", "pinyin_clean": "hanyu", "hanviet": "Hán ngữ", "meaning": "Tiếng Trung, tiếng Hán", "radical": "汉 (Hán) + 语 (Ngữ: Ngôn ngữ)", "mnemonic": "Ngôn ngữ (语) của dân tộc Hán (汉) ➔ Tiếng Trung (汉语).", "example": "我在学汉语。(Wǒ zài xué Hànyǔ.)"}, {"id": "hsk1-36", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "好", "pinyin": "hǎo", "pinyin_clean": "hao", "hanviet": "Hảo", "meaning": "Tốt, hay, đẹp", "radical": "女 (Nữ: Người mẹ) + 子 (Tử: Đứa con)", "mnemonic": "Người mẹ (女) ôm đứa con (子) là điều tốt đẹp ➔ Tốt / Hay (好).", "example": "今天天气很好。(Jīntiān tiānqì hěn hǎo.)"}, {"id": "hsk1-37", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "喝", "pinyin": "hē", "pinyin_clean": "he", "hanviet": "Hát", "meaning": "Uống", "radical": "口 (Bộ Khẩu: Miệng) + 曷", "mnemonic": "Mở miệng (口) uống nước giải khát ➔ Uống (喝).", "example": "请喝茶。(Qǐng hē chá.)"}, {"id": "hsk1-38", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "和", "pinyin": "hé", "pinyin_clean": "he", "hanviet": "Hòa", "meaning": "Và, với (liên từ)", "radical": "禾 (Hòa: Cây lúa) + 口 (Khẩu: Miệng)", "mnemonic": "Mọi miệng (口) cùng ăn lúa (禾) hòa thuận ➔ Và / Với (和).", "example": "我和你都是学生。(Wǒ hé nǐ dōu shì xuéshēng.)"}, {"id": "hsk1-39", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "很", "pinyin": "hěn", "pinyin_clean": "hen", "hanviet": "Rất", "meaning": "Rất (phó từ chỉ mức độ)", "radical": "彳 (Bộ Xích) + 艮 (Cấn)", "mnemonic": "Rất nhiều (很) cảm xúc dâng trào.", "example": "汉语很好学。(Hànyǔ hěn hǎo xué.)"}, {"id": "hsk1-40", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "后面", "pinyin": "hòumian", "pinyin_clean": "houmian", "hanviet": "Hậu diện", "meaning": "Phía sau, đằng sau", "radical": "后 (Hậu: Sau) + 面 (Diện: Mặt)", "mnemonic": "Mặt (面) phía sau lưng (后) ➔ Đằng sau (后面).", "example": "学校后面有一家饭店。(Xuéxiào hòumian yǒu yì jiā fàndiàn.)"}, {"id": "hsk1-41", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "回", "pinyin": "huí", "pinyin_clean": "hui", "hanviet": "Hồi", "meaning": "Về, quay về", "radical": "囗 (Bộ Vi: Vòng quanh) + 口 (Khẩu)", "mnemonic": "Đi một vòng tròn (囗) rồi quay về ➔ Về (回).", "example": "我想回家。(Wǒ xiǎng huí jiā.)"}, {"id": "hsk1-42", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "会", "pinyin": "huì", "pinyin_clean": "hui", "hanviet": "Hội", "meaning": "Biết (qua học tập)", "radical": "人 (Nhân) + 云 (Vân)", "mnemonic": "Con người (人) hội tụ lại học tập ➔ Biết (会).", "example": "我会说汉语。(Wǒ huì shuō Hànyǔ.)"}, {"id": "hsk1-43", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "几", "pinyin": "jǐ", "pinyin_clean": "ji", "hanviet": "Kỷ", "meaning": "Mấy, vài", "radical": "几 (Bộ Kỷ)", "mnemonic": "Hỏi số lượng nhỏ dưới 10 ➔ Mấy / Vài (几).", "example": "你有几个苹果？(Nǐ yǒu jǐ ge píngguǒ?)"}, {"id": "hsk1-44", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "家", "pinyin": "jiā", "pinyin_clean": "jia", "hanviet": "Gia", "meaning": "Gia đình, nhà", "radical": "宀 (Mái nhà) + 豕 (Con heo)", "mnemonic": "Dưới mái nhà (宀) có gia súc (豕) sinh sống ➔ Nhà (家).", "example": "我家在北京。(Wǒ jiā zài Běijīng.)"}, {"id": "hsk1-45", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "叫", "pinyin": "jiào", "pinyin_clean": "jiao", "hanviet": "Khiếu", "meaning": "Tên là, gọi là", "radical": "口 (Khẩu: Miệng) + 丩", "mnemonic": "Dùng miệng (口) cất tiếng gọi ➔ Gọi / Tên là (叫).", "example": "你叫什么名字？(Nǐ jiào shénme míngzi?)"}, {"id": "hsk1-46", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "今天", "pinyin": "jīntiān", "pinyin_clean": "jintian", "hanviet": "Kim thiên", "meaning": "Hôm nay", "radical": "今 (Kim: Hiện tại) + 天 (Thiên: Ngày)", "mnemonic": "Ngày (天) ở thời điểm hiện tại (今) ➔ Hôm nay (今天).", "example": "今天是星期一。(Jīntiān shì xīngqīyī.)"}, {"id": "hsk1-47", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "九", "pinyin": "jiǔ", "pinyin_clean": "jiu", "hanviet": "Cửu", "meaning": "Số 9", "radical": "九 (Bộ Cửu)", "mnemonic": "Hình cánh tay đang gập lại ➔ Số 9 (九).", "example": "现在九点了。(Xiànzài jiǔ diǎn le.)"}, {"id": "hsk1-48", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "开", "pinyin": "kāi", "pinyin_clean": "kai", "hanviet": "Khai", "meaning": "Mở, lái (xe)", "radical": "开 (Bộ Khai: Mở cửa)", "mnemonic": "Hai tay mở then cửa ➔ Mở / Lái xe (开).", "example": "我会开车。(Wǒ huì kāichē.)"}, {"id": "hsk1-49", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "看", "pinyin": "kàn", "pinyin_clean": "kan", "hanviet": "Khán", "meaning": "Nhìn, xem, đọc", "radical": "手 (Thủ: Bàn tay) + 目 (Mục: Con mắt)", "mnemonic": "Giơ bàn tay (手) che trên mắt (目) để nhìn xa ➔ Xem / Nhìn (看).", "example": "你在看什么书？(Nǐ zài kàn shénme shū?)"}, {"id": "hsk1-50", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "看见", "pinyin": "kànjiàn", "pinyin_clean": "kanjian", "hanviet": "Khán kiến", "meaning": "Nhìn thấy", "radical": "看 (Nhìn) + 见 (Kiến: Thấy)", "mnemonic": "Nhìn (看) và nhận ra hình ảnh (见) ➔ Nhìn thấy (看见).", "example": "我看见了一只猫。(Wǒ kànjiàn le yì zhī māo.)"}, {"id": "hsk1-51", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "块", "pinyin": "kuài", "pinyin_clean": "kuai", "hanviet": "Khối", "meaning": "Đồng (đơn vị tiền), miếng", "radical": "土 (Thổ: Đất) + 夬", "mnemonic": "Cục đất (土) hay thỏi tiền ➔ Đồng tiền / Miếng (块).", "example": "这个苹果三块钱。(Zhè ge píngguǒ sān kuài qián.)"}, {"id": "hsk1-52", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "来", "pinyin": "lái", "pinyin_clean": "lai", "hanviet": "Lai", "meaning": "Đến, tới", "radical": "木 (Mộc) + 𠂉", "mnemonic": "Hình cây lúa mì từ xa tới ➔ Đến / Tới (来).", "example": "他明天来我家。(Tā míngtiān lái wǒ jiā.)"}, {"id": "hsk1-53", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "老师", "pinyin": "lǎoshī", "pinyin_clean": "laoshi", "hanviet": "Lão sư", "meaning": "Thầy giáo, cô giáo", "radical": "老 (Lão: Già/Kính trọng) + 师 (Sư: Thầy)", "mnemonic": "Người thầy (师) kính trọng (老) truyền kiến thức ➔ Thầy cô (老师).", "example": "王老师是我们的汉语老师。(Wáng lǎoshī shì wǒmen de Hànyǔ lǎoshī.)"}, {"id": "hsk1-54", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "了", "pinyin": "le", "pinyin_clean": "le", "hanviet": "Liễu", "meaning": "Rồi (trợ từ hoàn thành)", "radical": "了 (Bộ Liễu)", "mnemonic": "Diễn tả hành động đã hoàn thành ➔ Rồi (了).", "example": "我吃了饭了。(Wǒ chī le fàn le.)"}, {"id": "hsk1-55", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "冷", "pinyin": "lěng", "pinyin_clean": "leng", "hanviet": "Lãnh", "meaning": "Lạnh", "radical": "冫 (Bộ Băng: Băng giá) + 令", "mnemonic": "Băng giá (冫) phủ kín buốt giá ➔ Lạnh (冷).", "example": "今天天气很冷。(Jīntiān tiānqì hěn lěng.)"}, {"id": "hsk1-56", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "里", "pinyin": "lǐ", "pinyin_clean": "li", "hanviet": "Lý", "meaning": "Bên trong", "radical": "日 (Mặt trời) + 土 (Đất)", "mnemonic": "Thửa ruộng trong làng ➔ Bên trong (里).", "example": "书包里有电脑。(Shūbāo li yǒu diànnǎo.)"}, {"id": "hsk1-57", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "六", "pinyin": "liù", "pinyin_clean": "liu", "hanviet": "Lục", "meaning": "Số 6", "radical": "六 (Bộ Lục)", "mnemonic": "Hình ngôi nhà có mái ➔ Số 6 (六).", "example": "我有六个苹果。(Wǒ yǒu liù ge píngguǒ.)"}, {"id": "hsk1-58", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "妈妈", "pinyin": "māma", "pinyin_clean": "mama", "hanviet": "Mã mã", "meaning": "Mẹ", "radical": "女 (Nữ: Người phụ nữ) + 马 (Mã)", "mnemonic": "Người phụ nữ (女) vất vả vì con ➔ Mẹ (妈妈).", "example": "妈妈在做饭。(Māma zài zuòfàn.)"}, {"id": "hsk1-59", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "吗", "pinyin": "ma", "pinyin_clean": "ma", "hanviet": "Mã", "meaning": "Không? (trợ từ nghi vấn)", "radical": "口 (Khẩu: Miệng) + 马 (Mã)", "mnemonic": "Dùng miệng (口) đặt câu hỏi cuối câu ➔ Không? (吗).", "example": "你是中国人吗？(Nǐ shì Zhōngguó rén ma?)"}, {"id": "hsk1-60", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "猫", "pinyin": "māo", "pinyin_clean": "mao", "hanviet": "Miêu", "meaning": "Con mèo", "radical": "犭 (Bộ Khuyển: Động vật) + 苗 (Miêu)", "mnemonic": "Loài động vật (犭) hay kêu meo meo ➔ Con mèo (猫).", "example": "小猫在椅子下面。(Xiǎomāo zài yǐzi xiàmiàn.)"}, {"id": "hsk1-61", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "没关系", "pinyin": "méi guānxi", "pinyin_clean": "meiguanxi", "hanviet": "Một quan hệ", "meaning": "Không sao, không có gì", "radical": "没 (Một: Không) + 关 (Quan) + 系 (Hệ)", "mnemonic": "Lời đáp lại khi được xin lỗi ➔ Không sao (没关系).", "example": "A: 对不起！ B: 没关系！"}, {"id": "hsk1-62", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "没有", "pinyin": "méiyǒu", "pinyin_clean": "meiyou", "hanviet": "Một hữu", "meaning": "Không có, chưa", "radical": "没 (Không) + 有 (Có)", "mnemonic": "Phủ định sự tồn tại ➔ Không có (没有).", "example": "我没有钱。(Wǒ méiyǒu qián.)"}, {"id": "hsk1-63", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "米饭", "pinyin": "mǐfàn", "pinyin_clean": "mifan", "hanviet": "Mễ phạn", "meaning": "Cơm", "radical": "米 (Mễ: Hạt gạo) + 饭 (Phạn: Cơm)", "mnemonic": "Hạt gạo (米) nấu chín thành cơm (饭) ➔ Cơm (米饭).", "example": "我喜欢吃米饭。(Wǒ xǐhuan chī mǐfàn.)"}, {"id": "hsk1-64", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "名字", "pinyin": "míngzi", "pinyin_clean": "mingzi", "hanviet": "Danh tự", "meaning": "Tên", "radical": "名 (Danh: Tên) + 字 (Tự: Chữ)", "mnemonic": "Chữ (字) ghi tên (名) gọi của một người ➔ Tên (名字).", "example": "你的名字叫什么？(Nǐ de míngzi jiào shénme?)"}, {"id": "hsk1-65", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "明天", "pinyin": "míngtiān", "pinyin_clean": "mingtian", "hanviet": "Minh thiên", "meaning": "Ngày mai", "radical": "日 (Mặt trời) + 月 (Mặt trăng) + 天 (Ngày)", "mnemonic": "Nhật (日) Nguyệt (月) trôi qua ngày mới ➔ Ngày mai (明天).", "example": "明天见！(Míngtiān jiàn!)"}, {"id": "hsk1-66", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "哪", "pinyin": "nǎ", "pinyin_clean": "na", "hanviet": "Nào", "meaning": "Nào, cái nào", "radical": "口 (Khẩu) + 那 (Na)", "mnemonic": "Từ dùng để hỏi lựa chọn ➔ Nào (哪).", "example": "你是哪国人？(Nǐ shì nǎ guó rén?)"}, {"id": "hsk1-67", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "哪儿", "pinyin": "nǎr", "pinyin_clean": "nar", "hanviet": "Nào nhi", "meaning": "Đâu, ở đâu", "radical": "哪 (Nào) + 儿 (Nhi)", "mnemonic": "Từ dùng để hỏi vị trí ➔ Đâu / Ở đâu (哪儿).", "example": "你去哪儿？(Nǐ qù nǎr?)"}, {"id": "hsk1-68", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "那", "pinyin": "nà", "pinyin_clean": "na", "hanviet": "Kia", "meaning": "Đó, kia", "radical": "阝 (Bộ Phụ)", "mnemonic": "Chỉ vật ở xa người nói ➔ Đó / Kia (那).", "example": "那是我的电脑。(Nà shì wǒ de diànnǎo.)"}, {"id": "hsk1-69", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "呢", "pinyin": "ne", "pinyin_clean": "ne", "hanviet": "Ni", "meaning": "Thì sao? (trợ từ ngắt câu)", "radical": "口 (Khẩu) + 尼", "mnemonic": "Trợ từ ngữ khí đứng cuối câu ➔ Thì sao? (呢).", "example": "你呢？(Nǐ ne?)"}, {"id": "hsk1-70", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "能", "pinyin": "néng", "pinyin_clean": "neng", "hanviet": "Năng", "meaning": "Có thể (khả năng)", "radical": "厶 + 月 + 匕", "mnemonic": "Con gấu có sức mạnh ➔ Có thể (能).", "example": "我能去吗？(Wǒ néng qù ma?)"}, {"id": "hsk1-71", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "你", "pinyin": "nǐ", "pinyin_clean": "ni", "hanviet": "Nhĩ", "meaning": "Bạn, cậu, anh", "radical": "亻 (Bộ Nhân đứng: Người) + 尔", "mnemonic": "Người (亻) đối diện đang trò chuyện ➔ Bạn / Cậu (你).", "example": "你好！(Nǐ hǎo!)"}, {"id": "hsk1-72", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "年", "pinyin": "nián", "pinyin_clean": "nian", "hanviet": "Niên", "meaning": "Năm", "radical": "干 + 亅", "mnemonic": "Mùa thu hoạch lúa chín ➔ Năm (年).", "example": "今年是2026年。(Jīnnián shì èrlíngèrliù nián.)"}, {"id": "hsk1-73", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "女儿", "pinyin": "nǚ'ér", "pinyin_clean": "nver", "hanviet": "Nữ nhi", "meaning": "Con gái", "radical": "女 (Nữ) + 儿 (Nhi)", "mnemonic": "Đứa con là phái nữ ➔ Con gái (女儿).", "example": "她有一个女儿。(Tā yǒu yí ge nǚ'ér.)"}, {"id": "hsk1-74", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "朋友", "pinyin": "péngyou", "pinyin_clean": "pengyou", "hanviet": "Bằng hữu", "meaning": "Bạn bè", "radical": "朋 (Bằng) + 友 (Hữu)", "mnemonic": "Hai bàn tay (友) nắm chặt gắn kết ➔ Bạn bè (朋友).", "example": "他是我的好朋友。(Tā shì wǒ de hǎo péngyou.)"}, {"id": "hsk1-75", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "漂亮", "pinyin": "piàoliang", "pinyin_clean": "piaoliang", "hanviet": "Phiêu lượng", "meaning": "Đẹp, xinh đẹp", "radical": "氵 (Thủy) + 票 + 亮 (Sáng)", "mnemonic": "Vẻ đẹp trong trẻo lấp lánh ➔ Xinh đẹp (漂亮).", "example": " cái này衣服很漂亮。(Zhè ge yīfu hěn piàoliang.)"}, {"id": "hsk1-76", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "苹果", "pinyin": "píngguǒ", "pinyin_clean": "pingguo", "hanviet": "Bình quả", "meaning": "Quả táo", "radical": "艹 (Thảo) + 平 + 果 (Quả)", "mnemonic": "Trái cây (果) tròn trịa ➔ Quả táo (苹果).", "example": "我想吃苹果。(Wǒ xiǎng chī píngguǒ.)"}, {"id": "hsk1-77", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "七", "pinyin": "qī", "pinyin_clean": "qi", "hanviet": "Thất", "meaning": "Số 7", "radical": "七 (Bộ Thất)", "mnemonic": "Nét cắt vuông góc ➔ Số 7 (七).", "example": "七月是夏天。(Qī yuè shì xiàtiān.)"}, {"id": "hsk1-78", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "钱", "pinyin": "qián", "pinyin_clean": "qian", "hanviet": "Tiền", "meaning": "Tiền", "radical": "钅 (Bộ Kim) + 戔", "mnemonic": "Đồng kim loại (钅) dùng để trao đổi ➔ Tiền (钱).", "example": " cái này多少钱？(Zhè ge duōshao qián?)"}, {"id": "hsk1-79", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "前面", "pinyin": "qiánmiàn", "pinyin_clean": "qianmian", "hanviet": "Tiền diện", "meaning": "Phía trước", "radical": "前 (Tiền: Trước) + 面 (Diện: Mặt)", "mnemonic": "Hướng về phía trước (前) ➔ Phía trước (前面).", "example": "他在我前面。(Tā zài wǒ qiánmiàn.)"}, {"id": "hsk1-80", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "请", "pinyin": "qǐng", "pinyin_clean": "qing", "hanviet": "Thỉnh", "meaning": "Mời, xin vui lòng", "radical": "讠 (Ngôn) + 青 (Thanh)", "mnemonic": "Dùng lời nói (讠) lịch sự mời mọc ➔ Mời (请).", "example": "请进！(Qǐng jìn!)"}, {"id": "hsk1-81", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "去", "pinyin": "qù", "pinyin_clean": "qu", "hanviet": "Khứ", "meaning": "Đi", "radical": "土 (Đất) + 厶", "mnemonic": "Rời khỏi nơi chốn ➔ Đi (去).", "example": "我去学校。(Wǒ qù xuéxiào.)"}, {"id": "hsk1-82", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "热", "pinyin": "rè", "pinyin_clean": "re", "hanviet": "Nhiệt", "meaning": "Nóng", "radical": "执 + 灬 (Bộ Hỏa: Lửa)", "mnemonic": "Lửa (灬) bốc lên ngùn ngụt ➔ Nóng (热).", "example": "今天天很热。(Jīntiān tiān hěn rè.)"}, {"id": "hsk1-83", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "人", "pinyin": "rén", "pinyin_clean": "ren", "hanviet": "Nhân", "meaning": "Người", "radical": "人 (Bộ Nhân)", "mnemonic": "Hình người bước đi ➔ Người (人).", "example": "他是中国人。(Tā shì Zhōngguó rén.)"}, {"id": "hsk1-84", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "认识", "pinyin": "rènshi", "pinyin_clean": "renshi", "hanviet": "Nhận thức", "meaning": "Quen biết, nhận ra", "radical": "讠 (Ngôn) + 认 + 识", "mnemonic": "Dùng lời nói (讠) để ghi nhận kiến thức ➔ Quen biết (认识).", "example": "很高兴认识你！(Hěn gāoxìng rènshi nǐ!)"}, {"id": "hsk1-85", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "三", "pinyin": "sān", "pinyin_clean": "san", "hanviet": "Tam", "meaning": "Số 3", "radical": "三 (Bộ Tam)", "mnemonic": "Ba nét ngang song song ➔ Số 3 (三).", "example": "三个人。(Sān ge rén.)"}, {"id": "hsk1-86", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "商店", "pinyin": "shāngdiàn", "pinyin_clean": "shangdian", "hanviet": "Thương điếm", "meaning": "Cửa hàng, tiệm", "radical": "商 (Thương) + 店 (Điếm)", "mnemonic": "Nơi tiệm (店) buôn bán (商) hàng hóa ➔ Cửa hàng (商店).", "example": "我去商店买东西。(Wǒ qù shāngdiàn mǎi dōngxi.)"}, {"id": "hsk1-87", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "上", "pinyin": "shàng", "pinyin_clean": "shang", "hanviet": "Thượng", "meaning": "Bên trên, lên", "radical": "卜 + 一", "mnemonic": "Nằm ở vị trí phía trên đường ngang ➔ Trên / Lên (上).", "example": "桌子上有一本书。(Zhuōzi shang yǒu yì běn shū.)"}, {"id": "hsk1-88", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "上午", "pinyin": "shàngwǔ", "pinyin_clean": "shangwu", "hanviet": "Thượng ngọ", "meaning": "Buổi sáng", "radical": "上 (Trước) + 午 (Ngọ: Giờ trưa)", "mnemonic": "Thời gian trước giờ ngọ trưa ➔ Buổi sáng (上午).", "example": "上午我有课。(Shàngwǔ wǒ yǒu kè.)"}, {"id": "hsk1-89", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "少", "pinyin": "shǎo", "pinyin_clean": "shao", "hanviet": "Thiếu", "meaning": "Ít", "radical": "小 (Tiểu) + 丿", "mnemonic": "Bớt đi một chút nhỏ ➔ Ít (少).", "example": "这里人很少。(Zhèlǐ rén hěn shǎo.)"}, {"id": "hsk1-90", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "谁", "pinyin": "shéi", "pinyin_clean": "shei", "hanviet": "Thùy", "meaning": "Ai", "radical": "讠 (Ngôn) + 隹 (Chuy)", "mnemonic": "Hỏi về người nào ➔ Ai (谁).", "example": "他是谁？(Tā shì shéi?)"}, {"id": "hsk1-91", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "什么", "pinyin": "shénme", "pinyin_clean": "shenme", "hanviet": "Thập ma", "meaning": "Cái gì", "radical": "什 (Thập) + 么 (Ma)", "mnemonic": "Từ dùng để hỏi vật ➔ Cái gì (什么).", "example": "这是什么？(Zhè shì shénme?)"}, {"id": "hsk1-92", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "十", "pinyin": "shí", "pinyin_clean": "shi", "hanviet": "Thập", "meaning": "Số 10", "radical": "十 (Bộ Thập)", "mnemonic": "Dấu thập đếm đủ 10 ➔ Số 10 (十).", "example": "我有十本书。(Wǒ yǒu shí běn shū.)"}, {"id": "hsk1-93", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "时候", "pinyin": "shíhou", "pinyin_clean": "shihou", "hanviet": "Thời hậu", "meaning": "Lúc, khi", "radical": "时 (Thời) + 候 (Hậu)", "mnemonic": "Khoảng thời gian (时) ➔ Lúc / Khi (时候).", "example": "你什么时候来？(Nǐ shénme shíhou lái?)"}, {"id": "hsk1-94", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "是", "pinyin": "shì", "pinyin_clean": "shi", "hanviet": "Thị", "meaning": "Là, phải, đúng", "radical": "日 (Mặt trời) + 疋", "mnemonic": "Mặt trời chiếu thẳng đứng minh bạch ➔ Là / Đúng (是).", "example": "我是学生。(Wǒ shì xuéshēng.)"}, {"id": "hsk1-95", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "书", "pinyin": "shū", "pinyin_clean": "shu", "hanviet": "Thư", "meaning": "Sách", "radical": "𦘒 + 亅", "mnemonic": "Hình tay cầm bút viết lên trang giấy ➔ Sách (书).", "example": "我在看书。(Wǒ zài kàn shū.)"}, {"id": "hsk1-96", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "水", "pinyin": "shuǐ", "pinyin_clean": "shui", "hanviet": "Thủy", "meaning": "Nước", "radical": "水 (Bộ Thủy: Dòng nước)", "mnemonic": "Dòng nước chảy cuồn cuộn ➔ Nước (水).", "example": "请喝水。(Qǐng hē shuǐ.)"}, {"id": "hsk1-97", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "水果", "pinyin": "shuǐguǒ", "pinyin_clean": "shuiguo", "hanviet": "Thủy quả", "meaning": "Trái cây, hoa quả", "radical": "水 (Nước) + 果 (Trái cây)", "mnemonic": "Trái cây (果) chứa nhiều nước (水) ➔ Hoa quả (水果).", "example": "我想买水果。(Wǒ xiǎng mǎi shuǐguǒ.)"}, {"id": "hsk1-98", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "睡觉", "pinyin": "shuìjiào", "pinyin_clean": "shuijiao", "hanviet": "Thụy giác", "meaning": "Đi ngủ", "radical": "目 (Bộ Mắt) + 垂 + 觉", "mnemonic": "Nhắm mắt (目) thả lỏng đi vào giấc ngủ ➔ Đi ngủ (睡觉).", "example": "我要睡觉了。(Wǒ yào shuìjiào le.)"}, {"id": "hsk1-99", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "说话", "pinyin": "shuōhuà", "pinyin_clean": "shuohua", "hanviet": "Thuyết thoại", "meaning": "Nói chuyện", "radical": "讠 (Ngôn) + 兑 + 话", "mnemonic": "Mở lời (讠) nói ra suy nghĩ ➔ Nói chuyện (说话).", "example": "别说话！(Bié shuōhuà!)"}, {"id": "hsk1-100", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "四", "pinyin": "sì", "pinyin_clean": "si", "hanviet": "Tứ", "meaning": "Số 4", "radical": "囗 + 儿", "mnemonic": "Hình hộp chia 4 phần ➔ Số 4 (四).", "example": "四个人。(Sì ge rén.)"}, {"id": "hsk1-101", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "岁", "pinyin": "suì", "pinyin_clean": "sui", "hanviet": "Tuế", "meaning": "Tuổi", "radical": "山 (Núi) + 夕", "mnemonic": "Thời gian trôi qua thêm một tuổi ➔ Tuổi (岁).", "example": "我二十岁了。(Wǒ èrshí suì le.)"}, {"id": "hsk1-102", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "他", "pinyin": "tā", "pinyin_clean": "ta", "hanviet": "Tha", "meaning": "Anh ấy, ông ấy", "radical": "亻 (Nhân đứng) + 也", "mnemonic": "Người đàn ông khác (亻) ➔ Anh ấy (他).", "example": "他是我的好朋友。(Tā shì wǒ de hǎo péngyou.)"}, {"id": "hsk1-103", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "她", "pinyin": "tā", "pinyin_clean": "ta", "hanviet": "Tha", "meaning": "Cô ấy, chị ấy", "radical": "女 (Bộ Nữ) + 也", "mnemonic": "Người phụ nữ (女) ➔ Cô ấy (她).", "example": "她是我的老师。(Tā shì wǒ de lǎoshī.)"}, {"id": "hsk1-104", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "太", "pinyin": "tài", "pinyin_clean": "tai", "hanviet": "Thái", "meaning": "Quá, rất", "radical": "大 (Đại) + 丶", "mnemonic": "Thêm một chấm vào chữ 大 thể hiện vượt mức ➔ Quá (太).", "example": "太好了！(Tài hǎo le!)"}, {"id": "hsk1-105", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "天气", "pinyin": "tiānqì", "pinyin_clean": "tianqi", "hanviet": "Thiên khí", "meaning": "Thời tiết", "radical": "天 (Trời) + 气 (Khí)", "mnemonic": "Khí (气) của đất trời (天) ➔ Thời tiết (天气).", "example": "今天天气很好。(Jīntiān tiānqì hěn hǎo.)"}, {"id": "hsk1-106", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "听", "pinyin": "tīng", "pinyin_clean": "ting", "hanviet": "Thính", "meaning": "Nghe", "radical": "口 (Khẩu) + 斤", "mnemonic": "Dùng tai lắng nghe ➔ Nghe (听).", "example": "我在听音乐。(Wǒ zài tīng yīnyuè.)"}, {"id": "hsk1-107", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "同学", "pinyin": "tóngxué", "pinyin_clean": "tongxue", "hanviet": "Đồng học", "meaning": "Bạn cùng học", "radical": "同 (Đồng) + 学 (Học)", "mnemonic": "Cùng nhau (同) học tập (学) ➔ Bạn học (同学).", "example": "我们是同学。(Wǒmen s: shì tóngxué.)"}, {"id": "hsk1-108", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "喂", "pinyin": "wèi", "pinyin_clean": "wei", "hanviet": "Ủy", "meaning": "Alo (khi nghe điện thoại)", "radical": "口 (Khẩu)", "mnemonic": "Dùng miệng (口) cất tiếng chào khi nghe máy ➔ Alo (喂).", "example": "喂，你是谁？(Wèi, nǐ shì shéi?)"}, {"id": "hsk1-109", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "我", "pinyin": "wǒ", "pinyin_clean": "wo", "hanviet": "Ngã", "meaning": "Tôi, tớ, bản thân", "radical": "手 (Thủ) + 戈 (Binh khí)", "mnemonic": "Bản thân tay cầm binh khí tự vệ ➔ Tôi (我).", "example": "我是越南人。(Wǒ shì Yuènán rén.)"}, {"id": "hsk1-110", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "五", "pinyin": "wǔ", "pinyin_clean": "wu", "hanviet": "Ngũ", "meaning": "Số 5", "radical": "五 (Bộ Ngũ)", "mnemonic": "Số 5 ➔ 五.", "example": "五个人。(Wǔ ge rén.)"}, {"id": "hsk1-111", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "喜欢", "pinyin": "xǐhuan", "pinyin_clean": "xihuan", "hanviet": "Hỷ hoan", "meaning": "Thích, yêu thích", "radical": "喜 (Hỷ) + 欢 (Hoan)", "mnemonic": "Cảm thấy hoan hỷ (欢) vui vẻ (喜) ➔ Yêu thích (喜欢).", "example": "我喜欢学汉语。(Wǒ xǐhuan xué Hànyǔ.)"}, {"id": "hsk1-112", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "下", "pinyin": "xià", "pinyin_clean": "xia", "hanviet": "Hạ", "meaning": "Bên dưới, xuống", "radical": "一 + 卜", "mnemonic": "Nằm ở vị trí bên dưới đường ngang ➔ Dưới / Xuống (下).", "example": "小猫在桌子下面。(Xiǎomāo zài zhuōzi xiàmiàn.)"}, {"id": "hsk1-113", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "下午", "pinyin": "xiàwǔ", "pinyin_clean": "xiawu", "hanviet": "Hạ ngọ", "meaning": "Buổi chiều", "radical": "下 (Sau) + 午 (Ngọ)", "mnemonic": "Khoảng thời gian sau giờ trưa ➔ Buổi chiều (下午).", "example": "下午我去买东西。(Xiàwǔ wǒ qù mǎi dōngxi.)"}, {"id": "hsk1-114", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "下雨", "pinyin": "xiàyǔ", "pinyin_clean": "xiayu", "hanviet": "Hạ vũ", "meaning": "Trời mưa", "radical": "下 (Rơi xuống) + 雨 (Mưa)", "mnemonic": "Cơn mưa (雨) rơi xuống (下) ➔ Trời mưa (下雨).", "example": "外面下雨了。(Wàimiàn xiàyǔ le.)"}, {"id": "hsk1-115", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "先生", "pinyin": "xiānsheng", "pinyin_clean": "xiansheng", "hanviet": "Tiên sinh", "meaning": "Ông, ngài, anh", "radical": "先 (Tiên) + 生 (Sinh)", "mnemonic": "Cách xưng hô lịch sự với nam giới ➔ Tiên sinh / Ông (先生).", "example": "王先生很忙。(Wáng xiānsheng hěn máng.)"}, {"id": "hsk1-116", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "现在", "pinyin": "xiànzài", "pinyin_clean": "xianzai", "hanviet": "Hiện tại", "meaning": "Bây giờ, hiện tại", "radical": "现 (Hiện) + 在 (Tại)", "mnemonic": "Thời điểm đang ở (在) hiện tại (现) ➔ Bây giờ (现在).", "example": "现在几点了？(Xiànzài jǐ diǎn le?)"}, {"id": "hsk1-117", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "想", "pinyin": "xiǎng", "pinyin_clean": "xiang", "hanviet": "Tưởng", "meaning": "Muốn, nghĩ, nhớ", "radical": "相 (Tương) + 心 (Tâm)", "mnemonic": "Hình ảnh ghi sâu vào trong lòng (心) ➔ Muốn / Nhớ (想).", "example": "我想去中国。(Wǒ xiǎng qù Zhōngguó.)"}, {"id": "hsk1-118", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "小", "pinyin": "xiǎo", "pinyin_clean": "xiao", "hanviet": "Tiểu", "meaning": "Nhỏ, bé", "radical": "小 (Bộ Tiểu)", "mnemonic": "Chia nhỏ vật thành 3 mẩu ➔ Nhỏ / Bé (小).", "example": " cái này苹果很小。(Zhè ge píngguǒ hěn xiǎo.)"}, {"id": "hsk1-119", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "小姐", "pinyin": "xiǎojiě", "pinyin_clean": "xiaojie", "hanviet": "Tiểu thư", "meaning": "Cô gái, cô", "radical": "小 (Tiểu) + 姐 (Tỷ)", "mnemonic": "Cách gọi xưng hô cô gái trẻ ➔ Cô / Tiểu thư (小姐).", "example": "李小姐在看书。(Lǐ xiǎojiě zài kàn shū.)"}, {"id": "hsk1-120", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "些", "pinyin": "xiē", "pinyin_clean": "xie", "hanviet": "Tá", "meaning": "Một vài, một số", "radical": "此 + 二", "mnemonic": "Số lượng nhỏ không xác định ➔ Vài / Một số (些).", "example": "Những东西是我的。(Zhèxiē dōngxi shì wǒ de.)"}, {"id": "hsk1-121", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "写", "pinyin": "xiě", "pinyin_clean": "xie", "hanviet": "Tả", "meaning": "Viết", "radical": "冖 (Mái) + 与", "mnemonic": "Đặt ngọn bút nét mực lên giấy ➔ Viết (写).", "example": "在写汉字。(Zài xiě hànzì.)"}, {"id": "hsk1-122", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "谢谢", "pinyin": "xièxie", "pinyin_clean": "xiexie", "hanviet": "Tạ tạ", "meaning": "Cảm ơn", "radical": "讠 (Ngôn) + 射 + 寸", "mnemonic": "Lời nói (讠) từ tâm chân thành ➔ Cảm ơn (谢谢).", "example": "谢谢你的帮助！(Xièxie nǐ de bāngzhù!)"}, {"id": "hsk1-123", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "星期", "pinyin": "xīngqī", "pinyin_clean": "xingqi", "hanviet": "Tinh kỳ", "meaning": "Tuần, thứ", "radical": "星 (Sao) + 期 (Kỳ)", "mnemonic": "Chu kỳ các vì sao ➔ Tuần / Thứ (星期).", "example": "今天是星期一。(Jīntiān shì xīngqīyī.)"}, {"id": "hsk1-124", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "学生", "pinyin": "xuéshēng", "pinyin_clean": "xuesheng", "hanviet": "Học sinh", "meaning": "Học sinh, sinh viên", "radical": "学 (Học) + 生 (Sinh)", "mnemonic": "Người sinh ra (生) để học tập (学) ➔ Học sinh (学生).", "example": "我是汉语学生。(Wǒ shì Hànyǔ xuéshēng.)"}, {"id": "hsk1-125", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "学习", "pinyin": "xuéxí", "pinyin_clean": "xuexi", "hanviet": "Học tập", "meaning": "Học tập, học", "radical": "学 (Học) + 习 (Tập)", "mnemonic": "Học (学) đi đôi với luyện tập (习) ➔ Học tập (学习).", "example": "我喜欢学习汉语。(Wǒ xǐhuan xuéxí Hànyǔ.)"}, {"id": "hsk1-126", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "学校", "pinyin": "xuéxiào", "pinyin_clean": "xuexiao", "hanviet": "Học hiệu", "meaning": "Trường học", "radical": "学 (Học) + 校 (Hiệu)", "mnemonic": "Ngôi trường (校) dạy học (学) ➔ Trường học (学校).", "example": "我们的学校很大。(Wǒmen de xuéxiào hěn dà.)"}, {"id": "hsk1-127", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "一", "pinyin": "yī", "pinyin_clean": "yi", "hanviet": "Nhất", "meaning": "Số 1", "radical": "一 (Bộ Nhất)", "mnemonic": "Một nét ngang cơ bản ➔ Số 1 (一).", "example": "一个人。(Yí ge rén.)"}, {"id": "hsk1-128", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "衣服", "pinyin": "yīfu", "pinyin_clean": "yifu", "hanviet": "Y phục", "meaning": "Quần áo", "radical": "衣 (Y) + 服 (Phục)", "mnemonic": "Trang phục khoác lên người ➔ Quần áo (衣服).", "example": "这条衣服很漂亮。(Zhè tiáo yīfu hěn piàoliang.)"}, {"id": "hsk1-129", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "医生", "pinyin": "yīshēng", "pinyin_clean": "yisheng", "hanviet": "Y sinh", "meaning": "Bác sĩ", "radical": "医 (Y) + 生 (Sinh)", "mnemonic": "Người chữa bệnh ngành y (医) ➔ Bác sĩ (医生).", "example": "他爸爸是医生。(Tā bàba shì yīshēng.)"}, {"id": "hsk1-130", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "医院", "pinyin": "yīyuàn", "pinyin_clean": "yiyuan", "hanviet": "Y viện", "meaning": "Bệnh viện", "radical": "医 (Y) + 院 (Viện)", "mnemonic": "Tòa viện (院) khám chữa bệnh (医) ➔ Bệnh viện (医院).", "example": "他在医院工作。(Tā zài yīyuàn gōngzuò.)"}, {"id": "hsk1-131", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "椅子", "pinyin": "yǐzi", "pinyin_clean": "yizi", "hanviet": "Ỷ tử", "meaning": "Cái ghế", "radical": "木 (Mộc) + 奇 + Tử", "mnemonic": "Đồ vật bằng gỗ (木) để tựa lưng ➔ Cái ghế (椅子).", "example": "请坐在椅子上。(Qǐng zuò zài yǐzi shang.)"}, {"id": "hsk1-132", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "有", "pinyin": "yǒu", "pinyin_clean": "you", "hanviet": "Hữu", "meaning": "Có", "radical": "𠂇 + 月", "mnemonic": "Bàn tay cầm miếng thịt ➔ Có (有).", "example": "我有三本书。(Wǒ yǒu sān běn shū.)"}, {"id": "hsk1-133", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "月", "pinyin": "yuè", "pinyin_clean": "yue", "hanviet": "Nguyệt", "meaning": "Tháng, mặt trăng", "radical": "月 (Bộ Nguyệt)", "mnemonic": "Hình vành trăng khuyết ➔ Tháng / Mặt trăng (月).", "example": "一月很冷。(Yī yuè hěn lěng.)"}, {"id": "hsk1-134", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "再见", "pinyin": "zàijiàn", "pinyin_clean": "zaijian", "hanviet": "Tái kiến", "meaning": "Tạm biệt", "radical": "再 (Tái) + 见 (Kiến)", "mnemonic": "Hẹn gặp lại (见) lần nữa (再) ➔ Tạm biệt (再见).", "example": "老师，再见！(Lǎoshī, zàijiàn!)"}, {"id": "hsk1-135", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "在", "pinyin": "zài", "pinyin_clean": "zai", "hanviet": "Tại", "meaning": "Đang, ở tại", "radical": "土 (Đất) + 𠂇", "mnemonic": "Hiện diện ở một vị trí trên mặt đất ➔ Ở / Đang (在).", "example": "我在家看书。(Wǒ zài jiā kàn shū.)"}, {"id": "hsk1-136", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "怎么", "pinyin": "zěnme", "pinyin_clean": "zenme", "hanviet": "Chẩm ma", "meaning": "Làm sao, thế nào", "radical": "怎 (Chẩm) + 么 (Ma)", "mnemonic": "Từ hỏi phương thức ➔ Thế nào (怎么).", "example": " cái này字怎么读？(Zhè ge zì zěnme dú?)"}, {"id": "hsk1-137", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "怎么样", "pinyin": "zěnmeyàng", "pinyin_clean": "zenmeyang", "hanviet": "Chẩm ma dạng", "meaning": "Thế nào, ra sao", "radical": "怎么 + 样 (Dạng)", "mnemonic": "Hỏi tính chất / ý kiến ➔ Ra sao / Thế nào (怎么样).", "example": "今天天气怎么样？(Jīntiān tiānqì zěnmeyàng?)"}, {"id": "hsk1-138", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "张", "pinyin": "zhāng", "pinyin_clean": "zhang", "hanviet": "Trương", "meaning": "Tờ, bức (lượng từ vật phẳng)", "radical": "弓 (Cung) + 长 (Trường)", "mnemonic": "Mở rộng tấm phẳng ➔ Tờ / Bức (张).", "example": "一张桌子。(Yì zhāng zhuōzi.)"}, {"id": "hsk1-139", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "中国", "pinyin": "Zhōngguó", "pinyin_clean": "zhongguo", "hanviet": "Trung Quốc", "meaning": "Trung Quốc", "radical": "中 (Trung) + 国 (Quốc)", "mnemonic": "Đất nước ở trung tâm ➔ Trung Quốc (中国).", "example": "我想去中国旅游。(Wǒ xiǎng qù Zhōngguó lǚyóu.)"}, {"id": "hsk1-140", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "中午", "pinyin": "zhōngwǔ", "pinyin_clean": "zhongwu", "hanviet": "Trung ngọ", "meaning": "Buổi trưa", "radical": "中 (Giữa) + 午 (Ngọ)", "mnemonic": "Thời điểm chính giữa giờ ngọ ➔ Buổi trưa (中午).", "example": "中午我们吃米饭。(Zhōngwǔ wǒmen chī mǐfàn.)"}, {"id": "hsk1-141", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "住", "pinyin": "zhù", "pinyin_clean": "zhu", "hanviet": "Trú", "meaning": "Ở, cư trú", "radical": "亻 (Nhân) + 主 (Chủ)", "mnemonic": "Con người (亻) định cư sinh sống ➔ Ở / Trú (住).", "example": "你住在哪儿？(Nǐ zhù zài nǎr?)"}, {"id": "hsk1-142", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "桌子", "pinyin": "zhuōzi", "pinyin_clean": "zhuozi", "hanviet": "Trác tử", "meaning": "Cái bàn", "radical": "木 (Mộc) + 卓 + 子", "mnemonic": "Đồ vật bằng gỗ (木) có mặt phẳng ➔ Cái bàn (桌子).", "example": "桌子上有一台电脑。(Zhuōzi shang yǒu yì tái diànnǎo.)"}, {"id": "hsk1-143", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "字", "pinyin": "zì", "pinyin_clean": "zi", "hanviet": "Tự", "meaning": "Chữ, chữ Hán", "radical": "宀 (Mái) + Tử", "mnemonic": "Đứa con trong nhà học viết ➔ Chữ (字).", "example": " cái này汉字怎么写？(Zhè ge hànzì zěnme xiě?)"}, {"id": "hsk1-144", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "昨天", "pinyin": "zuótiān", "pinyin_clean": "zuotian", "hanviet": "Tạc thiên", "meaning": "Hôm qua", "radical": "日 (Mặt trời) + 乍 + Thiên", "mnemonic": "Ngày (天) vừa trôi qua (乍) ➔ Hôm qua (昨天).", "example": "昨天是星期日。(Zuótiān shì xīngqīrì.)"}, {"id": "hsk1-145", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "坐", "pinyin": "zuò", "pinyin_clean": "zuo", "hanviet": "Tọa", "meaning": "Ngồi, đi (xe/máy bay)", "radical": "人 + 人 + 土", "mnemonic": "Hai người (人) ngồi cạnh nhau trên mặt đất (土) ➔ Ngồi (坐).", "example": "请坐！(Qǐng zuò!)"}, {"id": "hsk1-146", "level": "HSK 1", "day": 0, "tag": "HSK 1 • Ôn Tập Cốt Lõi", "hanzi": "做", "pinyin": "zuò", "pinyin_clean": "zuo", "hanviet": "Tác", "meaning": "Làm", "radical": "亻 (Nhân) + 故", "mnemonic": "Con người (亻) hành động làm ra kết quả ➔ Làm (做).", "example": "你在做什么？(Nǐ zài zuò shénme?)"}, {"id": "hsk2-d1-1", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "就", "pinyin": "jiù", "pinyin_clean": "jiu", "hanviet": "Tựu", "meaning": "Thì, ngay, chính là", "radical": "", "mnemonic": "", "example": "我们这就出发。 (Wǒmen jiù zhè chūfā. - Chúng ta xuất phát ngay bây giờ.)"}, {"id": "hsk2-d1-2", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "给", "pinyin": "gěi", "pinyin_clean": "gei", "hanviet": "Cấp", "meaning": "Cho, cho ai, đưa cho", "radical": "", "mnemonic": "", "example": "这是给你的书。 (Zhè shì gěi nǐ de shū. - Đây là cuốn sách cho bạn.)"}, {"id": "hsk2-d1-3", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "让", "pinyin": "ràng", "pinyin_clean": "rang", "hanviet": "Nhượng", "meaning": "Bảo, nhường, cho phép", "radical": "", "mnemonic": "", "example": "让我想想。 (Ràng wǒ xiǎngxiang. - Để tôi suy nghĩ một chút.)"}, {"id": "hsk2-d1-4", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "接", "pinyin": "jiē", "pinyin_clean": "jie", "hanviet": "Tiếp", "meaning": "Đón, nhận, tiếp theo", "radical": "", "mnemonic": "", "example": "我去机场接朋友。 (Wǒ qù jīchǎng jiē péngyou. - Tôi đi sân bay đón bạn.)"}, {"id": "hsk2-d1-5", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "次", "pinyin": "cì", "pinyin_clean": "ci", "hanviet": "Thứ", "meaning": "Lần, lượt", "radical": "", "mnemonic": "", "example": "我去过一次北京。 (Wǒ qù guo yí cì Běijīng. - Tôi từng đi Bắc Kinh một lần.)"}, {"id": "hsk2-d1-6", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "旅游", "pinyin": "lǚyóu", "pinyin_clean": "lvyou", "hanviet": "Lữ Du", "meaning": "Du lịch, đi chơi", "radical": "", "mnemonic": "", "example": "九月去北京旅游最好。 (Jiǔyuè qù Běijīng lǚyóu zuì hǎo. - Đi Bắc Kinh du lịch tháng 9 tốt nhất.)"}, {"id": "hsk2-d1-7", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "帮忙", "pinyin": "bāngmáng", "pinyin_clean": "bangmang", "hanviet": "Bang Mang", "meaning": "Giúp đỡ, nhờ giúp", "radical": "", "mnemonic": "", "example": "谢谢你帮我的忙。 (Xièxie nǐ bāng wǒ de máng. - Cảm ơn bạn đã giúp tôi.)"}, {"id": "hsk2-d1-8", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "不好意思", "pinyin": "bù hǎoyìsi", "pinyin_clean": "buhaoyisi", "hanviet": "Bất Hảo Ý Tư", "meaning": "Ngại quá, xin lỗi", "radical": "", "mnemonic": "", "example": "真不好意思，我迟到了。 (Zhēn bù hǎoyìsi, wǒ chídào le. - Thật ngại quá, tôi đến muộn rồi.)"}, {"id": "hsk2-d1-9", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "已经", "pinyin": "yǐjīng", "pinyin_clean": "yijing", "hanviet": "Dĩ Kinh", "meaning": "Đã, rồi", "radical": "", "mnemonic": "", "example": "我已经吃过了。 (Wǒ yǐjīng chī guo le. - Tôi đã ăn rồi.)"}, {"id": "hsk2-d1-10", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "那", "pinyin": "nà", "pinyin_clean": "na", "hanviet": "Na", "meaning": "Thế thì, vậy thì", "radical": "", "mnemonic": "", "example": "那我们明天去吧。 (Nà wǒmen míngtiān qù ba. - Thế thì ngày mai chúng ta đi nhé.)"}, {"id": "hsk2-d1-11", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "介绍", "pinyin": "jièshào", "pinyin_clean": "jieshao", "hanviet": "Giới Thiệu", "meaning": "Giới thiệu", "radical": "", "mnemonic": "", "example": "我给你介绍一下。 (Wǒ gěi nǐ jièshào yíxià. - Tôi giới thiệu với bạn một chút.)"}, {"id": "hsk2-d1-12", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "有时", "pinyin": "yǒushí", "pinyin_clean": "youshi", "hanviet": "Hữu Thì", "meaning": "Có lúc, thỉnh thoảng", "radical": "", "mnemonic": "", "example": "他有时看书，有时看电影。 (Tā yǒushí kàn shū, yǒushí kàn diànyǐng. - Cậu ấy có lúc đọc sách, có lúc xem phim.)"}, {"id": "hsk2-d1-13", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "懂", "pinyin": "dǒng", "pinyin_clean": "dong", "hanviet": "Đổng", "meaning": "Hiểu, nắm rõ", "radical": "", "mnemonic": "", "example": "我听懂了。 (Wǒ tīng dǒng le. - Tôi nghe hiểu rồi.)"}, {"id": "hsk2-d1-14", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "意思", "pinyin": "yìsi", "pinyin_clean": "yisi", "hanviet": "Ý Tư", "meaning": "Ý nghĩa, sở thích", "radical": "", "mnemonic": "", "example": "这是什么意思？ (Zhè shì shénme yìsi? - Đây là có ý nghĩa gì?)"}, {"id": "hsk2-d2-1", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "公交车", "pinyin": "gōngjiāochē", "pinyin_clean": "gongjiaoche", "hanviet": "Công Giao Xa", "meaning": "Xe buýt, xe công cộng", "radical": "", "mnemonic": "", "example": "我坐公交车去学校。 (Wǒ zuò gōngjiāochē qù xuéxiào. - Tôi đi xe buýt đến trường.)"}, {"id": "hsk2-d2-2", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "但", "pinyin": "dàn", "pinyin_clean": "dan", "hanviet": "Đản", "meaning": "Nhưng, nhưng mà", "radical": "", "mnemonic": "", "example": "我想去，但没有时间。 (Wǒ xiǎng qù, dàn méiyǒu shíjiān. - Tôi muốn đi nhưng không có thời gian.)"}, {"id": "hsk2-d2-3", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "车站", "pinyin": "chēzhàn", "pinyin_clean": "chezhan", "hanviet": "Xa Trạm", "meaning": "Trạm xe, bến xe", "radical": "", "mnemonic": "", "example": "我在车站等你。 (Wǒ zài chēzhàn děng nǐ. - Tôi đợi bạn ở trạm xe.)"}, {"id": "hsk2-d2-4", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "远", "pinyin": "yuǎn", "pinyin_clean": "yuan", "hanviet": "Viễn", "meaning": "Xa, khoảng cách xa", "radical": "", "mnemonic": "", "example": "我家离学校不远。 (Wǒ jiā lí xuéxiào bù yuǎn. - Nhà tôi cách trường không xa.)"}, {"id": "hsk2-d2-5", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "打车", "pinyin": "dǎchē", "pinyin_clean": "dache", "hanviet": "Đả Xa", "meaning": "Bắt xe taxi", "radical": "", "mnemonic": "", "example": "太晚了，我们打车吧。 (Tài wǎn le, wǒmen dǎchē ba. - Muộn quá rồi, chúng ta bắt taxi nhé.)"}, {"id": "hsk2-d2-6", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "还是", "pinyin": "háishì", "pinyin_clean": "haishi", "hanviet": "Hoàn Thị", "meaning": "Hay là, vẫn là", "radical": "", "mnemonic": "", "example": "你喝茶还是喝咖啡？ (Nǐ hē chá háishì hē kāfēi? - Bạn uống trà hay uống cà phê?)"}, {"id": "hsk2-d2-7", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "北京大学", "pinyin": "Běijīng Dàxué", "pinyin_clean": "beijingdaxue", "hanviet": "Bắc Kinh Đại Học", "meaning": "Đại học Bắc Kinh", "radical": "", "mnemonic": "", "example": "他在北京大学学习。 (Tā zài Běijīng Dàxué xuéxí. - Cậu ấy học ở Đại học Bắc Kinh.)"}, {"id": "hsk2-d2-8", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "啊", "pinyin": "a", "pinyin_clean": "a", "hanviet": "A", "meaning": "Thán từ cảm thán (À, nhé)", "radical": "", "mnemonic": "", "example": "好啊，我们一起去！ (Hǎo a, wǒmen yìqǐ qù! - Được nhé, chúng ta cùng đi!)"}, {"id": "hsk2-d2-9", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "万", "pinyin": "wàn", "pinyin_clean": "wan", "hanviet": "Vạn", "meaning": "Mười nghìn (10.000)", "radical": "", "mnemonic": "", "example": "这本书一万字。 (Zhè běn shū yí wàn zì. - Cuốn sách này mười nghìn chữ.)"}, {"id": "hsk2-d2-10", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "名", "pinyin": "míng", "pinyin_clean": "ming", "hanviet": "Danh", "meaning": "Người (Lượng từ cho sinh viên, bác sĩ)", "radical": "", "mnemonic": "", "example": "一名医生。 (Yì míng yīshēng. - Một vị bác sĩ.)"}, {"id": "hsk2-d2-11", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "网上", "pinyin": "wǎngshang", "pinyin_clean": "wangshang", "hanviet": "Võng Thượng", "meaning": "Trên mạng, internet", "radical": "", "mnemonic": "", "example": "我在网上买衣服。 (Wǒ zài wǎngshang mǎi yīfu. - Tôi mua quần áo trên mạng.)"}, {"id": "hsk2-d2-12", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "外国", "pinyin": "wàiguó", "pinyin_clean": "waiguo", "hanviet": "Ngoại Quốc", "meaning": "Nước ngoài", "radical": "", "mnemonic": "", "example": "他是外国留学生。 (Tā shì wàiguó liúxuéshēng. - Cậu ấy là lưu học sinh nước ngoài.)"}, {"id": "hsk2-d2-13", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "间", "pinyin": "jiān", "pinyin_clean": "jian", "hanviet": "Gian", "meaning": "Căn, phòng (Lượng từ phòng)", "radical": "", "mnemonic": "", "example": "一间教室。 (Yì jiān jiàoshì. - Một phòng học.)"}, {"id": "hsk2-d2-14", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "教室", "pinyin": "jiàoshì", "pinyin_clean": "jiaoshi", "hanviet": "Giáo Thất", "meaning": "Phòng học, lớp học", "radical": "", "mnemonic": "", "example": "同学们在教室里。 (Tóngxuémen zài jiàoshì li. - Các bạn học sinh ở trong lớp học.)"}, {"id": "hsk2-d2-15", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "票", "pinyin": "piào", "pinyin_clean": "piao", "hanviet": "Phiếu", "meaning": "Vé (vé xe, vé xem phim)", "radical": "", "mnemonic": "", "example": "我买了两张车票。 (Wǒ mǎi le liǎng zhāng chēpiào. - Tôi đã mua hai tấm vé xe.)"}, {"id": "hsk2-d2-16", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "别", "pinyin": "bié", "pinyin_clean": "bie", "hanviet": "Biệt", "meaning": "Đừng, không được", "radical": "", "mnemonic": "", "example": "别说话，认真听！ (Bié shuōhuà, rènzhēn tīng! - Đừng nói chuyện, tập trung nghe!)"}, {"id": "hsk2-d2-17", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "过来", "pinyin": "guòlái", "pinyin_clean": "guolai", "hanviet": "Quá Lai", "meaning": "Băng qua, lại đây", "radical": "", "mnemonic": "", "example": "请你过来一下。 (Qǐng nǐ guòlái yíxià. - Mời bạn qua đây một chút.)"}, {"id": "hsk2-d3-1", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "回来", "pinyin": "huílái", "pinyin_clean": "huilai", "hanviet": "Hồi Lai", "meaning": "Trở về, về đây", "radical": "", "mnemonic": "", "example": "你什么时候回来？ (Nǐ shénme shíhou huílái? - Khi nào bạn trở về?)"}, {"id": "hsk2-d3-2", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "这么", "pinyin": "zhème", "pinyin_clean": "zheme", "hanviet": "Giá Ma", "meaning": "Thế này, như thế này", "radical": "", "mnemonic": "", "example": "你怎么这么高兴？ (Nǐ zěnme zhème gāoxìng? - Sao bạn lại vui như thế này?)"}, {"id": "hsk2-d3-3", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "完", "pinyin": "wán", "pinyin_clean": "wan", "hanviet": "Hoàn", "meaning": "Xong, hoàn thành", "radical": "", "mnemonic": "", "example": "我做完作业了。 (Wǒ zuò wán zuòyè le. - Tôi làm xong bài tập rồi.)"}, {"id": "hsk2-d3-4", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "一起", "pinyin": "yìqǐ", "pinyin_clean": "yiqi", "hanviet": "Nhất Khởi", "meaning": "Cùng nhau, cùng", "radical": "", "mnemonic": "", "example": "我们一起去吃饭吧。 (Wǒmen yìqǐ qù chī fàn ba. - Chúng ta cùng đi ăn cơm nhé.)"}, {"id": "hsk2-d3-5", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "出去", "pinyin": "chūqù", "pinyin_clean": "chuqu", "hanviet": "Xuất Khứ", "meaning": "Đi ra ngoài", "radical": "", "mnemonic": "", "example": "他已经出去了。 (Tā yǐjīng chūqù le. - Cậu ấy đã đi ra ngoài rồi.)"}, {"id": "hsk2-d3-6", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "洗", "pinyin": "xǐ", "pinyin_clean": "xi", "hanviet": "Tẩy", "meaning": "Rửa, giặt", "radical": "", "mnemonic": "", "example": "吃饭前要洗手。 (Chī fàn qián yào xǐ shǒu. - Trước khi ăn cơm phải rửa tay.)"}, {"id": "hsk2-d3-7", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "自己", "pinyin": "zìjǐ", "pinyin_clean": "ziji", "hanviet": "Tự Kỷ", "meaning": "Tự mình, bản thân", "radical": "", "mnemonic": "", "example": "我自己去做。 (Wǒ zìjǐ qù zuò. - Tự tôi đi làm.)"}, {"id": "hsk2-d3-8", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "拿", "pinyin": "ná", "pinyin_clean": "na", "hanviet": "Nã", "meaning": "Cầm, nắm, lấy", "radical": "", "mnemonic": "", "example": "请帮我拿一下包。 (Qǐng bāng wǒ ná yíxià bāo. - Xin giúp tôi cầm túi một chút.)"}, {"id": "hsk2-d3-9", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "手", "pinyin": "shǒu", "pinyin_clean": "shou", "hanviet": "Thủ", "meaning": "Bàn tay, tay", "radical": "", "mnemonic": "", "example": "我的手很冷。 (Wǒ de shǒu hěn lěng. - Bàn tay tôi rất lạnh.)"}, {"id": "hsk2-d3-10", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "为什么", "pinyin": "wèishénme", "pinyin_clean": "weishenme", "hanviet": "Vi Thập Ma", "meaning": "Tại sao, vì sao", "radical": "", "mnemonic": "", "example": "你为什么没去？ (Nǐ wèishénme méi qù? - Tại sao bạn không đi?)"}, {"id": "hsk2-d3-11", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "不错", "pinyin": "búcuò", "pinyin_clean": "bucuo", "hanviet": "Bất Thác", "meaning": "Không tệ, khá tốt", "radical": "", "mnemonic": "", "example": "这个电影不错。 (Zhè gè diànyǐng búcuò. - Bộ phim này không tệ.)"}, {"id": "hsk2-d3-12", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "送", "pinyin": "sòng", "pinyin_clean": "song", "hanviet": "Tống", "meaning": "Tặng, biếu, tiễn", "radical": "", "mnemonic": "", "example": "这朵花送给你。 (Zhè duǒ huā sòng gěi nǐ. - Bông hoa này tặng bạn.)"}, {"id": "hsk2-d3-13", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "回去", "pinyin": "huíqù", "pinyin_clean": "huiqu", "hanviet": "Hồi Khứ", "meaning": "Trở về, đi về", "radical": "", "mnemonic": "", "example": "时间不早了，我该回去了。 (Shíjiān bù zǎo le, wǒ gāi huíqù le. - Thời gian không còn sớm, tôi phải về rồi.)"}, {"id": "hsk2-d3-14", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "每", "pinyin": "měi", "pinyin_clean": "mei", "hanviet": "Mỗi", "meaning": "Mỗi, mọi", "radical": "", "mnemonic": "", "example": "每个人都有自己的名字。 (Měi gè rén dōu yǒu zìjǐ de míngzi. - Mỗi người đều có tên riêng.)"}, {"id": "hsk2-d3-15", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "累", "pinyin": "lèi", "pinyin_clean": "lei", "hanviet": "Lụy", "meaning": "Mệt, mệt mỏi", "radical": "", "mnemonic": "", "example": "今天工作太累了。 (Jīntiān gōngzuò tài lèi le. - Hôm nay làm việc mệt quá.)"}, {"id": "hsk2-d3-16", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "西安", "pinyin": "Xī'ān", "pinyin_clean": "xian", "hanviet": "Tây An", "meaning": "Thành phố Tây An", "radical": "", "mnemonic": "", "example": "西安有很多历史古迹。 (Xī'ān yǒu hěn duō lìshǐ gǔjì. - Tây An có rất nhiều di tích lịch sử.)"}, {"id": "hsk2-d4-1", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "西瓜", "pinyin": "xīguā", "pinyin_clean": "xigua", "hanviet": "Tây Qua", "meaning": "Dưa hấu", "radical": "", "mnemonic": "", "example": "夏天的西瓜非常甜。 (Xiàtiān de xīguā fēicháng tián. - Dưa hấu mùa hè cực kỳ ngọt.)"}, {"id": "hsk2-d4-2", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "甜", "pinyin": "tián", "pinyin_clean": "tian", "hanviet": "Điềm", "meaning": "Ngọt, vị ngọt", "radical": "", "mnemonic": "", "example": "这个苹果真甜！ (Zhè gè píngguǒ zhēn tián! - Quả táo này thật ngọt!)"}, {"id": "hsk2-d4-3", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "真", "pinyin": "zhēn", "pinyin_clean": "zhen", "hanviet": "Chân", "meaning": "Thật, quả thật", "radical": "", "mnemonic": "", "example": "你真棒！ (Nǐ zhēn bàng! - Bạn thật giỏi!)"}, {"id": "hsk2-d4-4", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "条", "pinyin": "tiáo", "pinyin_clean": "tiao", "hanviet": "Điều", "meaning": "Chiếc, sợi, con (quần, cá, đường)", "radical": "", "mnemonic": "", "example": "一条红色的裤子。 (Yì tiáo hóngsè de kùzi. - Một chiếc quần màu đỏ.)"}, {"id": "hsk2-d4-5", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "裤子", "pinyin": "kùzi", "pinyin_clean": "kuzi", "hanviet": "Khố Tử", "meaning": "Quần, chiếc quần", "radical": "", "mnemonic": "", "example": "这条裤子很合适。 (Zhè tiáo kùzi hěn héshì. - Chiếc quần này rất vừa vặn.)"}, {"id": "hsk2-d4-6", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "衬衫", "pinyin": "chènshān", "pinyin_clean": "chenshan", "hanviet": "Sấn Sam", "meaning": "Áo sơ mi", "radical": "", "mnemonic": "", "example": "他穿一件白衬衫。 (Tā chuān yí jiàn bái chènshān. - Anh ấy mặc một chiếc áo sơ mi trắng.)"}, {"id": "hsk2-d4-7", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "元", "pinyin": "yuán", "pinyin_clean": "yuan", "hanviet": "Nguyên", "meaning": "Tệ (Đơn vị tiền tệ Trung Quốc)", "radical": "", "mnemonic": "", "example": "一共一百元。 (Yígòng yì bǎi yuán. - Tổng cộng 100 tệ.)"}, {"id": "hsk2-d4-8", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "旗袍", "pinyin": "qípáo", "pinyin_clean": "qipao", "hanviet": "Kỳ Báo", "meaning": "Áo sườn xám", "radical": "", "mnemonic": "", "example": "中国旗袍非常美。 (Zhōngguó qípáo fēicháng měi. - Áo sườn xám Trung Quốc rất đẹp.)"}, {"id": "hsk2-d4-9", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "买", "pinyin": "mǎi", "pinyin_clean": "mai", "hanviet": "Mãi", "meaning": "Mua", "radical": "", "mnemonic": "", "example": "你想买什么？ (Nǐ xiǎng mǎi shénme? - Bạn muốn mua gì?)"}, {"id": "hsk2-d4-10", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "试", "pinyin": "shì", "pinyin_clean": "shi", "hanviet": "Thử", "meaning": "Thử (thử quần áo)", "radical": "", "mnemonic": "", "example": "我能试试吗？ (Wǒ néng shìshi ma? - Tôi thử một chút được không?)"}, {"id": "hsk2-d4-11", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "合适", "pinyin": "héshì", "pinyin_clean": "heshi", "hanviet": "Hợp Thích", "meaning": "Thích hợp, vừa vặn", "radical": "", "mnemonic": "", "example": "这件衣服很合适。 (Zhè jiān yīfu hěn héshì. - Bộ quần áo này rất vừa vặn.)"}, {"id": "hsk2-d4-12", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "重", "pinyin": "zhòng", "pinyin_clean": "zhong", "hanviet": "Trọng", "meaning": "Nặng, trọng lượng lớn", "radical": "", "mnemonic": "", "example": "这个箱子太重了。 (Zhè gè xiāngzi tài zhòng le. - Chiếc chiếc vali này nặng quá.)"}, {"id": "hsk2-d4-13", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "轻", "pinyin": "qīng", "pinyin_clean": "qing", "hanviet": "Khinh", "meaning": "Nhẹ, trọng lượng nhỏ", "radical": "", "mnemonic": "", "example": "这个包很轻。 (Zhè gè bāo hěn qīng. - Cái túi này rất nhẹ.)"}, {"id": "hsk2-d4-14", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "便宜", "pinyin": "piányi", "pinyin_clean": "pianyi", "hanviet": "Tiện Nghi", "meaning": "Rẻ, giá rẻ", "radical": "", "mnemonic": "", "example": "苹果很便宜。 (Píngguǒ hěn piányi. - Táo rất rẻ.)"}, {"id": "hsk2-d4-15", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "贵", "pinyin": "guì", "pinyin_clean": "gui", "hanviet": "Quý", "meaning": "Đắt, đắt tiền", "radical": "", "mnemonic": "", "example": "太贵了，便宜一点吧。 (Tài guì le, piányi yìdiǎn ba. - Đắt quá, rẻ một chút đi.)"}, {"id": "hsk2-d5-1", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "外面", "pinyin": "waimian", "pinyin_clean": "waimian", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-2", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "准备", "pinyin": "zhunbei", "pinyin_clean": "zhunbei", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-3", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "就", "pinyin": "jiu", "pinyin_clean": "jiu", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-4", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "鱼", "pinyin": "yu", "pinyin_clean": "yu", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-5", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "吧", "pinyin": "ba", "pinyin_clean": "ba", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-6", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "件", "pinyin": "jian", "pinyin_clean": "jian", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-7", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "还", "pinyin": "hai", "pinyin_clean": "hai", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-8", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "可以", "pinyin": "keyi", "pinyin_clean": "keyi", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-9", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "不错", "pinyin": "bucuo", "pinyin_clean": "bucuo", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-10", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "考试", "pinyin": "kaoshi", "pinyin_clean": "kaoshi", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-11", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "意思", "pinyin": "yisi", "pinyin_clean": "yisi", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-12", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "咖啡", "pinyin": "kafei", "pinyin_clean": "kafei", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d5-13", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "对", "pinyin": "dui", "pinyin_clean": "dui", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-1", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "门", "pinyin": "men", "pinyin_clean": "men", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-2", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "外", "pinyin": "wai", "pinyin_clean": "wai", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-3", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "自行车", "pinyin": "zixingche", "pinyin_clean": "zixingche", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-4", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "羊肉", "pinyin": "yangrou", "pinyin_clean": "yangrou", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-5", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "好吃", "pinyin": "haochi", "pinyin_clean": "haochi", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-6", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "面条", "pinyin": "miantiao", "pinyin_clean": "miantiao", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-7", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "打篮球", "pinyin": "dalanqiu", "pinyin_clean": "dalanqiu", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-8", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "因为", "pinyin": "yinwei", "pinyin_clean": "yinwei", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-9", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "所以", "pinyin": "suoyi", "pinyin_clean": "suoyi", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-10", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "游泳", "pinyin": "youyong", "pinyin_clean": "youyong", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-11", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "经常", "pinyin": "jingchang", "pinyin_clean": "jingchang", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-12", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "公斤", "pinyin": "gongjin", "pinyin_clean": "gongjin", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d6-13", "level": "HSK 2", "day": 6, "tag": "HSK 2 • Ngày 6", "hanzi": "姐姐", "pinyin": "jiejie", "pinyin_clean": "jiejie", "hanviet": "", "meaning": "", "radical": "", "mnemonic": "", "example": ""}, {"id": "hsk2-d7-1", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "生日", "pinyin": "shēngrì", "pinyin_clean": "shengri", "hanviet": "Sinh Nhật", "meaning": "Sinh nhật, ngày sinh", "radical": "", "mnemonic": "", "example": "今天是我的生日。 (Jīntiān shì wǒ de shēngrì. - Hôm nay là sinh nhật tôi.)"}, {"id": "hsk2-d7-2", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "快乐", "pinyin": "kuàilè", "pinyin_clean": "kuaile", "hanviet": "Khoái Lạc", "meaning": "Vui vẻ, khoái lạc, hạnh phúc", "radical": "", "mnemonic": "", "example": "祝你生日快乐！ (Zhù nǐ shēngrì kuàilè! - Chúc bạn sinh nhật vui vẻ!)"}, {"id": "hsk2-d7-3", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "送", "pinyin": "sòng", "pinyin_clean": "song", "hanviet": "Tống", "meaning": "Tặng, biếu, tiễn", "radical": "", "mnemonic": "", "example": "我送你一个生日礼物。 (Wǒ sòng nǐ yí gè shēngrì lǐwù. - Tôi tặng bạn một món quà sinh nhật.)"}, {"id": "hsk2-d7-4", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "礼物", "pinyin": "lǐwù", "pinyin_clean": "liwu", "hanviet": "Lễ Vật", "meaning": "Quà tặng, lễ vật", "radical": "", "mnemonic": "", "example": "这个礼物非常漂亮。 (Zhè gè lǐwù fēicháng piàoliang. - Món quà này cực kỳ đẹp.)"}, {"id": "hsk2-d7-5", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "晚上", "pinyin": "wǎnshang", "pinyin_clean": "wanshang", "hanviet": "Vãn Thượng", "meaning": "Buổi tối, ban đêm", "radical": "", "mnemonic": "", "example": "今天晚上我们一起吃蛋糕。 (Jīntiān wǎnshang wǒmen yìqǐ chī dàngāo. - Tối nay chúng ta cùng ăn bánh kem.)"}, {"id": "hsk2-d7-6", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "蛋糕", "pinyin": "dàngāo", "pinyin_clean": "dangao", "hanviet": "Đản Cao", "meaning": "Bánh kem, bánh ngọt", "radical": "", "mnemonic": "", "example": "我买了一个生日蛋糕。 (Wǒ mǎi le yí gè shēngrì dàngāo. - Tôi đã mua một chiếc bánh sinh nhật.)"}, {"id": "hsk2-d7-7", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "问", "pinyin": "wèn", "pinyin_clean": "wen", "hanviet": "Vấn", "meaning": "Hỏi, hỏi thăm", "radical": "", "mnemonic": "", "example": "我想问你一个问题。 (Wǒ xiǎng wèn nǐ yí gè wèntí. - Tôi muốn hỏi bạn một câu hỏi.)"}, {"id": "hsk2-d7-8", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "非常", "pinyin": "fēicháng", "pinyin_clean": "feichang", "hanviet": "Phi Thường", "meaning": "Cực kỳ, vô cùng, rất", "radical": "", "mnemonic": "", "example": "我非常高兴参加你的聚会。 (Wǒ fēicháng gāoxìng cānjiā nǐ de jùhuì. - Tôi cực kỳ vui mừng dự tiệc của bạn.)"}, {"id": "hsk2-d7-9", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "开始", "pinyin": "kāishǐ", "pinyin_clean": "kaishi", "hanviet": "Khai Thủy", "meaning": "Bắt đầu, mở đầu", "radical": "", "mnemonic": "", "example": "聚会晚上七点开始。 (Jùhuì wǎnshang qī diǎn kāishǐ. - Buổi tiệc bắt đầu lúc 7 giờ tối.)"}, {"id": "hsk2-d7-10", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "长", "pinyin": "cháng / zhǎng", "pinyin_clean": "changzhang", "hanviet": "Trường / Trưởng", "meaning": "Dài (cháng) / Lớn lên, trưởng thành (zhǎng)", "radical": "", "mnemonic": "", "example": "生日那天要吃长寿面。 (Shēngrì nà tiān yào chī chángshòumiàn. - Sinh nhật phải ăn mì trường thọ.)"}, {"id": "hsk2-d7-11", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "希望", "pinyin": "xīwàng", "pinyin_clean": "xiwang", "hanviet": "Hi Vọng", "meaning": "Hy vọng, mong muốn", "radical": "", "mnemonic": "", "example": "我希望你每天都快乐。 (Wǒ xīwàng nǐ měitiān dōu kuàilè. - Tôi hy vọng bạn mỗi ngày đều vui vẻ.)"}, {"id": "hsk2-d7-12", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "参加", "pinyin": "cānjiā", "pinyin_clean": "canjia", "hanviet": "Tham Gia", "meaning": "Tham gia, dự (tiệc, cuộc họp)", "radical": "", "mnemonic": "", "example": "你能来参加我的生日聚会吗？ (Nǐ néng lái cānjiā wǒ de shēngrì jùhuì ma? - Bạn dự tiệc sinh nhật tôi được không?)"}, {"id": "hsk2-d7-13", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "聚会", "pinyin": "jùhuì", "pinyin_clean": "juhui", "hanviet": "Tụ Hội", "meaning": "Tiệc tùng, tụ họp, buổi gặp mặt", "radical": "", "mnemonic": "", "example": "欢迎来到我的生日聚会！ (Huānyíng lái dào wǒ de shēngrì jùhuì! - Chào mừng đến tiệc sinh nhật tôi!)"}, {"id": "hsk2-d7-14", "level": "HSK 2", "day": 7, "tag": "HSK 2 • Ngày 7", "hanzi": "祝", "pinyin": "zhù", "pinyin_clean": "zhu", "hanviet": "Chúc", "meaning": "Chúc, cầu chúc", "radical": "", "mnemonic": "", "example": "祝你身体健康，学习进步！ (Zhù nǐ shēntǐ jiànkāng, xuéxí jìnbù! - Chúc bạn sức khỏe, học tập tiến bộ!)"}];
 
-        let activeView = 'srs'; // 'srs' or 'dict'
-        let srsFilter = 'all';  // 'all', 'hsk1', 'hsk2'
-        let srsState = { cardState: {}, lastReviewDate: new Date().toISOString().split('T')[0] };
+        let activeView = 'template';
+        let maskState = { pinyin: false, meaning: false, hanzi: false };
+
+        let srsState = { cardState: {}, streak: 1, todayLearned: 0, lastDate: new Date().toISOString().split('T')[0] };
         let srsQueue = [];
         let srsCurrentIdx = 0;
-        let srsIsFlipped = false;
-
-        function switchView(view) {
-            activeView = view;
-            const btnSrs = document.getElementById('nav-btn-srs');
-            const btnDict = document.getElementById('nav-btn-dict');
-            const secSrs = document.getElementById('sec-srs-view');
-            const secDict = document.getElementById('sec-dict-view');
-
-            if (view === 'srs') {
-                btnSrs.className = "flex-1 py-1.5 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition";
-                btnDict.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
-                secSrs.classList.remove('hidden');
-                secDict.classList.add('hidden');
-            } else {
-                btnDict.className = "flex-1 py-1.5 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition";
-                btnSrs.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
-                secDict.classList.remove('hidden');
-                secSrs.classList.add('hidden');
-                renderDictionary();
-            }
-        }
 
         function loadSrsState() {
             try {
-                const saved = localStorage.getItem('cece_hsk_srs_standalone_v1');
+                const saved = localStorage.getItem('cece_srs_clairevu_v1');
                 if (saved) srsState = JSON.parse(saved);
             } catch(e) { console.error("Failed to load SRS state", e); }
             if (!srsState.cardState) srsState.cardState = {};
+
+            const today = new Date().toISOString().split('T')[0];
+            if (srsState.lastDate !== today) {
+                srsState.todayLearned = 0;
+                srsState.lastDate = today;
+            }
+
+            const streakBadge = document.getElementById('streak-badge');
+            if (streakBadge) streakBadge.textContent = '🔥 ' + (srsState.streak || 1) + ' Ngày';
+
+            updateJournalProgress();
         }
 
         function saveSrsState() {
             try {
-                localStorage.setItem('cece_hsk_srs_standalone_v1', JSON.stringify(srsState));
+                localStorage.setItem('cece_srs_clairevu_v1', JSON.stringify(srsState));
             } catch(e) { console.error("Failed to save SRS state", e); }
+            updateJournalProgress();
         }
 
-        function confirmResetSrs() {
-            if (confirm("Chị có chắc chắn muốn đặt lại toàn bộ tiến độ ôn tập SRS không?")) {
-                srsState = { cardState: {}, lastReviewDate: new Date().toISOString().split('T')[0] };
-                saveSrsState();
-                initSrsSession();
+        function updateJournalProgress() {
+            const count = srsState.todayLearned || 0;
+            const target = 30;
+            const pct = Math.min(100, Math.round((count / target) * 100));
+
+            const txt = document.getElementById('journal-progress-text');
+            const bar = document.getElementById('journal-progress-bar');
+            const stamp = document.getElementById('journal-stamp');
+
+            if (txt) txt.textContent = count + ' / ' + target + ' từ';
+            if (bar) bar.style.width = pct + '%';
+
+            if (stamp) {
+                if (count >= 20) stamp.classList.remove('hidden');
+                else stamp.classList.add('hidden');
             }
         }
 
-        function setSrsFilter(flt) {
-            srsFilter = flt;
-            ['all', 'hsk1', 'hsk2'].forEach(f => {
-                const btn = document.getElementById('srs-flt-' + f);
-                if (btn) {
-                    btn.className = (f === flt) ? "flex-1 py-1 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition" : "flex-1 py-1 rounded-lg text-slate-300 hover:bg-slate-800 transition";
+        function switchView(view) {
+            activeView = view;
+            ['template', 'journal', 'srs'].forEach(v => {
+                const btn = document.getElementById('nav-btn-' + v);
+                const sec = document.getElementById('sec-' + v + '-view');
+                if (v === view) {
+                    if (btn) btn.className = "flex-1 py-1.5 px-2 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition whitespace-nowrap";
+                    if (sec) sec.classList.remove('hidden');
+                } else {
+                    if (btn) btn.className = "flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap";
+                    if (sec) sec.classList.add('hidden');
                 }
             });
-            initSrsSession();
+
+            if (view === 'template') renderTemplateSheet();
+            if (view === 'srs') initSrsSession();
         }
 
-        function getFilteredBank() {
-            if (srsFilter === 'hsk1') return FULL_SRS_BANK.filter(w => w.level === 'HSK 1');
-            if (srsFilter === 'hsk2') return FULL_SRS_BANK.filter(w => w.level === 'HSK 2');
-            return FULL_SRS_BANK;
+        function toggleMask(type) {
+            maskState[type] = !maskState[type];
+            const btn = document.getElementById('btn-mask-' + (type === 'pinyin' ? 'py' : (type === 'meaning' ? 'vi' : 'hz')));
+            if (btn) {
+                btn.className = maskState[type] ? "py-1 px-2 rounded-lg bg-blue-900 text-white font-bold border border-blue-800" : "py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300";
+            }
+            renderTemplateSheet();
+        }
+
+        function startLessonPlan(lessonFilterKey) {
+            const select = document.getElementById('template-lesson-filter');
+            if (select) select.value = lessonFilterKey;
+            switchView('template');
+        }
+
+        function renderTemplateSheet() {
+            const container = document.getElementById('template-sheet-container');
+            if (!container) return;
+
+            const filterVal = document.getElementById('template-lesson-filter').value;
+            let items = FULL_SRS_BANK;
+
+            if (filterVal === 'hsk2-d5') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 2' && w.day === 5);
+            else if (filterVal === 'hsk2-d6') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 2' && w.day === 6);
+            else if (filterVal === 'hsk2-d7') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 2' && w.day === 7);
+            else if (filterVal === 'hsk2-all') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 2');
+            else if (filterVal === 'hsk1-all') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 1');
+
+            container.innerHTML = items.map((w, idx) => {
+                const st = srsState.cardState[w.id] || {};
+                const ticks = st.ticks || {};
+
+                return `
+                    <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs space-y-2.5">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                            <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${w.tag}</span>
+                            <span class="text-[10px] text-slate-400 font-semibold">Từ ${idx + 1} / ${items.length}</span>
+                        </div>
+
+                        <!-- Active Recall Word Grid -->
+                        <div class="grid grid-cols-3 gap-2 items-center text-center">
+                            <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                                <span class="text-[9px] text-slate-400 block font-bold">CHỮ HÁN</span>
+                                <span class="zh text-xl font-black text-slate-900 ${maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                                <span class="text-[9px] text-slate-400 block font-bold">PINYIN</span>
+                                <span class="text-xs font-bold text-emerald-700 font-mono ${maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                                <span class="text-[9px] text-slate-400 block font-bold">NGHĨA VIỆT</span>
+                                <span class="text-xs font-bold text-blue-900 ${maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                            </div>
+                        </div>
+
+                        ${w.mnemonic ? `<div class="text-[11px] text-amber-950 bg-amber-50 p-2.5 rounded-xl border border-amber-200 leading-relaxed"><strong>💡 Mẹo nhớ:</strong> ${w.mnemonic}</div>` : ''}
+
+                        <!-- Claire Vu 6 Review Milestones Checkboxes -->
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-extrabold text-slate-500 uppercase tracking-wider block text-center">MỐC ÔN CLAIRE VU (SPACED REPETITION):</span>
+                            <div class="grid grid-cols-6 gap-1 text-center">
+                                ${[1, 2, 4, 7, 14, 30].map(day => `
+                                    <button onclick="toggleClaireTick('${w.id}', ${day})" class="py-1 rounded-lg text-[10px] font-extrabold transition active:scale-95 ${ticks[day] ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-300'}">
+                                        ${ticks[day] ? '✓' : ''} D${day}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleClaireTick(wordId, day) {
+            let st = srsState.cardState[wordId] || {};
+            if (!st.ticks) st.ticks = {};
+            st.ticks[day] = !st.ticks[day];
+            srsState.cardState[wordId] = st;
+
+            srsState.todayLearned = (srsState.todayLearned || 0) + 1;
+            saveSrsState();
+            renderTemplateSheet();
         }
 
         function initSrsSession() {
             loadSrsState();
-            const bank = getFilteredBank();
-            const today = new Date().toISOString().split('T')[0];
-
-            let dueCards = [];
-            let newCards = [];
-            let masteredCount = 0;
-
-            bank.forEach(item => {
-                const st = srsState.cardState[item.id];
-                if (!st) {
-                    newCards.push(item);
-                } else if (st.status === 'mastered') {
-                    masteredCount++;
-                    if (st.dueDate <= today) dueCards.push(item);
-                } else {
-                    if (st.dueDate <= today) dueCards.push(item);
-                }
-            });
-
-            srsQueue = [...dueCards, ...newCards.slice(0, 15)];
+            srsQueue = FULL_SRS_BANK.slice(0, 20);
             srsCurrentIdx = 0;
-            srsIsFlipped = false;
-
-            const elDue = document.getElementById('srs-cnt-due');
-            const elNew = document.getElementById('srs-cnt-new');
-            const elMast = document.getElementById('srs-cnt-mastered');
-
-            if (elDue) elDue.textContent = dueCards.length;
-            if (elNew) elNew.textContent = newCards.length;
-            if (elMast) elMast.textContent = masteredCount;
-
             renderSrsCard();
         }
 
@@ -257,14 +370,13 @@
             const box = document.getElementById('srs-card-box');
             if (!box) return;
 
-            if (srsQueue.length === 0 || srsCurrentIdx >= srsQueue.length) {
+            if (srsCurrentIdx >= srsQueue.length) {
                 box.innerHTML = `
                     <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-md space-y-3">
                         <div class="text-4xl">🎉</div>
-                        <h3 class="text-base font-extrabold text-blue-900">Hoàn Thành Ôn Tập Hôm Nay!</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Chị đã hoàn thành toàn bộ các thẻ từ vựng đến hạn ôn đợt này rồi ạ. Giỏi quá! 👏</p>
-                        <button onclick="initSrsSession()" class="px-5 py-2.5 bg-blue-900 text-white font-bold text-xs rounded-xl shadow-md hover:bg-blue-800 transition active:scale-95">
-                            🔄 Tiếp tục luyện tập thêm
+                        <h3 class="text-base font-extrabold text-blue-900">Hoàn Thành Đợt Ôn SRS!</h3>
+                        <button onclick="initSrsSession()" class="px-5 py-2.5 bg-blue-900 text-white font-bold text-xs rounded-xl shadow-md">
+                            🔄 Tiếp tục ôn thêm
                         </button>
                     </div>
                 `;
@@ -272,159 +384,54 @@
             }
 
             const word = srsQueue[srsCurrentIdx];
-            srsIsFlipped = false;
-
-            let radicalHtml = word.radical ? `<div class="text-amber-900"><strong>🧩 Bộ thủ:</strong> ${word.radical}</div>` : '';
-            let mnemonicHtml = word.mnemonic ? `<div class="text-amber-950 leading-relaxed"><strong>💡 Mẹo nhớ chiết tự:</strong> ${word.mnemonic}</div>` : '';
-            let exampleHtml = word.example ? `
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
-                    <span class="font-bold text-slate-900 block">📖 VÍ DỤ MINH HỌA:</span>
-                    <div class="zh text-slate-900 font-medium">${word.example}</div>
-                </div>
-            ` : '';
-
             box.innerHTML = `
                 <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-md space-y-4">
-                    <div class="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-100">
+                    <div class="flex items-center justify-between text-xs text-slate-500 border-b border-slate-100 pb-2">
                         <span class="bg-blue-100 text-blue-800 font-bold px-2.5 py-0.5 rounded-full text-[10px]">${word.tag}</span>
-                        <span class="font-semibold">Thẻ <strong class="text-blue-900">${srsCurrentIdx + 1}</strong> / ${srsQueue.length}</span>
+                        <span>Thẻ ${srsCurrentIdx + 1} / ${srsQueue.length}</span>
                     </div>
 
-                    <div class="text-center py-4 space-y-3">
+                    <div class="text-center py-4 space-y-2">
                         <div class="zh text-5xl font-black text-slate-900 tracking-wider flex items-center justify-center gap-2">
                             <span>${word.hanzi}</span>
-                            <button onclick="playWordAudio('${word.hanzi}')" class="w-9 h-9 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-900 flex items-center justify-center text-lg active:scale-90 transition border border-blue-200" title="Phát âm">
-                                🔊
-                            </button>
+                            <button onclick="playWordAudio('${word.hanzi}')" class="w-9 h-9 rounded-full bg-blue-50 text-blue-900 text-lg border border-blue-200">🔊</button>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <div class="relative">
-                            <input type="text" id="srs-typing-input" onkeyup="handleSrsTyping(event)" placeholder="✍️ Gõ Pinyin (vd: kaoya) hoặc Chữ Hán..." autocomplete="off" autocorrect="off" autocapitalize="off" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-sm font-medium outline-none transition pr-10">
-                            <span id="srs-typing-icon" class="absolute right-3 top-2.5 text-base"></span>
-                        </div>
-                        <div id="srs-typing-feedback" class="hidden text-xs p-2 rounded-lg font-bold text-center"></div>
+                        <input type="text" id="srs-typing-input" onkeyup="handleSrsTyping(event)" placeholder="✍️ Gõ Pinyin (vd: kaoya) hoặc Chữ Hán..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
                     </div>
 
-                    <button onclick="flipSrsCard()" id="btn-srs-flip" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs shadow-xs transition flex items-center justify-center gap-1.5 active:scale-98">
-                        <span>🔍 Xem Đáp Án & Mẹo Nhớ Chiết Tự</span>
-                    </button>
-
                     <div id="srs-card-back" class="hidden space-y-3 pt-3 border-t border-slate-200">
-                        <div class="grid grid-cols-2 gap-2 text-center bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                            <div>
-                                <span class="text-[10px] text-slate-400 block font-bold">PHIÊN ÂM PINYIN</span>
-                                <span class="text-sm font-bold text-emerald-700 font-mono">${word.pinyin}</span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-400 block font-bold">HÁN VIỆT</span>
-                                <span class="text-xs font-bold text-slate-700">${word.hanviet}</span>
-                            </div>
-                        </div>
+                        <div class="text-center font-bold text-emerald-700 font-mono text-sm">${word.pinyin} (${word.hanviet})</div>
+                        <div class="bg-blue-50 p-2.5 rounded-xl text-xs font-bold text-blue-900 text-center">${word.meaning}</div>
+                        ${word.mnemonic ? `<div class="bg-amber-50 p-2.5 rounded-xl text-xs text-amber-950">💡 ${word.mnemonic}</div>` : ''}
 
-                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-200 text-xs">
-                            <span class="font-extrabold text-blue-950 block mb-0.5">💡 NGHĨA TIẾNG VIỆT:</span>
-                            <span class="text-sm font-bold text-blue-900">${word.meaning}</span>
-                        </div>
-
-                        ${(radicalHtml || mnemonicHtml) ? `<div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 text-xs space-y-1">${radicalHtml}${mnemonicHtml}</div>` : ''}
-
-                        ${exampleHtml}
-
-                        <div class="space-y-1.5 pt-2">
-                            <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block text-center">ĐÁNH GIÁ MỨC ĐỘ GHI NHỚ (SRS):</span>
-                            <div class="grid grid-cols-4 gap-1.5">
-                                <button onclick="rateSrsCard(1)" class="bg-rose-100 hover:bg-rose-200 text-rose-800 font-extrabold py-2 rounded-xl text-[11px] active:scale-95 transition flex flex-col items-center border border-rose-300 shadow-xs">
-                                    <span>🔴 Quên</span>
-                                    <span class="text-[9px] font-normal opacity-80">1 ngày</span>
-                                </button>
-                                <button onclick="rateSrsCard(2)" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-extrabold py-2 rounded-xl text-[11px] active:scale-95 transition flex flex-col items-center border border-amber-300 shadow-xs">
-                                    <span>🟠 Khó</span>
-                                    <span class="text-[9px] font-normal opacity-80">3 ngày</span>
-                                </button>
-                                <button onclick="rateSrsCard(3)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2 rounded-xl text-[11px] active:scale-95 transition flex flex-col items-center shadow-xs">
-                                    <span>🟢 Tốt</span>
-                                    <span class="text-[9px] font-normal opacity-90">7 ngày</span>
-                                </button>
-                                <button onclick="rateSrsCard(4)" class="bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2 rounded-xl text-[11px] active:scale-95 transition flex flex-col items-center shadow-xs">
-                                    <span>🔵 Dễ</span>
-                                    <span class="text-[9px] font-normal opacity-90">14 ngày</span>
-                                </button>
-                            </div>
+                        <div class="grid grid-cols-4 gap-1.5 pt-2">
+                            <button onclick="rateSrsCard(1)" class="bg-rose-100 text-rose-800 font-extrabold py-2 rounded-xl text-[11px]">🔴 Quên</button>
+                            <button onclick="rateSrsCard(2)" class="bg-amber-100 text-amber-900 font-extrabold py-2 rounded-xl text-[11px]">🟠 Khó</button>
+                            <button onclick="rateSrsCard(3)" class="bg-emerald-600 text-white font-extrabold py-2 rounded-xl text-[11px]">🟢 Tốt</button>
+                            <button onclick="rateSrsCard(4)" class="bg-blue-900 text-white font-extrabold py-2 rounded-xl text-[11px]">🔵 Dễ</button>
                         </div>
                     </div>
                 </div>
             `;
-
-            setTimeout(() => {
-                const inp = document.getElementById('srs-typing-input');
-                if (inp && window.innerWidth > 640) inp.focus();
-            }, 100);
         }
 
         function handleSrsTyping(e) {
-            if (srsQueue.length === 0 || srsCurrentIdx >= srsQueue.length) return;
             const input = e.target.value.trim().toLowerCase();
             const word = srsQueue[srsCurrentIdx];
-
-            const fb = document.getElementById('srs-typing-feedback');
-            const icon = document.getElementById('srs-typing-icon');
-
-            if (!input) {
-                if (fb) fb.className = "hidden";
-                if (icon) icon.textContent = "";
-                return;
-            }
-
+            if (!input) return;
             const cleanTyped = input.replace(/[^a-z0-9]/g, '');
-            const cleanTarget = word.pinyin_clean || "";
-
-            const isMatchPinyin = cleanTyped && cleanTarget && cleanTyped === cleanTarget;
-            const isMatchHanzi = input === word.hanzi;
-
-            if (isMatchPinyin || isMatchHanzi) {
-                if (icon) icon.textContent = "✅";
-                if (fb) {
-                    fb.className = "text-xs p-2 rounded-lg font-bold text-center bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center justify-center gap-1.5";
-                    fb.innerHTML = `<span>✨</span> <div><strong>Chính xác!</strong> Pinyin: <span class="font-mono">${word.pinyin}</span></div>`;
-                }
-                if (!srsIsFlipped) {
-                    flipSrsCard();
-                }
-            } else if (e.key === 'Enter') {
-                flipSrsCard();
+            if (cleanTyped === word.pinyin_clean || input === word.hanzi || e.key === 'Enter') {
+                const back = document.getElementById('srs-card-back');
+                if (back) back.classList.remove('hidden');
             }
         }
 
-        function flipSrsCard() {
-            srsIsFlipped = true;
-            const backDiv = document.getElementById('srs-card-back');
-            const btnFlip = document.getElementById('btn-srs-flip');
-            if (backDiv) backDiv.classList.remove('hidden');
-            if (btnFlip) btnFlip.classList.add('hidden');
-        }
-
-        function rateSrsCard(quality) {
-            if (srsQueue.length === 0 || srsCurrentIdx >= srsQueue.length) return;
-            const word = srsQueue[srsCurrentIdx];
-
-            let st = srsState.cardState[word.id] || { interval: 1, repetition: 0, efactor: 2.5, dueDate: new Date().toISOString().split('T')[0], status: 'new' };
-            const today = new Date();
-            let addDays = 1;
-
-            if (quality === 1) { st.interval = 1; st.repetition = 0; st.status = 'learning'; addDays = 1; }
-            else if (quality === 2) { st.interval = Math.max(2, Math.round(st.interval * 1.3)); st.repetition += 1; st.status = 'learning'; addDays = 3; }
-            else if (quality === 3) { st.interval = Math.max(6, Math.round(st.interval * 2.1)); st.repetition += 1; st.status = 'mastered'; addDays = 7; }
-            else if (quality === 4) { st.interval = Math.max(14, Math.round(st.interval * 2.8)); st.repetition += 1; st.status = 'mastered'; addDays = 14; }
-
-            const nextDate = new Date(today);
-            nextDate.setDate(nextDate.getDate() + addDays);
-            st.dueDate = nextDate.toISOString().split('T')[0];
-
-            srsState.cardState[word.id] = st;
+        function rateSrsCard(q) {
+            srsState.todayLearned = (srsState.todayLearned || 0) + 1;
             saveSrsState();
-
             srsCurrentIdx++;
             renderSrsCard();
         }
@@ -436,57 +443,12 @@
                 utter.lang = 'zh-CN';
                 utter.rate = 0.9;
                 window.speechSynthesis.speak(utter);
-            } else {
-                const audio = new Audio('https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=1');
-                audio.play();
             }
-        }
-
-        function renderDictionary() {
-            const container = document.getElementById('dict-list-container');
-            if (!container) return;
-            filterDictionary();
-        }
-
-        function filterDictionary() {
-            const container = document.getElementById('dict-list-container');
-            if (!container) return;
-            const input = (document.getElementById('dict-search-input').value || "").trim().toLowerCase();
-
-            const filtered = FULL_SRS_BANK.filter(w => {
-                if (!input) return true;
-                return (
-                    w.hanzi.toLowerCase().includes(input) ||
-                    w.pinyin.toLowerCase().includes(input) ||
-                    (w.pinyin_clean && w.pinyin_clean.includes(input)) ||
-                    w.meaning.toLowerCase().includes(input) ||
-                    (w.hanviet && w.hanviet.toLowerCase().includes(input))
-                );
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center py-8 text-xs text-slate-500">Không tìm thấy từ vựng khớp với từ khóa "${input}".</div>`;
-                return;
-            }
-
-            container.innerHTML = filtered.map(w => `
-                <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs space-y-2">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span class="zh text-2xl font-black text-slate-900">${w.hanzi}</span>
-                            <button onclick="playWordAudio('${w.hanzi}')" class="text-sm p-1 rounded-full bg-blue-50 text-blue-900 hover:bg-blue-100 border border-blue-200">🔊</button>
-                        </div>
-                        <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">${w.tag}</span>
-                    </div>
-                    <div class="text-xs font-mono font-bold text-emerald-700">${w.pinyin} <span class="text-slate-500 font-normal italic">(${w.hanviet})</span></div>
-                    <div class="text-xs font-semibold text-blue-950">${w.meaning}</div>
-                    ${w.mnemonic ? `<div class="text-[11px] text-amber-950 bg-amber-50 p-2 rounded-xl border border-amber-100 leading-relaxed">💡 ${w.mnemonic}</div>` : ''}
-                </div>
-            `).join('');
         }
 
         window.onload = function() {
-            initSrsSession();
+            loadSrsState();
+            renderTemplateSheet();
         };
     </script>
 </body>
