@@ -66,8 +66,8 @@
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <span class="inline-block px-3 py-1 bg-blue-800/60 rounded-full text-xs font-semibold tracking-wide uppercase text-blue-200 mb-2">Giáo Trình HSK 2 Tự Học</span>
-                <h1 class="text-2xl md:text-3xl font-bold tracking-tight">第四课 这个西瓜真甜</h1>
-                <p class="text-blue-200 text-sm mt-1">Bài 4: Dưa hấu này thật ngọt - Mua sắm, hỏi giá tiền & cảm thán</p>
+                <h1 class="text-2xl md:text-3xl font-bold tracking-tight">第四课 这个工作是他帮我介绍的</h1>
+                <p class="text-blue-200 text-sm mt-1">Bài 4: Công việc này là do anh ấy giới thiệu cho tôi</p>
             </div>
             <div class="flex items-center gap-3 bg-slate-800/80 p-2.5 rounded-2xl border border-slate-700">
                 <span class="text-xs text-slate-300 font-medium pl-2">Tốc độ đọc:</span>
@@ -77,24 +77,21 @@
         </div>
     </header>
 
-    <!-- NAVIGATION TABS -->
-        <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 no-print shadow-sm">
         <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-none">
-            <button onclick="showTab('sim')" id="tab-sim" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎬</span> Mô phỏng nét viết</button>
-            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn active px-4 py-2.5 text-sm font-medium bg-blue-600 text-white font-bold active-tab transition flex items-center gap-1.5 shrink-0"><span>📌</span> Overview</button>
-            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📖</span> Từ vựng</button>
-            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>✍️</span> Tập viết & Mẹo nhớ</button>
-            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>💡</span> Ngữ pháp</button>
-            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🗣️</span> Bài khóa</button>
-            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>📝</span> Luyện tập</button>
-            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5 shrink-0"><span>🎋</span> Góc văn hóa</button>
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn active px-4 py-2.5 rounded-xl font-bold bg-blue-900 text-white shadow-sm transition whitespace-nowrap text-xs md:text-sm cursor-pointer">📌 Overview</button>
+            <button onclick="showTab('vocab')" id="tab-vocab" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📖 Từ vựng</button>
+            <button onclick="showTab('writing')" id="tab-writing" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">✍️ Tập viết & Mẹo nhớ</button>
+            <button onclick="showTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">💡 Ngữ pháp</button>
+            <button onclick="showTab('text')" id="tab-text" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🗣️ Bài khóa</button>
+            <button onclick="showTab('practice')" id="tab-practice" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">📝 Luyện tập</button>
+            <button onclick="showTab('culture')" id="tab-culture" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-900 transition">🎋 Góc văn hóa</button>
         </div>
     </div>
-            </div>
-        </div>
 
-        <!-- TAB VOCAB -->
-        <div id="sec-vocab" class="tab-content hidden">
+    <main class="max-w-7xl mx-auto px-4 py-8">
+
+<div id="sec-vocab" class="tab-content hidden">
             <!-- BẢNG QUI TẮC BIẾN ĐIỆU THANH ĐIỆU -->
                         <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/90 rounded-2xl p-5 shadow-sm space-y-4">
                 <div class="flex items-center gap-2.5 border-b border-amber-200/60 pb-2.5">
@@ -1483,8 +1480,47 @@ function checkQ(btnOrQNum, isCorrectOrOpt, ansId) {
     ansDiv.innerHTML = "✅ <strong>Đã chọn đáp án:</strong> " + isCorrectOrOpt;
 }
 
+
 var currentAudio = null;
 var currentRate = 0.85;
+
+function setAudioPlaybackRate(rate) {
+    currentRate = rate;
+    let b75 = document.getElementById('rate-075');
+    let b10 = document.getElementById('rate-100');
+    if (rate === 0.75) {
+        if (b75) { b75.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition'; }
+        if (b10) { b10.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition'; }
+    } else {
+        if (b75) { b75.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition'; }
+        if (b10) { b10.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow transition'; }
+    }
+}
+
+function setSpeed(rate) {
+    setAudioPlaybackRate(rate);
+}
+
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.style.display = 'none';
+    });
+    let targetSec = document.getElementById('sec-' + tabId);
+    if (targetSec) {
+        targetSec.classList.remove('hidden');
+        targetSec.style.display = 'block';
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'font-bold', 'active-tab', 'bg-blue-900', 'active', 'bg-blue-800');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+    });
+    let activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-blue-900', 'text-white', 'font-bold', 'active-tab');
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+    }
+}
 
 function extractChineseText(text) {
     if (!text) return "";
@@ -1712,7 +1748,10 @@ function clearCanvas(canvasId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
+        document.addEventListener('DOMContentLoaded', function() { showTab('overview'); });
+
+        document.addEventListener('DOMContentLoaded', () => {
     if (typeof items !== 'undefined' && Array.isArray(items)) {
         items.forEach(item => {
             let el = document.getElementById('target-' + item.id);
