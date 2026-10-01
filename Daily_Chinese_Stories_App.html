@@ -497,6 +497,12 @@
                         <i class="ri-mic-fill" id="modal-rec-icon"></i>
                     </button>
                     <div id="modal-rec-status" class="text-xs font-bold text-slate-600">Bấm nút Micro để bắt đầu đọc</div>
+                    
+                    <button onclick="playUserRecording()" id="btn-play-user-rec" class="hidden w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center space-x-1.5 shadow-md transition active:scale-95">
+                        <i class="ri-volume-up-fill text-base"></i>
+                        <span>🔊 Nghe Lại Giọng Đọc Của Tôi</span>
+                    </button>
+
                     <audio id="modal-audio-playback" controls class="hidden w-full mt-2 h-8 rounded-lg"></audio>
                 </div>
 
@@ -1331,6 +1337,20 @@
             document.getElementById('ai-voice-modal').classList.add('hidden');
         }
 
+        let userAudioUrl = null;
+        let userAudioObj = null;
+
+        function playUserRecording() {
+            if (!userAudioUrl) return;
+            if (userAudioObj) {
+                userAudioObj.pause();
+            }
+            userAudioObj = new Audio(userAudioUrl);
+            userAudioObj.play().catch(e => {
+                console.log("Audio play error:", e);
+            });
+        }
+
         async function toggleAIRecording() {
             if (isAIRecording) {
                 // Stop recording
@@ -1347,7 +1367,15 @@
                 // Start recording
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
+                    
+                    let mimeType = '';
+                    if (typeof MediaRecorder.isTypeSupported === 'function') {
+                        if (MediaRecorder.isTypeSupported('audio/mp4')) mimeType = 'audio/mp4';
+                        else if (MediaRecorder.isTypeSupported('audio/aac')) mimeType = 'audio/aac';
+                        else if (MediaRecorder.isTypeSupported('audio/webm')) mimeType = 'audio/webm';
+                    }
+
+                    mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
                     audioChunks = [];
 
                     mediaRecorder.ondataavailable = (e) => {
@@ -1355,15 +1383,21 @@
                     };
 
                     mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const blobType = mediaRecorder.mimeType || mimeType || 'audio/mp4';
+                        const audioBlob = new Blob(audioChunks, { type: blobType });
+                        userAudioUrl = URL.createObjectURL(audioBlob);
+
                         const playback = document.getElementById('modal-audio-playback');
-                        playback.src = audioUrl;
+                        playback.src = userAudioUrl;
+                        playback.load();
                         playback.classList.remove('hidden');
+
+                        document.getElementById('btn-play-user-rec').classList.remove('hidden');
                     };
 
                     mediaRecorder.start();
                     isAIRecording = true;
+                    document.getElementById('btn-play-user-rec').classList.add('hidden');
                     document.getElementById('modal-rec-status').innerText = "🔴 Đang thu âm... (Bấm lại để dừng & nhận xét)";
                     document.getElementById('modal-rec-status').className = "text-xs font-bold text-rose-600 animate-pulse";
                     document.getElementById('modal-rec-btn').className = "w-20 h-20 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center text-3xl shadow-lg mx-auto animate-bounce";
