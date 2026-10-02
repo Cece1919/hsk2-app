@@ -114,7 +114,7 @@
 
         <!-- Main Workspace -->
         <main class="flex-1 flex flex-col items-center justify-start py-3 px-2 sm:px-4 w-full">
-            <div id="content-container" class="w-full max-w-md transition-all duration-300 mx-auto flex flex-col">
+            <div id="content-container" class="w-full max-w-4xl transition-all duration-300 mx-auto flex flex-col">
                 
                 <!-- Floating Segmented Navigation Bar -->
                 <div class="w-full bg-[#faf7f5]/90 border-b border-[#ebdcd8] p-1.5 sticky top-[53px] z-20 backdrop-blur-sm mb-2">
@@ -123,12 +123,12 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
                             <span>Nạp Từ Mới</span>
                         </button>
-                        <button onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold">
+                        <button onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
                             <span>Ôn Tập SRS</span>
                             <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">24</span>
                         </button>
-                        <button onclick="switchView('notebook')" id="nav-btn-notebook" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
                             <span>Sổ Từ</span>
                             <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">(24)</span>
@@ -138,7 +138,7 @@
 
                 <!-- TAB 1: NẠP TỪ MỚI -->
                 <div id="sec-input-view" class="space-y-4 fade-in hidden">
-                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 shadow-xs space-y-3.5">
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 shadow-xs space-y-3.5 max-w-md mx-auto w-full">
                         <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2.5">
                             <div class="flex items-center gap-2">
                                 <div class="w-6 h-6 rounded-lg bg-[#f4ebe8] text-[#935864] flex items-center justify-center">
@@ -194,7 +194,7 @@
                     </div>
 
                     <!-- Quick Suggestion Chips -->
-                    <div class="bg-white border border-[#e8dedb] p-3 rounded-2xl space-y-2">
+                    <div class="bg-white border border-[#e8dedb] p-3 rounded-2xl space-y-2 max-w-md mx-auto w-full">
                         <span class="text-[10px] font-semibold text-[#786669] uppercase block">💡 Gợi Ý Từ HSK 2 Hay Gặp Để Nạp Nhanh:</span>
                         <div class="flex flex-wrap gap-1.5 text-xs font-medium">
                             <button onclick="fillSuggestion('自行车')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">🚲 自行车 (Xe đạp)</button>
@@ -208,7 +208,7 @@
                 </div>
 
                 <!-- TAB 2: ÔN TẬP SRS (FLASHCARD DECK) -->
-                <div id="sec-srs-view" class="space-y-4 fade-in">
+                <div id="sec-srs-view" class="space-y-4 fade-in hidden max-w-md mx-auto w-full">
                     
                     <!-- Sub-header & Progress -->
                     <div class="flex items-center justify-between text-xs text-[#736366]">
@@ -231,35 +231,76 @@
 
                 </div>
 
-                <!-- TAB 3: SỔ TỪ VỰNG (CLAIRE VU NOTEBOOK SHEET) -->
-                <div id="sec-notebook-view" class="space-y-4 fade-in hidden">
+                <!-- TAB 3: SỔ TỪ (EXACT MATCHING DESIGN FROM SCREENSHOT) -->
+                <div id="sec-notebook-view" class="space-y-4 fade-in w-full">
                     
-                    <!-- Active Recall Mask Controls -->
-                    <div class="bg-white border border-[#e8dedb] p-3 rounded-2xl shadow-xs space-y-2">
-                        <div class="flex items-center justify-between text-xs font-semibold text-[#2b2426]">
-                            <span>👁️ Che/Hiện Để Tự Nhớ (Active Recall):</span>
-                            <span class="text-[10px] text-[#7a4853] bg-[#f4ebe8] px-2 py-0.5 rounded-md border border-[#ebdcd8]">Bấm nút để lật</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-1.5 text-xs font-medium">
-                            <button onclick="toggleMask('pinyin')" id="btn-mask-py" class="py-1.5 px-2 rounded-xl bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] transition-colors">👁️ Pinyin</button>
-                            <button onclick="toggleMask('meaning')" id="btn-mask-vi" class="py-1.5 px-2 rounded-xl bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] transition-colors">👁️ Nghĩa Việt</button>
-                            <button onclick="toggleMask('hanzi')" id="btn-mask-hz" class="py-1.5 px-2 rounded-xl bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] transition-colors">👁️ Chữ Hán</button>
-                        </div>
-                    </div>
+                    <!-- Main Card Panel -->
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 sm:p-5 shadow-xs space-y-4 w-full">
+                        
+                        <!-- Row 1: Active Recall Header -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f0e6e3] pb-3.5">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 class="text-sm font-bold text-[#2b2426]">Công Tắc Active Recall</h3>
+                                    <span class="text-[11px] bg-[#f4ebe8] text-[#7d4e58] font-medium px-2.5 py-0.5 rounded-md border border-[#ebdcd8]">Ẩn / Hiện để rèn luyện trí nhớ</span>
+                                </div>
+                                <p class="text-xs text-[#786669]">Ẩn bớt trường thông tin khi nhìn danh sách để kích hoạt khả năng nhớ chủ động.</p>
+                            </div>
 
-                    <!-- Filter Dropdown -->
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="font-semibold text-[#2b2426]">DANH MỤC LỌC TỪ:</span>
-                        <select id="notebook-filter" onchange="renderNotebookSheet()" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-white font-semibold text-[#8a525f] text-xs shadow-2xs outline-none">
-                            <option value="all">★ Tất cả từ trong sổ vựng</option>
-                            <option value="hsk2-d1">📌 HSK 2 • Ngày 1 (14 từ)</option>
-                            <option value="hsk1-review">🔄 HSK 1 • Ôn Đầu Vào (10 từ)</option>
-                            <option value="custom">✍️ Từ do Chị nạp mới</option>
-                        </select>
-                    </div>
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <button onclick="toggleMask('hanzi')" id="btn-mask-hz" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#8a525f]"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>Chữ Hán</span>
+                                </button>
+                                <button onclick="toggleMask('pinyin')" id="btn-mask-py" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#8a525f]"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>Pinyin</span>
+                                </button>
+                                <button onclick="toggleMask('meaning')" id="btn-mask-vi" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#8a525f]"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>Nghĩa Việt</span>
+                                </button>
+                            </div>
+                        </div>
 
-                    <!-- Notebook List -->
-                    <div id="notebook-sheet-container" class="space-y-3"></div>
+                        <!-- Row 2: Search & Filter Toolbar -->
+                        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
+                            <div class="relative flex-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-[#8c7b7f]"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                <input id="notebook-search-input" oninput="onNotebookSearchChange()" type="text" placeholder="Tìm theo chữ Hán, Pinyin, Nghĩa Việt, bài học..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] focus:outline-none focus:border-[#8f525e]">
+                            </div>
+
+                            <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                                <select id="notebook-filter-level" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                    <option value="all">Tất cả cấp độ</option>
+                                    <option value="hsk2">HSK 2</option>
+                                    <option value="hsk1">HSK 1</option>
+                                    <option value="custom">Nạp mới</option>
+                                </select>
+
+                                <select id="notebook-filter-due" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                    <option value="all">Tất cả hạn ôn</option>
+                                    <option value="due">Đến hạn</option>
+                                    <option value="future">Chưa đến hạn</option>
+                                </select>
+
+                                <div class="flex items-center p-0.5 bg-[#ede4e1] rounded-xl border border-[#e5d8d4]">
+                                    <button onclick="switchNotebookLayout('card')" id="btn-layout-card" class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]">Thẻ</button>
+                                    <button onclick="switchNotebookLayout('table')" id="btn-layout-table" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs">Bảng</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Counter Status -->
+                        <div class="text-xs text-[#786669] font-medium pt-1">
+                            <span>Đang hiển thị: </span>
+                            <span id="notebook-rendered-count" class="font-bold text-[#2b2426]">24 / 24 từ</span>
+                        </div>
+
+                        <!-- Row 4: Data Table / Grid Container -->
+                        <div id="notebook-sheet-container" class="w-full overflow-x-auto"></div>
+
+                    </div>
 
                 </div>
 
@@ -270,6 +311,47 @@
         <footer class="w-full py-3.5 text-center text-xs text-[#786669] border-t border-[#ebdcd8] bg-[#fbf9f8] mt-auto">
             <p class="font-medium text-[11px] text-[#786669]">Cece SRS Notebook · 念念不忘，必有回响</p>
         </footer>
+    </div>
+
+    <!-- Edit Word Modal -->
+    <div id="edit-word-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-5 border border-[#e8dedb] shadow-2xl max-w-md w-full space-y-3.5 fade-in">
+            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2">
+                <h3 class="text-sm font-bold text-[#2b2426]">✏️ Chỉnh Sửa Từ Vựng</h3>
+                <button onclick="closeEditModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+            </div>
+            
+            <input type="hidden" id="edit-word-id">
+            <div class="space-y-2.5 text-xs">
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Chữ Hán:</label>
+                    <input type="text" id="edit-hanzi" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#2b2426] bg-[#faf7f5]">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Pinyin:</label>
+                        <input type="text" id="edit-pinyin" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#8a525f] font-semibold bg-[#faf7f5]">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Hán Việt:</label>
+                        <input type="text" id="edit-hanviet" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] font-semibold bg-[#faf7f5]">
+                    </div>
+                </div>
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Nghĩa Tiếng Việt:</label>
+                    <input type="text" id="edit-meaning" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] font-semibold bg-[#faf7f5]">
+                </div>
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Ví Dụ Minh Họa:</label>
+                    <textarea id="edit-example" rows="2" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] bg-[#faf7f5]"></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeEditModal()" class="px-4 py-2 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#5e5053] font-semibold text-xs rounded-xl border border-[#e2d5d1]">Hủy</button>
+                <button onclick="saveEditedWord()" class="px-4 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl shadow-2xs">Lưu Thay Đổi</button>
+            </div>
+        </div>
     </div>
 
     <!-- Toast Notification -->
@@ -287,7 +369,11 @@
             userCustomWords: [],
             cardProgress: {},
             maskState: { pinyin: false, meaning: false, hanzi: false },
-            viewMode: 'mobile' // 'mobile' or 'wide'
+            viewMode: 'wide', // 'mobile' or 'wide'
+            notebookLayout: 'table', // 'table' or 'card'
+            searchQuery: '',
+            filterLevel: 'all',
+            filterDue: 'all'
         };
 
         let srsQueue = [];
@@ -375,12 +461,12 @@
             if (appState.viewMode === 'wide') {
                 if (container) {
                     container.classList.remove('max-w-md');
-                    container.classList.add('max-w-3xl');
+                    container.classList.add('max-w-4xl');
                 }
                 if (btnText) btnText.innerText = "Máy tính";
             } else {
                 if (container) {
-                    container.classList.remove('max-w-3xl');
+                    container.classList.remove('max-w-4xl');
                     container.classList.add('max-w-md');
                 }
                 if (btnText) btnText.innerText = "Di động";
@@ -598,11 +684,9 @@
             isCardFlipped = false;
 
             box.innerHTML = `
-                <!-- 3D Flip Card Container -->
                 <div class="perspective-1000 w-full min-h-[300px]">
                     <div id="card-inner-box" onclick="flipCard()" class="card-inner w-full min-h-[300px] relative transform-style-3d cursor-pointer select-none rounded-2xl shadow-xs border border-[#e8dedb] hover:border-[#dbcac5]">
                         
-                        <!-- Front Face -->
                         <div class="absolute inset-0 w-full h-full bg-white rounded-2xl p-6 flex flex-col justify-between backface-hidden">
                             <div class="flex items-center justify-between text-xs text-[#8c7b7f]">
                                 <span class="font-medium text-[#7a4853]">${word.tag || 'Từ Vựng'}</span>
@@ -625,7 +709,6 @@
                             </div>
                         </div>
 
-                        <!-- Back Face -->
                         <div class="absolute inset-0 w-full h-full bg-[#fdfbf9] rounded-2xl p-6 flex flex-col justify-between rotate-y-180 backface-hidden border border-[#e8dedb]">
                             <div class="flex items-center justify-between text-xs text-[#5c4f52]">
                                 <div class="flex items-center gap-2">
@@ -639,7 +722,7 @@
 
                             <div class="space-y-2 py-1">
                                 <div>
-                                    <span class="text-[10px] font-medium text-[#8c7b7f] uppercase tracking-wider">Nghĩa tiếng Việt</span>
+                                    <span class="text-[10px] font-medium text-[#8c7b7f] uppercase tracking-wider">NGHĨA TIẾNG VIỆT</span>
                                     <p class="text-sm font-semibold text-[#2b2426] leading-snug mt-0.5">${word.meaning}</p>
                                     ${word.hanviet ? `<p class="text-[11px] text-[#7a4853] font-medium mt-0.5">Hán Việt: ${word.hanviet.toUpperCase()}</p>` : ''}
                                 </div>
@@ -665,7 +748,6 @@
                     </div>
                 </div>
 
-                <!-- Recall Test Bar -->
                 <div class="bg-white border border-[#e8dedb] rounded-xl p-2.5 shadow-2xs">
                     <form onsubmit="handleRecallTest(event)" class="flex items-center gap-2">
                         <input id="srs-typing-input" placeholder="Gõ Pinyin hoặc Nghĩa để thử phản xạ..." class="flex-1 text-xs px-3 py-1.5 bg-[#faf7f5] rounded-lg border border-[#e2d5d1] focus:outline-none focus:border-[#8a525f] text-[#2b2426]" type="text">
@@ -673,7 +755,6 @@
                     </form>
                 </div>
 
-                <!-- SM-2 Rating Bar (4 Soft Pastel Buttons) -->
                 <div class="pt-1">
                     <span class="block text-center text-[11px] font-medium text-[#786669] mb-1.5">Đánh giá trí nhớ (Thuật toán SM-2)</span>
                     <div class="grid grid-cols-4 gap-1.5">
@@ -730,86 +811,253 @@
                 const btn = document.getElementById('btn-mask-' + (t === 'meaning' ? 'vi' : (t === 'pinyin' ? 'py' : 'hz')));
                 if (btn) {
                     if (appState.maskState[t]) {
-                        btn.className = "py-1.5 px-2 rounded-xl bg-[#8f525e] text-white font-semibold transition-colors";
+                        btn.className = "px-3 py-1.5 rounded-xl border border-[#935864] bg-[#8f525e] text-white text-xs font-medium transition-colors flex items-center gap-1 shadow-2xs";
                     } else {
-                        btn.className = "py-1.5 px-2 rounded-xl bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] transition-colors";
+                        btn.className = "px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1";
                     }
                 }
             });
             renderNotebookSheet();
         }
 
+        function switchNotebookLayout(mode) {
+            appState.notebookLayout = mode;
+            const btnCard = document.getElementById('btn-layout-card');
+            const btnTable = document.getElementById('btn-layout-table');
+            if (mode === 'table') {
+                if (btnTable) btnTable.className = "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs";
+                if (btnCard) btnCard.className = "px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]";
+            } else {
+                if (btnCard) btnCard.className = "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs";
+                if (btnTable) btnTable.className = "px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]";
+            }
+            renderNotebookSheet();
+        }
+
+        function onNotebookSearchChange() {
+            const q = document.getElementById('notebook-search-input').value.trim().toLowerCase();
+            appState.searchQuery = q;
+            renderNotebookSheet();
+        }
+
         function renderNotebookSheet() {
             const container = document.getElementById('notebook-sheet-container');
+            const countEl = document.getElementById('notebook-rendered-count');
             if (!container) return;
 
-            const filterVal = document.getElementById('notebook-filter').value;
             let allWords = getAllWordsList();
+            const totalWordsCount = allWords.length;
 
-            if (filterVal === 'hsk2-d1') {
-                allWords = allWords.filter(w => w.day === 1 || (w.id && String(w.id).includes('d1')));
-            } else if (filterVal === 'hsk1-review') {
-                allWords = allWords.filter(w => w.level === 'HSK 1');
-            } else if (filterVal === 'custom') {
-                allWords = allWords.filter(w => w.level === 'Custom' || String(w.id).startsWith('custom-'));
-            }
+            const searchQ = (document.getElementById('notebook-search-input') ? document.getElementById('notebook-search-input').value.trim().toLowerCase() : appState.searchQuery);
+            const levelFilter = document.getElementById('notebook-filter-level') ? document.getElementById('notebook-filter-level').value : 'all';
+            const dueFilter = document.getElementById('notebook-filter-due') ? document.getElementById('notebook-filter-due').value : 'all';
 
             const today = getTodayStr();
 
-            container.innerHTML = allWords.map((w, idx) => {
-                const p = appState.cardProgress[w.id] || { ticks: {} };
-                const ticks = p.ticks || {};
-                const isDue = !p.dueDate || p.dueDate <= today;
+            // Filter by Search Query
+            if (searchQ) {
+                allWords = allWords.filter(w => 
+                    w.hanzi.toLowerCase().includes(searchQ) ||
+                    w.pinyin.toLowerCase().includes(searchQ) ||
+                    (w.pinyin_clean && w.pinyin_clean.includes(searchQ)) ||
+                    (w.meaning && w.meaning.toLowerCase().includes(searchQ)) ||
+                    (w.hanviet && w.hanviet.toLowerCase().includes(searchQ)) ||
+                    (w.tag && w.tag.toLowerCase().includes(searchQ))
+                );
+            }
 
-                return `
-                    <div class="bg-white rounded-2xl p-3.5 border border-[#e8dedb] shadow-2xs space-y-2.5">
-                        <div class="flex items-center justify-between border-b border-[#f2eae7] pb-1.5">
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-[10px] font-semibold bg-[#f4ebe8] text-[#7d4e58] px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.tag || 'Từ Vựng'}</span>
-                                ${isDue ? `<span class="text-[9px] bg-[#f7edeb] text-[#803838] font-bold px-1.5 py-0.5 rounded-md">⚡ Đến Hạn</span>` : `<span class="text-[9px] bg-[#edf3ef] text-[#34543f] font-semibold px-1.5 py-0.5 rounded-md">Ôn sau ${p.interval || 1}d</span>`}
-                            </div>
-                            <span class="text-[10px] text-[#8c7b7f]">Từ ${idx + 1} / ${allWords.length}</span>
-                        </div>
+            // Filter by Level
+            if (levelFilter === 'hsk2') {
+                allWords = allWords.filter(w => w.level === 'HSK 2' || w.day === 1 || (w.id && String(w.id).includes('d1')));
+            } else if (levelFilter === 'hsk1') {
+                allWords = allWords.filter(w => w.level === 'HSK 1');
+            } else if (levelFilter === 'custom') {
+                allWords = allWords.filter(w => w.level === 'Custom' || String(w.id).startsWith('custom-'));
+            }
 
-                        <div class="grid grid-cols-3 gap-2 items-center text-center">
-                            <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
-                                <span class="text-[9px] text-[#8c7b7f] block font-semibold">CHỮ HÁN</span>
-                                <span class="font-hanzi text-xl font-bold text-[#2b2426] ${appState.maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
-                            </div>
-                            <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
-                                <span class="text-[9px] text-[#8c7b7f] block font-semibold">PINYIN</span>
-                                <span class="text-xs font-semibold text-[#8a525f] ${appState.maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
-                            </div>
-                            <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
-                                <span class="text-[9px] text-[#8c7b7f] block font-semibold">NGHĨA VIỆT</span>
-                                <span class="text-xs font-semibold text-[#2b2426] ${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
-                            </div>
-                        </div>
+            // Filter by Due Date
+            if (dueFilter === 'due') {
+                allWords = allWords.filter(w => {
+                    const p = appState.cardProgress[w.id] || {};
+                    return !p.dueDate || p.dueDate <= today;
+                });
+            } else if (dueFilter === 'future') {
+                allWords = allWords.filter(w => {
+                    const p = appState.cardProgress[w.id] || {};
+                    return p.dueDate && p.dueDate > today;
+                });
+            }
 
-                        ${w.example ? `<div class="text-[11px] text-[#5e5053] bg-[#faf7f5] p-2.5 rounded-xl border border-[#e8dedb] leading-relaxed"><strong>💡 Ví dụ:</strong> ${w.example}</div>` : ''}
+            if (countEl) countEl.innerText = `${allWords.length} / ${totalWordsCount} từ`;
 
-                        <div class="space-y-1">
-                            <span class="text-[9px] font-semibold text-[#8c7b7f] uppercase block text-center">MỐC ÔN SPACED REPETITION:</span>
-                            <div class="grid grid-cols-6 gap-1 text-center">
-                                ${[1, 2, 4, 7, 15, 30].map(day => `
-                                    <button onclick="toggleTick('${w.id}', ${day})" class="py-1 rounded-lg text-[10px] font-semibold transition active:scale-95 ${ticks[day] ? 'bg-[#8f525e] text-white shadow-2xs' : 'bg-[#faf7f5] text-[#736366] hover:bg-[#ede5e2] border border-[#e2d5d1]'}">
-                                        ${ticks[day] ? '✓' : ''} D${day}
-                                    </button>
-                                `).join('')}
-                            </div>
-                        </div>
+            if (allWords.length === 0) {
+                container.innerHTML = `
+                    <div class="py-10 text-center text-xs text-[#8c7b7f] space-y-1">
+                        <p class="text-base">🔍</p>
+                        <p class="font-medium">Không tìm thấy từ vựng nào khớp với bộ lọc.</p>
                     </div>
                 `;
-            }).join('');
+                return;
+            }
+
+            // RENDER TABLE LAYOUT (EXACT SCREENSHOT SPECIFICATION)
+            if (appState.notebookLayout === 'table') {
+                container.innerHTML = `
+                    <table class="w-full text-left text-xs border-collapse min-w-[650px]">
+                        <thead>
+                            <tr class="border-b border-[#ebdcd8] text-[#786669] font-semibold text-[11px]">
+                                <th class="py-2.5 px-3">Chữ Hán</th>
+                                <th class="py-2.5 px-3">Pinyin</th>
+                                <th class="py-2.5 px-3">Hán Việt</th>
+                                <th class="py-2.5 px-3">Nghĩa Việt</th>
+                                <th class="py-2.5 px-3">Cấp độ</th>
+                                <th class="py-2.5 px-3">Kỳ hạn SRS</th>
+                                <th class="py-2.5 px-3 text-right">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#f2eae7]">
+                            ${allWords.map(w => {
+                                const p = appState.cardProgress[w.id] || {};
+                                const isDue = !p.dueDate || p.dueDate <= today;
+                                const isCustom = w.level === 'Custom' || String(w.id).startsWith('custom-');
+
+                                return `
+                                    <tr class="hover:bg-[#faf4f2] transition-colors">
+                                        <td class="py-3 px-3 font-hanzi font-bold text-base text-[#2b2426] whitespace-nowrap">
+                                            <div class="flex items-center gap-1">
+                                                <span class="${appState.maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
+                                                <button onclick="playWordAudio('${w.hanzi}')" class="text-[#8a525f] hover:text-[#2b2426] p-0.5" title="Nghe âm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-3 font-semibold text-[#8a525f] whitespace-nowrap">
+                                            <span class="${appState.maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
+                                        </td>
+                                        <td class="py-3 px-3 font-medium text-[#7a4853] text-[11px] uppercase whitespace-nowrap">
+                                            ${w.hanviet || '-'}
+                                        </td>
+                                        <td class="py-3 px-3 text-[#2b2426] font-medium max-w-xs">
+                                            <span class="${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                                        </td>
+                                        <td class="py-3 px-3 whitespace-nowrap">
+                                            <span class="text-[10px] bg-[#f4ebe8] text-[#7d4e58] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.level || 'HSK 2'}</span>
+                                        </td>
+                                        <td class="py-3 px-3 whitespace-nowrap">
+                                            ${isDue ? 
+                                                `<span class="text-[10px] bg-[#f7edeb] text-[#803838] font-semibold px-2 py-0.5 rounded-md border border-[#ebd3cf]">Đến hạn</span>` : 
+                                                `<span class="text-[10px] bg-[#edf3ef] text-[#34543f] font-semibold px-2 py-0.5 rounded-md border border-[#cfdfd4]">Sau ${p.interval || 1}d</span>`
+                                            }
+                                        </td>
+                                        <td class="py-3 px-3 text-right whitespace-nowrap">
+                                            <div class="flex items-center justify-end gap-1.5">
+                                                <button onclick="openEditModal('${w.id}')" class="p-1 text-[#786669] hover:text-[#935864] hover:bg-[#f4ebe8] rounded-md transition-colors" title="Sửa từ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                                </button>
+                                                ${isCustom ? `
+                                                    <button onclick="deleteCustomWord('${w.id}')" class="p-1 text-[#8c7b7f] hover:text-[#9c5050] hover:bg-[#f7edeb] rounded-md transition-colors" title="Xóa từ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                                    </button>
+                                                ` : ''}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                // GRID CARDS LAYOUT
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${allWords.map((w, idx) => {
+                            const p = appState.cardProgress[w.id] || { ticks: {} };
+                            const ticks = p.ticks || {};
+                            const isDue = !p.dueDate || p.dueDate <= today;
+
+                            return `
+                                <div class="bg-white rounded-2xl p-3.5 border border-[#e8dedb] shadow-2xs space-y-2.5">
+                                    <div class="flex items-center justify-between border-b border-[#f2eae7] pb-1.5">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="text-[10px] font-semibold bg-[#f4ebe8] text-[#7d4e58] px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.tag || 'Từ Vựng'}</span>
+                                            ${isDue ? `<span class="text-[9px] bg-[#f7edeb] text-[#803838] font-bold px-1.5 py-0.5 rounded-md">⚡ Đến Hạn</span>` : `<span class="text-[9px] bg-[#edf3ef] text-[#34543f] font-semibold px-1.5 py-0.5 rounded-md">Ôn sau ${p.interval || 1}d</span>`}
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <button onclick="openEditModal('${w.id}')" class="p-1 text-[#786669] hover:text-[#935864]" title="Sửa">✏️</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 gap-2 items-center text-center">
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">CHỮ HÁN</span>
+                                            <span class="font-hanzi text-xl font-bold text-[#2b2426] ${appState.maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
+                                        </div>
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">PINYIN</span>
+                                            <span class="text-xs font-semibold text-[#8a525f] ${appState.maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
+                                        </div>
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">NGHĨA VIỆT</span>
+                                            <span class="text-xs font-semibold text-[#2b2426] ${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                                        </div>
+                                    </div>
+
+                                    ${w.example ? `<div class="text-[11px] text-[#5e5053] bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]"><strong>💡 Ví dụ:</strong> ${w.example}</div>` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
         }
 
-        function toggleTick(wordId, day) {
-            let p = appState.cardProgress[wordId] || { ticks: {} };
-            if (!p.ticks) p.ticks = {};
-            p.ticks[day] = !p.ticks[day];
-            appState.cardProgress[wordId] = p;
+        function openEditModal(wordId) {
+            const allWords = getAllWordsList();
+            const w = allWords.find(item => item.id === wordId);
+            if (!w) return;
+
+            document.getElementById('edit-word-id').value = w.id;
+            document.getElementById('edit-hanzi').value = w.hanzi;
+            document.getElementById('edit-pinyin').value = w.pinyin;
+            document.getElementById('edit-hanviet').value = w.hanviet || '';
+            document.getElementById('edit-meaning').value = w.meaning;
+            document.getElementById('edit-example').value = w.example || '';
+
+            document.getElementById('edit-word-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-word-modal').classList.add('hidden');
+        }
+
+        function saveEditedWord() {
+            const wordId = document.getElementById('edit-word-id').value;
+            const allWords = getAllWordsList();
+            const w = allWords.find(item => item.id === wordId);
+            if (!w) return;
+
+            w.hanzi = document.getElementById('edit-hanzi').value.trim();
+            w.pinyin = document.getElementById('edit-pinyin').value.trim();
+            w.pinyin_clean = w.pinyin.toLowerCase().replace(/[^a-z]/g, '');
+            w.hanviet = document.getElementById('edit-hanviet').value.trim();
+            w.meaning = document.getElementById('edit-meaning').value.trim();
+            w.example = document.getElementById('edit-example').value.trim();
+
             saveAppState();
+            closeEditModal();
             renderNotebookSheet();
+            showToast("✨ Đã cập nhật từ vựng thành công!");
+        }
+
+        function deleteCustomWord(wordId) {
+            if (confirm("Chị có chắc chắn muốn xóa từ vựng này khỏi sổ tay?")) {
+                appState.userCustomWords = appState.userCustomWords.filter(w => w.id !== wordId);
+                delete appState.cardProgress[wordId];
+                saveAppState();
+                renderNotebookSheet();
+                showToast("🗑️ Đã xóa từ vựng khỏi sổ tay!");
+            }
         }
 
         function playWordAudio(text) {
