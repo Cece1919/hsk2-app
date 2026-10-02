@@ -18,7 +18,7 @@ html_content = """<!DOCTYPE html>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cece SRS Vocab">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/chinese-dragon.png">
-    <title>Cece HSK SRS Vocab App - Chuẩn Claire Vu Template</title>
+    <title>Cece HSK SRS Vocab App - Chuẩn Claire Vu & Thuật Toán Anki SM-2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -83,8 +83,8 @@ html_content = """<!DOCTYPE html>
                     <div class="flex items-center gap-2.5">
                         <span class="text-2xl">🧠</span>
                         <div>
-                            <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cece SRS Journal</h1>
-                            <p class="text-[10px] text-blue-300 font-medium">Lộ Trình Từng Bước • Day 1 ➔ Day 2 ➔ Day 3...</p>
+                            <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cece SRS & Anki Engine</h1>
+                            <p class="text-[10px] text-blue-300 font-medium">Spaced Repetition SM-2 • Claire Vu Journal</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-1">
@@ -98,7 +98,7 @@ html_content = """<!DOCTYPE html>
                 <div class="flex bg-slate-900/80 p-1 rounded-xl text-xs font-semibold gap-1 border border-slate-800 overflow-x-auto scrollbar-none">
                     <button onclick="switchView('template')" id="nav-btn-template" class="flex-1 py-1.5 px-2 rounded-lg bg-blue-600 font-bold text-white shadow-xs transition whitespace-nowrap">📋 Bảng Điền Từ</button>
                     <button onclick="switchView('journal')" id="nav-btn-journal" class="flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">📔 Nhật Ký Học</button>
-                    <button onclick="switchView('srs')" id="nav-btn-srs" class="flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">🎴 Thẻ SRS & Gõ</button>
+                    <button onclick="switchView('srs')" id="nav-btn-srs" class="flex-1 py-1.5 px-2 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">🎴 Anki Flashcard</button>
                 </div>
             </div>
 
@@ -202,6 +202,17 @@ html_content = """<!DOCTYPE html>
                         </div>
                     </div>
 
+                    <!-- Anki Algorithm Summary Banner -->
+                    <div class="bg-white p-3.5 rounded-2xl border border-indigo-200 shadow-xs space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-indigo-900 flex items-center gap-1">⚡ THUẬT TOÁN ANKI SM-2 ENGINE:</span>
+                            <span id="anki-due-counter" class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">0 từ cần ôn</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">
+                            Khi chị đánh giá mức độ khó (<strong>🔴 Quên, 🟠 Khó, 🟢 Tốt, 🔵 Dễ</strong>) ở Tab Flashcard, thuật toán Anki sẽ tự động tính toán chính xác số ngày đến hạn ôn lại để chị học tối ưu nhất!
+                        </p>
+                    </div>
+
                     <!-- 5-Day Accelerated Roadmap Cards -->
                     <div class="space-y-2.5">
                         <h3 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">📅 LỘ TRÌNH TĂNG TỐC TỪ BÀI 5:</h3>
@@ -244,8 +255,18 @@ html_content = """<!DOCTYPE html>
                     </div>
                 </div>
 
-                <!-- VIEW 3: SRS PRACTICE VIEW -->
+                <!-- VIEW 3: ANKI SMART FLASHCARD PRACTICE VIEW -->
                 <div id="sec-srs-view" class="space-y-4 hidden">
+                    
+                    <!-- Anki Mode Selector Header -->
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between text-xs">
+                        <span class="font-extrabold text-indigo-950 flex items-center gap-1.5">⚡ HÀNG ĐỢI ANKI:</span>
+                        <div class="flex gap-1">
+                            <button onclick="filterAnkiQueue('due')" id="anki-btn-due" class="px-2.5 py-1 rounded-lg bg-indigo-900 text-white font-bold text-[11px] transition">🎯 Từ Đến Hạn Ôn</button>
+                            <button onclick="filterAnkiQueue('all')" id="anki-btn-all" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-[11px] transition">📚 Ôn Tất Cả</button>
+                        </div>
+                    </div>
+
                     <div id="srs-card-box" class="space-y-4"></div>
                 </div>
 
@@ -260,9 +281,10 @@ html_content = """<!DOCTYPE html>
         let activeView = 'template';
         let maskState = { pinyin: false, meaning: false, hanzi: false };
 
-        let srsState = { cardState: {}, streak: 1, todayLearned: 0, dayStep: 1, unlockedDayStep: 1, lastDate: new Date().toISOString().split('T')[0] };
+        let srsState = { cardState: {}, ankiData: {}, streak: 1, todayLearned: 0, dayStep: 1, unlockedDayStep: 1, lastDate: new Date().toISOString().split('T')[0] };
         let srsQueue = [];
         let srsCurrentIdx = 0;
+        let ankiFilterMode = 'due';
 
         const DAY_STEP_MAP = {
             1: { key: 'hsk2-d5', name: 'NGÀY 1 • BÀI 5', count: 13 },
@@ -271,6 +293,10 @@ html_content = """<!DOCTYPE html>
             4: { key: 'hsk2-all', name: 'NGÀY 4 • TẤT CẢ HSK 2', count: 107 },
             5: { key: 'hsk1-all', name: 'NGÀY 5 • ÔN HSK 1 & HSK 2', count: 257 }
         };
+
+        function getTodayStr() {
+            return new Date().toISOString().split('T')[0];
+        }
 
         function loadSrsState() {
             try {
@@ -281,10 +307,11 @@ html_content = """<!DOCTYPE html>
                 }
             } catch(e) { console.error("Failed to load SRS state", e); }
             if (!srsState.cardState) srsState.cardState = {};
+            if (!srsState.ankiData) srsState.ankiData = {};
             if (!srsState.dayStep) srsState.dayStep = 1;
             if (!srsState.unlockedDayStep) srsState.unlockedDayStep = 1;
 
-            const today = new Date().toISOString().split('T')[0];
+            const today = getTodayStr();
             if (srsState.lastDate !== today) {
                 srsState.todayLearned = 0;
                 srsState.lastDate = today;
@@ -295,6 +322,7 @@ html_content = """<!DOCTYPE html>
 
             updateJournalProgress();
             updateJourneyBanner();
+            updateAnkiDueCounter();
         }
 
         function saveSrsState() {
@@ -303,6 +331,20 @@ html_content = """<!DOCTYPE html>
             } catch(e) { console.error("Failed to save SRS state", e); }
             updateJournalProgress();
             updateJourneyBanner();
+            updateAnkiDueCounter();
+        }
+
+        function updateAnkiDueCounter() {
+            const today = getTodayStr();
+            let dueCount = 0;
+            FULL_SRS_BANK.forEach(w => {
+                const aData = srsState.ankiData[w.id];
+                if (!aData || !aData.dueDate || aData.dueDate <= today) {
+                    dueCount++;
+                }
+            });
+            const counter = document.getElementById('anki-due-counter');
+            if (counter) counter.textContent = dueCount + ' từ cần ôn hôm nay';
         }
 
         function updateJourneyBanner() {
@@ -436,14 +478,21 @@ html_content = """<!DOCTYPE html>
             else if (filterVal === 'hsk2-all') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 2');
             else if (filterVal === 'hsk1-all') items = FULL_SRS_BANK.filter(w => w.level === 'HSK 1');
 
+            const today = getTodayStr();
+
             container.innerHTML = items.map((w, idx) => {
                 const st = srsState.cardState[w.id] || {};
                 const ticks = st.ticks || {};
+                const aData = srsState.ankiData[w.id] || {};
+                const isDue = !aData.dueDate || aData.dueDate <= today;
 
                 return `
                     <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs space-y-2.5">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
-                            <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${w.tag}</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${w.tag}</span>
+                                ${isDue ? `<span class="text-[9px] bg-rose-100 text-rose-800 font-extrabold px-1.5 py-0.5 rounded-full">⚡ Anki Due</span>` : `<span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded-full">Ôn ${aData.interval || 0}d</span>`}
+                            </div>
                             <span class="text-[10px] text-slate-400 font-semibold">Từ ${idx + 1} / ${items.length}</span>
                         </div>
 
@@ -492,11 +541,70 @@ html_content = """<!DOCTYPE html>
             renderTemplateSheet();
         }
 
+        function filterAnkiQueue(mode) {
+            ankiFilterMode = mode;
+            const btnDue = document.getElementById('anki-btn-due');
+            const btnAll = document.getElementById('anki-btn-all');
+            if (mode === 'due') {
+                if (btnDue) btnDue.className = "px-2.5 py-1 rounded-lg bg-indigo-900 text-white font-bold text-[11px] transition";
+                if (btnAll) btnAll.className = "px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-[11px] transition";
+            } else {
+                if (btnDue) btnDue.className = "px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-[11px] transition";
+                if (btnAll) btnAll.className = "px-2.5 py-1 rounded-lg bg-indigo-900 text-white font-bold text-[11px] transition";
+            }
+            initSrsSession();
+        }
+
         function initSrsSession() {
             loadSrsState();
-            srsQueue = FULL_SRS_BANK.slice(0, 20);
+            const today = getTodayStr();
+
+            if (ankiFilterMode === 'due') {
+                srsQueue = FULL_SRS_BANK.filter(w => {
+                    const aData = srsState.ankiData[w.id];
+                    return !aData || !aData.dueDate || aData.dueDate <= today;
+                });
+                if (srsQueue.length === 0) srsQueue = FULL_SRS_BANK.slice(0, 20);
+            } else {
+                srsQueue = FULL_SRS_BANK.slice(0, 30);
+            }
+
             srsCurrentIdx = 0;
             renderSrsCard();
+        }
+
+        function calculateAnkiNextInterval(wordId, quality) {
+            let aData = srsState.ankiData[wordId] || { interval: 0, easeFactor: 2.5, repetition: 0 };
+            let ef = aData.easeFactor || 2.5;
+            let rep = aData.repetition || 0;
+            let interval = aData.interval || 0;
+
+            if (quality === 1) { // Again (Quên)
+                rep = 0;
+                interval = 1;
+                ef = Math.max(1.3, ef - 0.2);
+            } else if (quality === 2) { // Hard (Khó)
+                rep += 1;
+                interval = interval === 0 ? 1 : Math.max(1, Math.round(interval * 1.2));
+                ef = Math.max(1.3, ef - 0.15);
+            } else if (quality === 3) { // Good (Tốt)
+                rep += 1;
+                if (interval === 0) interval = 1;
+                else if (interval === 1) interval = 3;
+                else interval = Math.round(interval * ef);
+            } else if (quality === 4) { // Easy (Dễ)
+                rep += 1;
+                if (interval === 0) interval = 2;
+                else if (interval === 1) interval = 4;
+                else interval = Math.round(interval * ef * 1.3);
+                ef += 0.15;
+            }
+
+            const d = new Date();
+            d.setDate(d.getDate() + interval);
+            const nextDueDate = d.toISOString().split('T')[0];
+
+            return { interval, easeFactor: ef, repetition: rep, dueDate: nextDueDate };
         }
 
         function renderSrsCard() {
@@ -507,9 +615,10 @@ html_content = """<!DOCTYPE html>
                 box.innerHTML = `
                     <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-md space-y-3">
                         <div class="text-4xl">🎉</div>
-                        <h3 class="text-base font-extrabold text-blue-900">Hoàn Thành Đợt Ôn SRS!</h3>
+                        <h3 class="text-base font-extrabold text-blue-900">Hoàn Thành Đợt Ôn Anki Flashcard!</h3>
+                        <p class="text-xs text-slate-500">Tất cả thẻ đến hạn đã được cập nhật lịch ôn thông minh!</p>
                         <button onclick="initSrsSession()" class="px-5 py-2.5 bg-blue-900 text-white font-bold text-xs rounded-xl shadow-md">
-                            🔄 Tiếp tục ôn thêm
+                            🔄 Tiếp tục ôn lượt mới
                         </button>
                     </div>
                 `;
@@ -517,6 +626,11 @@ html_content = """<!DOCTYPE html>
             }
 
             const word = srsQueue[srsCurrentIdx];
+            const againVal = calculateAnkiNextInterval(word.id, 1).interval;
+            const hardVal = calculateAnkiNextInterval(word.id, 2).interval;
+            const goodVal = calculateAnkiNextInterval(word.id, 3).interval;
+            const easyVal = calculateAnkiNextInterval(word.id, 4).interval;
+
             box.innerHTML = `
                 <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-md space-y-4">
                     <div class="flex items-center justify-between text-xs text-slate-500 border-b border-slate-100 pb-2">
@@ -540,11 +654,22 @@ html_content = """<!DOCTYPE html>
                         <div class="bg-blue-50 p-2.5 rounded-xl text-xs font-bold text-blue-900 text-center">${word.meaning}</div>
                         ${word.mnemonic ? `<div class="bg-amber-50 p-2.5 rounded-xl text-xs text-amber-950">💡 ${word.mnemonic}</div>` : ''}
 
-                        <div class="grid grid-cols-4 gap-1.5 pt-2">
-                            <button onclick="rateSrsCard(1)" class="bg-rose-100 text-rose-800 font-extrabold py-2 rounded-xl text-[11px]">🔴 Quên</button>
-                            <button onclick="rateSrsCard(2)" class="bg-amber-100 text-amber-900 font-extrabold py-2 rounded-xl text-[11px]">🟠 Khó</button>
-                            <button onclick="rateSrsCard(3)" class="bg-emerald-600 text-white font-extrabold py-2 rounded-xl text-[11px]">🟢 Tốt</button>
-                            <button onclick="rateSrsCard(4)" class="bg-blue-900 text-white font-extrabold py-2 rounded-xl text-[11px]">🔵 Dễ</button>
+                        <div class="space-y-1 pt-1">
+                            <span class="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider block text-center">ĐÁNH GIÁ MỨC ĐỘ KHÓ (THUẬT TOÁN ANKI SM-2):</span>
+                            <div class="grid grid-cols-4 gap-1.5">
+                                <button onclick="rateAnkiCard(1)" class="bg-rose-100 hover:bg-rose-200 text-rose-900 font-extrabold py-2 rounded-xl text-[10px] text-center border border-rose-300">
+                                    🔴 Quên<br/><span class="text-[9px] opacity-80">${againVal} ngày</span>
+                                </button>
+                                <button onclick="rateAnkiCard(2)" class="bg-amber-100 hover:bg-amber-200 text-amber-950 font-extrabold py-2 rounded-xl text-[10px] text-center border border-amber-300">
+                                    🟠 Khó<br/><span class="text-[9px] opacity-80">${hardVal} ngày</span>
+                                </button>
+                                <button onclick="rateAnkiCard(3)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2 rounded-xl text-[10px] text-center border border-emerald-400">
+                                    🟢 Tốt<br/><span class="text-[9px] opacity-90">${goodVal} ngày</span>
+                                </button>
+                                <button onclick="rateAnkiCard(4)" class="bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2 rounded-xl text-[10px] text-center border border-blue-700">
+                                    🔵 Dễ<br/><span class="text-[9px] opacity-90">${easyVal} ngày</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -562,9 +687,16 @@ html_content = """<!DOCTYPE html>
             }
         }
 
-        function rateSrsCard(q) {
-            srsState.todayLearned = (srsState.todayLearned || 0) + 1;
-            saveSrsState();
+        function rateAnkiCard(quality) {
+            const word = srsQueue[srsCurrentIdx];
+            if (word) {
+                const updatedAnki = calculateAnkiNextInterval(word.id, quality);
+                srsState.ankiData[word.id] = updatedAnki;
+
+                srsState.todayLearned = (srsState.todayLearned || 0) + 1;
+                saveSrsState();
+            }
+
             srsCurrentIdx++;
             renderSrsCard();
         }
@@ -591,5 +723,4 @@ html_content = """<!DOCTYPE html>
 with open('/Users/trangngo95/Desktop/HSK/srs.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
 
-print("Generated upgraded srs.html with Guided Day Progression successfully!")
-
+print("Successfully updated srs.html with Anki SM-2 Smart Scheduling Engine!")
