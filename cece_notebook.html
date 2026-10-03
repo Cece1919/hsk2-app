@@ -1193,13 +1193,14 @@
             // RENDER TABLE LAYOUT (EXACT SCREENSHOT SPECIFICATION)
             if (appState.notebookLayout === 'table') {
                 container.innerHTML = `
-                    <table class="w-full text-left text-xs border-collapse min-w-[650px]">
+                    <table class="w-full text-left text-xs border-collapse min-w-[750px]">
                         <thead>
                             <tr class="border-b border-[#ebdcd8] text-[#786669] font-semibold text-[11px]">
                                 <th class="py-2.5 px-3">Chữ Hán</th>
                                 <th class="py-2.5 px-3">Pinyin</th>
                                 <th class="py-2.5 px-3">Hán Việt</th>
                                 <th class="py-2.5 px-3">Nghĩa Việt</th>
+                                <th class="py-2.5 px-3">Ví dụ Minh Họa</th>
                                 <th class="py-2.5 px-3">Cấp độ</th>
                                 <th class="py-2.5 px-3">Kỳ hạn SRS</th>
                                 <th class="py-2.5 px-3 text-right">Thao tác</th>
@@ -1210,6 +1211,7 @@
                                 const p = appState.cardProgress[w.id] || {};
                                 const isDue = !p.dueDate || p.dueDate <= today;
                                 const isCustom = w.level === 'Custom' || String(w.id).startsWith('custom-');
+                                const exText = w.example || '';
 
                                 return `
                                     <tr class="hover:bg-[#faf4f2] transition-colors">
@@ -1229,6 +1231,16 @@
                                         </td>
                                         <td class="py-3 px-3 text-[#2b2426] font-medium max-w-xs">
                                             <span class="${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                                        </td>
+                                        <td class="py-3 px-3 text-[#5e5053] font-normal text-[11px] max-w-xs leading-snug">
+                                            ${exText ? `
+                                                <div class="flex items-center gap-1 font-hanzi">
+                                                    <span>${exText}</span>
+                                                    <button onclick="playWordAudio('${exText.split('(')[0].replace(/'/g, "\'")}')" class="text-[#8a525f] hover:text-[#2b2426] p-0.5 shrink-0" title="Nghe ví dụ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                                    </button>
+                                                </div>
+                                            ` : '-'}
                                         </td>
                                         <td class="py-3 px-3 whitespace-nowrap">
                                             <span class="text-[10px] bg-[#f4ebe8] text-[#7d4e58] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.level || 'HSK 2'}</span>
