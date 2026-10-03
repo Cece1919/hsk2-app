@@ -155,6 +155,11 @@ def generate_app():
                     </button>
 
                     <div class="flex items-center gap-1">
+                        <button onclick="openCloudSyncModal()" title="Đồng bộ Cloud (iPhone ⇄ Mac)" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                            <span>☁️ Đồng bộ</span>
+                        </button>
+
                         <button onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
                         </button>
@@ -414,6 +419,52 @@ def generate_app():
         </div>
     </div>
 
+    <!-- Cloud Sync Modal -->
+    <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg">☁️</span>
+                    <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Đám Mây (iPhone ⇄ Mac)</h3>
+                </div>
+                <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+            </div>
+            
+            <p class="text-xs text-[#786669] leading-relaxed">
+                Nhập cùng <b>Mã Đồng Bộ</b> trên cả iPhone và Mac để giữ dữ liệu từ vựng & tiến trình SRS luôn giống nhau 100%.
+            </p>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Mã Đồng Bộ Cá Nhân (Sync Code):</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="cloud-sync-code" value="CECE-1919" class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] font-mono font-bold text-[#8f525e] bg-[#faf7f5] text-center uppercase tracking-widest text-sm" placeholder="Mã đồng bộ...">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button onclick="pushToCloud()" id="btn-cloud-push" class="w-full py-2.5 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-2xs transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                        <span>Đẩy Lên Cloud</span>
+                    </button>
+
+                    <button onclick="pullFromCloud()" id="btn-cloud-pull" class="w-full py-2.5 px-3 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
+                        <span>Tải Từ Cloud</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-[#f0e6e3] pt-3 text-[11px] text-[#8c7b7f] space-y-2">
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="cloud-auto-pull" onchange="toggleAutoPull(event)" class="rounded text-[#8f525e] focus:ring-0">
+                    <label for="cloud-auto-pull" class="cursor-pointer font-medium text-[#5e5053]">Tự động tải khi mở web</label>
+                </div>
+                <p id="cloud-sync-status" class="text-[10px] text-[#a08f93] italic">Chưa đồng bộ trong phiên này.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast-notify" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#2b2426] text-[#faf7f5] px-4 py-3 rounded-2xl shadow-2xl border border-[#8f525e] text-xs font-semibold hidden z-50 flex items-center gap-2 max-w-xs text-center transition">
         <span id="toast-msg">✅ Thao tác thành công!</span>
@@ -452,6 +503,8 @@ def generate_app():
             updateHeaderCounters();
         }}
 
+        const SYNC_MAP_DEFAULT_ID = "ff808181a09d98f701a0ffc2895a6769";
+
         function loadAppState() {{
             try {{
                 const saved = localStorage.getItem('cece_srs_notebook_app_v1');
@@ -465,6 +518,109 @@ def generate_app():
             }}
             applyViewModeUI();
             updateHeaderCounters();
+            if (appState.autoPullCloud) {{
+                pullFromCloud(true);
+            }}
+        }}
+
+        function openCloudSyncModal() {{
+            const modal = document.getElementById('cloud-sync-modal');
+            if (modal) modal.classList.remove('hidden');
+            const codeInput = document.getElementById('cloud-sync-code');
+            if (codeInput && !codeInput.value) codeInput.value = appState.syncCode || "CECE-1919";
+            const autoChk = document.getElementById('cloud-auto-pull');
+            if (autoChk) autoChk.checked = !!appState.autoPullCloud;
+        }}
+
+        function closeCloudSyncModal() {{
+            const modal = document.getElementById('cloud-sync-modal');
+            if (modal) modal.classList.add('hidden');
+        }}
+
+        function toggleAutoPull(e) {{
+            appState.autoPullCloud = e.target.checked;
+            saveAppState();
+        }}
+
+        async function pushToCloud() {{
+            const codeInput = document.getElementById('cloud-sync-code');
+            const code = (codeInput ? codeInput.value.trim() : 'CECE-1919').toUpperCase() || 'CECE-1919';
+            appState.syncCode = code;
+            saveAppState();
+
+            const statusEl = document.getElementById('cloud-sync-status');
+            const btnPush = document.getElementById('btn-cloud-push');
+            if (btnPush) btnPush.disabled = true;
+            if (statusEl) statusEl.innerText = "⏳ Đang đẩy dữ liệu lên Cloud...";
+
+            try {{
+                const payload = {{
+                    name: `Cece Notebook - ${{code}}`,
+                    data: {{
+                        dayStep: appState.dayStep,
+                        userCustomWords: appState.userCustomWords,
+                        cardProgress: appState.cardProgress,
+                        updatedAt: new Date().toISOString()
+                    }}
+                }};
+
+                const res = await fetch(`https://api.restful-api.dev/objects/${{SYNC_MAP_DEFAULT_ID}}`, {{
+                    method: 'PUT',
+                    headers: {{ 'Content-Type': 'application/json' }},
+                    body: JSON.stringify(payload)
+                }});
+
+                if (res.ok) {{
+                    const nowStr = new Date().toLocaleTimeString('vi-VN');
+                    if (statusEl) statusEl.innerText = `✅ Đã lưu lên Cloud lúc ${{nowStr}}!`;
+                    showToast("☁️ Đã đẩy toàn bộ từ mới & SRS lên Cloud!");
+                }} else {{
+                    throw new Error("HTTP " + res.status);
+                }}
+            }} catch (err) {{
+                console.error("Cloud push failed:", err);
+                if (statusEl) statusEl.innerText = "❌ Lỗi kết nối Cloud, vui lòng thử lại!";
+                showToast("⚠️ Lỗi tải dữ liệu lên Cloud.");
+            }} finally {{
+                if (btnPush) btnPush.disabled = false;
+            }}
+        }}
+
+        async function pullFromCloud(silent = false) {{
+            const codeInput = document.getElementById('cloud-sync-code');
+            const code = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'CECE-1919')).toUpperCase() || 'CECE-1919';
+            
+            const statusEl = document.getElementById('cloud-sync-status');
+            const btnPull = document.getElementById('btn-cloud-pull');
+            if (btnPull) btnPull.disabled = true;
+            if (statusEl && !silent) statusEl.innerText = "⏳ Đang tải dữ liệu từ Cloud...";
+
+            try {{
+                const res = await fetch(`https://api.restful-api.dev/objects/${{SYNC_MAP_DEFAULT_ID}}`);
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                
+                const result = await res.json();
+                if (result && result.data) {{
+                    const cloudData = result.data;
+                    if (cloudData.userCustomWords) appState.userCustomWords = cloudData.userCustomWords;
+                    if (cloudData.cardProgress) appState.cardProgress = cloudData.cardProgress;
+                    if (cloudData.dayStep) appState.dayStep = cloudData.dayStep;
+                    
+                    saveAppState();
+                    updateHeaderCounters();
+                    if (appState.notebookLayout === 'table') renderNotebookSheet();
+                    
+                    const nowStr = new Date().toLocaleTimeString('vi-VN');
+                    if (statusEl) statusEl.innerText = `✅ Đã đồng bộ lúc ${{nowStr}}!`;
+                    if (!silent) showToast("☁️ Đã tải dữ liệu mới nhất từ Cloud!");
+                }}
+            }} catch (err) {{
+                console.error("Cloud pull failed:", err);
+                if (statusEl && !silent) statusEl.innerText = "⚠️ Chưa có bản lưu trên Cloud hoặc lỗi mạng.";
+                if (!silent) showToast("⚠️ Không thể tải dữ liệu từ Cloud.");
+            }} finally {{
+                if (btnPull) btnPull.disabled = false;
+            }}
         }}
 
         function initDay1DefaultState() {{
