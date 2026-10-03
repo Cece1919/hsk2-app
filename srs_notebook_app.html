@@ -505,7 +505,7 @@
             const statusEl = document.getElementById('cloud-sync-status');
             const btnPush = document.getElementById('btn-cloud-push');
             if (btnPush) btnPush.disabled = true;
-            if (statusEl) statusEl.innerText = "⏳ Đang đẩy dữ liệu lên Cloud...";
+            if (statusEl) statusEl.innerText = "⏳ Đang kết nối Đám Mây...";
 
             try {
                 const payload = {
@@ -518,23 +518,53 @@
                     }
                 };
 
-                const res = await fetch(`https://api.restful-api.dev/objects/${SYNC_MAP_DEFAULT_ID}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                let targetId = appState.syncObjectId || SYNC_MAP_DEFAULT_ID;
+                let success = false;
 
-                if (res.ok) {
+                // Attempt 1: PUT update to existing object
+                if (targetId) {
+                    try {
+                        const res = await fetch(`https://api.restful-api.dev/objects/${targetId}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (res.ok) {
+                            success = true;
+                        }
+                    } catch(e) {
+                        console.warn("PUT failed, falling back to POST...", e);
+                    }
+                }
+
+                // Attempt 2: If PUT failed or expired (404), POST to create a fresh cloud record!
+                if (!success) {
+                    const resPost = await fetch(`https://api.restful-api.dev/objects`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (resPost.ok) {
+                        const newObj = await resPost.json();
+                        if (newObj && newObj.id) {
+                            appState.syncObjectId = newObj.id;
+                            saveAppState();
+                            success = true;
+                        }
+                    }
+                }
+
+                if (success) {
                     const nowStr = new Date().toLocaleTimeString('vi-VN');
-                    if (statusEl) statusEl.innerText = `✅ Đã lưu lên Cloud lúc ${nowStr}!`;
-                    showToast("☁️ Đã đẩy toàn bộ từ mới & SRS lên Cloud!");
+                    if (statusEl) statusEl.innerText = `✅ Đã lưu lên Cloud thành công lúc ${nowStr}!`;
+                    showToast("☁️ Đã lưu toàn bộ dữ liệu lên Cloud!");
                 } else {
-                    throw new Error("HTTP " + res.status);
+                    throw new Error("HTTP Cloud save failed");
                 }
             } catch (err) {
                 console.error("Cloud push failed:", err);
-                if (statusEl) statusEl.innerText = "❌ Lỗi kết nối Cloud, vui lòng thử lại!";
-                showToast("⚠️ Lỗi tải dữ liệu lên Cloud.");
+                if (statusEl) statusEl.innerText = "⚠️ Lỗi kết nối Cloud! Hãy dùng nút 'Sao Chép Mã' bên dưới nhé.";
+                showToast("⚠️ Vui lòng thử nút 'Sao chép Mã Data' bên dưới!");
             } finally {
                 if (btnPush) btnPush.disabled = false;
             }
@@ -547,10 +577,11 @@
             const statusEl = document.getElementById('cloud-sync-status');
             const btnPull = document.getElementById('btn-cloud-pull');
             if (btnPull) btnPull.disabled = true;
-            if (statusEl && !silent) statusEl.innerText = "⏳ Đang tải dữ liệu từ Cloud...";
+            if (statusEl && !silent) statusEl.innerText = "⏳ Đang tải từ Cloud...";
 
             try {
-                const res = await fetch(`https://api.restful-api.dev/objects/${SYNC_MAP_DEFAULT_ID}`);
+                let targetId = appState.syncObjectId || SYNC_MAP_DEFAULT_ID;
+                const res = await fetch(`https://api.restful-api.dev/objects/${targetId}`);
                 if (!res.ok) throw new Error("HTTP " + res.status);
                 
                 const result = await res.json();
@@ -570,8 +601,8 @@
                 }
             } catch (err) {
                 console.error("Cloud pull failed:", err);
-                if (statusEl && !silent) statusEl.innerText = "⚠️ Chưa có bản lưu trên Cloud hoặc lỗi mạng.";
-                if (!silent) showToast("⚠️ Không thể tải dữ liệu từ Cloud.");
+                if (statusEl && !silent) statusEl.innerText = "⚠️ Chưa có bản lưu trên Cloud. Hãy bấm 'Đẩy Lên Cloud' trước.";
+                if (!silent) showToast("⚠️ Chưa có dữ liệu trên Cloud.");
             } finally {
                 if (btnPull) btnPull.disabled = false;
             }
@@ -586,6 +617,7 @@
                     t: Date.now()
                 });
                 const encoded = btoa(encodeURIComponent(dataStr));
+                
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(encoded).then(() => {
                         showToast("📋 Đã sao chép Mã Data vào bộ nhớ tạm!");
