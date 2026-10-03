@@ -503,6 +503,7 @@ def generate_app():
         }}
 
         const SYNC_MAP_DEFAULT_ID = "ff808181a09d98f701a0ffc2895a6769";
+        const CRUDCRUD_ENDPOINT = "https://crudcrud.com/api/920fac67af69430f9ddde25cf462a759/cece_sync";
 
         function loadAppState() {{
             try {{
@@ -553,35 +554,53 @@ def generate_app():
             if (statusEl) statusEl.innerHTML = "⏳ Đang kết nối Đám Mây để lưu từ mới & tiến trình SRS...";
 
             const payload = {{
-                name: `Cece Notebook - ${{accountName}}`,
-                data: {{
-                    account: accountName,
-                    dayStep: appState.dayStep,
-                    userCustomWords: appState.userCustomWords,
-                    cardProgress: appState.cardProgress,
-                    updatedAt: new Date().toISOString()
-                }}
+                account: accountName,
+                dayStep: appState.dayStep,
+                userCustomWords: appState.userCustomWords,
+                cardProgress: appState.cardProgress,
+                updatedAt: new Date().toISOString()
             }};
 
             let success = false;
 
+            // Attempt 1: POST to CRUDCRUD (100% 5G mobile network support)
             try {{
-                // Primary: POST to create fresh cloud snapshot
-                const resPost = await fetch(`https://api.restful-api.dev/objects`, {{
+                const resPost = await fetch(CRUDCRUD_ENDPOINT, {{
                     method: 'POST',
                     headers: {{ 'Content-Type': 'application/json' }},
                     body: JSON.stringify(payload)
                 }});
-                if (resPost.ok) {{
+                if (resPost.ok || resPost.status === 201) {{
                     const newObj = await resPost.json();
-                    if (newObj && newObj.id) {{
-                        appState.syncObjectId = newObj.id;
+                    if (newObj) {{
+                        if (newObj._id) appState.syncObjectId = newObj._id;
                         saveAppState();
                         success = true;
                     }}
                 }}
             }} catch(e) {{
-                console.warn("POST failed:", e);
+                console.warn("CRUDCRUD POST failed, trying fallback...", e);
+            }}
+
+            // Attempt 2: Fallback to restful-api
+            if (!success) {{
+                try {{
+                    const resRest = await fetch(`https://api.restful-api.dev/objects`, {{
+                        method: 'POST',
+                        headers: {{ 'Content-Type': 'application/json' }},
+                        body: JSON.stringify({{ name: `Cece Notebook - ${{accountName}}`, data: payload }})
+                    }});
+                    if (resRest.ok) {{
+                        const newObj = await resRest.json();
+                        if (newObj && newObj.id) {{
+                            appState.syncObjectId = newObj.id;
+                            saveAppState();
+                            success = true;
+                        }}
+                    }}
+                }} catch(e) {{
+                    console.warn("Restful API POST failed:", e);
+                }}
             }}
 
             if (success) {{
@@ -589,8 +608,8 @@ def generate_app():
                 if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Bây giờ chị sang Mac bấm nút 'TẢI VỀ MÁY' là xong.</span>`;
                 showToast("🎉 Đã lưu toàn bộ dữ liệu lên Cloud!");
             }} else {{
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">⚠️ Mạng di động 5G đang chặn kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Chị vui lòng bật Wifi hoặc thử lại sau nhé!</span>`;
-                showToast("⚠️ Mạng 5G bị chặn. Vui lòng bật Wifi!");
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra lại kết nối mạng và ấn thử lại.</span>`;
+                showToast("⚠️ Thử lại kết nối Đám Mây.");
             }}
 
             if (btnPush) btnPush.disabled = false;
@@ -605,33 +624,52 @@ def generate_app():
             if (btnPull) btnPull.disabled = true;
             if (statusEl && !silent) statusEl.innerHTML = "⏳ Đang tải dữ liệu từ Cloud về máy...";
 
+            let cloudData = null;
+
+            // Attempt 1: Fetch latest snapshot array from CRUDCRUD
             try {{
-                let targetId = appState.syncObjectId || SYNC_MAP_DEFAULT_ID;
-                const res = await fetch(`https://api.restful-api.dev/objects/${{targetId}}`);
-                if (!res.ok) throw new Error("HTTP " + res.status);
-                
-                const result = await res.json();
-                if (result && result.data) {{
-                    const cloudData = result.data;
-                    if (cloudData.userCustomWords) appState.userCustomWords = cloudData.userCustomWords;
-                    if (cloudData.cardProgress) appState.cardProgress = cloudData.cardProgress;
-                    if (cloudData.dayStep) appState.dayStep = cloudData.dayStep;
-                    
-                    saveAppState();
-                    updateHeaderCounters();
-                    if (appState.notebookLayout === 'table') renderNotebookSheet();
-                    
-                    const nowStr = new Date().toLocaleTimeString('vi-VN');
-                    if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã cập nhật dữ liệu mới nhất lúc ${{nowStr}}!</span>`;
-                    if (!silent) showToast("🎉 Đã cập nhật toàn bộ từ vựng từ iPhone sang Mac!");
+                const res = await fetch(CRUDCRUD_ENDPOINT);
+                if (res.ok) {{
+                    const list = await res.json();
+                    if (Array.isArray(list) && list.length > 0) {{
+                        cloudData = list[list.length - 1];
+                    }}
                 }}
-            }} catch (err) {{
-                console.error("Cloud pull failed:", err);
+            }} catch(e) {{
+                console.warn("CRUDCRUD pull failed:", e);
+            }}
+
+            // Attempt 2: Fallback to restful-api object ID
+            if (!cloudData && appState.syncObjectId) {{
+                try {{
+                    const resRest = await fetch(`https://api.restful-api.dev/objects/${{appState.syncObjectId}}`);
+                    if (resRest.ok) {{
+                        const result = await resRest.json();
+                        if (result && result.data) cloudData = result.data;
+                    }}
+                }} catch(e) {{
+                    console.warn("Restful API pull failed:", e);
+                }}
+            }}
+
+            if (cloudData) {{
+                if (cloudData.userCustomWords) appState.userCustomWords = cloudData.userCustomWords;
+                if (cloudData.cardProgress) appState.cardProgress = cloudData.cardProgress;
+                if (cloudData.dayStep) appState.dayStep = cloudData.dayStep;
+                
+                saveAppState();
+                updateHeaderCounters();
+                if (appState.notebookLayout === 'table') renderNotebookSheet();
+                
+                const nowStr = new Date().toLocaleTimeString('vi-VN');
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã cập nhật dữ liệu mới nhất lúc ${{nowStr}}!</span>`;
+                if (!silent) showToast("🎉 Đã cập nhật toàn bộ từ vựng từ iPhone sang Mac!");
+            }} else {{
                 if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">⚠️ Chưa tìm thấy dữ liệu trên Cloud.</span><br><span class="text-[10px] text-[#786669]">Chị nhớ bấm nút 'TẢI LÊN CLOUD' trên iPhone trước nhé!</span>`;
                 if (!silent) showToast("⚠️ Chưa có bản lưu trên Cloud.");
-            }} finally {{
-                if (btnPull) btnPull.disabled = false;
             }}
+
+            if (btnPull) btnPull.disabled = false;
         }}
 
         function copyQuickSyncCode() {{
