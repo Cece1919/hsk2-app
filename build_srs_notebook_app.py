@@ -518,18 +518,17 @@ def generate_app():
             }}
             applyViewModeUI();
             updateHeaderCounters();
-            if (appState.autoPullCloud) {{
-                pullFromCloud(true);
-            }}
+            // Always auto-pull latest Cloud snapshot on page load for seamless sync!
+            pullFromCloud(true);
         }}
 
         function openCloudSyncModal() {{
             const modal = document.getElementById('cloud-sync-modal');
             if (modal) modal.classList.remove('hidden');
             const codeInput = document.getElementById('cloud-sync-code');
-            if (codeInput && !codeInput.value) codeInput.value = appState.syncCode || "CECE-1919";
+            if (codeInput && !codeInput.value) codeInput.value = appState.syncCode || "Cece1919";
             const autoChk = document.getElementById('cloud-auto-pull');
-            if (autoChk) autoChk.checked = !!appState.autoPullCloud;
+            if (autoChk) autoChk.checked = true;
         }}
 
         function closeCloudSyncModal() {{
@@ -605,10 +604,11 @@ def generate_app():
 
             if (success) {{
                 const nowStr = new Date().toLocaleTimeString('vi-VN');
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Bây giờ chị sang Mac bấm nút 'TẢI VỀ MÁY' là xong.</span>`;
-                showToast("🎉 Đã lưu toàn bộ dữ liệu lên Cloud!");
+                const totalCount = getAllWordsList().length;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công (${{totalCount}} từ) lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Bây giờ chị mở Mac là web tự tải về.</span>`;
+                showToast(`🎉 Đã lưu toàn bộ ${{totalCount}} từ lên Cloud!`);
             }} else {{
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra lại kết nối mạng và ấn thử lại.</span>`;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra kết nối mạng và ấn thử lại.</span>`;
                 showToast("⚠️ Thử lại kết nối Đám Mây.");
             }}
 
@@ -632,7 +632,10 @@ def generate_app():
                 if (res.ok) {{
                     const list = await res.json();
                     if (Array.isArray(list) && list.length > 0) {{
-                        cloudData = list[list.length - 1];
+                        const validList = list.filter(item => item && (item.userCustomWords || item.cardProgress));
+                        if (validList.length > 0) {{
+                            cloudData = validList[validList.length - 1];
+                        }}
                     }}
                 }}
             }} catch(e) {{
@@ -659,13 +662,15 @@ def generate_app():
                 
                 saveAppState();
                 updateHeaderCounters();
-                if (appState.notebookLayout === 'table') renderNotebookSheet();
+                renderNotebookSheet();
+                initSrsSession();
                 
                 const nowStr = new Date().toLocaleTimeString('vi-VN');
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã cập nhật dữ liệu mới nhất lúc ${{nowStr}}!</span>`;
-                if (!silent) showToast("🎉 Đã cập nhật toàn bộ từ vựng từ iPhone sang Mac!");
+                const totalCount = getAllWordsList().length;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã đồng bộ ${{totalCount}} từ từ Cloud lúc ${{nowStr}}!</span>`;
+                if (!silent) showToast(`🎉 Đã tải ${{totalCount}} từ vựng từ Cloud sang Mac!`);
             }} else {{
-                if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">⚠️ Chưa tìm thấy dữ liệu trên Cloud.</span><br><span class="text-[10px] text-[#786669]">Chị nhớ bấm nút 'TẢI LÊN CLOUD' trên iPhone trước nhé!</span>`;
+                if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">⚠️ Chưa tìm thấy dữ liệu trên Cloud.</span><br><span class="text-[10px] text-[#786669]">Chị nhớ bấm 'TẢI LÊN CLOUD' trên iPhone trước nhé!</span>`;
                 if (!silent) showToast("⚠️ Chưa có bản lưu trên Cloud.");
             }}
 
