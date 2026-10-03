@@ -361,44 +361,58 @@
 
     <!-- Cloud Sync Modal -->
     <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
+        <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2.5">
                 <div class="flex items-center gap-2">
                     <span class="text-lg">☁️</span>
-                    <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Đám Mây (iPhone ⇄ Mac)</h3>
+                    <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Dữ Liệu (iPhone ⇄ Mac)</h3>
                 </div>
                 <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
             </div>
             
-            <p class="text-xs text-[#786669] leading-relaxed">
-                Nhập cùng <b>Mã Đồng Bộ</b> trên cả iPhone và Mac để giữ dữ liệu từ vựng & tiến trình SRS luôn giống nhau 100%.
-            </p>
-
-            <div class="space-y-3 text-xs">
+            <!-- Option A: Cloud Sync -->
+            <div class="bg-[#faf7f5] rounded-xl p-3 border border-[#e8dedb] space-y-2 text-xs">
+                <span class="font-bold text-[#2b2426] block">1. Đồng bộ qua Đám Mây (Cloud):</span>
+                
                 <div>
-                    <label class="font-semibold text-[#6e5f62] block mb-1">Mã Đồng Bộ Cá Nhân (Sync Code):</label>
-                    <div class="flex gap-2">
-                        <input type="text" id="cloud-sync-code" value="CECE-1919" class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] font-mono font-bold text-[#8f525e] bg-[#faf7f5] text-center uppercase tracking-widest text-sm" placeholder="Mã đồng bộ...">
-                    </div>
+                    <label class="text-[11px] text-[#786669] block mb-1">Mã Đồng Bộ Cá Nhân (Sync Code):</label>
+                    <input type="text" id="cloud-sync-code" value="CECE-1919" class="w-full px-3 py-1.5 rounded-lg border border-[#e2d5d1] font-mono font-bold text-[#8f525e] bg-white text-center uppercase tracking-widest text-xs" placeholder="Mã đồng bộ...">
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="pushToCloud()" id="btn-cloud-push" class="w-full py-2.5 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-2xs transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                    <button onclick="pushToCloud()" id="btn-cloud-push" class="w-full py-2 px-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold rounded-lg text-xs flex items-center justify-center gap-1 shadow-2xs transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
                         <span>Đẩy Lên Cloud</span>
                     </button>
 
-                    <button onclick="pullFromCloud()" id="btn-cloud-pull" class="w-full py-2.5 px-3 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
+                    <button onclick="pullFromCloud()" id="btn-cloud-pull" class="w-full py-2 px-2 bg-white hover:bg-[#f4ebe8] text-[#7b434f] border border-[#ebdcd8] font-semibold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
                         <span>Tải Từ Cloud</span>
                     </button>
                 </div>
             </div>
 
-            <div class="border-t border-[#f0e6e3] pt-3 text-[11px] text-[#8c7b7f] space-y-2">
+            <!-- Option B: 1-Click Copy Code (Super Reliable Fallback) -->
+            <div class="bg-[#fcf8f6] rounded-xl p-3 border border-[#ebdcd8] space-y-2 text-xs">
+                <span class="font-bold text-[#8f525e] block">⚡ 2. Mã Sao Chép 1-Chạm (100% Thành công):</span>
+                <p class="text-[11px] text-[#786669] leading-snug">
+                    Nếu mạng 5G chặn Cloud, chị bấm <b>Sao Chép</b> trên iPhone rồi dán (paste) qua Zalo/Message sang Mac để khôi phục 100%!
+                </p>
+
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button onclick="copyQuickSyncCode()" class="w-full py-2 px-2 bg-[#faf0ed] hover:bg-[#ebdcd8] text-[#8f525e] border border-[#e5d0cb] font-semibold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+                        📋 Sao Chép Mã
+                    </button>
+                    <button onclick="pasteQuickSyncCode()" class="w-full py-2 px-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold rounded-lg text-xs flex items-center justify-center gap-1 transition shadow-2xs">
+                        📥 Dán & Nhập
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-[#f0e6e3] pt-2 text-[11px] text-[#8c7b7f] space-y-1.5">
                 <div class="flex items-center gap-2">
                     <input type="checkbox" id="cloud-auto-pull" onchange="toggleAutoPull(event)" class="rounded text-[#8f525e] focus:ring-0">
-                    <label for="cloud-auto-pull" class="cursor-pointer font-medium text-[#5e5053]">Tự động tải khi mở web</label>
+                    <label for="cloud-auto-pull" class="cursor-pointer font-medium text-[#5e5053]">Tự động tải Cloud khi mở web</label>
                 </div>
                 <p id="cloud-sync-status" class="text-[10px] text-[#a08f93] italic">Chưa đồng bộ trong phiên này.</p>
             </div>
@@ -560,6 +574,60 @@
                 if (!silent) showToast("⚠️ Không thể tải dữ liệu từ Cloud.");
             } finally {
                 if (btnPull) btnPull.disabled = false;
+            }
+        }
+
+        function copyQuickSyncCode() {
+            try {
+                const dataStr = JSON.stringify({
+                    u: appState.userCustomWords,
+                    p: appState.cardProgress,
+                    d: appState.dayStep,
+                    t: Date.now()
+                });
+                const encoded = btoa(encodeURIComponent(dataStr));
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(encoded).then(() => {
+                        showToast("📋 Đã sao chép Mã Data vào bộ nhớ tạm!");
+                        const statusEl = document.getElementById('cloud-sync-status');
+                        if (statusEl) statusEl.innerText = "✅ Đã sao chép! Hãy dán (paste) sang Zalo/Notes.";
+                    }).catch(() => {
+                        fallbackPromptCopy(encoded);
+                    });
+                } else {
+                    fallbackPromptCopy(encoded);
+                }
+            } catch(e) {
+                showToast("⚠️ Không thể tạo mã sao chép.");
+            }
+        }
+
+        function fallbackPromptCopy(str) {
+            prompt("Hãy sao chép (Copy) toàn bộ đoạn mã dưới đây:", str);
+        }
+
+        function pasteQuickSyncCode() {
+            const code = prompt("Dán (Paste) Mã Data từ iPhone vào ô dưới đây:");
+            if (!code || !code.trim()) return;
+            try {
+                const decoded = decodeURIComponent(atob(code.trim()));
+                const parsed = JSON.parse(decoded);
+                if (parsed && (parsed.u || parsed.p)) {
+                    if (parsed.u) appState.userCustomWords = parsed.u;
+                    if (parsed.p) appState.cardProgress = parsed.p;
+                    if (parsed.d) appState.dayStep = parsed.d;
+                    saveAppState();
+                    updateHeaderCounters();
+                    if (appState.notebookLayout === 'table') renderNotebookSheet();
+                    showToast("🎉 Đã khôi phục dữ liệu từ iPhone thành công 100%!");
+                    const statusEl = document.getElementById('cloud-sync-status');
+                    if (statusEl) statusEl.innerText = "✅ Đã nạp thành công từ Mã Data!";
+                    closeCloudSyncModal();
+                } else {
+                    alert("⚠️ Mã dữ liệu không hợp lệ!");
+                }
+            } catch(e) {
+                alert("⚠️ Mã dữ liệu bị lỗi hoặc dán không chính xác!");
             }
         }
 
