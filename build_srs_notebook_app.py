@@ -51,52 +51,13 @@ def generate_app():
         {"hanzi": "牛奶", "pinyin": "niúnǎi", "hanviet": "Ngưu nãi", "meaning": "Sữa bò", "example": "早上我喝了一杯牛奶。 (Zǎoshang wǒ hē le yì bēi niúnǎi. - Buổi sáng tôi uống 1 ly sữa.)"}
     ]
 
-    # Fill 28 HSK 1 words to reach EXACTLY 75 default baseline words (14 HSK2 + 10 HSK1 + 23 Custom + 28 HSK1)
-    hsk1_baseline_28 = [x for x in full_db if x.get('level') == 'HSK 1'][10:38]
-    
-    extra_baseline_words = []
-    import re
-
-    added_hanzi = set()
     for item in extra_vocab:
         dictionary_map[item['hanzi']] = item
-        clean_py = re.sub(r'[^a-z]', '', item['pinyin'].lower())
-        added_hanzi.add(item['hanzi'])
-        extra_baseline_words.append({
-            "id": f"custom-extra-{len(extra_baseline_words)+1}",
-            "level": "HSK 2",
-            "day": 2,
-            "tag": "HSK 2 · Từ Vựng",
-            "hanzi": item['hanzi'],
-            "pinyin": item['pinyin'],
-            "pinyin_clean": clean_py,
-            "hanviet": item.get('hanviet', ''),
-            "meaning": item['meaning'],
-            "example": item.get('example', '')
-        })
-
-    for item in hsk1_baseline_28:
-        if item['hanzi'] in added_hanzi:
-            continue
-        clean_py = re.sub(r'[^a-z]', '', item['pinyin'].lower())
-        added_hanzi.add(item['hanzi'])
-        extra_baseline_words.append({
-            "id": f"custom-extra-{len(extra_baseline_words)+1}",
-            "level": "HSK 1",
-            "day": 1,
-            "tag": "HSK 1",
-            "hanzi": item['hanzi'],
-            "pinyin": item['pinyin'],
-            "pinyin_clean": clean_py,
-            "hanviet": item.get('hanviet', ''),
-            "meaning": item['meaning'],
-            "example": item.get('example', f"{item['hanzi']}。")
-        })
 
     dict_json = json.dumps(dictionary_map, ensure_ascii=False)
     hsk2_d1_json = json.dumps(hsk2_d1_words, ensure_ascii=False)
     hsk1_baseline_json = json.dumps(hsk1_baseline, ensure_ascii=False)
-    extra_baseline_json = json.dumps(extra_baseline_words, ensure_ascii=False)
+    extra_baseline_json = "[]"
 
     html_code = f"""<!DOCTYPE html>
 <html lang="vi">
@@ -558,10 +519,9 @@ def generate_app():
                 initDay1DefaultState();
             }}
 
-            // Purge any duplicated baseline words saved in userCustomWords
+            // Purge any automatically injected extra words so only words user manually entered remain
             if (appState.userCustomWords && appState.userCustomWords.length > 0) {{
-                const baselineHanzi = new Set([...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT, ...EXTRA_BASELINE_INIT].map(w => w.hanzi));
-                appState.userCustomWords = appState.userCustomWords.filter(w => w && w.hanzi && !baselineHanzi.has(w.hanzi));
+                appState.userCustomWords = appState.userCustomWords.filter(w => w && w.id && !String(w.id).startsWith('custom-extra-'));
                 saveAppState();
             }}
 
