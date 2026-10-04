@@ -1247,8 +1247,8 @@
                                         </td>
                                         <td class="py-3 px-3 whitespace-nowrap">
                                             ${isDue ? 
-                                                `<span class="text-[10px] bg-[#f7edeb] text-[#803838] font-semibold px-2 py-0.5 rounded-md border border-[#ebd3cf]">Đến hạn</span>` : 
-                                                `<span class="text-[10px] bg-[#edf3ef] text-[#34543f] font-semibold px-2 py-0.5 rounded-md border border-[#cfdfd4]">Sau ${p.interval || 1}d</span>`
+                                                `<span class="text-[10px] bg-[#f7edeb] text-[#803838] font-bold px-2 py-0.5 rounded-md border border-[#ebd3cf]">⚡ Đến hạn</span>` : 
+                                                `<span class="text-[10px] bg-[#edf3ef] text-[#34543f] font-semibold px-2 py-0.5 rounded-md border border-[#cfdfd4]">Sau ${p.interval || 1}d (${p.dueDate ? p.dueDate.split('-').reverse().slice(0,2).join('/') : ''})</span>`
                                             }
                                         </td>
                                         <td class="py-3 px-3 text-right whitespace-nowrap">
