@@ -457,6 +457,14 @@
             } catch(e) {
                 initDay1DefaultState();
             }
+
+            // Purge any duplicated baseline words saved in userCustomWords
+            if (appState.userCustomWords && appState.userCustomWords.length > 0) {
+                const baselineHanzi = new Set([...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT, ...EXTRA_BASELINE_INIT].map(w => w.hanzi));
+                appState.userCustomWords = appState.userCustomWords.filter(w => w && w.hanzi && !baselineHanzi.has(w.hanzi));
+                saveAppState();
+            }
+
             applyViewModeUI();
             updateHeaderCounters();
             // Always auto-pull latest Cloud snapshot on page load for seamless sync!
@@ -702,7 +710,9 @@
 
         function getAllWordsList() {
             const baseline = [...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT, ...EXTRA_BASELINE_INIT];
-            return [...baseline, ...appState.userCustomWords];
+            const baselineHanzi = new Set(baseline.map(w => w.hanzi));
+            const customOnly = (appState.userCustomWords || []).filter(w => w && w.hanzi && !baselineHanzi.has(w.hanzi));
+            return [...baseline, ...customOnly];
         }
 
         function toggleViewMode() {
