@@ -51,12 +51,55 @@ def generate_app():
         {"hanzi": "牛奶", "pinyin": "niúnǎi", "hanviet": "Ngưu nãi", "meaning": "Sữa bò", "example": "早上我喝了一杯牛奶。 (Zǎoshang wǒ hē le yì bēi niúnǎi. - Buổi sáng tôi uống 1 ly sữa.)"}
     ]
 
+    # Fill remaining words from full_db to reach exactly 75 default baseline words
+    used_ids = set([x['id'] for x in hsk2_d1_words + hsk1_baseline])
+    remaining_db_words = [x for x in full_db if x['id'] not in used_ids]
+    
+    extra_baseline_words = []
+    import re
+
+    added_hanzi = set()
     for item in extra_vocab:
         dictionary_map[item['hanzi']] = item
+        clean_py = re.sub(r'[^a-z]', '', item['pinyin'].lower())
+        added_hanzi.add(item['hanzi'])
+        extra_baseline_words.append({
+            "id": f"custom-extra-{len(extra_baseline_words)+1}",
+            "level": "Custom",
+            "day": 2,
+            "tag": "Chị Nạp • Từ Mới",
+            "hanzi": item['hanzi'],
+            "pinyin": item['pinyin'],
+            "pinyin_clean": clean_py,
+            "hanviet": item.get('hanviet', ''),
+            "meaning": item['meaning'],
+            "example": item.get('example', '')
+        })
+
+    for item in remaining_db_words:
+        if len(extra_baseline_words) >= 51:
+            break
+        if item['hanzi'] in added_hanzi:
+            continue
+        clean_py = re.sub(r'[^a-z]', '', item['pinyin'].lower())
+        added_hanzi.add(item['hanzi'])
+        extra_baseline_words.append({
+            "id": f"custom-extra-{len(extra_baseline_words)+1}",
+            "level": item.get('level', 'Custom'),
+            "day": item.get('day', 2),
+            "tag": "Chị Nạp • Từ Mới",
+            "hanzi": item['hanzi'],
+            "pinyin": item['pinyin'],
+            "pinyin_clean": clean_py,
+            "hanviet": item.get('hanviet', ''),
+            "meaning": item['meaning'],
+            "example": item.get('example', f"{item['hanzi']}。")
+        })
 
     dict_json = json.dumps(dictionary_map, ensure_ascii=False)
     hsk2_d1_json = json.dumps(hsk2_d1_words, ensure_ascii=False)
     hsk1_baseline_json = json.dumps(hsk1_baseline, ensure_ascii=False)
+    extra_baseline_json = json.dumps(extra_baseline_words, ensure_ascii=False)
 
     html_code = f"""<!DOCTYPE html>
 <html lang="vi">
@@ -473,6 +516,7 @@ def generate_app():
         const BUILTIN_DICTIONARY = {dict_json};
         const HSK2_DAY1_INIT = {hsk2_d1_json};
         const HSK1_BASELINE_INIT = {hsk1_baseline_json};
+        const EXTRA_BASELINE_INIT = {extra_baseline_json};
 
         let appState = {{
             dayStep: 1,
@@ -738,17 +782,7 @@ def generate_app():
             appState.cardProgress = {{}};
             const today = getTodayStr();
 
-            HSK2_DAY1_INIT.forEach(w => {{
-                appState.cardProgress[w.id] = {{
-                    interval: 1,
-                    easeFactor: 2.5,
-                    repetition: 0,
-                    dueDate: today,
-                    ticks: {{}}
-                }};
-            }});
-
-            HSK1_BASELINE_INIT.forEach(w => {{
+            getAllWordsList().forEach(w => {{
                 appState.cardProgress[w.id] = {{
                     interval: 1,
                     easeFactor: 2.5,
@@ -762,7 +796,7 @@ def generate_app():
         }}
 
         function resetDay1Data() {{
-            if (confirm("Khôi phục về trạng thái Ngày 1 (14 từ HSK 2 Day 1 + 10 từ HSK 1 đầu vào)?")) {{
+            if (confirm("Khôi phục về trạng thái ban đầu (75 từ vựng mẫu)?")) {{
                 localStorage.removeItem('cece_srs_notebook_app_v1');
                 initDay1DefaultState();
                 location.reload();
@@ -770,7 +804,7 @@ def generate_app():
         }}
 
         function getAllWordsList() {{
-            const baseline = [...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT];
+            const baseline = [...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT, ...EXTRA_BASELINE_INIT];
             return [...baseline, ...appState.userCustomWords];
         }}
 
