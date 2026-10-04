@@ -64,9 +64,9 @@ def generate_app():
         added_hanzi.add(item['hanzi'])
         extra_baseline_words.append({
             "id": f"custom-extra-{len(extra_baseline_words)+1}",
-            "level": "Custom",
+            "level": "HSK 2",
             "day": 2,
-            "tag": "Chị Nạp • Từ Mới",
+            "tag": "HSK 2 · Từ Vựng",
             "hanzi": item['hanzi'],
             "pinyin": item['pinyin'],
             "pinyin_clean": clean_py,
@@ -82,9 +82,9 @@ def generate_app():
         added_hanzi.add(item['hanzi'])
         extra_baseline_words.append({
             "id": f"custom-extra-{len(extra_baseline_words)+1}",
-            "level": item.get('level', 'Custom'),
-            "day": item.get('day', 2),
-            "tag": "Chị Nạp • Từ Mới",
+            "level": "HSK 1",
+            "day": 1,
+            "tag": "HSK 1",
             "hanzi": item['hanzi'],
             "pinyin": item['pinyin'],
             "pinyin_clean": clean_py,
