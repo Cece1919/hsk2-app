@@ -51,9 +51,8 @@ def generate_app():
         {"hanzi": "牛奶", "pinyin": "niúnǎi", "hanviet": "Ngưu nãi", "meaning": "Sữa bò", "example": "早上我喝了一杯牛奶。 (Zǎoshang wǒ hē le yì bēi niúnǎi. - Buổi sáng tôi uống 1 ly sữa.)"}
     ]
 
-    # Fill remaining words from full_db to reach exactly 75 default baseline words
-    used_ids = set([x['id'] for x in hsk2_d1_words + hsk1_baseline])
-    remaining_db_words = [x for x in full_db if x['id'] not in used_ids]
+    # Fill 28 HSK 1 words to reach EXACTLY 75 default baseline words (14 HSK2 + 10 HSK1 + 23 Custom + 28 HSK1)
+    hsk1_baseline_28 = [x for x in full_db if x.get('level') == 'HSK 1'][10:38]
     
     extra_baseline_words = []
     import re
@@ -76,9 +75,7 @@ def generate_app():
             "example": item.get('example', '')
         })
 
-    for item in remaining_db_words:
-        if len(extra_baseline_words) >= 51:
-            break
+    for item in hsk1_baseline_28:
         if item['hanzi'] in added_hanzi:
             continue
         clean_py = re.sub(r'[^a-z]', '', item['pinyin'].lower())
