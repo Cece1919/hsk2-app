@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="IELTS Vocab">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="apple-touch-icon.png">
+    <title>Cece English Notebook - Sổ Từ Vựng SRS</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8f525e">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #faf7f5;
+            color: #2b2426;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        /* 3D Card Flip & Safari Fix */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
+        .rotate-y-180 { transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+
+        .backface-hidden {
+            backface-visibility: hidden !important;
+            -webkit-backface-visibility: hidden !important;
+        }
+
+        .card-inner {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-inner.flipped {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+
+        /* Strict Safari/Mobile Fix for 3D Backface Bleed-Through */
+        .card-inner.flipped > .card-front {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            display: none !important;
+        }
+
+        .card-inner:not(.flipped) > .card-back {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Active Recall Mask Styles */
+        .hide-text { filter: blur(6px); user-select: none; transition: filter 0.2s; }
+        .hide-text:hover { filter: none; }
+        
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Button Active States */
+        .nav-btn-active {
+            background-color: #ffffff !important;
+            color: #2b2426 !important;
+            font-weight: 700 !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-[#faf7f5] text-[#2b2426] selection:bg-[#ebdcd8] selection:text-[#2b2426] flex flex-col min-h-screen">
+
+    <!-- App Wrapper Container -->
+    <div id="app-root" class="flex-1 flex flex-col items-center justify-start w-full">
+        
+        <!-- Header Bar -->
+        <header class="w-full bg-[#fcfbfa]/90 backdrop-blur-md border-b border-[#ece4e1] sticky top-0 z-30 transition-all">
+            <div class="max-w-4xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+                
+                <!-- Left Brand -->
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-[#935864] text-[#fdfaf9] flex items-center justify-center shadow-xs font-bold text-sm">
+                        EN
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold text-[#2b2426] tracking-tight text-sm">Cece Notebook</span>
+                            <span class="text-[11px] text-[#786669] font-normal">Sổ từ vựng SRS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-2 sm:gap-2.5">
+                    <button onclick="toggleVoiceAccent()" id="btn-voice-accent" class="px-2.5 py-1.5 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#7b434f] border border-[#ebdcd8] text-xs font-semibold transition-all flex items-center gap-1">
+                        <span id="accent-flag">🇺🇸</span>
+                        <span id="accent-label">US</span>
+                    </button>
+                    
+                    <div class="flex items-center gap-1.5 px-2 py-1 bg-[#f4ebe8] rounded-lg text-xs font-medium text-[#7d4e58] border border-[#e8dedb]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#935864] animate-pulse"></span>
+                        <span id="header-due-badge" class="tabular-nums font-semibold">0</span>
+                        <span class="hidden xs:inline text-[#66424b]">cần ôn</span>
+                    </div>
+
+                    <div class="flex items-center gap-1">
+                        <button onclick="openCloudSyncModal()" title="Đồng bộ Cloud (iPhone ⇄ Mac)" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+                            <span>☁️ Đồng bộ</span>
+                        </button>
+
+                        <button onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                        </button>
+                        <button onclick="triggerImportJSON()" title="Nhập dữ liệu từ file JSON" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
+                        </button>
+                        <input type="file" id="import-json-file" onchange="importDataJSON(event)" class="hidden" accept=".json">
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 flex flex-col items-center justify-start py-3 px-2 sm:px-4 w-full">
+            <div id="content-container" class="w-full max-w-4xl transition-all duration-300 mx-auto flex flex-col">
+                
+                <!-- Floating Segmented Navigation Bar -->
+                <div class="w-full bg-[#faf7f5]/90 border-b border-[#ebdcd8] p-1.5 sticky top-[53px] z-20 backdrop-blur-sm mb-2">
+                    <div class="max-w-md mx-auto grid grid-cols-3 gap-1 p-1 bg-[#ede4e1]/70 rounded-xl border border-[#e5d8d4]">
+                        <button onclick="switchView('input')" id="nav-btn-input" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+                            <span>Nạp Từ Mới</span>
+                        </button>
+                        <button onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
+                            <span>Ôn Tập SRS</span>
+                            <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">0</span>
+                        </button>
+                        <button onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
+                            <span>Sổ Từ</span>
+                            <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">(0)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 1: NẠP TỪ MỚI CỦA CHỊ -->
+                <div id="sec-input-view" class="space-y-4 fade-in hidden">
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 sm:p-5 shadow-xs space-y-3.5 max-w-md mx-auto w-full">
+                        <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-lg bg-[#f4ebe8] text-[#935864] flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+                                </div>
+                                <h2 class="text-xs font-bold text-[#2b2426] uppercase tracking-wider">NẠP TỪ MỚI CỦA CHỊ</h2>
+                            </div>
+                            <span class="text-[10px] bg-[#f4ebe8] text-[#8a525f] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">🤖 AI Auto Lookup</span>
+                        </div>
+
+                        <p class="text-[11px] text-[#786669] leading-relaxed">
+                            Nhập Từ/Cụm từ tiếng Anh chị học. Hệ thống kết hợp <strong>Từ điển & AI Dịch thuật thông minh</strong> để tự tra <strong>IPA, Nghĩa Việt, Synonyms & Ví dụ câu</strong>!
+                        </p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">1. Từ / Cụm Từ Tiếng Anh:</label>
+                                <div class="flex gap-2">
+                                    <input type="text" id="input-word" placeholder="Vd: Meticulous, Alleviate, Assertive..." class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-bold text-[#2b2426] bg-[#faf7f5] focus:outline-none focus:border-[#935864]">
+                                    <button onclick="autoLookupEnglishWord()" id="btn-lookup" class="px-3 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl transition flex items-center gap-1 whitespace-nowrap shadow-2xs">
+                                        🤖 Tra & Điền AI
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">2. Phiên Âm IPA:</label>
+                                    <input type="text" id="input-ipa" placeholder="Vd: /mɪˈtɪkjələs/" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#7a4853] bg-[#faf7f5] outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">3. Từ Loại:</label>
+                                    <input type="text" id="input-pos" placeholder="Vd: adj. / verb / noun" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">4. Nghĩa Tiếng Việt (Tự Động Dịch AI):</label>
+                                <input type="text" id="input-meaning" placeholder="Vd: Tỉ mỉ, kỹ lưỡng, cẩn thận" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">5. Collocation:</label>
+                                    <input type="text" id="input-collocation" placeholder="Vd: meticulous about" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">6. Từ Đồng Nghĩa:</label>
+                                    <input type="text" id="input-synonyms" placeholder="Vd: thorough, careful" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">7. Ví Dụ Dùng Từ Đó (Tiếng Anh + Dịch Việt AI):</label>
+                                <textarea id="input-example" rows="2" placeholder="Vd: She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc nghiên cứu.)" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="pt-1">
+                            <button onclick="saveCustomWordFromForm()" class="w-full bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-2xs">
+                                <span>💾 LƯU VÀO BỘ NHỚ & LÊN KẾ HOẠCH ÔN SRS 🚀</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Suggestion Chips -->
+                    <div class="bg-white border border-[#e8dedb] p-3 rounded-2xl space-y-2 max-w-md mx-auto w-full">
+                        <span class="text-[10px] font-semibold text-[#786669] uppercase block">💡 Gợi Ý Từ IELTS Band 7.0+ Hay Gặp Để Nạp Nhanh:</span>
+                        <div class="flex flex-wrap gap-1.5 text-xs font-medium">
+                            <button onclick="fillSuggestion('Meticulous', '/mɪˈtɪkjələs/', 'adj.', 'Tỉ mỉ, kỹ lưỡng', 'meticulous about', 'thorough, careful', 'She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">🎯 Meticulous</button>
+                            <button onclick="fillSuggestion('Alleviate', '/əˈliːvieɪt/', 'verb', 'Làm giảm nhẹ, xoa dịu', 'alleviate congestion', 'mitigate, ease', 'Public transport can alleviate traffic congestion. (Giao thông công cộng làm giảm ùn tắc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">⚡ Alleviate</button>
+                            <button onclick="fillSuggestion('Assertive', '/əˈsɜːtɪv/', 'adj.', 'Quyết đoán, tự tin', 'be assertive', 'confident, decisive', 'Young people should learn to be assertive. (Người trẻ nên học cách quyết đoán.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">🔥 Assertive</button>
+                            <button onclick="fillSuggestion('Ubiquitous', '/juːˈbɪkwɪtəs/', 'adj.', 'Phổ biến ở khắp nơi', 'become ubiquitous', 'omnipresent, pervasive', 'Smartphones have become ubiquitous in society. (Điện thoại đã trở nên phổ biến ở khắp nơi.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">📱 Ubiquitous</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: ÔN TẬP SRS (FLASHCARD DECK) -->
+                <div id="sec-srs-view" class="space-y-4 fade-in hidden max-w-md mx-auto w-full">
+                    <!-- Sub-header & Progress -->
+                    <div class="flex items-center justify-between text-xs text-[#736366]">
+                        <div class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#8a525f]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
+                            <span id="srs-card-counter">Thẻ 1 / 0</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="srs-tag-pill" class="text-[11px] text-[#8c7b7f]">IELTS Band 7.0+</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full h-1 bg-[#ede4e1] rounded-full overflow-hidden">
+                        <div id="srs-progress-bar" class="h-full bg-[#8f525e] transition-all duration-300 rounded-full" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Card Flip Container Box -->
+                    <div id="srs-card-box" class="space-y-4"></div>
+                </div>
+
+                <!-- TAB 3: SỔ TỪ (NOTEBOOK VIEW) -->
+                <div id="sec-notebook-view" class="space-y-4 fade-in w-full">
+                    
+                    <!-- Main Card Panel -->
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 sm:p-5 shadow-xs space-y-4 w-full">
+                        
+                        <!-- Row 1: Active Recall Header -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f0e6e3] pb-3.5">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 class="text-sm font-bold text-[#2b2426]">Công Tắc Active Recall</h3>
+                                    <span class="text-[11px] bg-[#f4ebe8] text-[#7d4e58] font-medium px-2.5 py-0.5 rounded-md border border-[#ebdcd8]">Ẩn / Hiện để rèn luyện trí nhớ</span>
+                                </div>
+                                <p class="text-xs text-[#786669]">Ẩn bớt trường thông tin khi nhìn danh sách để kích hoạt khả năng nhớ chủ động.</p>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <button onclick="toggleMask('word')" id="btn-mask-word" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <span>👁️ Từ Gốc</span>
+                                </button>
+                                <button onclick="toggleMask('ipa')" id="btn-mask-ipa" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <span>👁️ Phiên Âm IPA</span>
+                                </button>
+                                <button onclick="toggleMask('meaning')" id="btn-mask-vi" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                    <span>👁️ Nghĩa Việt</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Search & Filter Toolbar -->
+                        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
+                            <div class="relative flex-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-[#8c7b7f]"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                <input id="notebook-search-input" oninput="onNotebookSearchChange()" type="text" placeholder="Tìm theo từ gốc, IPA, Nghĩa Việt, bài học..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] focus:outline-none focus:border-[#8f525e]">
+                            </div>
+
+                            <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                                <select id="notebook-filter-level" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                    <option value="all">Tất cả Nhãn (Tags)</option>
+                                </select>
+
+                                <select id="notebook-filter-due" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                    <option value="all">Tất cả hạn ôn</option>
+                                    <option value="due">Đến hạn</option>
+                                    <option value="future">Chưa đến hạn</option>
+                                </select>
+
+                                <div class="flex items-center p-0.5 bg-[#ede4e1] rounded-xl border border-[#e5d8d4]">
+                                    <button onclick="switchNotebookLayout('table')" id="btn-layout-table" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs">Bảng</button>
+                                    <button onclick="switchNotebookLayout('card')" id="btn-layout-card" class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]">Thẻ</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Counter Status -->
+                        <div class="text-xs text-[#786669] font-medium pt-1">
+                            <span>Đang hiển thị: </span>
+                            <span id="notebook-rendered-count" class="font-bold text-[#2b2426]">0 / 0 từ</span>
+                        </div>
+
+                        <!-- Row 4: Data Table / Grid Container -->
+                        <div id="notebook-sheet-container" class="w-full overflow-x-auto"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full py-3.5 text-center text-xs text-[#786669] border-t border-[#ebdcd8] bg-[#fbf9f8] mt-auto">
+            <p class="font-medium text-[11px] text-[#786669]">Cece English Notebook · Continuous Learning, Endless Growth</p>
+        </footer>
+    </div>
+
+    <!-- Edit Word Modal -->
+    <div id="edit-word-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-5 border border-[#e8dedb] shadow-2xl max-w-md w-full space-y-3.5 fade-in">
+            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2">
+                <h3 class="text-sm font-bold text-[#2b2426]">✏️ Chỉnh Sửa Từ Vựng</h3>
+                <button onclick="closeEditModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+            </div>
+            
+            <input type="hidden" id="edit-word-id">
+            <div class="space-y-2.5 text-xs">
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Từ Gốc:</label>
+                    <input type="text" id="edit-word" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#2b2426] bg-[#faf7f5]">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Phiên Âm IPA:</label>
+                        <input type="text" id="edit-ipa" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#8a525f] font-semibold bg-[#faf7f5]">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Từ Loại:</label>
+                        <input type="text" id="edit-pos" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] font-semibold bg-[#faf7f5]">
+                    </div>
+                </div>
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Nghĩa Tiếng Việt:</label>
+                    <input type="text" id="edit-meaning" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] font-semibold bg-[#faf7f5]">
+                </div>
+                <div>
+                    <label class="font-semibold text-[#6e5f62] block mb-1">Ví Dụ Minh Họa:</label>
+                    <textarea id="edit-example" rows="2" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-[#2b2426] bg-[#faf7f5]"></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeEditModal()" class="px-4 py-2 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#5e5053] font-semibold text-xs rounded-xl border border-[#e2d5d1]">Hủy</button>
+                <button onclick="saveEditedWord()" class="px-4 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl shadow-2xs">Lưu Thay Đổi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloud Sync Modal -->
+    <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">☁️</span>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Tự Động (iPhone ⇄ Mac)</h3>
+                        <p class="text-[11px] text-[#786669]">Chỉ cần 1-chạm để chia sẻ từ vựng giữa các máy</p>
+                    </div>
+                </div>
+                <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-semibold text-[#6e5f62] block mb-1">Tên Tài Khoản Đồng Bộ:</label>
+                    <input type="text" id="cloud-sync-code" value="CeceEnglish" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#8f525e] bg-[#faf7f5] text-center text-sm" placeholder="Tên tài khoản...">
+                </div>
+
+                <div class="space-y-2 pt-1">
+                    <button onclick="pushToCloud()" id="btn-cloud-push" class="w-full py-3 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
+                        <span>☁️ TẢI LÊN CLOUD (Dùng trên iPhone)</span>
+                    </button>
+
+                    <button onclick="pullFromCloud()" id="btn-cloud-pull" class="w-full py-3 px-4 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
+                        <span>📥 TẢI VỀ MÁY (Dùng trên Mac)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- APP SCRIPT LOGIC -->
+    <script>
+        const DEFAULT_VOCAB = [
+  {
+    "id": "en_ielts_001",
+    "stt": 1,
+    "word": "anxious",
+    "phonetic": "/ˈæŋkʃəs/",
+    "meaning": "lo lắng, bất an",
+    "meaning_en": "worried or nervous about something",
+    "synonyms": "worried, uneasy",
+    "collocation": "feel anxious about",
+    "example_target": "Many students feel anxious about their future career prospects.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_002",
+    "stt": 2,
+    "word": "apprehensive",
+    "phonetic": "/ˌæprɪˈhensɪv/",
+    "meaning": "lo ngại, e dè",
+    "meaning_en": "worried that something unpleasant may happen",
+    "synonyms": "anxious, uneasy",
+    "collocation": "apprehensive about",
+    "example_target": "Some people are apprehensive about the rapid development of artificial intelligence.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_003",
+    "stt": 3,
+    "word": "cynical",
+    "phonetic": "/ˈsɪnɪkəl/",
+    "meaning": "hoài nghi",
+    "meaning_en": "believing people are mainly motivated by self-interest",
+    "synonyms": "skeptical, distrustful",
+    "collocation": "cynical about",
+    "example_target": "Many young people have become cynical about traditional advertising.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_004",
+    "stt": 4,
+    "word": "clumsy",
+    "phonetic": "/ˈklʌmzi/",
+    "meaning": "vụng về, hậu đậu",
+    "meaning_en": "moving or doing things awkwardly",
+    "synonyms": "awkward, uncoordinated",
+    "collocation": "physically clumsy",
+    "example_target": "Children may initially be clumsy when learning new physical skills.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_005",
+    "stt": 5,
+    "word": "gullible",
+    "phonetic": "/ˈɡʌləbəl/",
+    "meaning": "cả tin, dễ bị lừa",
+    "meaning_en": "easily persuaded to believe something untrue",
+    "synonyms": "naive, credulous",
+    "collocation": "gullible enough to believe",
+    "example_target": "Gullible consumers may be influenced by misleading advertisements.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_006",
+    "stt": 6,
+    "word": "assertive",
+    "phonetic": "/əˈsɜːtɪv/",
+    "meaning": "quyết đoán",
+    "meaning_en": "confident in expressing opinions or needs",
+    "synonyms": "confident, self-assured",
+    "collocation": "be assertive",
+    "example_target": "Young people should be encouraged to be assertive.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_007",
+    "stt": 7,
+    "word": "self-conscious",
+    "phonetic": "/ˌself ˈkɒnʃəs/",
+    "meaning": "ngượng ngùng, thiếu tự nhiên",
+    "meaning_en": "uncomfortable because of concern about others' opinions",
+    "synonyms": "insecure, embarrassed",
+    "collocation": "feel self-conscious about",
+    "example_target": "Teenagers often feel self-conscious about their appearance.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_008",
+    "stt": 8,
+    "word": "self-confident",
+    "phonetic": "/ˌself ˈkɒnfɪdənt/",
+    "meaning": "tự tin vào bản thân",
+    "meaning_en": "confident in yourself and your abilities",
+    "synonyms": "confident, self-assured",
+    "collocation": "become more self-confident",
+    "example_target": "Extracurricular activities can help students become more self-confident.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_009",
+    "stt": 9,
+    "word": "tactful",
+    "phonetic": "/ˈtæktfəl/",
+    "meaning": "khéo léo, tế nhị",
+    "meaning_en": "careful not to upset or offend others",
+    "synonyms": "diplomatic, considerate",
+    "collocation": "tactful approach",
+    "example_target": "Teachers should adopt a tactful approach when giving feedback.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_010",
+    "stt": 10,
+    "word": "sensible",
+    "phonetic": "/ˈsensəbəl/",
+    "meaning": "hợp lý, khôn ngoan",
+    "meaning_en": "practical and based on good judgment",
+    "synonyms": "reasonable, practical",
+    "collocation": "sensible approach",
+    "example_target": "Investing in public transport is a sensible approach.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 18/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_011",
+    "stt": 11,
+    "word": "candidate in",
+    "phonetic": "/ˈkændɪdət ɪn/",
+    "meaning": "ứng viên/người theo học trong lĩnh vực",
+    "meaning_en": "a candidate in a particular field",
+    "synonyms": "applicant, contender",
+    "collocation": "doctoral candidate in",
+    "example_target": "She is a doctoral candidate in psychology.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_012",
+    "stt": 12,
+    "word": "clinical psychology",
+    "phonetic": "/ˌklɪnɪkəl saɪˈkɒlədʒi/",
+    "meaning": "tâm lý học lâm sàng",
+    "meaning_en": "branch of psychology concerned with mental and behavioural problems",
+    "synonyms": "",
+    "collocation": "study clinical psychology",
+    "example_target": "Clinical psychology plays an important role in addressing mental health problems.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_013",
+    "stt": 13,
+    "word": "adolescent",
+    "phonetic": "/ˌædəˈlesənt/",
+    "meaning": "thanh thiếu niên",
+    "meaning_en": "a young person developing into an adult",
+    "synonyms": "teenager, youth",
+    "collocation": "adolescent development",
+    "example_target": "Social media can affect adolescent development.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_014",
+    "stt": 14,
+    "word": "trait",
+    "phonetic": "/treɪt/",
+    "meaning": "đặc điểm, nét tính cách",
+    "meaning_en": "a particular characteristic or quality",
+    "synonyms": "characteristic, quality",
+    "collocation": "personality trait",
+    "example_target": "Confidence is an important personality trait.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_015",
+    "stt": 15,
+    "word": "superiority",
+    "phonetic": "/suːˌpɪəriˈɒrəti/",
+    "meaning": "sự vượt trội, ưu thế",
+    "meaning_en": "the state of being better or more powerful",
+    "synonyms": "supremacy, dominance",
+    "collocation": "sense of superiority",
+    "example_target": "A sense of superiority may harm interpersonal relationships.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_016",
+    "stt": 16,
+    "word": "disrupt",
+    "phonetic": "/dɪsˈrʌpt/",
+    "meaning": "làm gián đoạn, gây rối",
+    "meaning_en": "to interrupt normal continuation",
+    "synonyms": "interrupt, disturb",
+    "collocation": "disrupt the learning process",
+    "example_target": "Smartphone use can disrupt the learning process.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_017",
+    "stt": 17,
+    "word": "perceive",
+    "phonetic": "/pəˈsiːv/",
+    "meaning": "nhận thức, nhìn nhận",
+    "meaning_en": "to understand or regard in a particular way",
+    "synonyms": "regard, view",
+    "collocation": "be perceived as",
+    "example_target": "University education is often perceived as a pathway to better careers.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_018",
+    "stt": 18,
+    "word": "inherent",
+    "phonetic": "/ɪnˈhɪərənt/",
+    "meaning": "vốn có, cố hữu",
+    "meaning_en": "existing as a natural part of something",
+    "synonyms": "intrinsic, innate",
+    "collocation": "inherent in",
+    "example_target": "There are risks inherent in new technologies.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_019",
+    "stt": 19,
+    "word": "portray",
+    "phonetic": "/pɔːˈtreɪ/",
+    "meaning": "miêu tả, khắc họa",
+    "meaning_en": "to describe or represent",
+    "synonyms": "depict, represent",
+    "collocation": "portray someone as",
+    "example_target": "The media often portray successful people as role models.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_020",
+    "stt": 20,
+    "word": "peer",
+    "phonetic": "/pɪə(r)/",
+    "meaning": "người đồng trang lứa",
+    "meaning_en": "a person of the same age or status",
+    "synonyms": "equal, contemporary",
+    "collocation": "peer pressure",
+    "example_target": "Adolescents are vulnerable to peer pressure.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_021",
+    "stt": 21,
+    "word": "extracurricular",
+    "phonetic": "/ˌekstrəkəˈrɪkjələ(r)/",
+    "meaning": "ngoại khóa",
+    "meaning_en": "outside the regular academic curriculum",
+    "synonyms": "non-academic",
+    "collocation": "extracurricular activities",
+    "example_target": "Extracurricular activities can develop social skills.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_022",
+    "stt": 22,
+    "word": "kinaesthetic",
+    "phonetic": "/ˌkɪnəsˈθetɪk/",
+    "meaning": "thuộc về vận động",
+    "meaning_en": "relating to learning through movement",
+    "synonyms": "kinesthetic",
+    "collocation": "kinaesthetic learning",
+    "example_target": "Kinaesthetic learning can benefit hands-on learners.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_023",
+    "stt": 23,
+    "word": "congestion",
+    "phonetic": "/kənˈdʒestʃən/",
+    "meaning": "sự ùn tắc",
+    "meaning_en": "overcrowding or blockage, especially traffic",
+    "synonyms": "overcrowding, blockage",
+    "collocation": "traffic congestion",
+    "example_target": "Public transport can reduce traffic congestion.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_024",
+    "stt": 24,
+    "word": "alleviate",
+    "phonetic": "/əˈliːvieɪt/",
+    "meaning": "làm giảm nhẹ, xoa dịu",
+    "meaning_en": "to make something bad less severe",
+    "synonyms": "ease, relieve, mitigate",
+    "collocation": "alleviate traffic congestion",
+    "example_target": "Public transport can alleviate traffic congestion.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 19/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_025",
+    "stt": 25,
+    "word": "retrospect",
+    "phonetic": "/ˈretrəspekt/",
+    "meaning": "sự nhìn lại quá khứ",
+    "meaning_en": "a review of past events",
+    "synonyms": "hindsight, review",
+    "collocation": "in retrospect",
+    "example_target": "In retrospect, stricter policies should have been introduced earlier.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_026",
+    "stt": 26,
+    "word": "contemporary",
+    "phonetic": "/kənˈtempərəri/",
+    "meaning": "đương đại, hiện đại",
+    "meaning_en": "belonging to the present time",
+    "synonyms": "modern, current",
+    "collocation": "contemporary society",
+    "example_target": "Contemporary society relies heavily on technology.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_027",
+    "stt": 27,
+    "word": "bygone",
+    "phonetic": "/ˈbaɪɡɒn/",
+    "meaning": "đã qua, thuộc thời xưa",
+    "meaning_en": "belonging to an earlier time",
+    "synonyms": "past, former",
+    "collocation": "bygone era",
+    "example_target": "Many traditions from a bygone era are preserved.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_028",
+    "stt": 28,
+    "word": "immediate",
+    "phonetic": "/ɪˈmiːdiət/",
+    "meaning": "ngay lập tức",
+    "meaning_en": "happening at once",
+    "synonyms": "instant, prompt",
+    "collocation": "immediate action",
+    "example_target": "Immediate action is needed to tackle climate change.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_029",
+    "stt": 29,
+    "word": "preceding",
+    "phonetic": "/prɪˈsiːdɪŋ/",
+    "meaning": "trước đó",
+    "meaning_en": "coming before",
+    "synonyms": "previous, prior",
+    "collocation": "preceding year",
+    "example_target": "The preceding chapter explains the concept.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_030",
+    "stt": 30,
+    "word": "current",
+    "phonetic": "/ˈkʌrənt/",
+    "meaning": "hiện tại",
+    "meaning_en": "existing or happening now",
+    "synonyms": "present, existing",
+    "collocation": "current situation",
+    "example_target": "The current education system faces challenges.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_031",
+    "stt": 31,
+    "word": "topical",
+    "phonetic": "/ˈtɒpɪkəl/",
+    "meaning": "mang tính thời sự",
+    "meaning_en": "relating to current issues",
+    "synonyms": "timely, relevant",
+    "collocation": "topical issue",
+    "example_target": "Climate change remains a topical issue.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_032",
+    "stt": 32,
+    "word": "status quo",
+    "phonetic": "/ˌsteɪtəs ˈkwəʊ/",
+    "meaning": "hiện trạng",
+    "meaning_en": "the existing state of affairs",
+    "synonyms": "existing situation",
+    "collocation": "maintain the status quo",
+    "example_target": "Some people prefer to maintain the status quo.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_033",
+    "stt": 33,
+    "word": "conduct",
+    "phonetic": "/kənˈdʌkt/ (v); /ˈkɒndʌkt/ (n)",
+    "meaning": "tiến hành; hành vi",
+    "meaning_en": "to carry out; behaviour",
+    "synonyms": "carry out, perform",
+    "collocation": "conduct research",
+    "example_target": "Scientists conduct research to develop new technologies.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_034",
+    "stt": 34,
+    "word": "ancestor",
+    "phonetic": "/ˈænsestə(r)/",
+    "meaning": "tổ tiên",
+    "meaning_en": "a person from whom one is descended",
+    "synonyms": "forebear, predecessor",
+    "collocation": "common ancestor",
+    "example_target": "Our ancestors relied heavily on natural resources.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_035",
+    "stt": 35,
+    "word": "pioneer",
+    "phonetic": "/ˌpaɪəˈnɪə(r)/",
+    "meaning": "người tiên phong",
+    "meaning_en": "one of the first to develop something",
+    "synonyms": "innovator, trailblazer",
+    "collocation": "pioneer in",
+    "example_target": "She was a pioneer in medical research.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_036",
+    "stt": 36,
+    "word": "colonial",
+    "phonetic": "/kəˈləʊniəl/",
+    "meaning": "thuộc thời thuộc địa",
+    "meaning_en": "relating to colonies",
+    "synonyms": "imperial",
+    "collocation": "colonial rule",
+    "example_target": "Many countries were influenced by colonial rule.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_037",
+    "stt": 37,
+    "word": "ancient",
+    "phonetic": "/ˈeɪnʃənt/",
+    "meaning": "cổ đại",
+    "meaning_en": "belonging to the distant past",
+    "synonyms": "old, prehistoric",
+    "collocation": "ancient civilization",
+    "example_target": "Ancient civilizations left valuable historical records.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_038",
+    "stt": 38,
+    "word": "civilization",
+    "phonetic": "/ˌsɪvəlaɪˈzeɪʃən/",
+    "meaning": "nền văn minh",
+    "meaning_en": "an advanced human society",
+    "synonyms": "culture, society",
+    "collocation": "ancient civilization",
+    "example_target": "Egypt is home to one of the world's oldest civilizations.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_039",
+    "stt": 39,
+    "word": "dwell",
+    "phonetic": "/dwel/",
+    "meaning": "cư trú",
+    "meaning_en": "to live somewhere",
+    "synonyms": "reside, live",
+    "collocation": "dwell in",
+    "example_target": "Early humans dwelt near rivers and lakes.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_040",
+    "stt": 40,
+    "word": "shore",
+    "phonetic": "/ʃɔː(r)/",
+    "meaning": "bờ biển, bờ hồ",
+    "meaning_en": "land along the edge of a sea or lake",
+    "synonyms": "coast, coastline",
+    "collocation": "along the shore",
+    "example_target": "People settled along the shore.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_041",
+    "stt": 41,
+    "word": "archaeologist",
+    "phonetic": "/ˌɑːkiˈɒlədʒɪst/",
+    "meaning": "nhà khảo cổ học",
+    "meaning_en": "a specialist who studies past human cultures",
+    "synonyms": "researcher",
+    "collocation": "team of archaeologists",
+    "example_target": "Archaeologists uncovered evidence of an ancient settlement.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_042",
+    "stt": 42,
+    "word": "evidence",
+    "phonetic": "/ˈevɪdəns/",
+    "meaning": "bằng chứng",
+    "meaning_en": "facts showing something is true",
+    "synonyms": "proof, indication",
+    "collocation": "provide evidence",
+    "example_target": "There is strong evidence that exercise benefits mental health.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_043",
+    "stt": 43,
+    "word": "remnant",
+    "phonetic": "/ˈremnənt/",
+    "meaning": "tàn tích, phần còn sót lại",
+    "meaning_en": "a small remaining part",
+    "synonyms": "remainder, relic",
+    "collocation": "remnant of",
+    "example_target": "The temple is a remnant of an ancient civilization.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_044",
+    "stt": 44,
+    "word": "yield",
+    "phonetic": "/jiːld/",
+    "meaning": "tạo ra, mang lại",
+    "meaning_en": "to produce or provide a result",
+    "synonyms": "produce, generate",
+    "collocation": "yield results",
+    "example_target": "The new policy has yielded positive results.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_045",
+    "stt": 45,
+    "word": "fleck",
+    "phonetic": "/flek/",
+    "meaning": "đốm nhỏ",
+    "meaning_en": "a very small spot or mark",
+    "synonyms": "speck, spot",
+    "collocation": "flecks of charcoal",
+    "example_target": "Archaeologists discovered flecks of charcoal.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_046",
+    "stt": 46,
+    "word": "charcoal",
+    "phonetic": "/ˈtʃɑːkəʊl/",
+    "meaning": "than củi",
+    "meaning_en": "black carbon-rich material made from wood",
+    "synonyms": "carbon",
+    "collocation": "charcoal remains",
+    "example_target": "Charcoal remains helped researchers estimate the site's age.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_047",
+    "stt": 47,
+    "word": "vital",
+    "phonetic": "/ˈvaɪtəl/",
+    "meaning": "vô cùng quan trọng, thiết yếu",
+    "meaning_en": "extremely important or necessary",
+    "synonyms": "crucial, essential, indispensable",
+    "collocation": "play a vital role",
+    "example_target": "Education plays a vital role in economic development.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_048",
+    "stt": 48,
+    "word": "on the verge of destruction",
+    "phonetic": "/ɒn ðə vɜːdʒ əv dɪˈstrʌkʃən/",
+    "meaning": "bên bờ vực bị hủy diệt",
+    "meaning_en": "very close to being destroyed",
+    "synonyms": "on the brink of destruction",
+    "collocation": "on the verge of destruction",
+    "example_target": "Many historical sites are on the verge of destruction.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_049",
+    "stt": 49,
+    "word": "erosion",
+    "phonetic": "/ɪˈrəʊʒən/",
+    "meaning": "sự xói mòn",
+    "meaning_en": "gradual wearing away of land or rock",
+    "synonyms": "degradation, wear",
+    "collocation": "soil erosion",
+    "example_target": "Governments should take measures to prevent soil erosion.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_050",
+    "stt": 50,
+    "word": "looter",
+    "phonetic": "/ˈluːtə(r)/",
+    "meaning": "kẻ cướp bóc, kẻ hôi của",
+    "meaning_en": "a person who steals during disorder",
+    "synonyms": "robber, plunderer",
+    "collocation": "archaeological looters",
+    "example_target": "Looters have caused serious damage to archaeological sites.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_051",
+    "stt": 51,
+    "word": "antique",
+    "phonetic": "/ænˈtiːk/",
+    "meaning": "đồ cổ, cổ vật",
+    "meaning_en": "an old valuable object",
+    "synonyms": "antiquity, collectible",
+    "collocation": "antique furniture",
+    "example_target": "Antique objects provide valuable insights into the past.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_052",
+    "stt": 52,
+    "word": "excavate",
+    "phonetic": "/ˈekskəveɪt/",
+    "meaning": "khai quật",
+    "meaning_en": "to dig to uncover objects or remains",
+    "synonyms": "unearth, dig up",
+    "collocation": "excavate a site",
+    "example_target": "Archaeologists excavated the site and found valuable artefacts.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_053",
+    "stt": 53,
+    "word": "artefact (BrE) / artifact (AmE)",
+    "phonetic": "/ˈɑːtɪfækt/",
+    "meaning": "hiện vật, cổ vật",
+    "meaning_en": "a human-made object of historical or cultural interest",
+    "synonyms": "relic, antiquity",
+    "collocation": "cultural artefact",
+    "example_target": "Museums preserve ancient artefacts for future generations.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  },
+  {
+    "id": "en_ielts_054",
+    "stt": 54,
+    "word": "sediment",
+    "phonetic": "/ˈsedɪmənt/",
+    "meaning": "trầm tích",
+    "meaning_en": "material such as sand or mud deposited by water",
+    "synonyms": "deposit, residue",
+    "collocation": "deep layers of sediment",
+    "example_target": "Ancient remains were buried beneath deep layers of sediment.",
+    "example_vi": "",
+    "tags": [
+      "IELTS 7.0+",
+      "Ngày 21/7"
+    ],
+    "pos": "vocab",
+    "audio": "",
+    "srs": {
+      "interval": 1,
+      "repetition": 0,
+      "easeFactor": 2.5,
+      "dueDate": "2026-10-06"
+    }
+  }
+];
+
+        let appState = {
+            words: [],
+            activeView: 'notebook',
+            voiceLang: 'en-US',
+            notebookLayout: 'table',
+            masks: { word: false, ipa: false, meaning: false },
+            srsIndex: 0,
+            srsQueue: []
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initAppState();
+            renderAllViews();
+        });
+
+        function initAppState() {
+            const saved = localStorage.getItem('cece_english_notebook_v1');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    appState.words = parsed.words || DEFAULT_VOCAB;
+                } catch (e) {
+                    appState.words = DEFAULT_VOCAB;
+                }
+            } else {
+                appState.words = DEFAULT_VOCAB;
+            }
+            saveAppState();
+        }
+
+        function saveAppState() {
+            localStorage.setItem('cece_english_notebook_v1', JSON.stringify({
+                words: appState.words
+            }));
+            updateBadges();
+        }
+
+        function updateBadges() {
+            const today = new Date().toISOString().split('T')[0];
+            const dueList = appState.words.filter(w => !w.srs || !w.srs.dueDate || w.srs.dueDate <= today);
+            
+            document.getElementById('header-due-badge').textContent = dueList.length;
+            document.getElementById('tab-due-badge').textContent = dueList.length;
+            document.getElementById('tab-total-badge').textContent = `(${appState.words.length})`;
+        }
+
+        /* Dynamic SM-2 Interval Calculation for SRS buttons */
+        function getPreviewIntervals(srs) {
+            let { interval, repetition, easeFactor } = srs || { interval: 1, repetition: 0, easeFactor: 2.5 };
+            
+            const daysAgain = 1;
+            
+            let daysHard = 1;
+            if (repetition === 0) daysHard = 1;
+            else if (repetition === 1) daysHard = 2;
+            else daysHard = Math.max(2, Math.round(interval * 1.2));
+            
+            let daysGood = 3;
+            if (repetition === 0) daysGood = 3;
+            else if (repetition === 1) daysGood = 4;
+            else daysGood = Math.round(interval * easeFactor);
+            
+            let daysEasy = 7;
+            if (repetition === 0) daysEasy = 6;
+            else if (repetition === 1) daysEasy = 8;
+            else daysEasy = Math.round(interval * easeFactor * 1.3);
+
+            return { daysAgain, daysHard, daysGood, daysEasy };
+        }
+
+        function getSRSBadgeHTML(srs) {
+            const today = new Date().toISOString().split('T')[0];
+            if (!srs || !srs.dueDate || srs.dueDate <= today) {
+                return `<span class="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-[10px] font-bold border border-rose-200 inline-flex items-center gap-1">🔴 Đến hạn (${srs?.dueDate || 'Hôm nay'})</span>`;
+            }
+            const target = new Date(srs.dueDate);
+            const curr = new Date(today);
+            const diffTime = target - curr;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return `<span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-semibold border border-emerald-200 inline-flex items-center gap-1">🟢 Sau ${diffDays} ngày (${srs.dueDate})</span>`;
+        }
+
+        /* --- VOICE SYNTHESIS --- */
+        function toggleVoiceAccent() {
+            if (appState.voiceLang === 'en-US') {
+                appState.voiceLang = 'en-GB';
+                document.getElementById('accent-flag').textContent = '🇬🇧';
+                document.getElementById('accent-label').textContent = 'UK';
+            } else {
+                appState.voiceLang = 'en-US';
+                document.getElementById('accent-flag').textContent = '🇺🇸';
+                document.getElementById('accent-label').textContent = 'US';
+            }
+        }
+
+        function speakWordText(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = lang || appState.voiceLang;
+                u.rate = 0.9;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+
+        /* --- VIEW SWITCHER --- */
+        function switchView(viewName) {
+            appState.activeView = viewName;
+
+            document.getElementById('sec-input-view').classList.add('hidden');
+            document.getElementById('sec-srs-view').classList.add('hidden');
+            document.getElementById('sec-notebook-view').classList.add('hidden');
+
+            document.getElementById('nav-btn-input').className = 'flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+            document.getElementById('nav-btn-srs').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+            document.getElementById('nav-btn-notebook').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+
+            if (viewName === 'input') {
+                document.getElementById('sec-input-view').classList.remove('hidden');
+                document.getElementById('nav-btn-input').className = 'flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
+            } else if (viewName === 'srs') {
+                document.getElementById('sec-srs-view').classList.remove('hidden');
+                document.getElementById('nav-btn-srs').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                initSRSDeck();
+            } else if (viewName === 'notebook') {
+                document.getElementById('sec-notebook-view').classList.remove('hidden');
+                document.getElementById('nav-btn-notebook').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                populateNotebookFilterTags();
+                renderNotebookSheet();
+            }
+        }
+
+        function renderAllViews() {
+            switchView(appState.activeView);
+        }
+
+
+        /* --- TAB 1: AI SMART AUTO LOOKUP & FORM --- */
+        async function autoLookupEnglishWord() {
+            const wordInput = document.getElementById('input-word');
+            const btn = document.getElementById('btn-lookup');
+            const word = wordInput.value.trim();
+            if (!word) return;
+
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '⏳ AI Đang Tra...';
+            btn.disabled = true;
+
+            try {
+                let ipa = '', pos = '', exampleTarget = '', synonyms = '';
+                try {
+                    const dictRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+                    if (dictRes.ok) {
+                        const dictData = await dictRes.json();
+                        if (dictData && dictData[0]) {
+                            const entry = dictData[0];
+                            ipa = entry.phonetic || (entry.phonetics && entry.phonetics[0] ? entry.phonetics[0].text : '');
+                            if (entry.meanings && entry.meanings[0]) {
+                                pos = entry.meanings[0].partOfSpeech || 'vocab';
+                                if (entry.meanings[0].definitions && entry.meanings[0].definitions[0]) {
+                                    const def = entry.meanings[0].definitions[0];
+                                    if (def.example) exampleTarget = def.example;
+                                }
+                                if (entry.meanings[0].synonyms && entry.meanings[0].synonyms.length > 0) {
+                                    synonyms = entry.meanings[0].synonyms.slice(0, 3).join(', ');
+                                }
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.log('Dict API fallback:', err);
+                }
+
+                let meaningVi = '';
+                try {
+                    const transRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|vi`);
+                    if (transRes.ok) {
+                        const transData = await transRes.json();
+                        if (transData && transData.responseData && transData.responseData.translatedText) {
+                            meaningVi = transData.responseData.translatedText;
+                        }
+                    }
+                } catch (err) {
+                    console.log('AI Translation fallback:', err);
+                }
+
+                if (ipa) document.getElementById('input-ipa').value = ipa;
+                if (pos) document.getElementById('input-pos').value = pos;
+                if (meaningVi && !document.getElementById('input-meaning').value) document.getElementById('input-meaning').value = meaningVi;
+                if (synonyms) document.getElementById('input-synonyms').value = synonyms;
+
+                if (exampleTarget) {
+                    try {
+                        const exRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(exampleTarget)}&langpair=en|vi`);
+                        if (exRes.ok) {
+                            const exData = await exRes.json();
+                            const exVi = exData.responseData ? exData.responseData.translatedText : '';
+                            document.getElementById('input-example').value = `"${exampleTarget}" (${exVi})`;
+                        } else {
+                            document.getElementById('input-example').value = `"${exampleTarget}"`;
+                        }
+                    } catch (e) {
+                        document.getElementById('input-example').value = `"${exampleTarget}"`;
+                    }
+                }
+
+            } finally {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+            }
+        }
+
+        function fillSuggestion(word, ipa, pos, meaning, collocation, synonyms, example) {
+            document.getElementById('input-word').value = word;
+            document.getElementById('input-ipa').value = ipa;
+            document.getElementById('input-pos').value = pos;
+            document.getElementById('input-meaning').value = meaning;
+            document.getElementById('input-collocation').value = collocation;
+            document.getElementById('input-synonyms').value = synonyms;
+            document.getElementById('input-example').value = example;
+        }
+
+        function saveCustomWordFromForm() {
+            const word = document.getElementById('input-word').value.trim();
+            const meaning = document.getElementById('input-meaning').value.trim();
+            if (!word || !meaning) {
+                alert('Vui lòng nhập Từ gốc và Nghĩa tiếng Việt.');
+                return;
+            }
+
+            const newObj = {
+                id: 'custom_' + Date.now(),
+                stt: appState.words.length + 1,
+                word: word,
+                phonetic: document.getElementById('input-ipa').value.trim(),
+                pos: document.getElementById('input-pos').value.trim() || 'vocab',
+                meaning: meaning,
+                meaning_en: '',
+                collocation: document.getElementById('input-collocation').value.trim(),
+                synonyms: document.getElementById('input-synonyms').value.trim(),
+                example_target: document.getElementById('input-example').value.trim(),
+                tags: ['Chị Nạp • Từ Mới'],
+                srs: {
+                    interval: 1,
+                    repetition: 0,
+                    easeFactor: 2.5,
+                    dueDate: new Date().toISOString().split('T')[0]
+                }
+            };
+
+            appState.words.unshift(newObj);
+            saveAppState();
+
+            // Clear inputs
+            document.getElementById('input-word').value = '';
+            document.getElementById('input-ipa').value = '';
+            document.getElementById('input-pos').value = '';
+            document.getElementById('input-meaning').value = '';
+            document.getElementById('input-collocation').value = '';
+            document.getElementById('input-synonyms').value = '';
+            document.getElementById('input-example').value = '';
+
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+            switchView('notebook');
+        }
+
+
+        /* --- TAB 2: SRS FLASHCARD DECK --- */
+        function initSRSDeck() {
+            const today = new Date().toISOString().split('T')[0];
+            appState.srsQueue = appState.words.filter(w => !w.srs || !w.srs.dueDate || w.srs.dueDate <= today);
+            appState.srsIndex = 0;
+
+            renderSRSCard();
+        }
+
+        function renderSRSCard() {
+            const box = document.getElementById('srs-card-box');
+            const total = appState.srsQueue.length;
+            document.getElementById('srs-card-counter').textContent = `Thẻ ${appState.srsIndex + 1} / ${total}`;
+            
+            const pct = total > 0 ? Math.round(((appState.srsIndex) / total) * 100) : 100;
+            document.getElementById('srs-progress-bar').style.width = pct + '%';
+
+            if (total === 0 || appState.srsIndex >= total) {
+                box.innerHTML = `
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-6 text-center space-y-3">
+                        <div class="text-4xl">🎉</div>
+                        <h3 class="text-base font-bold text-[#2b2426]">Tuyệt Vời! Đã Ôn Xong Bài Hôm Nay</h3>
+                        <p class="text-xs text-[#786669]">Bạn đã thuộc hết các từ đến hạn. Hệ thống SRS đã tự xếp lịch ôn lại cho tương lai.</p>
+                        <button onclick="switchView('notebook')" class="px-4 py-2 bg-[#8f525e] text-white font-semibold text-xs rounded-xl shadow-2xs">Xem Sổ Từ Vựng</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const item = appState.srsQueue[appState.srsIndex];
+            const { daysAgain, daysHard, daysGood, daysEasy } = getPreviewIntervals(item.srs);
+
+            box.innerHTML = `
+                <div class="perspective-1000 min-h-[360px] w-full">
+                    <div id="active-srs-card-inner" onclick="this.classList.toggle('flipped')" class="card-inner relative w-full min-h-[360px] cursor-pointer transform-style-3d">
+                        
+                        <!-- FRONT CARD FACE WITH SRS BUTTONS -->
+                        <div class="card-front absolute inset-0 w-full h-full bg-white border border-[#e8dedb] rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-xs backface-hidden">
+                            <div class="w-full flex items-center justify-between">
+                                <span class="text-[10px] bg-[#f4ebe8] text-[#8a525f] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">${item.tags ? item.tags[0] : 'IELTS'}</span>
+                                <button onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="w-8 h-8 rounded-full bg-[#f4ebe8] text-[#8a525f] flex items-center justify-center hover:bg-[#ede5e2]">🔊</button>
+                            </div>
+
+                            <div class="my-auto py-3 space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[#2b2426] tracking-tight">${item.word}</h2>
+                                <p class="text-base font-semibold text-[#8a525f]">${item.phonetic || ''}</p>
+                                <span class="text-[10px] bg-[#faf7f5] text-[#786669] font-semibold px-2 py-0.5 rounded border border-[#e2d5d1]">${item.pos || 'vocab'}</span>
+                                <p class="text-[11px] text-[#8c7b7f] animate-pulse pt-1">
+                                    👆 Chạm phần trống để xem nghĩa & ví dụ
+                                </p>
+                            </div>
+
+                            <!-- SRS Rating Buttons Grid on FRONT CARD -->
+                            <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
+                                <button onclick="handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button onclick="handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button onclick="handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button onclick="handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                            </div>
+                        </div>
+
+                        <!-- BACK CARD FACE WITH SRS BUTTONS -->
+                        <div class="card-back absolute inset-0 w-full h-full bg-[#fffcfb] border border-[#e8dedb] rounded-2xl p-5 flex flex-col justify-between text-left shadow-xs backface-hidden rotate-y-180 overflow-y-auto">
+                            <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2">
+                                <span class="font-bold text-sm text-[#2b2426]">${item.word}</span>
+                                <button onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="text-xs text-[#8a525f]">🔊 Nghe</button>
+                            </div>
+
+                            <div class="space-y-2 my-auto py-2 text-xs">
+                                <div>
+                                    <span class="text-[10px] font-bold text-[#8a525f] uppercase block">Nghĩa Tiếng Việt</span>
+                                    <p class="text-base font-bold text-[#2b2426]">${item.meaning}</p>
+                                </div>
+
+                                ${item.collocation ? `<div><span class="text-[10px] font-bold text-[#786669] uppercase block">Collocation</span><p class="text-xs font-semibold text-[#7b434f]">${item.collocation}</p></div>` : ''}
+                                ${item.synonyms ? `<div><span class="text-[10px] font-bold text-[#786669] uppercase block">Synonyms</span><p class="text-xs text-[#6e5f62]">${item.synonyms}</p></div>` : ''}
+                                ${item.example_target ? `<div class="bg-[#faf7f5] p-2.5 rounded-xl border border-[#e2d5d1]"><span class="text-[10px] font-bold text-[#8a525f] block">Ví Dụ</span><p class="text-xs italic text-[#2b2426]">${item.example_target}</p></div>` : ''}
+                            </div>
+
+                            <!-- SRS Rating Buttons Grid on BACK CARD -->
+                            <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
+                                <button onclick="handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button onclick="handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button onclick="handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button onclick="handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSRSAction(quality) {
+            const item = appState.srsQueue[appState.srsIndex];
+            if (!item) return;
+
+            let srs = item.srs || { interval: 1, repetition: 0, easeFactor: 2.5, dueDate: new Date().toISOString().split('T')[0] };
+            if (quality < 2) {
+                srs.repetition = 0;
+                srs.interval = 1;
+            } else {
+                if (srs.repetition === 0) srs.interval = 1;
+                else if (srs.repetition === 1) srs.interval = 3;
+                else srs.interval = Math.round(srs.interval * srs.easeFactor);
+                srs.repetition += 1;
+            }
+            srs.easeFactor = srs.easeFactor + (0.1 - (4 - quality) * (0.08 + (4 - quality) * 0.02));
+            if (srs.easeFactor < 1.3) srs.easeFactor = 1.3;
+
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + srs.interval);
+            srs.dueDate = targetDate.toISOString().split('T')[0];
+
+            item.srs = srs;
+            saveAppState();
+
+            appState.srsIndex += 1;
+            renderSRSCard();
+        }
+
+
+        /* --- TAB 3: NOTEBOOK VIEW (TABLE WITH CẤP ĐỘ & KỲ HẠN SRS COLUMNS) --- */
+        function toggleMask(field) {
+            appState.masks[field] = !appState.masks[field];
+
+            document.getElementById('btn-mask-word').className = appState.masks.word ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
+            document.getElementById('btn-mask-ipa').className = appState.masks.ipa ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
+            document.getElementById('btn-mask-vi').className = appState.masks.meaning ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
+
+            renderNotebookSheet();
+        }
+
+        function switchNotebookLayout(mode) {
+            appState.notebookLayout = mode;
+            document.getElementById('btn-layout-table').className = mode === 'table' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]';
+            document.getElementById('btn-layout-card').className = mode === 'card' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]';
+            renderNotebookSheet();
+        }
+
+        function populateNotebookFilterTags() {
+            const tagSet = new Set();
+            appState.words.forEach(w => {
+                if (w.tags) w.tags.forEach(t => tagSet.add(t));
+            });
+            const sel = document.getElementById('notebook-filter-level');
+            sel.innerHTML = '<option value="all">Tất cả Nhãn (Tags)</option>';
+            tagSet.forEach(t => {
+                sel.innerHTML += `<option value="${t}">${t}</option>`;
+            });
+        }
+
+        function onNotebookSearchChange() {
+            renderNotebookSheet();
+        }
+
+        function renderNotebookSheet() {
+            const search = (document.getElementById('notebook-search-input').value || '').toLowerCase().trim();
+            const tagFilter = document.getElementById('notebook-filter-level').value;
+            const dueFilter = document.getElementById('notebook-filter-due').value;
+            const today = new Date().toISOString().split('T')[0];
+
+            let list = appState.words.filter(item => {
+                const matchSearch = !search || item.word.toLowerCase().includes(search) || (item.meaning && item.meaning.toLowerCase().includes(search)) || (item.phonetic && item.phonetic.toLowerCase().includes(search));
+                const matchTag = tagFilter === 'all' || (item.tags && item.tags.includes(tagFilter));
+                let matchDue = true;
+                if (dueFilter === 'due') matchDue = !item.srs || !item.srs.dueDate || item.srs.dueDate <= today;
+                if (dueFilter === 'future') matchDue = item.srs && item.srs.dueDate && item.srs.dueDate > today;
+
+                return matchSearch && matchTag && matchDue;
+            });
+
+            document.getElementById('notebook-rendered-count').textContent = `${list.length} / ${appState.words.length} từ`;
+            const container = document.getElementById('notebook-sheet-container');
+
+            if (list.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-xs text-[#786669]">Không có từ vựng nào phù hợp với tìm kiếm.</div>`;
+                return;
+            }
+
+            if (appState.notebookLayout === 'table') {
+                container.innerHTML = `
+                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="border-b border-[#e8dedb] text-[#786669] font-bold bg-[#faf7f5]">
+                                <th class="py-2.5 px-3 w-12 text-center">STT</th>
+                                <th class="py-2.5 px-3">Từ Gốc</th>
+                                <th class="py-2.5 px-3">IPA</th>
+                                <th class="py-2.5 px-3">Từ Loại</th>
+                                <th class="py-2.5 px-3">Nghĩa Tiếng Việt</th>
+                                <th class="py-2.5 px-3">Ví Dụ Minh Họa</th>
+                                <th class="py-2.5 px-3 text-center">Cấp Độ</th>
+                                <th class="py-2.5 px-3 text-center">Kỳ Hạn SRS</th>
+                                <th class="py-2.5 px-3 w-20 text-center">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#f0e6e3]">
+                            ${list.map((item, idx) => `
+                                <tr class="hover:bg-[#fcfbfa] transition-colors">
+                                    <td class="py-2.5 px-3 text-center text-[#8c7b7f] font-mono">${idx + 1}</td>
+                                    <td class="py-2.5 px-3 font-bold text-[#2b2426]">
+                                        <span class="${appState.masks.word ? 'hide-text' : ''}">${item.word}</span>
+                                        <button onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="ml-1 text-[11px] text-[#8a525f] hover:text-[#935864]">🔊</button>
+                                    </td>
+                                    <td class="py-2.5 px-3 font-semibold text-[#8a525f]">
+                                        <span class="${appState.masks.ipa ? 'hide-text' : ''}">${item.phonetic || ''}</span>
+                                    </td>
+                                    <td class="py-2.5 px-3 text-[#786669]">
+                                        <span class="px-1.5 py-0.5 rounded bg-[#faf7f5] border border-[#e2d5d1] text-[10px]">${item.pos || 'vocab'}</span>
+                                    </td>
+                                    <td class="py-2.5 px-3 font-semibold text-[#2b2426]">
+                                        <span class="${appState.masks.meaning ? 'hide-text' : ''}">${item.meaning}</span>
+                                    </td>
+                                    <td class="py-2.5 px-3 text-[11px] text-[#6e5f62] whitespace-normal min-w-[200px]">
+                                        ${item.example_target ? `<p class="italic text-[#2b2426]">"${item.example_target}"</p>` : ''}
+                                        ${item.collocation ? `<p class="text-[10px] text-[#7b434f] font-medium">Colloc: ${item.collocation}</p>` : ''}
+                                    </td>
+                                    <td class="py-2.5 px-3 text-center">
+                                        <span class="px-2 py-0.5 rounded bg-[#f4ebe8] text-[#8a525f] text-[10px] font-semibold border border-[#ebdcd8]">${item.tags ? item.tags[0] : 'IELTS'}</span>
+                                    </td>
+                                    <td class="py-2.5 px-3 text-center">
+                                        ${getSRSBadgeHTML(item.srs)}
+                                    </td>
+                                    <td class="py-2.5 px-3 text-center space-x-1">
+                                        <button onclick="openEditModal('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-[#2b2426]">✏️</button>
+                                        <button onclick="deleteWord('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-rose-600">🗑️</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        ${list.map(item => `
+                            <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 space-y-2 relative shadow-2xs hover:border-[#ebdcd8] transition">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-base text-[#2b2426] ${appState.masks.word ? 'hide-text' : ''}">${item.word}</h3>
+                                        <p class="text-xs font-semibold text-[#8a525f] ${appState.masks.ipa ? 'hide-text' : ''}">${item.phonetic || ''}</p>
+                                    </div>
+                                    <button onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="p-1 text-xs text-[#8a525f]">🔊</button>
+                                </div>
+                                <p class="text-sm font-semibold text-[#2b2426] ${appState.masks.meaning ? 'hide-text' : ''}">${item.meaning}</p>
+                                ${item.example_target ? `<p class="text-xs italic text-[#786669] bg-[#faf7f5] p-2 rounded-xl border border-[#e2d5d1]">"${item.example_target}"</p>` : ''}
+                                <div class="flex items-center justify-between pt-2 border-t border-[#f0e6e3] text-[10px]">
+                                    <span class="bg-[#f4ebe8] text-[#8a525f] px-2 py-0.5 rounded font-medium">${item.tags ? item.tags[0] : 'IELTS'}</span>
+                                    <div>${getSRSBadgeHTML(item.srs)}</div>
+                                    <div class="space-x-1">
+                                        <button onclick="openEditModal('${item.id}')" class="text-[#8c7b7f] hover:text-[#2b2426]">✏️ Sửa</button>
+                                        <button onclick="deleteWord('${item.id}')" class="text-[#8c7b7f] hover:text-rose-600">🗑️ Xóa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function deleteWord(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa từ này khỏi sổ từ vựng?')) {
+                appState.words = appState.words.filter(w => w.id !== id);
+                saveAppState();
+                renderNotebookSheet();
+            }
+        }
+
+        function openEditModal(id) {
+            const item = appState.words.find(w => w.id === id);
+            if (!item) return;
+
+            document.getElementById('edit-word-id').value = item.id;
+            document.getElementById('edit-word').value = item.word;
+            document.getElementById('edit-ipa').value = item.phonetic || '';
+            document.getElementById('edit-pos').value = item.pos || '';
+            document.getElementById('edit-meaning').value = item.meaning || '';
+            document.getElementById('edit-example').value = item.example_target || '';
+
+            document.getElementById('edit-word-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-word-modal').classList.add('hidden');
+        }
+
+        function saveEditedWord() {
+            const id = document.getElementById('edit-word-id').value;
+            const item = appState.words.find(w => w.id === id);
+            if (item) {
+                item.word = document.getElementById('edit-word').value.trim();
+                item.phonetic = document.getElementById('edit-ipa').value.trim();
+                item.pos = document.getElementById('edit-pos').value.trim();
+                item.meaning = document.getElementById('edit-meaning').value.trim();
+                item.example_target = document.getElementById('edit-example').value.trim();
+
+                saveAppState();
+                renderNotebookSheet();
+                closeEditModal();
+            }
+        }
+
+        /* --- DATA IMPORT / EXPORT --- */
+        function exportDataJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.words, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `Cece_English_Notebook_${new Date().toISOString().split('T')[0]}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function triggerImportJSON() {
+            document.getElementById('import-json-file').click();
+        }
+
+        function importDataJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        appState.words = imported;
+                        saveAppState();
+                        renderNotebookSheet();
+                        alert('Khôi phục dữ liệu từ vựng thành công!');
+                    }
+                } catch (err) {
+                    alert('File JSON không hợp lệ.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        /* --- CLOUD SYNC --- */
+        function openCloudSyncModal() {
+            document.getElementById('cloud-sync-modal').classList.remove('hidden');
+        }
+        function closeCloudSyncModal() {
+            document.getElementById('cloud-sync-modal').classList.add('hidden');
+        }
+
+        async function pushToCloud() {
+            const code = document.getElementById('cloud-sync-code').value.trim() || 'CeceEnglish';
+            try {
+                const res = await fetch(`https://keyvalue.impathy.workers.dev/${code}`, {
+                    method: 'POST',
+                    body: JSON.stringify(appState.words)
+                });
+                alert('Đã tải dữ liệu lên Cloud thành công! Bạn có thể dùng tên này trên iPhone để tải về.');
+                closeCloudSyncModal();
+            } catch (e) {
+                alert('Không thể kết nối Cloud Sync. Kiểm tra kết nối mạng.');
+            }
+        }
+
+        async function pullFromCloud() {
+            const code = document.getElementById('cloud-sync-code').value.trim() || 'CeceEnglish';
+            try {
+                const res = await fetch(`https://keyvalue.impathy.workers.dev/${code}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data)) {
+                        appState.words = data;
+                        saveAppState();
+                        renderNotebookSheet();
+                        alert('Đã tải dữ liệu từ Cloud về máy thành công!');
+                        closeCloudSyncModal();
+                    }
+                }
+            } catch (e) {
+                alert('Không tìm thấy dữ liệu trên Cloud.');
+            }
+        }
+    </script>
+</body>
+</html>
