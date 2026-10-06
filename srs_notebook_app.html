@@ -763,10 +763,13 @@
         }
 
         function resetDay1Data() {
-            if (confirm("Khôi phục về trạng thái ban đầu (75 từ vựng mẫu)?")) {
+            const answer = prompt("⚠️ KHÓA AN TOÀN: Để bảo vệ tiến trình học, nếu bạn thực sự muốn đặt lại toàn bộ dữ liệu, vui lòng gõ chữ 'XÓA' vào bên dưới:");
+            if (answer && answer.trim().toUpperCase() === "XÓA") {
                 localStorage.removeItem('cece_srs_notebook_app_v1');
                 initDay1DefaultState();
                 location.reload();
+            } else if (answer !== null) {
+                alert("🔒 Đã hủy thao tác! Dữ liệu học tập và Sổ từ của bạn được bảo vệ an toàn 100%.");
             }
         }
 
