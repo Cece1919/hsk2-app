@@ -5,8 +5,8 @@ def generate_app():
     with open(db_path, 'r', encoding='utf-8') as f:
         full_db = json.load(f)
 
-    # Day 1 HSK 2 Words (14 words)
-    hsk2_d1_words = [x for x in full_db if x.get('day') == 1 or 'd1' in str(x.get('id'))]
+    # HSK 2 Studied Words (Day 1 - 4: 62 words)
+    hsk2_d1_words = [x for x in full_db if x.get('day') in [1, 2, 3, 4] or any(f'd{i}' in str(x.get('id')) for i in range(1, 5))]
     
     # HSK 1 baseline review words (10 words)
     hsk1_baseline = [x for x in full_db if x.get('level') == 'HSK 1'][:10]
@@ -58,6 +58,7 @@ def generate_app():
     hsk2_d1_json = json.dumps(hsk2_d1_words, ensure_ascii=False)
     hsk1_baseline_json = json.dumps(hsk1_baseline, ensure_ascii=False)
     extra_baseline_json = "[]"
+    total_baseline_count = len(hsk2_d1_words) + len(hsk1_baseline)
 
     html_code = f"""<!DOCTYPE html>
 <html lang="vi">
@@ -147,7 +148,7 @@ def generate_app():
                     
                     <div class="flex items-center gap-1.5 px-2 py-1 bg-[#f4ebe8] rounded-lg text-xs font-medium text-[#7d4e58] border border-[#e8dedb]">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#935864]"></span>
-                        <span id="header-due-badge" class="tabular-nums font-semibold">24</span>
+                        <span id="header-due-badge" class="tabular-nums font-semibold">{total_baseline_count}</span>
                         <span class="hidden xs:inline text-[#66424b]">cần ôn</span>
                     </div>
 
@@ -170,7 +171,7 @@ def generate_app():
                         </button>
                         <input type="file" id="import-json-file" onchange="importDataJSON(event)" class="hidden" accept=".json">
                         
-                        <button onclick="resetDay1Data()" title="Khôi phục 24 từ Ngày 1 chuẩn" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#736366] hover:text-[#935864] hover:bg-[#f6efed] transition-colors">
+                        <button onclick="resetDay1Data()" title="Khôi phục trạng thái chuẩn" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#736366] hover:text-[#935864] hover:bg-[#f6efed] transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
                         </button>
                     </div>
@@ -193,12 +194,12 @@ def generate_app():
                         <button onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
                             <span>Ôn Tập SRS</span>
-                            <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">24</span>
+                            <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">{total_baseline_count}</span>
                         </button>
                         <button onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
                             <span>Sổ Từ</span>
-                            <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">(24)</span>
+                            <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">({total_baseline_count})</span>
                         </button>
                     </div>
                 </div>
@@ -343,9 +344,13 @@ def generate_app():
                             <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                                 <select id="notebook-filter-level" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
                                     <option value="all">Tất cả cấp độ</option>
-                                    <option value="hsk2">HSK 2</option>
-                                    <option value="hsk1">HSK 1</option>
-                                    <option value="custom">Nạp mới</option>
+                                    <option value="hsk2">HSK 2 (Tất cả)</option>
+                                    <option value="hsk2-d1">HSK 2 · Ngày 1</option>
+                                    <option value="hsk2-d2">HSK 2 · Ngày 2</option>
+                                    <option value="hsk2-d3">HSK 2 · Ngày 3</option>
+                                    <option value="hsk2-d4">HSK 2 · Ngày 4</option>
+                                    <option value="hsk1">HSK 1 Ôn tập</option>
+                                    <option value="custom">Chị nạp từ mới</option>
                                 </select>
 
                                 <select id="notebook-filter-due" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
@@ -364,7 +369,7 @@ def generate_app():
                         <!-- Row 3: Counter Status -->
                         <div class="text-xs text-[#786669] font-medium pt-1">
                             <span>Đang hiển thị: </span>
-                            <span id="notebook-rendered-count" class="font-bold text-[#2b2426]">24 / 24 từ</span>
+                            <span id="notebook-rendered-count" class="font-bold text-[#2b2426]">{total_baseline_count} / {total_baseline_count} từ</span>
                         </div>
 
                         <!-- Row 4: Data Table / Grid Container -->
@@ -546,7 +551,12 @@ def generate_app():
             try {{
                 const saved = localStorage.getItem('cece_srs_notebook_app_v1');
                 if (saved) {{
-                    appState = Object.assign(appState, JSON.parse(saved));
+                    const parsed = JSON.parse(saved);
+                    if (parsed) {{
+                        if (parsed.userCustomWords) appState.userCustomWords = parsed.userCustomWords.filter(w => w && w.id && !String(w.id).startsWith('custom-extra-'));
+                        if (parsed.cardProgress) appState.cardProgress = parsed.cardProgress;
+                        if (parsed.dayStep) appState.dayStep = parsed.dayStep;
+                    }}
                 }} else {{
                     initDay1DefaultState();
                 }}
@@ -554,15 +564,22 @@ def generate_app():
                 initDay1DefaultState();
             }}
 
-            // Purge any automatically injected extra words so only words user manually entered remain
-            if (appState.userCustomWords && appState.userCustomWords.length > 0) {{
-                appState.userCustomWords = appState.userCustomWords.filter(w => w && w.id && !String(w.id).startsWith('custom-extra-'));
-                saveAppState();
-            }}
+            const today = getTodayStr();
+            getAllWordsList().forEach(w => {{
+                if (!appState.cardProgress[w.id]) {{
+                    appState.cardProgress[w.id] = {{
+                        interval: 1,
+                        easeFactor: 2.5,
+                        repetition: 0,
+                        dueDate: today,
+                        ticks: {{}}
+                    }};
+                }}
+            }});
 
+            saveAppState();
             applyViewModeUI();
             updateHeaderCounters();
-            // Always auto-pull latest Cloud snapshot on page load for seamless sync!
             pullFromCloud(true);
         }}
 
@@ -700,8 +717,17 @@ def generate_app():
             }}
 
             if (cloudData) {{
-                if (cloudData.userCustomWords) appState.userCustomWords = cloudData.userCustomWords;
-                if (cloudData.cardProgress) appState.cardProgress = cloudData.cardProgress;
+                if (cloudData.userCustomWords && Array.isArray(cloudData.userCustomWords)) {{
+                    const existingIds = new Set((appState.userCustomWords || []).map(w => w.id));
+                    cloudData.userCustomWords.forEach(w => {{
+                        if (w && w.id && !existingIds.has(w.id) && !String(w.id).startsWith('custom-extra-')) {{
+                            appState.userCustomWords.push(w);
+                        }}
+                    }});
+                }}
+                if (cloudData.cardProgress) {{
+                    appState.cardProgress = Object.assign({{}}, appState.cardProgress, cloudData.cardProgress);
+                }}
                 if (cloudData.dayStep) appState.dayStep = cloudData.dayStep;
                 
                 saveAppState();
@@ -1442,9 +1468,17 @@ def generate_app():
 
             // Filter by Level
             if (levelFilter === 'hsk2') {{
-                allWords = allWords.filter(w => w.level === 'HSK 2' || w.day === 1 || (w.id && String(w.id).includes('d1')));
+                allWords = allWords.filter(w => w.level === 'HSK 2' || (w.tag && w.tag.includes('HSK 2')) || [1,2,3,4].includes(w.day));
+            }} else if (levelFilter === 'hsk2-d1') {{
+                allWords = allWords.filter(w => w.day === 1 || (w.tag && w.tag.includes('1')));
+            }} else if (levelFilter === 'hsk2-d2') {{
+                allWords = allWords.filter(w => w.day === 2 || (w.tag && w.tag.includes('2')));
+            }} else if (levelFilter === 'hsk2-d3') {{
+                allWords = allWords.filter(w => w.day === 3 || (w.tag && w.tag.includes('3')));
+            }} else if (levelFilter === 'hsk2-d4') {{
+                allWords = allWords.filter(w => w.day === 4 || (w.tag && w.tag.includes('4')));
             }} else if (levelFilter === 'hsk1') {{
-                allWords = allWords.filter(w => w.level === 'HSK 1');
+                allWords = allWords.filter(w => w.level === 'HSK 1' || (w.tag && w.tag.includes('HSK 1')));
             }} else if (levelFilter === 'custom') {{
                 allWords = allWords.filter(w => w.level === 'Custom' || String(w.id).startsWith('custom-'));
             }}
