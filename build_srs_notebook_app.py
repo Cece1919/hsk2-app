@@ -5,11 +5,11 @@ def generate_app():
     with open(db_path, 'r', encoding='utf-8') as f:
         full_db = json.load(f)
 
-    # HSK 2 Studied Words (Day 1 - 4: 62 words)
-    hsk2_d1_words = [x for x in full_db if x.get('day') in [1, 2, 3, 4] or any(f'd{i}' in str(x.get('id')) for i in range(1, 5))]
+    # HSK 2 Studied Words (Day 1 - 7: 101 words)
+    hsk2_d1_words = [x for x in full_db if x.get('day') in range(1, 8) or any(f'd{i}' in str(x.get('id')) for i in range(1, 8))]
     
-    # HSK 1 baseline review words (10 words)
-    hsk1_baseline = [x for x in full_db if x.get('level') == 'HSK 1'][:10]
+    # HSK 1 baseline review words (34 words to match 135 total baseline)
+    hsk1_baseline = [x for x in full_db if x.get('level') == 'HSK 1'][:34]
 
     # Combine dictionary map for auto lookup
     dictionary_map = {}
@@ -349,6 +349,9 @@ def generate_app():
                                     <option value="hsk2-d2">HSK 2 · Ngày 2</option>
                                     <option value="hsk2-d3">HSK 2 · Ngày 3</option>
                                     <option value="hsk2-d4">HSK 2 · Ngày 4</option>
+                                    <option value="hsk2-d5">HSK 2 · Ngày 5</option>
+                                    <option value="hsk2-d6">HSK 2 · Ngày 6</option>
+                                    <option value="hsk2-d7">HSK 2 · Ngày 7</option>
                                     <option value="hsk1">HSK 1 Ôn tập</option>
                                     <option value="custom">Chị nạp từ mới</option>
                                 </select>
@@ -1468,15 +1471,21 @@ def generate_app():
 
             // Filter by Level
             if (levelFilter === 'hsk2') {{
-                allWords = allWords.filter(w => w.level === 'HSK 2' || (w.tag && w.tag.includes('HSK 2')) || [1,2,3,4].includes(w.day));
+                allWords = allWords.filter(w => w.level === 'HSK 2' || (w.tag && w.tag.includes('HSK 2')) || (w.day && w.day >= 1 && w.day <= 7));
             }} else if (levelFilter === 'hsk2-d1') {{
-                allWords = allWords.filter(w => w.day === 1 || (w.tag && w.tag.includes('1')));
+                allWords = allWords.filter(w => w.day === 1 || (w.tag && w.tag.includes('Ngày 1')));
             }} else if (levelFilter === 'hsk2-d2') {{
-                allWords = allWords.filter(w => w.day === 2 || (w.tag && w.tag.includes('2')));
+                allWords = allWords.filter(w => w.day === 2 || (w.tag && w.tag.includes('Ngày 2')));
             }} else if (levelFilter === 'hsk2-d3') {{
-                allWords = allWords.filter(w => w.day === 3 || (w.tag && w.tag.includes('3')));
+                allWords = allWords.filter(w => w.day === 3 || (w.tag && w.tag.includes('Ngày 3')));
             }} else if (levelFilter === 'hsk2-d4') {{
-                allWords = allWords.filter(w => w.day === 4 || (w.tag && w.tag.includes('4')));
+                allWords = allWords.filter(w => w.day === 4 || (w.tag && w.tag.includes('Ngày 4')));
+            }} else if (levelFilter === 'hsk2-d5') {{
+                allWords = allWords.filter(w => w.day === 5 || (w.tag && w.tag.includes('Ngày 5')));
+            }} else if (levelFilter === 'hsk2-d6') {{
+                allWords = allWords.filter(w => w.day === 6 || (w.tag && w.tag.includes('Ngày 6')));
+            }} else if (levelFilter === 'hsk2-d7') {{
+                allWords = allWords.filter(w => w.day === 7 || (w.tag && w.tag.includes('Ngày 7')));
             }} else if (levelFilter === 'hsk1') {{
                 allWords = allWords.filter(w => w.level === 'HSK 1' || (w.tag && w.tag.includes('HSK 1')));
             }} else if (levelFilter === 'custom') {{
