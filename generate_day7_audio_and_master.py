@@ -135,18 +135,18 @@ def build_sec_sim_html():
                 <div class="flex items-center justify-center gap-2 w-full">
                     <div class="flex flex-col items-center">
                         <span class="text-[10px] text-slate-400 mb-1 font-semibold">HanziWriter</span>
-                        <div id="target-{item["id"]}" class="writer-container w-[130px] h-[130px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
+                        <div id="target-{item["id"]}" class="writer-container w-[105px] h-[105px] bg-slate-50 rounded-xl border-2 border-slate-200 flex items-center justify-center shadow-inner"></div>
                     </div>
                     <div class="flex flex-col items-center">
                         <span class="text-[10px] text-slate-400 mb-1 font-semibold">Tianzige Ô Vẽ</span>
-                        <div class="relative w-[130px] h-[130px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
+                        <div class="relative w-[105px] h-[105px] bg-amber-50/40 rounded-xl border-2 border-amber-200 shadow-inner overflow-hidden">
                             <svg class="absolute inset-0 w-full h-full text-amber-200 pointer-events-none" viewBox="0 0 100 100">
                                 <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
                                 <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1"/>
                                 <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
                                 <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"/>
                             </svg>
-                            <canvas id="pad-{item["id"]}" width="130" height="130" class="pad-canvas relative z-10 w-full h-full cursor-crosshair"></canvas>
+                            <canvas id="pad-{item["id"]}" width="105" height="105" class="pad-canvas relative z-10 w-full h-full cursor-crosshair"></canvas>
                         </div>
                     </div>
                 </div>
@@ -496,8 +496,8 @@ def build_master_html(is_mo_phong=True):
         .audio-btn {{ transition: all 0.2s ease; cursor: pointer; }}
         .audio-btn:hover {{ transform: scale(1.08); }}
         .audio-btn:active {{ transform: scale(0.95); }}
-        .writer-container {{ width: 130px; height: 130px; border: 2px dashed #cbd5e1; border-radius: 12px; background: #ffffff; position: relative; background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px); background-size: 50% 50%; }}
-        .pad-canvas {{ width: 130px; height: 130px; border: 2px solid #cbd5e1; border-radius: 12px; background: #ffffff; touch-action: none; cursor: crosshair; }}
+        .writer-container {{ width: 98px; height: 98px; border: 2px dashed #cbd5e1; border-radius: 12px; background: #ffffff; position: relative; background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px); background-size: 50% 50%; }}
+        .pad-canvas {{ width: 98px; height: 98px; border: 2px solid #cbd5e1; border-radius: 12px; background: #ffffff; touch-action: none; cursor: crosshair; }}
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen">
@@ -826,8 +826,8 @@ def build_master_html(is_mo_phong=True):
                 if (el && typeof HanziWriter !== 'undefined') {{
                     try {{
                         writers[item.id] = HanziWriter.create('target-' + item.id, item.char, {{
-                            width: 130,
-                            height: 130,
+                            width: 98,
+                            height: 98,
                             padding: 5,
                             strokeAnimationSpeed: 1,
                             delayBetweenStrokes: 150,
