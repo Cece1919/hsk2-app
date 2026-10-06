@@ -5,11 +5,11 @@ def generate_app():
     with open(db_path, 'r', encoding='utf-8') as f:
         full_db = json.load(f)
 
-    # HSK 2 Studied Words (Day 1 - 7: 101 words)
-    hsk2_d1_words = [x for x in full_db if x.get('day') in range(1, 8) or any(f'd{i}' in str(x.get('id')) for i in range(1, 8))]
+    # HSK 2 Studied Words (Day 1 - 5 ONLY: 75 words)
+    hsk2_d1_words = [x for x in full_db if x.get('day') in range(1, 6) or any(f'd{i}' in str(x.get('id')) for i in range(1, 6))]
     
-    # HSK 1 baseline review words (34 words to match 135 total baseline)
-    hsk1_baseline = [x for x in full_db if x.get('level') == 'HSK 1'][:34]
+    # HSK 1 baseline review words (set to empty so only user studied words appear)
+    hsk1_baseline = []
 
     # Combine dictionary map for auto lookup
     dictionary_map = {}
@@ -24,7 +24,7 @@ def generate_app():
             "mnemonic": item.get('mnemonic', '')
         }
 
-    # Add extra common words
+    # Add extra common words to dictionary for lookup
     extra_vocab = [
         {"hanzi": "自行车", "pinyin": "zìxíngchē", "hanviet": "Tự hành xa", "meaning": "Xe đạp", "example": "我骑自行车去学校。 (Wǒ qí zìxíngchē qù xuéxiào. - Tôi đi xe đạp đến trường.)"},
         {"hanzi": "羊肉", "pinyin": "yángròu", "hanviet": "Dương nhục", "meaning": "Thịt cừu", "example": "今天的羊肉很好吃。 (Jīntiān de yángròu hěn hǎochī. - Thịt cừu hôm nay rất ngon.)"},
@@ -568,6 +568,15 @@ def generate_app():
             }}
 
             const today = getTodayStr();
+            const validIds = new Set(getAllWordsList().map(w => w.id));
+            if (appState.cardProgress) {{
+                Object.keys(appState.cardProgress).forEach(id => {{
+                    if (!validIds.has(id)) {{
+                        delete appState.cardProgress[id];
+                    }}
+                }});
+            }}
+
             getAllWordsList().forEach(w => {{
                 if (!appState.cardProgress[w.id]) {{
                     appState.cardProgress[w.id] = {{
