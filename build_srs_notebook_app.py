@@ -582,7 +582,7 @@ def generate_app():
         }}
 
         const SYNC_MAP_DEFAULT_ID = "ff808181a09d98f701a0ffc2895a6769";
-        const CRUDCRUD_ENDPOINT = "https://crudcrud.com/api/920fac67af69430f9ddde25cf462a759/cece_sync";
+        const CRUDCRUD_ENDPOINT = "https://crudcrud.com/api/901d68cb059641cc861e57af81de2e91/cece_sync";
 
         function updateGoogleUserUI() {{
             const userBox = document.getElementById('google-user-box');
@@ -770,19 +770,22 @@ def generate_app():
             saveAppState();
         }}
 
-        async function pushToCloud() {{
+        async function pushToCloud(silent = false) {{
             const codeInput = document.getElementById('cloud-sync-code');
-            const accountName = (codeInput ? codeInput.value.trim() : 'Cece1919') || 'Cece1919';
+            let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
+            if (appState.googleUser && appState.googleUser.email) {{
+                accountName = "google_" + appState.googleUser.email.trim().toLowerCase();
+            }}
             appState.syncCode = accountName;
-            saveAppState();
-
+            
             const statusEl = document.getElementById('cloud-sync-status');
             const btnPush = document.getElementById('btn-cloud-push');
             if (btnPush) btnPush.disabled = true;
-            if (statusEl) statusEl.innerHTML = "⏳ Đang kết nối Đám Mây để lưu từ mới & tiến trình SRS...";
+            if (statusEl && !silent) statusEl.innerHTML = "⏳ Đang kết nối Đám Mây để lưu từ mới & tiến trình SRS...";
 
             const payload = {{
                 account: accountName,
+                googleEmail: appState.googleUser ? appState.googleUser.email : '',
                 dayStep: appState.dayStep,
                 userCustomWords: appState.userCustomWords,
                 cardProgress: appState.cardProgress,
@@ -791,7 +794,7 @@ def generate_app():
 
             let success = false;
 
-            // Attempt 1: POST to CRUDCRUD (100% 5G mobile network support)
+            // Primary Provider: CRUDCRUD API
             try {{
                 const resPost = await fetch(CRUDCRUD_ENDPOINT, {{
                     method: 'POST',
@@ -802,7 +805,6 @@ def generate_app():
                     const newObj = await resPost.json();
                     if (newObj) {{
                         if (newObj._id) appState.syncObjectId = newObj._id;
-                        saveAppState();
                         success = true;
                     }}
                 }}
@@ -810,35 +812,40 @@ def generate_app():
                 console.warn("CRUDCRUD POST failed, trying fallback...", e);
             }}
 
-            // Attempt 2: Fallback to restful-api
+            // Backup Provider: dpaste API
             if (!success) {{
                 try {{
-                    const resRest = await fetch(`https://api.restful-api.dev/objects`, {{
+                    const formData = new URLSearchParams();
+                    formData.append('content', JSON.stringify(payload));
+                    formData.append('format', 'url');
+                    formData.append('expiry_days', '365');
+                    const resDp = await fetch('https://dpaste.org/api/', {{
                         method: 'POST',
-                        headers: {{ 'Content-Type': 'application/json' }},
-                        body: JSON.stringify({{ name: `Cece Notebook - ${{accountName}}`, data: payload }})
+                        body: formData
                     }});
-                    if (resRest.ok) {{
-                        const newObj = await resRest.json();
-                        if (newObj && newObj.id) {{
-                            appState.syncObjectId = newObj.id;
-                            saveAppState();
+                    if (resDp.ok) {{
+                        const dpUrl = (await resDp.text()).trim();
+                        if (dpUrl && dpUrl.startsWith('http')) {{
+                            appState.dpasteUrl = dpUrl.endsWith('/raw') ? dpUrl : dpUrl + '/raw';
                             success = true;
                         }}
                     }}
                 }} catch(e) {{
-                    console.warn("Restful API POST failed:", e);
+                    console.warn("dpaste POST failed:", e);
                 }}
             }}
+
+            saveAppState();
 
             if (success) {{
                 const nowStr = new Date().toLocaleTimeString('vi-VN');
                 const totalCount = getAllWordsList().length;
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công (${{totalCount}} từ) lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Bây giờ chị mở Mac là web tự tải về.</span>`;
-                showToast(`🎉 Đã lưu toàn bộ ${{totalCount}} từ lên Cloud!`);
+                const userDisplay = appState.googleUser ? appState.googleUser.email : accountName;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công (${{totalCount}} từ) lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Tài khoản: ${{userDisplay}}</span>`;
+                if (!silent) showToast(`🎉 Đã lưu toàn bộ ${{totalCount}} từ lên Cloud!`);
             }} else {{
-                if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra kết nối mạng và ấn thử lại.</span>`;
-                showToast("⚠️ Thử lại kết nối Đám Mây.");
+                if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra kết nối mạng và ấn thử lại.</span>`;
+                if (!silent) showToast("⚠️ Thử lại kết nối Đám Mây.");
             }}
 
             if (btnPush) btnPush.disabled = false;
@@ -846,8 +853,11 @@ def generate_app():
 
         async function pullFromCloud(silent = false) {{
             const codeInput = document.getElementById('cloud-sync-code');
-            const accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
-            
+            let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
+            if (appState.googleUser && appState.googleUser.email) {{
+                accountName = "google_" + appState.googleUser.email.trim().toLowerCase();
+            }}
+
             const statusEl = document.getElementById('cloud-sync-status');
             const btnPull = document.getElementById('btn-cloud-pull');
             if (btnPull) btnPull.disabled = true;
@@ -855,13 +865,13 @@ def generate_app():
 
             let cloudData = null;
 
-            // Attempt 1: Fetch latest snapshot array from CRUDCRUD
+            // Attempt 1: Fetch latest snapshot from CRUDCRUD
             try {{
                 const res = await fetch(CRUDCRUD_ENDPOINT);
                 if (res.ok) {{
                     const list = await res.json();
                     if (Array.isArray(list) && list.length > 0) {{
-                        const validList = list.filter(item => item && (item.userCustomWords || item.cardProgress));
+                        const validList = list.filter(item => item && (item.account === accountName || (appState.googleUser && item.googleEmail === appState.googleUser.email)));
                         if (validList.length > 0) {{
                             cloudData = validList[validList.length - 1];
                         }}
@@ -871,16 +881,16 @@ def generate_app():
                 console.warn("CRUDCRUD pull failed:", e);
             }}
 
-            // Attempt 2: Fallback to restful-api object ID
-            if (!cloudData && appState.syncObjectId) {{
+            // Attempt 2: Fallback to dpaste raw URL
+            if (!cloudData && appState.dpasteUrl) {{
                 try {{
-                    const resRest = await fetch(`https://api.restful-api.dev/objects/${{appState.syncObjectId}}`);
-                    if (resRest.ok) {{
-                        const result = await resRest.json();
-                        if (result && result.data) cloudData = result.data;
+                    const resDp = await fetch(appState.dpasteUrl);
+                    if (resDp.ok) {{
+                        const dpData = await resDp.json();
+                        if (dpData && (dpData.userCustomWords || dpData.cardProgress)) cloudData = dpData;
                     }}
                 }} catch(e) {{
-                    console.warn("Restful API pull failed:", e);
+                    console.warn("dpaste pull failed:", e);
                 }}
             }}
 
@@ -906,10 +916,12 @@ def generate_app():
                 const nowStr = new Date().toLocaleTimeString('vi-VN');
                 const totalCount = getAllWordsList().length;
                 if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã đồng bộ ${{totalCount}} từ từ Cloud lúc ${{nowStr}}!</span>`;
-                if (!silent) showToast(`🎉 Đã tải ${{totalCount}} từ vựng từ Cloud sang Mac!`);
+                if (!silent) showToast(`🎉 Đã đồng bộ thành công ${{totalCount}} từ vựng từ Cloud!`);
             }} else {{
-                if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">⚠️ Chưa tìm thấy dữ liệu trên Cloud.</span><br><span class="text-[10px] text-[#786669]">Chị nhớ bấm 'TẢI LÊN CLOUD' trên iPhone trước nhé!</span>`;
-                if (!silent) showToast("⚠️ Chưa có bản lưu trên Cloud.");
+                if (statusEl && !silent) {{
+                    statusEl.innerHTML = `<span class="text-[#8f525e] font-bold">ℹ️ Sẵn sàng đồng bộ cho tài khoản Google!</span><br><span class="text-[10px] text-[#786669]">Chị hãy nhấn 'TẢI LÊN CLOUD' lần đầu tiên để đẩy từ vựng lên nhé.</span>`;
+                }}
+                if (!silent) showToast("ℹ️ Sẵn sàng tạo bản lưu mới trên Cloud.");
             }}
 
             if (btnPull) btnPull.disabled = false;
