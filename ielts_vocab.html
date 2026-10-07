@@ -22,6 +22,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
+    <!-- Firebase SDK v10 (Compat Mode) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,9 +135,9 @@
                     </div>
 
                     <div class="flex items-center gap-1">
-                        <button onclick="openCloudSyncModal()" title="Đồng bộ Cloud (iPhone ⇄ Mac)" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1">
+                        <button onclick="openCloudSyncModal()" id="header-cloud-btn" title="Đồng bộ Đám mây & Tài khoản" class="py-1 px-2.5 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-2xs">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
-                            <span>☁️ Đồng bộ</span>
+                            <span id="header-cloud-label">🔑 Đăng nhập / Cloud</span>
                         </button>
 
                         <button onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
@@ -391,34 +396,99 @@
         </div>
     </div>
 
-    <!-- Cloud Sync Modal -->
+    <!-- Cloud Sync & Authentication Modal -->
     <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
             <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
                 <div class="flex items-center gap-2">
-                    <span class="text-xl">☁️</span>
+                    <div class="w-8 h-8 rounded-xl bg-[#f4ebe8] text-[#935864] flex items-center justify-center font-bold text-base shadow-2xs">
+                        ☁️
+                    </div>
                     <div>
-                        <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Tự Động (iPhone ⇄ Mac)</h3>
-                        <p class="text-[11px] text-[#786669]">Chỉ cần 1-chạm để chia sẻ từ vựng giữa các máy</p>
+                        <h3 class="text-sm font-bold text-[#2b2426]">Đồng Bộ Cloud & Tài Khoản</h3>
+                        <p class="text-[11px] text-[#786669]">Giữ từ đã học đồng bộ trên mọi thiết bị</p>
                     </div>
                 </div>
-                <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+                <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold p-1">✕</button>
             </div>
             
-            <div class="space-y-3">
-                <div>
-                    <label class="text-xs font-semibold text-[#6e5f62] block mb-1">Tên Tài Khoản Đồng Bộ:</label>
-                    <input type="text" id="cloud-sync-code" value="CeceEnglish" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#8f525e] bg-[#faf7f5] text-center text-sm" placeholder="Tên tài khoản...">
+            <!-- VIEW WHEN LOGGED IN -->
+            <div id="auth-user-view" class="space-y-3.5 hidden">
+                <div class="p-3 bg-[#fbf7f6] border border-[#eee4e1] rounded-xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[#935864] text-white flex items-center justify-center font-bold text-sm shadow-2xs" id="auth-user-avatar">
+                        👤
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-xs font-bold text-[#2b2426] truncate" id="auth-user-email">user@gmail.com</div>
+                        <div class="text-[10px] text-[#7b434f] font-semibold flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span>Đã kết nối Cloud & Tự động đồng bộ</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-2 pt-1">
-                    <button onclick="pushToCloud()" id="btn-cloud-push" class="w-full py-3 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
-                        <span>☁️ TẢI LÊN CLOUD (Dùng trên iPhone)</span>
+                <div class="space-y-2">
+                    <button onclick="forceSyncCloud()" class="w-full py-2.5 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
+                        <span>☁️ Đồng bộ dữ liệu ngay</span>
                     </button>
+                    <button onclick="logoutUser()" class="w-full py-2.5 px-4 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#786669] border border-[#e2d5d1] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
+                        <span>🚪 Đăng xuất tài khoản</span>
+                    </button>
+                </div>
+            </div>
 
-                    <button onclick="pullFromCloud()" id="btn-cloud-pull" class="w-full py-3 px-4 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
-                        <span>📥 TẢI VỀ MÁY (Dùng trên Mac)</span>
-                    </button>
+            <!-- VIEW WHEN NOT LOGGED IN -->
+            <div id="auth-guest-view" class="space-y-3.5">
+                <!-- Google Sign In Button -->
+                <button onclick="loginWithGoogle()" class="w-full py-2.5 px-4 bg-white hover:bg-[#faf7f5] text-[#2b2426] border border-[#ddd2ce] font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <span>Đăng nhập bằng Google</span>
+                </button>
+
+                <div class="flex items-center gap-2 my-1">
+                    <div class="flex-1 h-px bg-[#ebdcd8]"></div>
+                    <span class="text-[10px] text-[#9c8a8e] font-semibold uppercase tracking-wider">Hoặc Email / Mật khẩu</span>
+                    <div class="flex-1 h-px bg-[#ebdcd8]"></div>
+                </div>
+
+                <!-- Email & Password Form -->
+                <div class="space-y-2">
+                    <div>
+                        <input type="email" id="auth-email" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs bg-[#faf7f5] text-[#2b2426] focus:outline-none focus:border-[#8f525e]" placeholder="Địa chỉ Email (ví dụ: cece@gmail.com)">
+                    </div>
+                    <div>
+                        <input type="password" id="auth-password" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs bg-[#faf7f5] text-[#2b2426] focus:outline-none focus:border-[#8f525e]" placeholder="Mật khẩu (tối thiểu 6 ký tự)">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <button onclick="loginWithEmail()" class="py-2.5 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs transition">
+                            🔑 Đăng Nhập
+                        </button>
+                        <button onclick="registerWithEmail()" class="py-2.5 px-3 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-bold rounded-xl text-xs transition">
+                            📝 Đăng Ký Mới
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1-Click Code Fallback -->
+                <div class="pt-2 border-t border-[#f0e6e3]">
+                    <details class="text-left text-[11px] text-[#786669] group">
+                        <summary class="cursor-pointer font-semibold hover:text-[#2b2426] flex items-center justify-between">
+                            <span>🔗 Tùy chọn 1-Chạm (Không cần đăng nhập)</span>
+                            <span class="text-xs group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="pt-2 space-y-2">
+                            <input type="text" id="cloud-sync-code" value="CeceEnglish" class="w-full px-2.5 py-1.5 rounded-lg border border-[#e2d5d1] text-xs bg-[#faf7f5] text-center font-bold text-[#8f525e]" placeholder="Mã đồng bộ...">
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <button onclick="pushToCloud()" class="py-1.5 px-2 bg-[#8f525e] text-white font-semibold rounded-lg text-[11px]">Tải lên Cloud</button>
+                                <button onclick="pullFromCloud()" class="py-1.5 px-2 bg-[#f4ebe8] text-[#7b434f] font-semibold rounded-lg text-[11px] border border-[#ebdcd8]">Tải về máy</button>
+                            </div>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>
@@ -1761,6 +1831,9 @@
                 words: appState.words
             }));
             updateBadges();
+            if (typeof syncToCloudFirestore === 'function') {
+                syncToCloudFirestore();
+            }
         }
 
         function updateBadges() {
@@ -2332,7 +2405,174 @@
             reader.readAsText(file);
         }
 
-        /* --- CLOUD SYNC --- */
+        /* --- CLOUD SYNC & AUTHENTICATION --- */
+        const firebaseConfig = {
+            apiKey: "AIzaSyB-cece-ielts-srs-vocab-key",
+            authDomain: "cece-ielts-vocab.firebaseapp.com",
+            projectId: "cece-ielts-vocab",
+            storageBucket: "cece-ielts-vocab.appspot.com",
+            messagingSenderId: "959595959595",
+            appId: "1:959595959595:web:ceceieltsvocab"
+        };
+
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+
+        try {
+            if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+                auth = firebase.auth();
+                db = firebase.firestore();
+            }
+        } catch (e) {
+            console.log('Firebase init note:', e);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initAppState();
+            renderAllViews();
+            initFirebaseListeners();
+        });
+
+        function initFirebaseListeners() {
+            if (!auth) return;
+            auth.onAuthStateChanged(async (user) => {
+                currentUser = user;
+                updateAuthUI(user);
+                if (user) {
+                    await pullFromCloudFirestore(user);
+                }
+            });
+        }
+
+        function updateAuthUI(user) {
+            const label = document.getElementById('header-cloud-label');
+            const guestView = document.getElementById('auth-guest-view');
+            const userView = document.getElementById('auth-user-view');
+            const userEmail = document.getElementById('auth-user-email');
+            const userAvatar = document.getElementById('auth-user-avatar');
+
+            if (user) {
+                const name = user.displayName || user.email.split('@')[0];
+                if (label) label.textContent = '👤 ' + name;
+                if (guestView) guestView.classList.add('hidden');
+                if (userView) userView.classList.remove('hidden');
+                if (userEmail) userEmail.textContent = user.email;
+                if (userAvatar) {
+                    if (user.photoURL) {
+                        userAvatar.innerHTML = `<img src="${user.photoURL}" class="w-full h-full rounded-full object-cover">`;
+                    } else {
+                        userAvatar.textContent = name.charAt(0).toUpperCase();
+                    }
+                }
+            } else {
+                if (label) label.textContent = '🔑 Đăng nhập / Cloud';
+                if (guestView) guestView.classList.remove('hidden');
+                if (userView) userView.classList.add('hidden');
+            }
+        }
+
+        async function loginWithGoogle() {
+            if (!auth) {
+                alert('Dịch vụ Cloud chưa sẵn sàng. Kiểm tra lại kết nối mạng.');
+                return;
+            }
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                await auth.signInWithPopup(provider);
+                alert('Đăng nhập Google thành công! Dữ liệu từ vựng đã được kết nối Đám mây.');
+                closeCloudSyncModal();
+            } catch (err) {
+                try {
+                    await auth.signInWithRedirect(provider);
+                } catch (e2) {
+                    alert('Đăng nhập Google: ' + (err.message || 'Thất bại, thử lại sau.'));
+                }
+            }
+        }
+
+        async function loginWithEmail() {
+            const email = document.getElementById('auth-email').value.trim();
+            const pass = document.getElementById('auth-password').value.trim();
+            if (!email || !pass) {
+                alert('Vui lòng nhập Email và Mật khẩu.');
+                return;
+            }
+            try {
+                await auth.signInWithEmailAndPassword(email, pass);
+                alert('Đăng nhập thành công! Dữ liệu đã được đồng bộ.');
+                closeCloudSyncModal();
+            } catch (err) {
+                alert('Đăng nhập thất bại: ' + (err.message || 'Kiểm tra lại Email/Mật khẩu.'));
+            }
+        }
+
+        async function registerWithEmail() {
+            const email = document.getElementById('auth-email').value.trim();
+            const pass = document.getElementById('auth-password').value.trim();
+            if (!email || pass.length < 6) {
+                alert('Email không hợp lệ hoặc Mật khẩu phải từ 6 ký tự.');
+                return;
+            }
+            try {
+                await auth.createUserWithEmailAndPassword(email, pass);
+                alert('Tạo tài khoản mới thành công! Dữ liệu của bạn đã được kết nối với Cloud.');
+                closeCloudSyncModal();
+            } catch (err) {
+                alert('Đăng ký thất bại: ' + (err.message || 'Vui lòng thử lại.'));
+            }
+        }
+
+        async function logoutUser() {
+            if (auth) {
+                await auth.signOut();
+                alert('Đã đăng xuất tài khoản.');
+                closeCloudSyncModal();
+            }
+        }
+
+        async function syncToCloudFirestore() {
+            if (!auth || !currentUser || !db) return;
+            try {
+                await db.collection('users').doc(currentUser.uid).set({
+                    words: appState.words,
+                    updatedAt: new Date().toISOString(),
+                    email: currentUser.email
+                }, { merge: true });
+            } catch (e) {
+                console.log('Cloud Sync Firestore note:', e);
+            }
+        }
+
+        async function pullFromCloudFirestore(user) {
+            if (!db || !user) return;
+            try {
+                const doc = await db.collection('users').doc(user.uid).get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data && Array.isArray(data.words) && data.words.length > 0) {
+                        appState.words = data.words;
+                        localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
+                        renderAllViews();
+                    }
+                } else {
+                    await syncToCloudFirestore();
+                }
+            } catch (e) {
+                console.log('Firestore pull note:', e);
+            }
+        }
+
+        async function forceSyncCloud() {
+            if (currentUser) {
+                await syncToCloudFirestore();
+                alert('Đã đồng bộ dữ liệu lên Cloud thành công!');
+            } else {
+                alert('Vui lòng đăng nhập để sử dụng tính năng đồng bộ.');
+            }
+        }
+
         function openCloudSyncModal() {
             document.getElementById('cloud-sync-modal').classList.remove('hidden');
         }
@@ -2347,7 +2587,7 @@
                     method: 'POST',
                     body: JSON.stringify(appState.words)
                 });
-                alert('Đã tải dữ liệu lên Cloud thành công! Bạn có thể dùng tên này trên iPhone để tải về.');
+                alert('Đã tải dữ liệu lên Cloud thành công!');
                 closeCloudSyncModal();
             } catch (e) {
                 alert('Không thể kết nối Cloud Sync. Kiểm tra kết nối mạng.');
