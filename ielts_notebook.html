@@ -187,16 +187,16 @@
                 <!-- Segmented Navigation Bar -->
                 <div class="w-full bg-[#faf7f5] border-b border-[#ebdcd8] p-1.5 z-20 mb-3 sticky top-[50px] sm:static backdrop-blur-md">
                     <div class="max-w-md mx-auto grid grid-cols-3 gap-1 p-1 bg-[#ede4e1]/80 rounded-xl border border-[#e5d8d4] shadow-2xs">
-                        <button onclick="switchView('input'); event.stopPropagation();" id="nav-btn-input" type="button" class="cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('input')" id="nav-btn-input" type="button" class="cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
                             <span>Nạp Từ Mới</span>
                         </button>
-                        <button onclick="switchView('srs'); event.stopPropagation();" id="nav-btn-srs" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('srs')" id="nav-btn-srs" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
                             <span>Ôn Tập SRS</span>
                             <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">0</span>
                         </button>
-                        <button onclick="switchView('notebook'); event.stopPropagation();" id="nav-btn-notebook" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('notebook')" id="nav-btn-notebook" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
                             <span>Sổ Từ</span>
                             <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">(0)</span>
@@ -2489,7 +2489,18 @@
             initAppState();
             renderAllViews();
             initAuthSession();
+            initTabListeners();
         });
+
+        function initTabListeners() {
+            const btnInput = document.getElementById('nav-btn-input');
+            const btnSrs = document.getElementById('nav-btn-srs');
+            const btnNotebook = document.getElementById('nav-btn-notebook');
+
+            if (btnInput) btnInput.onclick = function(e) { if(e) e.preventDefault(); switchView('input'); };
+            if (btnSrs) btnSrs.onclick = function(e) { if(e) e.preventDefault(); switchView('srs'); };
+            if (btnNotebook) btnNotebook.onclick = function(e) { if(e) e.preventDefault(); switchView('notebook'); };
+        }
 
         function initAuthSession() {
             const savedSession = localStorage.getItem('cece_user_session');
