@@ -531,6 +531,10 @@ def generate_app():
                 <div id="cloud-sync-status" class="p-2.5 rounded-xl bg-[#faf7f5] border border-[#e8dedb] text-[11px] text-[#5e5053] font-medium text-center">
                     Chưa đồng bộ trong phiên này.
                 </div>
+                <button onclick="forceReloadApp()" class="w-full py-2 px-3 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#6e5f62] border border-[#e8dedb] font-semibold rounded-xl text-[11px] flex items-center justify-center gap-1.5 transition cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 21v-5h5"></path></svg>
+                    <span>🔄 Tải lại bản mới nhất (Xóa Cache Safari)</span>
+                </button>
             </div>
         </div>
     </div>
@@ -658,7 +662,7 @@ def generate_app():
                     saveAppState();
                     updateGoogleUserUI();
                     showToast(`🎉 Xin chào ${{appState.googleUser.name}}! Đã đăng nhập bằng Google.`);
-                    pullFromCloud(false);
+                    pushToCloud(false);
                 }}
             }} catch(err) {{
                 console.error("Parse JWT error:", err);
@@ -691,7 +695,7 @@ def generate_app():
                 saveAppState();
                 updateGoogleUserUI();
                 showToast(`🎉 Đã kết nối tài khoản Google (${{cleanEmail}})!`);
-                pullFromCloud(false);
+                pushToCloud(false);
             }}
         }}
 
@@ -700,6 +704,10 @@ def generate_app():
             saveAppState();
             updateGoogleUserUI();
             showToast("ℹ️ Đã đăng xuất tài khoản Google.");
+        }}
+
+        function forceReloadApp() {{
+            window.location.href = window.location.pathname + '?refresh=' + Date.now();
         }}
 
         function loadAppState() {{
