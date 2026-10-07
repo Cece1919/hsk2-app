@@ -2369,9 +2369,7 @@ def generate_app():
             navigator.clipboard.writeText(promptText).then(() => {{
                 showToast("📋 Đã sao chép Prompt cho AI! Chị hãy mở ChatGPT / Gemini và dán vào nhé.");
             }}).catch(() => {{
-                alert("Prompt AI của chị:
-
-" + promptText);
+                alert("Prompt AI của chị:\n\n" + promptText);
             }});
         }}
 
@@ -2412,9 +2410,7 @@ def generate_app():
             navigator.clipboard.writeText(promptText).then(() => {{
                 showToast(`🎉 Đã sao chép Prompt (${{checked.length}} từ)! Chị dán vào ChatGPT / Gemini là có ngay câu chuyện nhé.`);
             }}).catch(() => {{
-                alert("Prompt AI của chị:
-
-" + promptText);
+                alert("Prompt AI của chị:\n\n" + promptText);
             }});
         }}
 
