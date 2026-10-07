@@ -2003,41 +2003,78 @@
                 description: 'Câu chuyện bài 1-2: Sử dụng các từ 旅游, 运动, 眼睛, 足球, 觉得, 最, 也...',
                 paragraphs: [
                     {
-                        zh: 'Cece 喜欢 旅游 和 运动。',
-                        pinyin: 'Cece xǐhuan lǚyóu hé yùndòng.',
                         vi: 'Cece thích đi du lịch và tập thể thao.',
                         words: [
                             { word: '旅游', pinyin: 'lǚyóu', meaning: 'du lịch' },
                             { word: '运动', pinyin: 'yùndòng', meaning: 'thể thao, vận động' }
+                        ],
+                        tokens: [
+                            { zh: 'Cece', py: ['Cece'], target: false },
+                            { zh: '喜欢', py: ['xǐ', 'huan'], target: false },
+                            { zh: '旅游', py: ['lǚ', 'yóu'], target: true, mean: 'du lịch' },
+                            { zh: '和', py: ['hé'], target: false },
+                            { zh: '运动', py: ['yùn', 'dòng'], target: true, mean: 'thể thao, vận động' },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '今天 天气 很好，她 觉得 最 好的 运动 是 踢足球。',
-                        pinyin: 'Jīntiān tiānqì hěn hǎo, tā juéde zuì hǎo de yùndòng shì tī zúqiú.',
                         vi: 'Hôm nay thời tiết rất tốt, cô ấy thấy môn thể thao tốt nhất là đá bóng.',
                         words: [
                             { word: '觉得', pinyin: 'juéde', meaning: 'cảm thấy, thấy' },
                             { word: '最', pinyin: 'zuì', meaning: 'nhất' },
                             { word: '踢足球', pinyin: 'tī zúqiú', meaning: 'đá bóng' }
+                        ],
+                        tokens: [
+                            { zh: '今天', py: ['jīn', 'tiān'], target: false },
+                            { zh: '天气', py: ['tiān', 'qì'], target: false },
+                            { zh: '很好', py: ['hěn', 'hǎo'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '她', py: ['tā'], target: false },
+                            { zh: '觉得', py: ['jué', 'de'], target: true, mean: 'cảm thấy, thấy' },
+                            { zh: '最', py: ['zuì'], target: true, mean: 'nhất' },
+                            { zh: '好', py: ['hǎo'], target: false },
+                            { zh: '的', py: ['de'], target: false },
+                            { zh: '运动', py: ['yùn', 'dòng'], target: false },
+                            { zh: '是', py: ['shì'], target: false },
+                            { zh: '踢足球', py: ['tī', 'zú', 'qiú'], target: true, mean: 'đá bóng' },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '她的 眼睛 很 大，笑起来 也 非常 好看。',
-                        pinyin: 'Tā de yǎnjing hěn dà, xiào qǐlái yě fēicháng hǎokàn.',
                         vi: 'Đôi mắt của cô ấy rất to, mỉm cười lên cũng cực kỳ xinh đẹp.',
                         words: [
                             { word: '眼睛', pinyin: 'yǎnjing', meaning: 'đôi mắt' },
                             { word: '也', pinyin: 'yě', meaning: 'cũng' },
                             { word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }
+                        ],
+                        tokens: [
+                            { zh: '她的', py: ['tā', 'de'], target: false },
+                            { zh: '眼睛', py: ['yǎn', 'jing'], target: true, mean: 'đôi mắt' },
+                            { zh: '很', py: ['hěn'], target: false },
+                            { zh: '大', py: ['dà'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '笑起来', py: ['xiào', 'qǐ', 'lái'], target: false },
+                            { zh: '也', py: ['yě'], target: true, mean: 'cũng' },
+                            { zh: '非常', py: ['fēi', 'cháng'], target: true, mean: 'rất, cực kỳ' },
+                            { zh: '好看', py: ['hǎo', 'kàn'], target: false },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '下午 她 和 朋友 一起 去 跑步。',
-                        pinyin: 'Xiàwǔ tā hé péngyou yìqǐ qù pǎobù.',
                         vi: 'Buổi chiều cô ấy cùng bạn bè đi chạy bộ.',
                         words: [
                             { word: '一起', pinyin: 'yìqǐ', meaning: 'cùng nhau' },
                             { word: '跑步', pinyin: 'pǎobù', meaning: 'chạy bộ' }
+                        ],
+                        tokens: [
+                            { zh: '下午', py: ['xià', 'wǔ'], target: false },
+                            { zh: '她', py: ['tā'], target: false },
+                            { zh: '和', py: ['hé'], target: false },
+                            { zh: '朋友', py: ['péng', 'you'], target: false },
+                            { zh: '一起', py: ['yì', 'qǐ'], target: true, mean: 'cùng nhau' },
+                            { zh: '去', py: ['qù'], target: false },
+                            { zh: '跑步', py: ['pǎo', 'bù'], target: true, mean: 'chạy bộ' },
+                            { zh: '。', py: [''], target: false }
                         ]
                     }
                 ]
@@ -2049,38 +2086,81 @@
                 description: 'Câu chuyện bài 3-4: Sử dụng các từ 服务员, 生病, 休息, 药, 身体, 起床, 早上...',
                 paragraphs: [
                     {
-                        zh: '早上 六点，小明 就 起床 了。',
-                        pinyin: 'Zǎoshang liù diǎn, Xiǎomíng jiù qǐchuáng le.',
                         vi: '6 giờ sáng, Tiểu Minh đã thức dậy rồi.',
                         words: [
                             { word: '早上', pinyin: 'zǎoshang', meaning: 'buổi sáng' },
                             { word: '起床', pinyin: 'qǐchuáng', meaning: 'thức dậy' }
+                        ],
+                        tokens: [
+                            { zh: '早上', py: ['zǎo', 'shang'], target: true, mean: 'buổi sáng' },
+                            { zh: '六点', py: ['liù', 'diǎn'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '小明', py: ['Xiǎo', 'míng'], target: false },
+                            { zh: '就', py: ['jiù'], target: false },
+                            { zh: '起床', py: ['qǐ', 'chuáng'], target: true, mean: 'thức dậy' },
+                            { zh: '了', py: ['le'], target: false },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '因为 昨天 他 生病 了，所以 医生 让 他 多 休息。',
-                        pinyin: 'Yīnwèi zuótiān tā shēngbìng le, suǒyǐ yīshēng ràng tā duō xiūxi.',
                         vi: 'Vì hôm qua cậu ấy bị ốm, cho nên bác sĩ bảo cậu ấy nghỉ ngơi nhiều.',
                         words: [
                             { word: '生病', pinyin: 'shēngbìng', meaning: 'bị ốm, bị bệnh' },
-                            { word: '休息', pinyin: 'xiūxi', meaning: 'nghỉ ngơi' }
+                            { word: '休息', pinyin: 'xiūxi', meaning: 'nghỉ ngơi' },
+                            { word: '医生', pinyin: 'yīshēng', meaning: 'bác sĩ' }
+                        ],
+                        tokens: [
+                            { zh: '因为', py: ['yīn', 'wèi'], target: false },
+                            { zh: '昨天', py: ['zuó', 'tiān'], target: false },
+                            { zh: '他', py: ['tā'], target: false },
+                            { zh: '生病', py: ['shēng', 'bìng'], target: true, mean: 'bị ốm, bị bệnh' },
+                            { zh: '了', py: ['le'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '所以', py: ['suǒ', 'yǐ'], target: false },
+                            { zh: '医生', py: ['yī', 'shēng'], target: true, mean: 'bác sĩ' },
+                            { zh: '让', py: ['ràng'], target: false },
+                            { zh: '他', py: ['tā'], target: false },
+                            { zh: '多', py: ['duō'], target: false },
+                            { zh: '休息', py: ['xiū', 'xi'], target: true, mean: 'nghỉ ngơi' },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '吃了 药 以后，他的 身体 好了 很多。',
-                        pinyin: 'Chī le yào yǐhòu, tā de shēntǐ hǎo le hěn duō.',
                         vi: 'Sau khi uống thuốc, cơ thể của cậu ấy đã tốt hơn rất nhiều.',
                         words: [
                             { word: '药', pinyin: 'yào', meaning: 'thuốc' },
                             { word: '身体', pinyin: 'shēntǐ', meaning: 'cơ thể, sức khỏe' }
+                        ],
+                        tokens: [
+                            { zh: '吃了', py: ['chī', 'le'], target: false },
+                            { zh: '药', py: ['yào'], target: true, mean: 'thuốc' },
+                            { zh: '以后', py: ['yǐ', 'hòu'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '他的', py: ['tā', 'de'], target: false },
+                            { zh: '身体', py: ['shēn', 'tǐ'], target: true, mean: 'cơ thể, sức khỏe' },
+                            { zh: '好', py: ['hǎo'], target: false },
+                            { zh: '了', py: ['le'], target: false },
+                            { zh: '很多', py: ['hěn', 'duō'], target: false },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '晚上 他 去 饭馆 吃饭，服务员 很 热情。',
-                        pinyin: 'Wǎnshang tā qù fànguǎn chīfàn, fúwùyuán hěn rèqíng.',
                         vi: 'Buổi tối cậu ấy đến nhà hàng ăn cơm, người phục vụ rất nhiệt tình.',
                         words: [
+                            { word: '晚上', pinyin: 'wǎnshang', meaning: 'buổi tối' },
                             { word: '服务员', pinyin: 'fúwùyuán', meaning: 'người phục vụ' }
+                        ],
+                        tokens: [
+                            { zh: '晚上', py: ['wǎn', 'shang'], target: true, mean: 'buổi tối' },
+                            { zh: '他', py: ['tā'], target: false },
+                            { zh: '去', py: ['qù'], target: false },
+                            { zh: '饭馆', py: ['fàn', 'guǎn'], target: false },
+                            { zh: '吃饭', py: ['chī', 'fàn'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '服务员', py: ['fú', 'wù', 'yuán'], target: true, mean: 'người phục vụ' },
+                            { zh: '很', py: ['hěn'], target: false },
+                            { zh: '热情', py: ['rè', 'qíng'], target: false },
+                            { zh: '。', py: [''], target: false }
                         ]
                     }
                 ]
@@ -2092,42 +2172,86 @@
                 description: 'Câu chuyện bài 5-6: Sử dụng các từ 生日, 快乐, 送, 礼物, 姐姐, 蛋糕, 希望...',
                 paragraphs: [
                     {
-                        zh: '今天是 姐姐 的 生日，大家 都 祝 她 生日快乐！',
-                        pinyin: 'Jīntiān shì jiějie de shēngrì, dàjiā dōu zhù tā shēngrì kuàilè!',
                         vi: 'Hôm nay là sinh nhật của chị gái, mọi người đều chúc chị sinh nhật vui vẻ!',
                         words: [
                             { word: '姐姐', pinyin: 'jiějie', meaning: 'chị gái' },
                             { word: '生日', pinyin: 'shēngrì', meaning: 'sinh nhật' },
                             { word: '快乐', pinyin: 'kuàilè', meaning: 'vui vẻ' }
+                        ],
+                        tokens: [
+                            { zh: '今天', py: ['jīn', 'tiān'], target: false },
+                            { zh: '是', py: ['shì'], target: false },
+                            { zh: '姐姐', py: ['jiě', 'jie'], target: true, mean: 'chị gái' },
+                            { zh: '的', py: ['de'], target: false },
+                            { zh: '生日', py: ['shēng', 'rì'], target: true, mean: 'sinh nhật' },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '大家', py: ['dà', 'jiā'], target: false },
+                            { zh: '都', py: ['dōu'], target: false },
+                            { zh: '祝', py: ['zhù'], target: false },
+                            { zh: '她', py: ['tā'], target: false },
+                            { zh: '生日', py: ['shēng', 'rì'], target: false },
+                            { zh: '快乐', py: ['kuài', 'lè'], target: true, mean: 'vui vẻ' },
+                            { zh: '！', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '我 送给 姐姐 一部 新 手机 作为 礼物。',
-                        pinyin: 'Wǒ sòng gěi jiějie yí bù xīn shǒujī zuòwéi lǐwù.',
                         vi: 'Tôi tặng chị gái một chiếc điện thoại mới làm món quà.',
                         words: [
                             { word: '送', pinyin: 'sòng', meaning: 'tặng, tiễn' },
                             { word: '手机', pinyin: 'shǒujī', meaning: 'điện thoại di động' },
                             { word: '礼物', pinyin: 'lǐwù', meaning: 'món quà' }
+                        ],
+                        tokens: [
+                            { zh: '我', py: ['wǒ'], target: false },
+                            { zh: '送', py: ['sòng'], target: true, mean: 'tặng, tiễn' },
+                            { zh: '给', py: ['gěi'], target: false },
+                            { zh: '姐姐', py: ['jiě', 'jie'], target: false },
+                            { zh: '一部', py: ['yì', 'bù'], target: false },
+                            { zh: '新', py: ['xīn'], target: false },
+                            { zh: '手机', py: ['shǒu', 'jī'], target: true, mean: 'điện thoại di động' },
+                            { zh: '作为', py: ['zuò', 'wéi'], target: false },
+                            { zh: '礼物', py: ['lǐ', 'wù'], target: true, mean: 'món quà' },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '我们 一起 吃 蛋糕，喝 咖啡，非常 高兴。',
-                        pinyin: 'Wǒmen yìqǐ chī dàngāo, hē kāfēi, fēicháng gāoxìng.',
                         vi: 'Chúng tôi cùng nhau ăn bánh kem, uống cà phê, vô cùng vui vẻ.',
                         words: [
                             { word: '蛋糕', pinyin: 'dàngāo', meaning: 'bánh kem' },
                             { word: '咖啡', pinyin: 'kāfēi', meaning: 'cà phê' },
                             { word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }
+                        ],
+                        tokens: [
+                            { zh: '我们', py: ['wǒ', 'men'], target: false },
+                            { zh: '一起', py: ['yì', 'qǐ'], target: false },
+                            { zh: '吃', py: ['chī'], target: false },
+                            { zh: '蛋糕', py: ['dàn', 'gāo'], target: true, mean: 'bánh kem' },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '喝', py: ['hē'], target: false },
+                            { zh: '咖啡', py: ['kā', 'fēi'], target: true, mean: 'cà phê' },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '非常', py: ['fēi', 'cháng'], target: true, mean: 'rất, cực kỳ' },
+                            { zh: '高兴', py: ['gāo', 'xìng'], target: false },
+                            { zh: '。', py: [''], target: false }
                         ]
                     },
                     {
-                        zh: '我 希望 姐姐 天天 快乐，学习 越来越 好！',
-                        pinyin: 'Wǒ xīwàng jiějie tiāntiān kuàilè, xuéxí yuè lái yuè hǎo!',
                         vi: 'Tôi hy vọng chị gái mỗi ngày đều vui vẻ, học tập ngày càng tốt hơn!',
                         words: [
                             { word: '希望', pinyin: 'xīwàng', meaning: 'hy vọng' },
                             { word: '学习', pinyin: 'xuéxí', meaning: 'học tập' }
+                        ],
+                        tokens: [
+                            { zh: '我', py: ['wǒ'], target: false },
+                            { zh: '希望', py: ['xī', 'wàng'], target: true, mean: 'hy vọng' },
+                            { zh: '姐姐', py: ['jiě', 'jie'], target: false },
+                            { zh: '天天', py: ['tiān', 'tiān'], target: false },
+                            { zh: '快乐', py: ['kuài', 'lè'], target: false },
+                            { zh: '，', py: [''], target: false },
+                            { zh: '学习', py: ['xué', 'xí'], target: true, mean: 'học tập' },
+                            { zh: '越来越', py: ['yuè', 'lái', 'yuè'], target: false },
+                            { zh: '好', py: ['hǎo'], target: false },
+                            { zh: '！', py: [''], target: false }
                         ]
                     }
                 ]
@@ -2210,28 +2334,35 @@
             `;
 
             story.paragraphs.forEach((p, idx) => {
-                const wordsList = p.words || [];
-                const targetWords = wordsList.map(w => w.word);
-
                 let formattedZh = '';
-                const parts = p.zh.split(' ');
-                const pyParts = p.pinyin.split(' ');
 
-                parts.forEach((part, pIdx) => {
-                    const py = pyParts[pIdx] || '';
-                    const isTarget = targetWords.includes(part);
+                (p.tokens || []).forEach(t => {
+                    const zhChars = Array.from(t.zh);
+                    const pyList = t.py || [];
+                    const isTarget = t.target;
+                    const mean = t.mean || '';
+                    const fullPy = pyList.join('');
+
+                    let innerRubies = '';
+                    zhChars.forEach((char, cIdx) => {
+                        const py = pyList[cIdx] || '';
+                        if (py) {
+                            innerRubies += `<ruby class="inline-flex flex-col items-center">${char}<rt class="${showPinyinState ? '' : 'hidden'} text-[#8a525f] text-[11px] font-normal leading-tight">${py}</rt></ruby>`;
+                        } else {
+                            innerRubies += `<span>${char}</span>`;
+                        }
+                    });
+
                     if (isTarget) {
-                        const targetObj = wordsList.find(w => w.word === part);
-                        const mean = targetObj ? targetObj.meaning : '';
-                        formattedZh += `<ruby onclick="speakWord('${part}', 'zh-CN'); showToast('${part} (${py}): ${mean}')" class="cursor-pointer bg-[#f4ebe8] text-[#8a525f] px-1 py-0.5 rounded font-bold hover:bg-[#ebdcd8] transition">${part}<rt class="${showPinyinState ? '' : 'hidden'} text-[#935864]">${py}</rt></ruby> `;
+                        formattedZh += `<span onclick="speakWord('${t.zh}', 'zh-CN'); showToast('${t.zh} (${fullPy}): ${mean}')" class="cursor-pointer inline-flex items-baseline bg-[#f4ebe8] text-[#8a525f] px-1 py-0.5 rounded font-bold hover:bg-[#ebdcd8] transition border border-[#ebdcd8] mx-0.5">${innerRubies}</span> `;
                     } else {
-                        formattedZh += `<ruby>${part}<rt class="${showPinyinState ? '' : 'hidden'} text-[#64748b]">${py}</rt></ruby> `;
+                        formattedZh += `<span class="inline-flex items-baseline mx-0.5">${innerRubies}</span> `;
                     }
                 });
 
                 html += `
                     <div class="p-3 bg-white rounded-xl border border-[#e8dedb] space-y-2">
-                        <div class="text-base text-[#2b2426] leading-relaxed">
+                        <div class="text-base text-[#2b2426] leading-relaxed flex flex-wrap items-baseline gap-y-2">
                             ${formattedZh}
                         </div>
                         <div class="story-vi-text ${showViState ? '' : 'hidden'} text-xs text-[#5e5053] font-medium pt-1 border-t border-[#f4ebe8]">
