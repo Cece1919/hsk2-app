@@ -184,19 +184,19 @@
         <main class="flex-1 flex flex-col items-center justify-start py-3 px-2 sm:px-4 w-full">
             <div id="content-container" class="w-full max-w-4xl transition-all duration-300 mx-auto flex flex-col">
                 
-                <!-- Floating Segmented Navigation Bar -->
-                <div class="w-full bg-[#faf7f5]/90 border-b border-[#ebdcd8] p-1.5 sticky top-[53px] z-20 backdrop-blur-sm mb-2">
-                    <div class="max-w-md mx-auto grid grid-cols-3 gap-1 p-1 bg-[#ede4e1]/70 rounded-xl border border-[#e5d8d4]">
-                        <button onclick="switchView('input')" id="nav-btn-input" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                <!-- Segmented Navigation Bar -->
+                <div class="w-full bg-[#faf7f5] border-b border-[#ebdcd8] p-1.5 z-20 mb-3 sticky top-[50px] sm:static backdrop-blur-md">
+                    <div class="max-w-md mx-auto grid grid-cols-3 gap-1 p-1 bg-[#ede4e1]/80 rounded-xl border border-[#e5d8d4] shadow-2xs">
+                        <button onclick="switchView('input'); event.stopPropagation();" id="nav-btn-input" type="button" class="cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
                             <span>Nạp Từ Mới</span>
                         </button>
-                        <button onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('srs'); event.stopPropagation();" id="nav-btn-srs" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
                             <span>Ôn Tập SRS</span>
                             <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums">0</span>
                         </button>
-                        <button onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
+                        <button onclick="switchView('notebook'); event.stopPropagation();" id="nav-btn-notebook" type="button" class="cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864]"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
                             <span>Sổ Từ</span>
                             <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal">(0)</span>
@@ -1962,28 +1962,40 @@
 
         /* --- VIEW SWITCHER --- */
         function switchView(viewName) {
-            appState.activeView = viewName;
+            try {
+                appState.activeView = viewName || 'input';
 
-            document.getElementById('sec-input-view').classList.add('hidden');
-            document.getElementById('sec-srs-view').classList.add('hidden');
-            document.getElementById('sec-notebook-view').classList.add('hidden');
+                const secInput = document.getElementById('sec-input-view');
+                const secSrs = document.getElementById('sec-srs-view');
+                const secNotebook = document.getElementById('sec-notebook-view');
 
-            document.getElementById('nav-btn-input').className = 'flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
-            document.getElementById('nav-btn-srs').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
-            document.getElementById('nav-btn-notebook').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+                if (secInput) secInput.classList.add('hidden');
+                if (secSrs) secSrs.classList.add('hidden');
+                if (secNotebook) secNotebook.classList.add('hidden');
 
-            if (viewName === 'input') {
-                document.getElementById('sec-input-view').classList.remove('hidden');
-                document.getElementById('nav-btn-input').className = 'flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
-            } else if (viewName === 'srs') {
-                document.getElementById('sec-srs-view').classList.remove('hidden');
-                document.getElementById('nav-btn-srs').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
-                initSRSDeck();
-            } else if (viewName === 'notebook') {
-                document.getElementById('sec-notebook-view').classList.remove('hidden');
-                document.getElementById('nav-btn-notebook').className = 'relative flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs transition-all nav-btn-active';
-                populateNotebookFilterTags();
-                renderNotebookSheet();
+                const btnInput = document.getElementById('nav-btn-input');
+                const btnSrs = document.getElementById('nav-btn-srs');
+                const btnNotebook = document.getElementById('nav-btn-notebook');
+
+                if (btnInput) btnInput.className = 'cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+                if (btnSrs) btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+                if (btnNotebook) btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+
+                if (viewName === 'input' && secInput && btnInput) {
+                    secInput.classList.remove('hidden');
+                    btnInput.className = 'cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                } else if (viewName === 'srs' && secSrs && btnSrs) {
+                    secSrs.classList.remove('hidden');
+                    btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                    initSRSDeck();
+                } else if (viewName === 'notebook' && secNotebook && btnNotebook) {
+                    secNotebook.classList.remove('hidden');
+                    btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                    populateNotebookFilterTags();
+                    renderNotebookSheet();
+                }
+            } catch (e) {
+                console.log('switchView note:', e);
             }
         }
 
