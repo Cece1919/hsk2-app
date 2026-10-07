@@ -1846,6 +1846,7 @@
                 appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
                 localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
                 localStorage.setItem('cece_english_notebook_v2', JSON.stringify({ words: appState.words }));
+                saveAppState();
                 return;
             }
 
@@ -1853,13 +1854,22 @@
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    appState.words = (parsed.words && parsed.words.length > 0) ? parsed.words : JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+                    if (parsed && Array.isArray(parsed.words) && parsed.words.length > 0) {
+                        appState.words = parsed.words;
+                    } else {
+                        appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+                    }
                 } catch (e) {
                     appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
                 }
             } else {
                 appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
             }
+
+            if (!appState.words || appState.words.length === 0) {
+                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+            }
+
             saveAppState();
         }
 
@@ -1969,9 +1979,9 @@
                 const secSrs = document.getElementById('sec-srs-view');
                 const secNotebook = document.getElementById('sec-notebook-view');
 
-                if (secInput) secInput.classList.add('hidden');
-                if (secSrs) secSrs.classList.add('hidden');
-                if (secNotebook) secNotebook.classList.add('hidden');
+                if (secInput) { secInput.classList.add('hidden'); secInput.style.display = 'none'; }
+                if (secSrs) { secSrs.classList.add('hidden'); secSrs.style.display = 'none'; }
+                if (secNotebook) { secNotebook.classList.add('hidden'); secNotebook.style.display = 'none'; }
 
                 const btnInput = document.getElementById('nav-btn-input');
                 const btnSrs = document.getElementById('nav-btn-srs');
@@ -1983,13 +1993,16 @@
 
                 if (viewName === 'input' && secInput && btnInput) {
                     secInput.classList.remove('hidden');
+                    secInput.style.display = 'block';
                     btnInput.className = 'cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
                 } else if (viewName === 'srs' && secSrs && btnSrs) {
                     secSrs.classList.remove('hidden');
+                    secSrs.style.display = 'block';
                     btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
                     initSRSDeck();
                 } else if (viewName === 'notebook' && secNotebook && btnNotebook) {
                     secNotebook.classList.remove('hidden');
+                    secNotebook.style.display = 'block';
                     btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
                     populateNotebookFilterTags();
                     renderNotebookSheet();
