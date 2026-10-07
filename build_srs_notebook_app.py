@@ -187,20 +187,24 @@ def generate_app():
                 
                 <!-- Floating Segmented Navigation Bar -->
                 <div class="w-full bg-[#faf7f5]/95 border-b border-[#ebdcd8] p-1.5 sticky top-[53px] z-30 backdrop-blur-md mb-2">
-                    <div class="max-w-md mx-auto grid grid-cols-3 gap-1 p-1 bg-[#ede4e1]/80 rounded-xl border border-[#e5d8d4]">
-                        <button type="button" onclick="switchView('input')" id="nav-btn-input" class="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
-                            <span class="pointer-events-none">Nạp Từ Mới</span>
+                    <div class="max-w-md mx-auto grid grid-cols-4 gap-1 p-1 bg-[#ede4e1]/80 rounded-xl border border-[#e5d8d4]">
+                        <button type="button" onclick="switchView('input')" id="nav-btn-input" class="flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none shrink-0"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+                            <span class="pointer-events-none truncate">Nạp Từ</span>
                         </button>
-                        <button type="button" onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
-                            <span class="pointer-events-none">Ôn Tập SRS</span>
-                            <span id="tab-due-badge" class="min-w-[16px] h-[16px] px-1 bg-[#935864] text-white rounded-full text-[9px] font-bold flex items-center justify-center tabular-nums pointer-events-none">{total_baseline_count}</span>
+                        <button type="button" onclick="switchView('srs')" id="nav-btn-srs" class="relative flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none shrink-0"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path></svg>
+                            <span class="pointer-events-none truncate">Ôn SRS</span>
+                            <span id="tab-due-badge" class="min-w-[15px] h-[15px] px-0.5 bg-[#935864] text-white rounded-full text-[8px] font-bold flex items-center justify-center tabular-nums pointer-events-none">{total_baseline_count}</span>
                         </button>
-                        <button type="button" onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold cursor-pointer touch-manipulation active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
-                            <span class="pointer-events-none">Sổ Từ</span>
-                            <span id="tab-total-badge" class="text-[10px] text-[#8c7b7f] font-normal pointer-events-none">({total_baseline_count})</span>
+                        <button type="button" onclick="switchView('notebook')" id="nav-btn-notebook" class="relative flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold cursor-pointer touch-manipulation active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none shrink-0"><path d="M10 2v8l3-3 3 3V2"></path><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path></svg>
+                            <span class="pointer-events-none truncate">Sổ Từ</span>
+                            <span id="tab-total-badge" class="text-[9px] text-[#8c7b7f] font-normal pointer-events-none">({total_baseline_count})</span>
+                        </button>
+                        <button type="button" onclick="switchView('story')" id="nav-btn-story" class="flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#935864] pointer-events-none shrink-0"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path><path d="M8 7h6"></path><path d="M8 11h8"></path></svg>
+                            <span class="pointer-events-none truncate">Câu Chuyện</span>
                         </button>
                     </div>
                 </div>
@@ -381,7 +385,56 @@ def generate_app():
 
                     </div>
 
+                
+                <!-- TAB 4: CÂU CHUYỆN TỪ VỰNG HSK 2 -->
+                <div id="sec-story-view" class="space-y-4 fade-in hidden">
+                    <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 shadow-xs space-y-4 max-w-2xl mx-auto w-full">
+                        <!-- Story Header -->
+                        <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-[#f4ebe8] text-[#935864] flex items-center justify-center text-base font-bold shadow-2xs">
+                                    📜
+                                </div>
+                                <div>
+                                    <h2 class="text-sm font-bold text-[#2b2426]">Câu Chuyện Từ Vựng HSK 2</h2>
+                                    <p class="text-[11px] text-[#786669]">Học từ vựng qua câu chuyện sinh động, nhớ sâu và tự nhiên</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCurrentStoryPrompt()" class="px-2.5 py-1.5 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#8a525f] font-semibold text-xs rounded-xl border border-[#ebdcd8] flex items-center gap-1 transition cursor-pointer">
+                                📋 Copy Prompt AI
+                            </button>
+                        </div>
+
+                        <!-- Story Day Selectors -->
+                        <div class="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin text-xs">
+                            <button onclick="selectStoryDay('day1')" id="story-tab-day1" class="px-3 py-1.5 rounded-xl font-semibold bg-[#8f525e] text-white shadow-2xs cursor-pointer whitespace-nowrap">Chuyện Bài 1-2</button>
+                            <button onclick="selectStoryDay('day2')" id="story-tab-day2" class="px-3 py-1.5 rounded-xl font-medium bg-[#faf7f5] text-[#6e5f62] border border-[#e8dedb] cursor-pointer whitespace-nowrap">Chuyện Bài 3-4</button>
+                            <button onclick="selectStoryDay('day3')" id="story-tab-day3" class="px-3 py-1.5 rounded-xl font-medium bg-[#faf7f5] text-[#6e5f62] border border-[#e8dedb] cursor-pointer whitespace-nowrap">Chuyện Bài 5-6</button>
+                            <button onclick="selectStoryDay('custom')" id="story-tab-custom" class="px-3 py-1.5 rounded-xl font-medium bg-[#faf7f5] text-[#6e5f62] border border-[#e8dedb] cursor-pointer whitespace-nowrap">✨ Tự Chọn Từ AI</button>
+                        </div>
+
+                        <!-- Story Main Display Card -->
+                        <div id="story-content-box" class="bg-[#faf6f4] border border-[#ebdcd8] rounded-2xl p-4 space-y-4">
+                            <!-- Rendered by JS -->
+                        </div>
+
+                        <!-- Custom Word Selector for AI Prompt Generator -->
+                        <div id="story-custom-prompt-box" class="hidden bg-[#faf7f5] border border-[#e8dedb] rounded-2xl p-4 space-y-3">
+                            <div class="flex items-center justify-between border-b border-[#e8dedb] pb-2">
+                                <h3 class="text-xs font-bold text-[#2b2426]">✨ Chọn Các Từ Vựng Trong Sổ Từ Để Tạo Prompt AI:</h3>
+                                <button onclick="selectAllStoryWords()" class="text-[11px] text-[#8f525e] font-semibold underline cursor-pointer">Chọn tất cả</button>
+                            </div>
+                            <div id="story-word-checkboxes" class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-1">
+                                <!-- Rendered dynamically -->
+                            </div>
+                            <button onclick="generateCustomStoryPrompt()" class="w-full py-2.5 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition cursor-pointer">
+                                📋 SAO CHÉP PROMPT CÂU CHUYỆN CHO CHATGPT / GEMINI
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+</div>
 
             </div>
         </main>
@@ -1091,19 +1144,22 @@ def generate_app():
             const secInput = document.getElementById('sec-input-view');
             const secSrs = document.getElementById('sec-srs-view');
             const secNotebook = document.getElementById('sec-notebook-view');
+            const secStory = document.getElementById('sec-story-view');
 
             const btnInput = document.getElementById('nav-btn-input');
             const btnSrs = document.getElementById('nav-btn-srs');
             const btnNotebook = document.getElementById('nav-btn-notebook');
+            const btnStory = document.getElementById('nav-btn-story');
 
             if (secInput) secInput.classList.add('hidden');
             if (secSrs) secSrs.classList.add('hidden');
             if (secNotebook) secNotebook.classList.add('hidden');
+            if (secStory) secStory.classList.add('hidden');
 
-            const unactiveClass = "flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95";
-            const activeClass = "flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold cursor-pointer touch-manipulation active:scale-95";
+            const unactiveClass = "flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95";
+            const activeClass = "flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold cursor-pointer touch-manipulation active:scale-95";
 
-            [btnInput, btnSrs, btnNotebook].forEach(btn => {{
+            [btnInput, btnSrs, btnNotebook, btnStory].forEach(btn => {{
                 if (btn) btn.className = unactiveClass;
             }});
 
@@ -1118,6 +1174,10 @@ def generate_app():
                 secNotebook.classList.remove('hidden');
                 btnNotebook.className = activeClass;
                 renderNotebookSheet();
+            }} else if (viewName === 'story' && secStory && btnStory) {{
+                secStory.classList.remove('hidden');
+                btnStory.className = activeClass;
+                renderStoryView();
             }}
             window.scrollTo({{ top: 0, behavior: 'smooth' }});
         }}
@@ -1992,6 +2052,373 @@ def generate_app():
             initSrsSession();
             bindTabNavigationEvents();
         }};
+        // Built-in HSK 2 Stories Data
+        const HSK2_STORIES = {{
+            day1: {{
+                id: 'day1',
+                titleZh: 'Cece 的快乐周末',
+                titleVi: 'Cuối Tuần Vui Vẻ Của Cece',
+                description: 'Câu chuyện bài 1-2: Sử dụng các từ 旅游, 运动, 眼睛, 足球, 觉得, 最, 也...',
+                paragraphs: [
+                    {{
+                        zh: 'Cece 喜欢 旅游 和 运动。',
+                        pinyin: 'Cece xǐhuan lǚyóu hé yùndòng.',
+                        vi: 'Cece thích đi du lịch và tập thể thao.',
+                        words: [
+                            {{ word: '旅游', pinyin: 'lǚyóu', meaning: 'du lịch' }},
+                            {{ word: '运动', pinyin: 'yùndòng', meaning: 'thể thao, vận động' }}
+                        ]
+                    }},
+                    {{
+                        zh: '今天 天气 很好，她 觉得 最 好的 运动 是 踢足球。',
+                        pinyin: 'Jīntiān tiānqì hěn hǎo, tā juéde zuì hǎo de yùndòng shì tī zúqiú.',
+                        vi: 'Hôm nay thời tiết rất tốt, cô ấy thấy môn thể thao tốt nhất là đá bóng.',
+                        words: [
+                            {{ word: '觉得', pinyin: 'juéde', meaning: 'cảm thấy, thấy' }},
+                            {{ word: '最', pinyin: 'zuì', meaning: 'nhất' }},
+                            {{ word: '踢足球', pinyin: 'tī zúqiú', meaning: 'đá bóng' }}
+                        ]
+                    }},
+                    {{
+                        zh: '她的 眼睛 很 大，笑起来 也 非常 好看。',
+                        pinyin: 'Tā de yǎnjing hěn dà, xiào qǐlái yě fēicháng hǎokàn.',
+                        vi: 'Đôi mắt của cô ấy rất to, mỉm cười lên cũng cực kỳ xinh đẹp.',
+                        words: [
+                            {{ word: '眼睛', pinyin: 'yǎnjing', meaning: 'đôi mắt' }},
+                            {{ word: '也', pinyin: 'yě', meaning: 'cũng' }},
+                            {{ word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }}
+                        ]
+                    }},
+                    {{
+                        zh: '下午 她 和 朋友 一起 去 跑步。',
+                        pinyin: 'Xiàwǔ tā hé péngyou yìqǐ qù pǎobù.',
+                        vi: 'Buổi chiều cô ấy cùng bạn bè đi chạy bộ.',
+                        words: [
+                            {{ word: '一起', pinyin: 'yìqǐ', meaning: 'cùng nhau' }},
+                            {{ word: '跑步', pinyin: 'pǎobù', meaning: 'chạy bộ' }}
+                        ]
+                    }}
+                ]
+            }},
+            day2: {{
+                id: 'day2',
+                titleZh: '健康 的 生活',
+                titleVi: 'Lối Sống Khỏe Mạnh',
+                description: 'Câu chuyện bài 3-4: Sử dụng các từ 服务员, 生病, 休息, 药, 身体, 起床, 早上...',
+                paragraphs: [
+                    {{
+                        zh: '早上 六点，小明 就 起床 了。',
+                        pinyin: 'Zǎoshang liù diǎn, Xiǎomíng jiù qǐchuáng le.',
+                        vi: '6 giờ sáng, Tiểu Minh đã thức dậy rồi.',
+                        words: [
+                            {{ word: '早上', pinyin: 'zǎoshang', meaning: 'buổi sáng' }},
+                            {{ word: '起床', pinyin: 'qǐchuáng', meaning: 'thức dậy' }}
+                        ]
+                    }},
+                    {{
+                        zh: '因为 昨天 他 生病 了，所以 医生 让 他 多 休息。',
+                        pinyin: 'Yīnwèi zuótiān tā shēngbìng le, suǒyǐ yīshēng ràng tā duō xiūxi.',
+                        vi: 'Vì hôm qua cậu ấy bị ốm, cho nên bác sĩ bảo cậu ấy nghỉ ngơi nhiều.',
+                        words: [
+                            {{ word: '生病', pinyin: 'shēngbìng', meaning: 'bị ốm, bị bệnh' }},
+                            {{ word: '休息', pinyin: 'xiūxi', meaning: 'nghỉ ngơi' }}
+                        ]
+                    }},
+                    {{
+                        zh: '吃了 药 以后，他的 身体 好了 很多。',
+                        pinyin: 'Chī le yào yǐhòu, tā de shēntǐ hǎo le hěn duō.',
+                        vi: 'Sau khi uống thuốc, cơ thể của cậu ấy đã tốt hơn rất nhiều.',
+                        words: [
+                            {{ word: '药', pinyin: 'yào', meaning: 'thuốc' }},
+                            {{ word: '身体', pinyin: 'shēntǐ', meaning: 'cơ thể, sức khỏe' }}
+                        ]
+                    }},
+                    {{
+                        zh: '晚上 他 去 饭馆 吃饭，服务员 很 热情。',
+                        pinyin: 'Wǎnshang tā qù fànguǎn chīfàn, fúwùyuán hěn rèqíng.',
+                        vi: 'Buổi tối cậu ấy đến nhà hàng ăn cơm, người phục vụ rất nhiệt tình.',
+                        words: [
+                            {{ word: '服务员', pinyin: 'fúwùyuán', meaning: 'người phục vụ' }}
+                        ]
+                    }}
+                ]
+            }},
+            day3: {{
+                id: 'day3',
+                titleZh: '姐姐 的 生日 聚会',
+                titleVi: 'Bữa Tiệc Sinh Nhật Của Chị Gái',
+                description: 'Câu chuyện bài 5-6: Sử dụng các từ 生日, 快乐, 送, 礼物, 姐姐, 蛋糕, 希望...',
+                paragraphs: [
+                    {{
+                        zh: '今天是 姐姐 的 生日，大家 都 祝 她 生日快乐！',
+                        pinyin: 'Jīntiān shì jiějie de shēngrì, dàjiā dōu zhù tā shēngrì kuàilè!',
+                        vi: 'Hôm nay là sinh nhật của chị gái, mọi người đều chúc chị sinh nhật vui vẻ!',
+                        words: [
+                            {{ word: '姐姐', pinyin: 'jiějie', meaning: 'chị gái' }},
+                            {{ word: '生日', pinyin: 'shēngrì', meaning: 'sinh nhật' }},
+                            {{ word: '快乐', pinyin: 'kuàilè', meaning: 'vui vẻ' }}
+                        ]
+                    }},
+                    {{
+                        zh: '我 送给 姐姐 一部 新 手机 作为 礼物。',
+                        pinyin: 'Wǒ sòng gěi jiějie yí bù xīn shǒujī zuòwéi lǐwù.',
+                        vi: 'Tôi tặng chị gái một chiếc điện thoại mới làm món quà.',
+                        words: [
+                            {{ word: '送', pinyin: 'sòng', meaning: 'tặng, tiễn' }},
+                            {{ word: '手机', pinyin: 'shǒujī', meaning: 'điện thoại di động' }},
+                            {{ word: '礼物', pinyin: 'lǐwù', meaning: 'món quà' }}
+                        ]
+                    }},
+                    {{
+                        zh: '我们 一起 吃 蛋糕，喝 咖啡，非常 高兴。',
+                        pinyin: 'Wǒmen yìqǐ chī dàngāo, hē kāfēi, fēicháng gāoxìng.',
+                        vi: 'Chúng tôi cùng nhau ăn bánh kem, uống cà phê, vô cùng vui vẻ.',
+                        words: [
+                            {{ word: '蛋糕', pinyin: 'dàngāo', meaning: 'bánh kem' }},
+                            {{ word: '咖啡', pinyin: 'kāfēi', meaning: 'cà phê' }},
+                            {{ word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }}
+                        ]
+                    }},
+                    {{
+                        zh: '我 希望 姐姐 天天 快乐，学习 越来越 好！',
+                        pinyin: 'Wǒ xīwàng jiějie tiāntiān kuàilè, xuéxí yuè lái yuè hǎo!',
+                        vi: 'Tôi hy vọng chị gái mỗi ngày đều vui vẻ, học tập ngày càng tốt hơn!',
+                        words: [
+                            {{ word: '希望', pinyin: 'xīwàng', meaning: 'hy vọng' }},
+                            {{ word: '学习', pinyin: 'xuéxí', meaning: 'học tập' }}
+                        ]
+                    }}
+                ]
+            }}
+        }};
+
+        let currentStoryId = 'day1';
+        let showPinyinState = true;
+        let showViState = true;
+
+        function selectStoryDay(dayId) {{
+            currentStoryId = dayId;
+            ['day1', 'day2', 'day3', 'custom'].forEach(id => {{
+                const btn = document.getElementById('story-tab-' + id);
+                if (btn) {{
+                    if (id === dayId) {{
+                        btn.className = "px-3 py-1.5 rounded-xl font-semibold bg-[#8f525e] text-white shadow-2xs cursor-pointer whitespace-nowrap";
+                    }} else {{
+                        btn.className = "px-3 py-1.5 rounded-xl font-medium bg-[#faf7f5] text-[#6e5f62] border border-[#e8dedb] cursor-pointer whitespace-nowrap";
+                    }}
+                }}
+            }});
+
+            const promptBox = document.getElementById('story-custom-prompt-box');
+            if (dayId === 'custom') {{
+                if (promptBox) promptBox.classList.remove('hidden');
+                renderCustomStoryCheckboxes();
+                renderStoryView();
+            }} else {{
+                if (promptBox) promptBox.classList.add('hidden');
+                renderStoryView();
+            }}
+        }}
+
+        function renderStoryView() {{
+            const box = document.getElementById('story-content-box');
+            if (!box) return;
+
+            const story = HSK2_STORIES[currentStoryId] || HSK2_STORIES.day1;
+            if (currentStoryId === 'custom') {{
+                box.innerHTML = `
+                    <div class="text-center py-4 space-y-2">
+                        <div class="text-2xl">✨</div>
+                        <h3 class="text-sm font-bold text-[#2b2426]">Tạo Câu Chuyện Tùy Chỉnh Bằng AI</h3>
+                        <p class="text-xs text-[#786669] max-w-sm mx-auto">Chị hãy tích chọn các từ vựng chị muốn luyện tập ở bảng bên dưới, sau đó bấm <strong>📋 SAO CHÉP PROMPT AI</strong> để dán vào ChatGPT / Gemini nhé!</p>
+                    </div>
+                `;
+                return;
+            }}
+
+            let html = `
+                <div class="flex items-center justify-between border-b border-[#ebdcd8] pb-2.5">
+                    <div>
+                        <h3 class="text-base font-bold text-[#2b2426] flex items-center gap-2">
+                            <span>${{story.titleZh}}</span>
+                            <span class="text-xs font-normal text-[#8c7b7f]">(${{story.titleVi}})</span>
+                        </h3>
+                        <p class="text-[11px] text-[#786669] mt-0.5">${{story.description}}</p>
+                    </div>
+                    <button onclick="playStoryAudio('${{story.id}}')" class="px-3 py-1.5 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs cursor-pointer shrink-0">
+                        <span>🔊 Đọc Bài</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-[#6e5f62] py-1">
+                    <div class="flex items-center gap-2">
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="checkbox" ${{showPinyinState ? 'checked' : ''}} onchange="togglePinyinDisplay(this.checked)" class="rounded text-[#8f525e]">
+                            <span>Pinyin</span>
+                        </label>
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="checkbox" ${{showViState ? 'checked' : ''}} onchange="toggleViDisplay(this.checked)" class="rounded text-[#8f525e]">
+                            <span>Dịch Việt</span>
+                        </label>
+                    </div>
+                    <span class="text-[10px] text-[#8c7b7f]">💡 Bấm từ màu nổi để nghe đọc</span>
+                </div>
+
+                <div class="space-y-4 pt-1">
+            `;
+
+            story.paragraphs.forEach((p, idx) => {{
+                const wordsList = p.words || [];
+                const targetWords = wordsList.map(w => w.word);
+
+                let formattedZh = '';
+                const parts = p.zh.split(' ');
+                const pyParts = p.pinyin.split(' ');
+
+                parts.forEach((part, pIdx) => {{
+                    const py = pyParts[pIdx] || '';
+                    const isTarget = targetWords.includes(part);
+                    if (isTarget) {{
+                        const targetObj = wordsList.find(w => w.word === part);
+                        const mean = targetObj ? targetObj.meaning : '';
+                        formattedZh += `<ruby onclick="speakWord('${{part}}', 'zh-CN'); showToast('${{part}} (${{py}}): ${{mean}}')" class="cursor-pointer bg-[#f4ebe8] text-[#8a525f] px-1 py-0.5 rounded font-bold hover:bg-[#ebdcd8] transition">${{part}}<rt class="${{showPinyinState ? '' : 'hidden'}} text-[#935864]">${{py}}</rt></ruby> `;
+                    }} else {{
+                        formattedZh += `<ruby>${{part}}<rt class="${{showPinyinState ? '' : 'hidden'}} text-[#64748b]">${{py}}</rt></ruby> `;
+                    }}
+                }});
+
+                html += `
+                    <div class="p-3 bg-white rounded-xl border border-[#e8dedb] space-y-2">
+                        <div class="text-base text-[#2b2426] leading-relaxed">
+                            ${{formattedZh}}
+                        </div>
+                        <div class="story-vi-text ${{showViState ? '' : 'hidden'}} text-xs text-[#5e5053] font-medium pt-1 border-t border-[#f4ebe8]">
+                            👉 ${{p.vi}}
+                        </div>
+                    </div>
+                `;
+            }});
+
+            let allStoryWords = [];
+            story.paragraphs.forEach(p => {{
+                if (p.words) allStoryWords.push(...p.words);
+            }});
+
+            html += `
+                </div>
+                <div class="pt-2 border-t border-[#ebdcd8]">
+                    <div class="text-xs font-bold text-[#2b2426] mb-2 flex items-center gap-1.5">
+                        <span>🏷️ Từ vựng cốt lõi trong bài:</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+            `;
+
+            allStoryWords.forEach(w => {{
+                html += `
+                    <button onclick="speakWord('${{w.word}}', 'zh-CN'); showToast('${{w.word}} (${{w.pinyin}}): ${{w.meaning}}')" class="px-2.5 py-1 bg-white border border-[#e8dedb] hover:border-[#8f525e] rounded-lg text-xs font-semibold text-[#8a525f] flex items-center gap-1 cursor-pointer transition">
+                        <span>${{w.word}}</span>
+                        <span class="text-[10px] text-[#8c7b7f] font-normal">(${{w.meaning}})</span>
+                    </button>
+                `;
+            }});
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            box.innerHTML = html;
+        }}
+
+        function togglePinyinDisplay(checked) {{
+            showPinyinState = checked;
+            renderStoryView();
+        }}
+
+        function toggleViDisplay(checked) {{
+            showViState = checked;
+            renderStoryView();
+        }}
+
+        function playStoryAudio(storyId) {{
+            const story = HSK2_STORIES[storyId];
+            if (!story) return;
+            const fullText = story.paragraphs.map(p => p.zh).join(' ');
+            speakWord(fullText, 'zh-CN');
+            showToast("🔊 Đang đọc toàn bộ câu chuyện tiếng Trung...");
+        }}
+
+        function copyCurrentStoryPrompt() {{
+            const story = HSK2_STORIES[currentStoryId] || HSK2_STORIES.day1;
+            let wordsStr = "";
+            if (currentStoryId === 'custom') {{
+                const checked = Array.from(document.querySelectorAll('.story-word-cb:checked')).map(cb => cb.value);
+                wordsStr = checked.join(', ');
+            }} else {{
+                let allW = [];
+                story.paragraphs.forEach(p => {{ if (p.words) allW.push(...p.words.map(w => w.word)); }});
+                wordsStr = allW.join(', ');
+            }}
+
+            if (!wordsStr) wordsStr = "旅游, 运动, 眼睛, 足球, 觉得, 最, 医生, 休息, 手机, 学习";
+
+            const promptText = `Hãy viết cho tôi một câu chuyện ngắn tiếng Trung HSK 2 khoảng 100-150 từ sinh động, dễ đọc, kèm theo phiên âm Pinyin và dịch nghĩa tiếng Việt chi tiết từng câu, trong đó bắt buộc sử dụng các từ vựng sau:
+
+👉 Từ vựng: ${{wordsStr}}`;
+
+            navigator.clipboard.writeText(promptText).then(() => {{
+                showToast("📋 Đã sao chép Prompt cho AI! Chị hãy mở ChatGPT / Gemini và dán vào nhé.");
+            }}).catch(() => {{
+                alert("Prompt AI của chị:
+
+" + promptText);
+            }});
+        }}
+
+        function renderCustomStoryCheckboxes() {{
+            const container = document.getElementById('story-word-checkboxes');
+            if (!container) return;
+
+            const allWords = getAllWordsList();
+            let html = '';
+            allWords.forEach((w, idx) => {{
+                html += `
+                    <label class="flex items-center gap-1.5 p-1.5 rounded-lg bg-white border border-[#e8dedb] text-xs cursor-pointer hover:bg-[#faf7f5]">
+                        <input type="checkbox" value="${{w.hanzi}}" class="story-word-cb rounded text-[#8f525e]" ${{idx < 8 ? 'checked' : ''}}>
+                        <span class="font-bold text-[#2b2426]">${{w.hanzi}}</span>
+                        <span class="text-[10px] text-[#8c7b7f] truncate">(${{w.meaning}})</span>
+                    </label>
+                `;
+            }});
+            container.innerHTML = html;
+        }}
+
+        function selectAllStoryWords() {{
+            const cbs = document.querySelectorAll('.story-word-cb');
+            cbs.forEach(cb => cb.checked = true);
+        }}
+
+        function generateCustomStoryPrompt() {{
+            const checked = Array.from(document.querySelectorAll('.story-word-cb:checked')).map(cb => cb.value);
+            if (checked.length === 0) {{
+                alert("⚠️ Vui lòng tích chọn ít nhất 1 từ vựng!");
+                return;
+            }}
+
+            const promptText = `Hãy viết cho tôi một câu chuyện ngắn tiếng Trung HSK 2 khoảng 100-150 từ sinh động, dễ đọc, kèm theo phiên âm Pinyin và dịch nghĩa tiếng Việt chi tiết từng câu, trong đó bắt buộc sử dụng các từ vựng sau:
+
+👉 Từ vựng: ${{checked.join(', ')}}`;
+
+            navigator.clipboard.writeText(promptText).then(() => {{
+                showToast(`🎉 Đã sao chép Prompt (${{checked.length}} từ)! Chị dán vào ChatGPT / Gemini là có ngay câu chuyện nhé.`);
+            }}).catch(() => {{
+                alert("Prompt AI của chị:
+
+" + promptText);
+            }});
+        }}
+
+
     </script>
 </body>
 </html>
