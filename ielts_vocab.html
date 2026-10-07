@@ -142,6 +142,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
                         </button>
                         <input type="file" id="import-json-file" onchange="importDataJSON(event)" class="hidden" accept=".json">
+                        
+                        <button onclick="resetAppState()" title="Reset tất cả từ vựng về trạng thái gốc 54 từ ban đầu" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                            <span>🔄 Reset Gốc</span>
+                        </button>
                     </div>
                 </div>
 
@@ -1807,18 +1812,46 @@
         });
 
         function initAppState() {
-            const saved = localStorage.getItem('cece_english_notebook_v1');
+            const urlParams = new URLSearchParams(window.location.search);
+            const forceReset = urlParams.get('reset') === '1' || urlParams.get('reset') === 'true';
+
+            if (forceReset) {
+                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+                localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
+                localStorage.setItem('cece_english_notebook_v2', JSON.stringify({ words: appState.words }));
+                return;
+            }
+
+            const saved = localStorage.getItem('cece_english_notebook_v2') || localStorage.getItem('cece_english_notebook_v1');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    appState.words = parsed.words || DEFAULT_VOCAB;
+                    appState.words = (parsed.words && parsed.words.length > 0) ? parsed.words : JSON.parse(JSON.stringify(DEFAULT_VOCAB));
                 } catch (e) {
-                    appState.words = DEFAULT_VOCAB;
+                    appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
                 }
             } else {
-                appState.words = DEFAULT_VOCAB;
+                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
             }
             saveAppState();
+        }
+
+        function resetAppState(skipConfirm = false) {
+            if (skipConfirm || confirm('Chị có chắc chắn muốn RESET tất cả từ vựng về 54 từ IELTS gốc ban đầu không?
+(Tất cả từ tự nạp thêm và tiến trình SRS cũ sẽ được làm sạch).')) {
+                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+                localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
+                localStorage.setItem('cece_english_notebook_v2', JSON.stringify({ words: appState.words }));
+                
+                if (typeof syncToCloudFirestore === 'function') {
+                    syncToCloudFirestore();
+                }
+                
+                renderAllViews();
+                if (!skipConfirm) {
+                    alert('Đã Reset tất cả từ vựng về 54 từ IELTS gốc ban đầu thành công!');
+                }
+            }
         }
 
         function saveAppState() {
