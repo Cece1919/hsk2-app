@@ -34,7 +34,6 @@
             background-color: #faf7f5;
             color: #2b2426;
             -webkit-tap-highlight-color: transparent;
-            user-select: none;
         }
         
         /* Button Clickability & Touch Fix */
@@ -123,6 +122,12 @@
 </head>
 <body class="bg-[#faf7f5] text-[#2b2426] selection:bg-[#ebdcd8] selection:text-[#2b2426] flex flex-col min-h-screen">
 
+    <!-- Toast Notification Banner -->
+    <div id="app-toast-banner" style="display: none !important;" class="fixed top-3 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-2xl shadow-xl border text-xs font-bold transition-all duration-300 flex items-center gap-2">
+        <span id="toast-icon">✨</span>
+        <span id="toast-msg">Thông báo</span>
+    </div>
+
     <!-- App Wrapper Container -->
     <div id="app-root" class="flex-1 flex flex-col items-center justify-start w-full">
         
@@ -145,7 +150,7 @@
 
                 <!-- Right Actions -->
                 <div class="flex items-center gap-1.5">
-                    <button onclick="toggleVoiceAccent()" id="btn-voice-accent" class="px-2 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#7b434f] border border-[#ebdcd8] text-xs font-semibold transition-all flex items-center gap-1">
+                    <button type="button" onclick="toggleVoiceAccent()" id="btn-voice-accent" class="px-2 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#7b434f] border border-[#ebdcd8] text-xs font-semibold transition-all flex items-center gap-1 cursor-pointer">
                         <span id="accent-flag">🇺🇸</span>
                         <span id="accent-label">US</span>
                     </button>
@@ -155,22 +160,22 @@
                         <span id="header-due-badge" class="tabular-nums font-semibold">0</span>
                     </div>
 
-                    <button onclick="openCloudSyncModal()" id="header-cloud-btn" title="Đồng bộ Đám mây & Tài khoản" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1 shadow-2xs">
+                    <button type="button" onclick="openCloudSyncModal()" id="header-cloud-btn" title="Đồng bộ Đám mây & Tài khoản" class="py-1 px-2 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1 shadow-2xs cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
                         <span id="header-cloud-label">🔑 Cloud</span>
                     </button>
 
-                    <button onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
+                    <button type="button" onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
                     </button>
-                    <button onclick="triggerImportJSON()" title="Nhập dữ liệu từ file JSON" class="p-1 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
+                    <button type="button" onclick="triggerImportJSON()" title="Nhập dữ liệu từ file JSON" class="p-1 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
                     </button>
                     <input type="file" id="import-json-file" onchange="importDataJSON(event)" class="hidden" accept=".json">
                     
-                    <button onclick="resetAppState()" title="Reset tất cả từ vựng về trạng thái gốc 54 từ ban đầu" class="py-1 px-1.5 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1">
+                    <button type="button" onclick="resetAppState()" title="Reset tất cả từ vựng về trạng thái gốc 54 từ ban đầu" class="py-1 px-1.5 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-                        <span>Reset</span>
+                        <span>Reset Gốc</span>
                     </button>
                 </div>
 
@@ -197,6 +202,10 @@
             </div>
         </header>
 
+        <!-- Main Content Area -->
+        <main class="w-full max-w-4xl px-3 py-4 flex-1">
+            <div id="views-container" class="w-full">
+                
                 <!-- TAB 1: NẠP TỪ MỚI CỦA CHỊ -->
                 <div id="sec-input-view" class="space-y-4 fade-in hidden">
                     <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 sm:p-5 shadow-xs space-y-3.5 max-w-md mx-auto w-full">
@@ -219,7 +228,7 @@
                                 <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">1. Từ / Cụm Từ Tiếng Anh:</label>
                                 <div class="flex gap-2">
                                     <input type="text" id="input-word" placeholder="Vd: Meticulous, Alleviate, Assertive..." class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-bold text-[#2b2426] bg-[#faf7f5] focus:outline-none focus:border-[#935864]">
-                                    <button onclick="autoLookupEnglishWord()" id="btn-lookup" class="px-3 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl transition flex items-center gap-1 whitespace-nowrap shadow-2xs">
+                                    <button type="button" onclick="autoLookupEnglishWord()" id="btn-lookup" class="px-3 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl transition flex items-center gap-1 whitespace-nowrap shadow-2xs cursor-pointer">
                                         🤖 Tra & Điền AI
                                     </button>
                                 </div>
@@ -259,7 +268,7 @@
                         </div>
 
                         <div class="pt-1">
-                            <button onclick="saveCustomWordFromForm()" class="w-full bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-2xs">
+                            <button type="button" onclick="saveCustomWordFromForm()" class="w-full bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-2xs cursor-pointer">
                                 <span>💾 LƯU VÀO BỘ NHỚ & LÊN KẾ HOẠCH ÔN SRS 🚀</span>
                             </button>
                         </div>
@@ -269,10 +278,10 @@
                     <div class="bg-white border border-[#e8dedb] p-3 rounded-2xl space-y-2 max-w-md mx-auto w-full">
                         <span class="text-[10px] font-semibold text-[#786669] uppercase block">💡 Gợi Ý Từ IELTS Band 7.0+ Hay Gặp Để Nạp Nhanh:</span>
                         <div class="flex flex-wrap gap-1.5 text-xs font-medium">
-                            <button onclick="fillSuggestion('Meticulous', '/mɪˈtɪkjələs/', 'adj.', 'Tỉ mỉ, kỹ lưỡng', 'meticulous about', 'thorough, careful', 'She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">🎯 Meticulous</button>
-                            <button onclick="fillSuggestion('Alleviate', '/əˈliːvieɪt/', 'verb', 'Làm giảm nhẹ, xoa dịu', 'alleviate congestion', 'mitigate, ease', 'Public transport can alleviate traffic congestion. (Giao thông công cộng làm giảm ùn tắc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">⚡ Alleviate</button>
-                            <button onclick="fillSuggestion('Assertive', '/əˈsɜːtɪv/', 'adj.', 'Quyết đoán, tự tin', 'be assertive', 'confident, decisive', 'Young people should learn to be assertive. (Người trẻ nên học cách quyết đoán.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">🔥 Assertive</button>
-                            <button onclick="fillSuggestion('Ubiquitous', '/juːˈbɪkwɪtəs/', 'adj.', 'Phổ biến ở khắp nơi', 'become ubiquitous', 'omnipresent, pervasive', 'Smartphones have become ubiquitous in society. (Điện thoại đã trở nên phổ biến ở khắp nơi.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1]">📱 Ubiquitous</button>
+                            <button type="button" onclick="fillSuggestion('Meticulous', '/mɪˈtɪkjələs/', 'adj.', 'Tỉ mỉ, kỹ lưỡng', 'meticulous about', 'thorough, careful', 'She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] cursor-pointer">🎯 Meticulous</button>
+                            <button type="button" onclick="fillSuggestion('Alleviate', '/əˈliːvieɪt/', 'verb', 'Làm giảm nhẹ, xoa dịu', 'alleviate congestion', 'mitigate, ease', 'Public transport can alleviate traffic congestion. (Giao thông công cộng làm giảm ùn tắc.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] cursor-pointer">⚡ Alleviate</button>
+                            <button type="button" onclick="fillSuggestion('Assertive', '/əˈsɜːtɪv/', 'adj.', 'Quyết đoán, tự tin', 'be assertive', 'confident, decisive', 'Young people should learn to be assertive. (Người trẻ nên học cách quyết đoán.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] cursor-pointer">🔥 Assertive</button>
+                            <button type="button" onclick="fillSuggestion('Ubiquitous', '/juːˈbɪkwɪtəs/', 'adj.', 'Phổ biến ở khắp nơi', 'become ubiquitous', 'omnipresent, pervasive', 'Smartphones have become ubiquitous in society. (Điện thoại đã trở nên phổ biến ở khắp nơi.)')" class="px-2.5 py-1 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] border border-[#e2d5d1] cursor-pointer">📱 Ubiquitous</button>
                         </div>
                     </div>
                 </div>
@@ -316,13 +325,13 @@
                             </div>
 
                             <div class="flex items-center gap-1.5 flex-wrap">
-                                <button onclick="toggleMask('word')" id="btn-mask-word" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                <button type="button" onclick="toggleMask('word')" id="btn-mask-word" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer">
                                     <span>👁️ Từ Gốc</span>
                                 </button>
-                                <button onclick="toggleMask('ipa')" id="btn-mask-ipa" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                <button type="button" onclick="toggleMask('ipa')" id="btn-mask-ipa" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer">
                                     <span>👁️ Phiên Âm IPA</span>
                                 </button>
-                                <button onclick="toggleMask('meaning')" id="btn-mask-vi" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1">
+                                <button type="button" onclick="toggleMask('meaning')" id="btn-mask-vi" class="px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer">
                                     <span>👁️ Nghĩa Việt</span>
                                 </button>
                             </div>
@@ -336,19 +345,19 @@
                             </div>
 
                             <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-                                <select id="notebook-filter-level" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                <select id="notebook-filter-level" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none cursor-pointer">
                                     <option value="all">Tất cả Nhãn (Tags)</option>
                                 </select>
 
-                                <select id="notebook-filter-due" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none">
+                                <select id="notebook-filter-due" onchange="renderNotebookSheet()" class="px-3 py-2 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] text-xs text-[#2b2426] font-medium focus:outline-none cursor-pointer">
                                     <option value="all">Tất cả hạn ôn</option>
                                     <option value="due">Đến hạn</option>
                                     <option value="future">Chưa đến hạn</option>
                                 </select>
 
                                 <div class="flex items-center p-0.5 bg-[#ede4e1] rounded-xl border border-[#e5d8d4]">
-                                    <button onclick="switchNotebookLayout('table')" id="btn-layout-table" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs">Bảng</button>
-                                    <button onclick="switchNotebookLayout('card')" id="btn-layout-card" class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]">Thẻ</button>
+                                    <button type="button" onclick="switchNotebookLayout('table')" id="btn-layout-table" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs cursor-pointer">Bảng</button>
+                                    <button type="button" onclick="switchNotebookLayout('card')" id="btn-layout-card" class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62] cursor-pointer">Thẻ</button>
                                 </div>
                             </div>
                         </div>
@@ -376,11 +385,11 @@
     </div>
 
     <!-- Edit Word Modal -->
-    <div id="edit-word-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+    <div id="edit-word-modal" style="display: none !important;" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-2xl p-5 border border-[#e8dedb] shadow-2xl max-w-md w-full space-y-3.5 fade-in">
             <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2">
                 <h3 class="text-sm font-bold text-[#2b2426]">✏️ Chỉnh Sửa Từ Vựng</h3>
-                <button onclick="closeEditModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
+                <button type="button" onclick="closeEditModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold cursor-pointer">✕</button>
             </div>
             
             <input type="hidden" id="edit-word-id">
@@ -410,14 +419,14 @@
             </div>
 
             <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeEditModal()" class="px-4 py-2 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#5e5053] font-semibold text-xs rounded-xl border border-[#e2d5d1]">Hủy</button>
-                <button onclick="saveEditedWord()" class="px-4 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl shadow-2xs">Lưu Thay Đổi</button>
+                <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#5e5053] font-semibold text-xs rounded-xl border border-[#e2d5d1] cursor-pointer">Hủy</button>
+                <button type="button" onclick="saveEditedWord()" class="px-4 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl shadow-2xs cursor-pointer">Lưu Thay Đổi</button>
             </div>
         </div>
     </div>
 
     <!-- Cloud Sync & Authentication Modal -->
-    <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+    <div id="cloud-sync-modal" style="display: none !important;" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
             <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
                 <div class="flex items-center gap-2">
@@ -429,7 +438,7 @@
                         <p class="text-[11px] text-[#786669]">Giữ từ đã học đồng bộ trên mọi thiết bị</p>
                     </div>
                 </div>
-                <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold p-1">✕</button>
+                <button type="button" onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold p-1 cursor-pointer">✕</button>
             </div>
             
             <!-- VIEW WHEN LOGGED IN -->
@@ -448,10 +457,10 @@
                 </div>
 
                 <div class="space-y-2">
-                    <button onclick="forceSyncCloud()" class="w-full py-2.5 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
+                    <button type="button" onclick="forceSyncCloud()" class="w-full py-2.5 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition cursor-pointer">
                         <span>☁️ Đồng bộ dữ liệu ngay</span>
                     </button>
-                    <button onclick="logoutUser()" class="w-full py-2.5 px-4 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#786669] border border-[#e2d5d1] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
+                    <button type="button" onclick="logoutUser()" class="w-full py-2.5 px-4 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#786669] border border-[#e2d5d1] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition cursor-pointer">
                         <span>🚪 Đăng xuất tài khoản</span>
                     </button>
                 </div>
@@ -459,16 +468,22 @@
 
             <!-- VIEW WHEN NOT LOGGED IN -->
             <div id="auth-guest-view" class="space-y-3.5">
-                <!-- Google Sign In Button -->
-                <button onclick="loginWithGoogle()" class="w-full py-2.5 px-4 bg-white hover:bg-[#faf7f5] text-[#2b2426] border border-[#ddd2ce] font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                    </svg>
-                    <span>Đăng nhập bằng Google</span>
-                </button>
+                <!-- Google Sign In Form -->
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-[#6e5f62] block uppercase">Đăng Nhập Nhanh Qua Google Email:</label>
+                    <div class="flex gap-1.5">
+                        <input type="email" id="google-email-input" class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs bg-[#faf7f5] text-[#2b2426] focus:outline-none focus:border-[#8f525e]" placeholder="Nhập Gmail của bạn...">
+                        <button type="button" onclick="loginWithGoogle()" class="py-2 px-3 bg-white hover:bg-[#faf7f5] text-[#2b2426] border border-[#ddd2ce] font-bold rounded-xl text-xs flex items-center gap-1 shadow-2xs transition cursor-pointer whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Google</span>
+                        </button>
+                    </div>
+                </div>
 
                 <div class="flex items-center gap-2 my-1">
                     <div class="flex-1 h-px bg-[#ebdcd8]"></div>
@@ -485,10 +500,10 @@
                         <input type="password" id="auth-password" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs bg-[#faf7f5] text-[#2b2426] focus:outline-none focus:border-[#8f525e]" placeholder="Mật khẩu (tối thiểu 6 ký tự)">
                     </div>
                     <div class="grid grid-cols-2 gap-2 pt-1">
-                        <button onclick="loginWithEmail()" class="py-2.5 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs transition">
+                        <button type="button" onclick="loginWithEmail()" class="py-2.5 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs transition cursor-pointer">
                             🔑 Đăng Nhập
                         </button>
-                        <button onclick="registerWithEmail()" class="py-2.5 px-3 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-bold rounded-xl text-xs transition">
+                        <button type="button" onclick="registerWithEmail()" class="py-2.5 px-3 bg-[#f4ebe8] hover:bg-[#ebdcd8] text-[#7b434f] border border-[#ebdcd8] font-bold rounded-xl text-xs transition cursor-pointer">
                             📝 Đăng Ký Mới
                         </button>
                     </div>
@@ -504,12 +519,25 @@
                         <div class="pt-2 space-y-2">
                             <input type="text" id="cloud-sync-code" value="CeceEnglish" class="w-full px-2.5 py-1.5 rounded-lg border border-[#e2d5d1] text-xs bg-[#faf7f5] text-center font-bold text-[#8f525e]" placeholder="Mã đồng bộ...">
                             <div class="grid grid-cols-2 gap-1.5">
-                                <button onclick="pushToCloud()" class="py-1.5 px-2 bg-[#8f525e] text-white font-semibold rounded-lg text-[11px]">Tải lên Cloud</button>
-                                <button onclick="pullFromCloud()" class="py-1.5 px-2 bg-[#f4ebe8] text-[#7b434f] font-semibold rounded-lg text-[11px] border border-[#ebdcd8]">Tải về máy</button>
+                                <button type="button" onclick="pushToCloud()" class="py-1.5 px-2 bg-[#8f525e] text-white font-semibold rounded-lg text-[11px] cursor-pointer">Tải lên Cloud</button>
+                                <button type="button" onclick="pullFromCloud()" class="py-1.5 px-2 bg-[#f4ebe8] text-[#7b434f] font-semibold rounded-lg text-[11px] border border-[#ebdcd8] cursor-pointer">Tải về máy</button>
                             </div>
                         </div>
                     </details>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Action Modal -->
+    <div id="confirm-action-modal" style="display: none !important;" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-5 max-w-xs w-full text-center space-y-3 shadow-2xl border border-[#e8dedb] fade-in">
+            <div class="text-3xl" id="confirm-modal-icon">⚠️</div>
+            <h3 class="text-sm font-bold text-[#2b2426]" id="confirm-modal-title">Xác nhận thao tác</h3>
+            <p class="text-xs text-[#786669]" id="confirm-modal-desc">Bạn có chắc chắn muốn thực hiện thao tác này không?</p>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button type="button" id="confirm-btn-cancel" onclick="closeConfirmModal()" class="py-2 px-3 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#5e5053] font-bold text-xs rounded-xl border border-[#e2d5d1] cursor-pointer">Hủy</button>
+                <button type="button" id="confirm-btn-ok" class="py-2 px-3 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold text-xs rounded-xl shadow-2xs cursor-pointer">Đồng ý</button>
             </div>
         </div>
     </div>
@@ -1826,9 +1854,56 @@
             srsQueue: []
         };
 
+        /* --- TOAST & CONFIRMATION MODALS (ZERO NATIVE POPUP BLOCKING) --- */
+        function showToast(msg, isSuccess = true) {
+            const banner = document.getElementById('app-toast-banner');
+            const icon = document.getElementById('toast-icon');
+            const label = document.getElementById('toast-msg');
+            if (!banner) return;
+
+            icon.textContent = isSuccess ? '✅' : '⚠️';
+            label.textContent = msg;
+            banner.className = `fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-2xl shadow-xl border text-xs font-bold transition-all duration-300 flex items-center gap-2 ${isSuccess ? 'bg-[#935864] text-white border-[#7b434f]' : 'bg-rose-700 text-white border-rose-800'}`;
+            banner.style.setProperty('display', 'flex', 'important');
+
+            setTimeout(() => {
+                banner.style.setProperty('display', 'none', 'important');
+            }, 3000);
+        }
+
+        function showConfirmModal(title, desc, icon, onConfirm) {
+            const modal = document.getElementById('confirm-action-modal');
+            if (!modal) {
+                onConfirm();
+                return;
+            }
+            document.getElementById('confirm-modal-title').textContent = title;
+            document.getElementById('confirm-modal-desc').textContent = desc;
+            document.getElementById('confirm-modal-icon').textContent = icon || '⚠️';
+
+            const okBtn = document.getElementById('confirm-btn-ok');
+            okBtn.onclick = function() {
+                closeConfirmModal();
+                onConfirm();
+            };
+
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            const modal = document.getElementById('confirm-action-modal');
+            if (modal) {
+                modal.style.setProperty('display', 'none', 'important');
+                modal.classList.add('hidden');
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             initAppState();
             renderAllViews();
+            initAuthSession();
+            initTabListeners();
         });
 
         function initAppState() {
@@ -1837,57 +1912,64 @@
 
             if (forceReset) {
                 appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
-                localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
-                localStorage.setItem('cece_english_notebook_v2', JSON.stringify({ words: appState.words }));
                 saveAppState();
                 return;
             }
 
-            const saved = localStorage.getItem('cece_english_notebook_v2') || localStorage.getItem('cece_english_notebook_v1');
-            if (saved) {
-                try {
-                    const parsed = JSON.parse(saved);
-                    if (parsed && Array.isArray(parsed.words) && parsed.words.length > 0) {
-                        appState.words = parsed.words;
-                    } else {
-                        appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
-                    }
-                } catch (e) {
-                    appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+            let loadedWords = null;
+            const keysToTry = ['cece_english_notebook_v3', 'cece_english_notebook_v2', 'cece_english_notebook_v1'];
+
+            for (const key of keysToTry) {
+                const saved = localStorage.getItem(key);
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        const arr = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.words) ? parsed.words : null);
+                        if (arr && arr.length > 0) {
+                            loadedWords = arr;
+                            break;
+                        }
+                    } catch (e) {}
                 }
-            } else {
-                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
             }
 
-            if (!appState.words || appState.words.length === 0) {
-                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+            if (!loadedWords || loadedWords.length === 0) {
+                loadedWords = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
             }
 
+            appState.words = loadedWords;
             saveAppState();
         }
 
         function resetAppState(skipConfirm = false) {
-            if (skipConfirm || confirm('Chị có chắc chắn muốn RESET tất cả từ vựng về 54 từ IELTS gốc ban đầu không?
-(Tất cả từ tự nạp thêm và tiến trình SRS cũ sẽ được làm sạch).')) {
+            const executeReset = () => {
                 appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
-                localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
-                localStorage.setItem('cece_english_notebook_v2', JSON.stringify({ words: appState.words }));
-                
-                if (typeof syncToCloudFirestore === 'function') {
-                    syncToCloudFirestore();
-                }
-                
+                saveAppState();
                 renderAllViews();
-                if (!skipConfirm) {
-                    alert('Đã Reset tất cả từ vựng về 54 từ IELTS gốc ban đầu thành công!');
-                }
+                showToast('Đã Reset tất cả từ vựng về 54 từ IELTS gốc ban đầu!');
+            };
+
+            if (skipConfirm) {
+                executeReset();
+            } else {
+                showConfirmModal(
+                    'Reset Từ Vựng Về Gốc',
+                    'Chị có chắc chắn muốn Reset tất cả về 54 từ IELTS gốc ban đầu không? Tiến trình SRS cũ sẽ được làm sạch.',
+                    '🔄',
+                    executeReset
+                );
             }
         }
 
         function saveAppState() {
-            localStorage.setItem('cece_english_notebook_v1', JSON.stringify({
-                words: appState.words
-            }));
+            if (!appState.words || appState.words.length === 0) {
+                appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+            }
+            const dataToSave = JSON.stringify({ words: appState.words });
+            localStorage.setItem('cece_english_notebook_v3', dataToSave);
+            localStorage.setItem('cece_english_notebook_v2', dataToSave);
+            localStorage.setItem('cece_english_notebook_v1', dataToSave);
+
             updateBadges();
             if (typeof syncToCloudFirestore === 'function') {
                 syncToCloudFirestore();
@@ -1945,10 +2027,12 @@
                 appState.voiceLang = 'en-GB';
                 document.getElementById('accent-flag').textContent = '🇬🇧';
                 document.getElementById('accent-label').textContent = 'UK';
+                showToast('Đã chuyển sang phát âm Giọng Anh (UK)');
             } else {
                 appState.voiceLang = 'en-US';
                 document.getElementById('accent-flag').textContent = '🇺🇸';
                 document.getElementById('accent-label').textContent = 'US';
+                showToast('Đã chuyển sang phát âm Giọng Mỹ (US)');
             }
         }
 
@@ -1962,7 +2046,6 @@
             }
         }
 
-
         /* --- VIEW SWITCHER --- */
         function switchView(viewName) {
             try {
@@ -1972,31 +2055,31 @@
                 const secSrs = document.getElementById('sec-srs-view');
                 const secNotebook = document.getElementById('sec-notebook-view');
 
-                if (secInput) { secInput.classList.add('hidden'); secInput.style.display = 'none'; }
-                if (secSrs) { secSrs.classList.add('hidden'); secSrs.style.display = 'none'; }
-                if (secNotebook) { secNotebook.classList.add('hidden'); secNotebook.style.display = 'none'; }
+                if (secInput) { secInput.classList.add('hidden'); secInput.style.setProperty('display', 'none', 'important'); }
+                if (secSrs) { secSrs.classList.add('hidden'); secSrs.style.setProperty('display', 'none', 'important'); }
+                if (secNotebook) { secNotebook.classList.add('hidden'); secNotebook.style.setProperty('display', 'none', 'important'); }
 
                 const btnInput = document.getElementById('nav-btn-input');
                 const btnSrs = document.getElementById('nav-btn-srs');
                 const btnNotebook = document.getElementById('nav-btn-notebook');
 
-                if (btnInput) btnInput.className = 'cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
-                if (btnSrs) btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
-                if (btnNotebook) btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium';
+                if (btnInput) btnInput.className = 'cursor-pointer flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium touch-manipulation';
+                if (btnSrs) btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium touch-manipulation';
+                if (btnNotebook) btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium touch-manipulation';
 
                 if (viewName === 'input' && secInput && btnInput) {
                     secInput.classList.remove('hidden');
-                    secInput.style.display = 'block';
-                    btnInput.className = 'cursor-pointer flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                    secInput.style.setProperty('display', 'block', 'important');
+                    btnInput.className = 'cursor-pointer flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active touch-manipulation';
                 } else if (viewName === 'srs' && secSrs && btnSrs) {
                     secSrs.classList.remove('hidden');
-                    secSrs.style.display = 'block';
-                    btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                    secSrs.style.setProperty('display', 'block', 'important');
+                    btnSrs.className = 'cursor-pointer relative flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active touch-manipulation';
                     initSRSDeck();
                 } else if (viewName === 'notebook' && secNotebook && btnNotebook) {
                     secNotebook.classList.remove('hidden');
-                    secNotebook.style.display = 'block';
-                    btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active';
+                    secNotebook.style.setProperty('display', 'block', 'important');
+                    btnNotebook.className = 'cursor-pointer relative flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs transition-all nav-btn-active touch-manipulation';
                     populateNotebookFilterTags();
                     renderNotebookSheet();
                 }
@@ -2009,13 +2092,15 @@
             switchView(appState.activeView);
         }
 
-
         /* --- TAB 1: AI SMART AUTO LOOKUP & FORM --- */
         async function autoLookupEnglishWord() {
             const wordInput = document.getElementById('input-word');
             const btn = document.getElementById('btn-lookup');
             const word = wordInput.value.trim();
-            if (!word) return;
+            if (!word) {
+                showToast('Vui lòng nhập từ tiếng Anh để tra AI', false);
+                return;
+            }
 
             const originalBtnText = btn.innerHTML;
             btn.innerHTML = '⏳ AI Đang Tra...';
@@ -2079,6 +2164,8 @@
                     }
                 }
 
+                showToast(`Đã tự tra AI thành công từ "${word}"!`);
+
             } finally {
                 btn.innerHTML = originalBtnText;
                 btn.disabled = false;
@@ -2093,13 +2180,14 @@
             document.getElementById('input-collocation').value = collocation;
             document.getElementById('input-synonyms').value = synonyms;
             document.getElementById('input-example').value = example;
+            showToast(`Đã điền gợi ý từ "${word}"`);
         }
 
         function saveCustomWordFromForm() {
             const word = document.getElementById('input-word').value.trim();
             const meaning = document.getElementById('input-meaning').value.trim();
             if (!word || !meaning) {
-                alert('Vui lòng nhập Từ gốc và Nghĩa tiếng Việt.');
+                showToast('Vui lòng nhập Từ gốc và Nghĩa tiếng Việt.', false);
                 return;
             }
 
@@ -2136,9 +2224,9 @@
             document.getElementById('input-example').value = '';
 
             confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+            showToast(`Đã lưu "${word}" vào sổ từ và lên lịch ôn SRS!`);
             switchView('notebook');
         }
-
 
         /* --- TAB 2: SRS FLASHCARD DECK --- */
         function initSRSDeck() {
@@ -2163,7 +2251,7 @@
                         <div class="text-4xl">🎉</div>
                         <h3 class="text-base font-bold text-[#2b2426]">Tuyệt Vời! Đã Ôn Xong Bài Hôm Nay</h3>
                         <p class="text-xs text-[#786669]">Bạn đã thuộc hết các từ đến hạn. Hệ thống SRS đã tự xếp lịch ôn lại cho tương lai.</p>
-                        <button onclick="switchView('notebook')" class="px-4 py-2 bg-[#8f525e] text-white font-semibold text-xs rounded-xl shadow-2xs">Xem Sổ Từ Vựng</button>
+                        <button type="button" onclick="switchView('notebook')" class="px-4 py-2 bg-[#8f525e] text-white font-semibold text-xs rounded-xl shadow-2xs cursor-pointer">Xem Sổ Từ Vựng</button>
                     </div>
                 `;
                 return;
@@ -2180,7 +2268,7 @@
                         <div class="card-front absolute inset-0 w-full h-full bg-white border border-[#e8dedb] rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-xs backface-hidden">
                             <div class="w-full flex items-center justify-between">
                                 <span class="text-[10px] bg-[#f4ebe8] text-[#8a525f] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">${item.tags ? item.tags[0] : 'IELTS'}</span>
-                                <button onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="w-8 h-8 rounded-full bg-[#f4ebe8] text-[#8a525f] flex items-center justify-center hover:bg-[#ede5e2]">🔊</button>
+                                <button type="button" onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="w-8 h-8 rounded-full bg-[#f4ebe8] text-[#8a525f] flex items-center justify-center hover:bg-[#ede5e2] cursor-pointer">🔊</button>
                             </div>
 
                             <div class="my-auto py-3 space-y-2">
@@ -2194,10 +2282,10 @@
 
                             <!-- SRS Rating Buttons Grid on FRONT CARD -->
                             <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
-                                <button onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition cursor-pointer">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition cursor-pointer">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition cursor-pointer">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition cursor-pointer">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
                             </div>
                         </div>
 
@@ -2205,7 +2293,7 @@
                         <div class="card-back absolute inset-0 w-full h-full bg-[#fffcfb] border border-[#e8dedb] rounded-2xl p-5 flex flex-col justify-between text-left shadow-xs backface-hidden rotate-y-180 overflow-y-auto">
                             <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-2">
                                 <span class="font-bold text-sm text-[#2b2426]">${item.word}</span>
-                                <button onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="text-xs text-[#8a525f]">🔊 Nghe</button>
+                                <button type="button" onclick="event.stopPropagation(); speakWordText('${item.word.replace(/'/g, "\'")}')" class="text-xs text-[#8a525f] cursor-pointer">🔊 Nghe</button>
                             </div>
 
                             <div class="space-y-2 my-auto py-2 text-xs">
@@ -2221,10 +2309,10 @@
 
                             <!-- SRS Rating Buttons Grid on BACK CARD -->
                             <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
-                                <button onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
-                                <button onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition cursor-pointer">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition cursor-pointer">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition cursor-pointer">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button type="button" onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition cursor-pointer">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
                             </div>
                         </div>
 
@@ -2261,22 +2349,21 @@
             renderSRSCard();
         }
 
-
         /* --- TAB 3: NOTEBOOK VIEW (TABLE WITH CẤP ĐỘ & KỲ HẠN SRS COLUMNS) --- */
         function toggleMask(field) {
             appState.masks[field] = !appState.masks[field];
 
-            document.getElementById('btn-mask-word').className = appState.masks.word ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
-            document.getElementById('btn-mask-ipa').className = appState.masks.ipa ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
-            document.getElementById('btn-mask-vi').className = appState.masks.meaning ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1';
+            document.getElementById('btn-mask-word').className = appState.masks.word ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1 cursor-pointer' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1 cursor-pointer';
+            document.getElementById('btn-mask-ipa').className = appState.masks.ipa ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1 cursor-pointer' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1 cursor-pointer';
+            document.getElementById('btn-mask-vi').className = appState.masks.meaning ? 'px-3 py-1.5 rounded-xl border border-[#935864] bg-[#f4ebe8] text-[#8a525f] text-xs font-semibold flex items-center gap-1 cursor-pointer' : 'px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium flex items-center gap-1 cursor-pointer';
 
             renderNotebookSheet();
         }
 
         function switchNotebookLayout(mode) {
             appState.notebookLayout = mode;
-            document.getElementById('btn-layout-table').className = mode === 'table' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]';
-            document.getElementById('btn-layout-card').className = mode === 'card' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]';
+            document.getElementById('btn-layout-table').className = mode === 'table' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs cursor-pointer' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62] cursor-pointer';
+            document.getElementById('btn-layout-card').className = mode === 'card' ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs cursor-pointer' : 'px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62] cursor-pointer';
             renderNotebookSheet();
         }
 
@@ -2342,7 +2429,7 @@
                                     <td class="py-2.5 px-3 text-center text-[#8c7b7f] font-mono">${idx + 1}</td>
                                     <td class="py-2.5 px-3 font-bold text-[#2b2426]">
                                         <span class="${appState.masks.word ? 'hide-text' : ''}">${item.word}</span>
-                                        <button onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="ml-1 text-[11px] text-[#8a525f] hover:text-[#935864]">🔊</button>
+                                        <button type="button" onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="ml-1 text-[11px] text-[#8a525f] hover:text-[#935864] cursor-pointer">🔊</button>
                                     </td>
                                     <td class="py-2.5 px-3 font-semibold text-[#8a525f]">
                                         <span class="${appState.masks.ipa ? 'hide-text' : ''}">${item.phonetic || ''}</span>
@@ -2364,8 +2451,8 @@
                                         ${getSRSBadgeHTML(item.srs)}
                                     </td>
                                     <td class="py-2.5 px-3 text-center space-x-1">
-                                        <button onclick="openEditModal('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-[#2b2426]">✏️</button>
-                                        <button onclick="deleteWord('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-rose-600">🗑️</button>
+                                        <button type="button" onclick="openEditModal('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-[#2b2426] cursor-pointer">✏️</button>
+                                        <button type="button" onclick="deleteWord('${item.id}')" class="p-1 text-[#8c7b7f] hover:text-rose-600 cursor-pointer">🗑️</button>
                                     </td>
                                 </tr>
                             `).join('')}
@@ -2382,7 +2469,7 @@
                                         <h3 class="font-bold text-base text-[#2b2426] ${appState.masks.word ? 'hide-text' : ''}">${item.word}</h3>
                                         <p class="text-xs font-semibold text-[#8a525f] ${appState.masks.ipa ? 'hide-text' : ''}">${item.phonetic || ''}</p>
                                     </div>
-                                    <button onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="p-1 text-xs text-[#8a525f]">🔊</button>
+                                    <button type="button" onclick="speakWordText('${item.word.replace(/'/g, "\'")}')" class="p-1 text-xs text-[#8a525f] cursor-pointer">🔊</button>
                                 </div>
                                 <p class="text-sm font-semibold text-[#2b2426] ${appState.masks.meaning ? 'hide-text' : ''}">${item.meaning}</p>
                                 ${item.example_target ? `<p class="text-xs italic text-[#786669] bg-[#faf7f5] p-2 rounded-xl border border-[#e2d5d1]">"${item.example_target}"</p>` : ''}
@@ -2390,8 +2477,8 @@
                                     <span class="bg-[#f4ebe8] text-[#8a525f] px-2 py-0.5 rounded font-medium">${item.tags ? item.tags[0] : 'IELTS'}</span>
                                     <div>${getSRSBadgeHTML(item.srs)}</div>
                                     <div class="space-x-1">
-                                        <button onclick="openEditModal('${item.id}')" class="text-[#8c7b7f] hover:text-[#2b2426]">✏️ Sửa</button>
-                                        <button onclick="deleteWord('${item.id}')" class="text-[#8c7b7f] hover:text-rose-600">🗑️ Xóa</button>
+                                        <button type="button" onclick="openEditModal('${item.id}')" class="text-[#8c7b7f] hover:text-[#2b2426] cursor-pointer">✏️ Sửa</button>
+                                        <button type="button" onclick="deleteWord('${item.id}')" class="text-[#8c7b7f] hover:text-rose-600 cursor-pointer">🗑️ Xóa</button>
                                     </div>
                                 </div>
                             </div>
@@ -2402,11 +2489,19 @@
         }
 
         function deleteWord(id) {
-            if (confirm('Bạn có chắc chắn muốn xóa từ này khỏi sổ từ vựng?')) {
-                appState.words = appState.words.filter(w => w.id !== id);
-                saveAppState();
-                renderNotebookSheet();
-            }
+            const item = appState.words.find(w => w.id === id);
+            const wordName = item ? item.word : 'từ này';
+            showConfirmModal(
+                'Xóa Từ Vựng',
+                `Bạn có chắc chắn muốn xóa "${wordName}" khỏi sổ từ vựng không?`,
+                '🗑️',
+                () => {
+                    appState.words = appState.words.filter(w => w.id !== id);
+                    saveAppState();
+                    renderNotebookSheet();
+                    showToast(`Đã xóa "${wordName}" thành công.`);
+                }
+            );
         }
 
         function openEditModal(id) {
@@ -2420,11 +2515,15 @@
             document.getElementById('edit-meaning').value = item.meaning || '';
             document.getElementById('edit-example').value = item.example_target || '';
 
-            document.getElementById('edit-word-modal').classList.remove('hidden');
+            const modal = document.getElementById('edit-word-modal');
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.classList.remove('hidden');
         }
 
         function closeEditModal() {
-            document.getElementById('edit-word-modal').classList.add('hidden');
+            const modal = document.getElementById('edit-word-modal');
+            modal.style.setProperty('display', 'none', 'important');
+            modal.classList.add('hidden');
         }
 
         function saveEditedWord() {
@@ -2440,6 +2539,7 @@
                 saveAppState();
                 renderNotebookSheet();
                 closeEditModal();
+                showToast(`Đã cập nhật từ "${item.word}" thành công!`);
             }
         }
 
@@ -2452,6 +2552,7 @@
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
+            showToast('Đã xuất file dữ liệu JSON về máy!');
         }
 
         function triggerImportJSON() {
@@ -2465,14 +2566,16 @@
             reader.onload = function(e) {
                 try {
                     const imported = JSON.parse(e.target.result);
-                    if (Array.isArray(imported)) {
+                    if (Array.isArray(imported) && imported.length > 0) {
                         appState.words = imported;
                         saveAppState();
                         renderNotebookSheet();
-                        alert('Khôi phục dữ liệu từ vựng thành công!');
+                        showToast(`Khôi phục ${imported.length} từ vựng từ JSON thành công!`);
+                    } else {
+                        showToast('File JSON không chứa danh sách từ vựng hợp lệ.', false);
                     }
                 } catch (err) {
-                    alert('File JSON không hợp lệ.');
+                    showToast('File JSON bị lỗi cấu trúc.', false);
                 }
             };
             reader.readAsText(file);
@@ -2490,13 +2593,6 @@
             }
             return 'user_' + Math.abs(hash).toString(36) + '_' + btoa(str.toLowerCase()).replace(/[^a-zA-Z0-9]/g, '').slice(0, 12);
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            initAppState();
-            renderAllViews();
-            initAuthSession();
-            initTabListeners();
-        });
 
         function initTabListeners() {
             const btnInput = document.getElementById('nav-btn-input');
@@ -2548,9 +2644,14 @@
         }
 
         async function loginWithGoogle() {
-            let email = prompt("Nhập địa chỉ Email Google của bạn để đăng nhập / kết nối Cloud:");
-            if (!email || !email.trim()) return;
-            email = email.trim().toLowerCase();
+            const emailInput = document.getElementById('google-email-input');
+            let email = emailInput ? emailInput.value.trim() : '';
+
+            if (!email) {
+                showToast('Vui lòng nhập Email Google của bạn', false);
+                return;
+            }
+            email = email.toLowerCase();
 
             const userKey = hashString(email + "_google_srs_cloud");
             currentUser = { email: email, displayName: email.split('@')[0], userKey: userKey, provider: 'google' };
@@ -2558,7 +2659,7 @@
 
             updateAuthUI(currentUser);
             await pullFromCloudFirestore();
-            alert(`Đăng nhập Google (${email}) thành công! Dữ liệu đã được kết nối Đám mây.`);
+            showToast(`Đăng nhập Google (${email}) thành công!`);
             closeCloudSyncModal();
         }
 
@@ -2567,7 +2668,7 @@
             const pass = document.getElementById('auth-password').value.trim();
 
             if (!email || !pass) {
-                alert('Vui lòng nhập Email và Mật khẩu.');
+                showToast('Vui lòng nhập Email và Mật khẩu.', false);
                 return;
             }
 
@@ -2586,7 +2687,7 @@
                             saveAppState();
                             renderAllViews();
                         }
-                        alert('Đăng nhập thành công! Dữ liệu từ vựng đã được đồng bộ.');
+                        showToast('Đăng nhập thành công! Dữ liệu đã đồng bộ.');
                         closeCloudSyncModal();
                         return;
                     }
@@ -2599,7 +2700,7 @@
             localStorage.setItem('cece_user_session', JSON.stringify(currentUser));
             updateAuthUI(currentUser);
             await pullFromCloudFirestore();
-            alert('Đăng nhập thành công!');
+            showToast('Đăng nhập thành công!');
             closeCloudSyncModal();
         }
 
@@ -2608,7 +2709,7 @@
             const pass = document.getElementById('auth-password').value.trim();
 
             if (!email || pass.length < 6) {
-                alert('Vui lòng nhập Email hợp lệ và Mật khẩu từ 6 ký tự trở lên.');
+                showToast('Vui lòng nhập Email hợp lệ và Mật khẩu từ 6 ký tự trở lên.', false);
                 return;
             }
 
@@ -2618,7 +2719,7 @@
             updateAuthUI(currentUser);
 
             await syncToCloudFirestore();
-            alert('Tạo tài khoản mới thành công! Tất cả từ đã học của bạn đã được sao lưu trên Cloud.');
+            showToast('Tạo tài khoản thành công! Đã sao lưu từ vựng lên Cloud.');
             closeCloudSyncModal();
         }
 
@@ -2626,7 +2727,7 @@
             currentUser = null;
             localStorage.removeItem('cece_user_session');
             updateAuthUI(null);
-            alert('Đã đăng xuất tài khoản.');
+            showToast('Đã đăng xuất tài khoản.');
             closeCloudSyncModal();
         }
 
@@ -2654,8 +2755,9 @@
                     const data = await res.json();
                     if (data && Array.isArray(data.words) && data.words.length > 0) {
                         appState.words = data.words;
-                        localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
+                        saveAppState();
                         renderAllViews();
+                        showToast('Đã đồng bộ từ vựng từ Cloud thành công!');
                     }
                 }
             } catch (e) {
@@ -2666,17 +2768,21 @@
         async function forceSyncCloud() {
             if (currentUser) {
                 await syncToCloudFirestore();
-                alert('Đã đồng bộ dữ liệu lên Cloud thành công!');
+                showToast('Đã đồng bộ dữ liệu lên Cloud thành công!');
             } else {
-                alert('Vui lòng đăng nhập để sử dụng tính năng đồng bộ.');
+                showToast('Vui lòng đăng nhập để sử dụng tính năng đồng bộ.', false);
             }
         }
 
         function openCloudSyncModal() {
-            document.getElementById('cloud-sync-modal').classList.remove('hidden');
+            const modal = document.getElementById('cloud-sync-modal');
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.classList.remove('hidden');
         }
         function closeCloudSyncModal() {
-            document.getElementById('cloud-sync-modal').classList.add('hidden');
+            const modal = document.getElementById('cloud-sync-modal');
+            modal.style.setProperty('display', 'none', 'important');
+            modal.classList.add('hidden');
         }
 
         async function pushToCloud() {
@@ -2686,10 +2792,10 @@
                     method: 'POST',
                     body: JSON.stringify(appState.words)
                 });
-                alert('Đã tải dữ liệu lên Cloud thành công!');
+                showToast('Đã tải dữ liệu lên Cloud thành công!');
                 closeCloudSyncModal();
             } catch (e) {
-                alert('Không thể kết nối Cloud Sync. Kiểm tra kết nối mạng.');
+                showToast('Không thể kết nối Cloud Sync. Kiểm tra kết nối mạng.', false);
             }
         }
 
@@ -2699,16 +2805,16 @@
                 const res = await fetch(`https://keyvalue.impathy.workers.dev/${code}`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (Array.isArray(data)) {
+                    if (Array.isArray(data) && data.length > 0) {
                         appState.words = data;
                         saveAppState();
                         renderNotebookSheet();
-                        alert('Đã tải dữ liệu từ Cloud về máy thành công!');
+                        showToast('Đã tải dữ liệu từ Cloud về máy thành công!');
                         closeCloudSyncModal();
                     }
                 }
             } catch (e) {
-                alert('Không tìm thấy dữ liệu trên Cloud.');
+                showToast('Không tìm thấy dữ liệu trên Cloud.', false);
             }
         }
     </script>
