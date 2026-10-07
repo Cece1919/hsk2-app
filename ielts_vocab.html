@@ -37,6 +37,19 @@
             user-select: none;
         }
         
+        /* Button Clickability & Touch Fix */
+        button, a, input, select, textarea, [role="button"] {
+            pointer-events: auto !important;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: auto;
+            user-select: auto;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
         /* 3D Card Flip & Safari Fix */
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
@@ -55,12 +68,26 @@
             -webkit-transform: rotateY(180deg);
         }
 
-        /* Strict Safari/Mobile Fix for 3D Backface Bleed-Through */
+        /* Strict Safari/Mobile Fix for 3D Backface Bleed-Through & Clickability */
+        .card-inner:not(.flipped) > .card-front {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
         .card-inner.flipped > .card-front {
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
             display: none !important;
+        }
+
+        .card-inner.flipped > .card-back {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         .card-inner:not(.flipped) > .card-back {
@@ -2149,10 +2176,10 @@
 
                             <!-- SRS Rating Buttons Grid on FRONT CARD -->
                             <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
-                                <button onclick="handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
-                                <button onclick="handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
-                                <button onclick="handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
-                                <button onclick="handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
                             </div>
                         </div>
 
@@ -2176,10 +2203,10 @@
 
                             <!-- SRS Rating Buttons Grid on BACK CARD -->
                             <div class="w-full grid grid-cols-4 gap-1.5 pt-2 border-t border-[#f0e6e3]" onclick="event.stopPropagation()">
-                                <button onclick="handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
-                                <button onclick="handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
-                                <button onclick="handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
-                                <button onclick="handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(1)" class="py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-rose-200 transition">🔴 Quên<br><span class="font-normal opacity-80">${daysAgain} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(2)" class="py-2 bg-amber-50 text-amber-700 hover:bg-amber-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-amber-200 transition">🟠 Khó<br><span class="font-normal opacity-80">${daysHard} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(3)" class="py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-emerald-200 transition">🟢 Tốt<br><span class="font-normal opacity-80">${daysGood} ngày</span></button>
+                                <button onclick="event.stopPropagation(); handleSRSAction(4)" class="py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 active:scale-95 rounded-xl text-[10px] font-bold text-center border border-sky-200 transition">🔵 Dễ<br><span class="font-normal opacity-80">${daysEasy} ngày</span></button>
                             </div>
                         </div>
 
