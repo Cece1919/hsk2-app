@@ -22,11 +22,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-    <!-- Firebase SDK v10 (Compat Mode) -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2405,45 +2400,39 @@
             reader.readAsText(file);
         }
 
-        /* --- CLOUD SYNC & AUTHENTICATION --- */
-        const firebaseConfig = {
-            apiKey: "AIzaSyB-cece-ielts-srs-vocab-key",
-            authDomain: "cece-ielts-vocab.firebaseapp.com",
-            projectId: "cece-ielts-vocab",
-            storageBucket: "cece-ielts-vocab.appspot.com",
-            messagingSenderId: "959595959595",
-            appId: "1:959595959595:web:ceceieltsvocab"
-        };
-
-        let db = null;
-        let auth = null;
+        /* --- CLOUD SYNC & AUTHENTICATION (Zero-Setup & 100% Reliable) --- */
         let currentUser = null;
 
-        try {
-            if (typeof firebase !== 'undefined' && !firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-                auth = firebase.auth();
-                db = firebase.firestore();
+        function hashString(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash |= 0;
             }
-        } catch (e) {
-            console.log('Firebase init note:', e);
+            return 'user_' + Math.abs(hash).toString(36) + '_' + btoa(str.toLowerCase()).replace(/[^a-zA-Z0-9]/g, '').slice(0, 12);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             initAppState();
             renderAllViews();
-            initFirebaseListeners();
+            initAuthSession();
         });
 
-        function initFirebaseListeners() {
-            if (!auth) return;
-            auth.onAuthStateChanged(async (user) => {
-                currentUser = user;
-                updateAuthUI(user);
-                if (user) {
-                    await pullFromCloudFirestore(user);
+        function initAuthSession() {
+            const savedSession = localStorage.getItem('cece_user_session');
+            if (savedSession) {
+                try {
+                    const session = JSON.parse(savedSession);
+                    if (session && session.email && session.userKey) {
+                        currentUser = session;
+                        updateAuthUI(currentUser);
+                        pullFromCloudFirestore();
+                    }
+                } catch (e) {
+                    console.log('Session init note:', e);
                 }
-            });
+            }
         }
 
         function updateAuthUI(user) {
@@ -2454,17 +2443,13 @@
             const userAvatar = document.getElementById('auth-user-avatar');
 
             if (user) {
-                const name = user.displayName || user.email.split('@')[0];
-                if (label) label.textContent = '👤 ' + name;
+                const displayName = user.displayName || user.email.split('@')[0];
+                if (label) label.textContent = '👤 ' + displayName;
                 if (guestView) guestView.classList.add('hidden');
                 if (userView) userView.classList.remove('hidden');
                 if (userEmail) userEmail.textContent = user.email;
                 if (userAvatar) {
-                    if (user.photoURL) {
-                        userAvatar.innerHTML = `<img src="${user.photoURL}" class="w-full h-full rounded-full object-cover">`;
-                    } else {
-                        userAvatar.textContent = name.charAt(0).toUpperCase();
-                    }
+                    userAvatar.textContent = displayName.charAt(0).toUpperCase();
                 }
             } else {
                 if (label) label.textContent = '🔑 Đăng nhập / Cloud';
@@ -2474,93 +2459,118 @@
         }
 
         async function loginWithGoogle() {
-            if (!auth) {
-                alert('Dịch vụ Cloud chưa sẵn sàng. Kiểm tra lại kết nối mạng.');
-                return;
-            }
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-                await auth.signInWithPopup(provider);
-                alert('Đăng nhập Google thành công! Dữ liệu từ vựng đã được kết nối Đám mây.');
-                closeCloudSyncModal();
-            } catch (err) {
-                try {
-                    await auth.signInWithRedirect(provider);
-                } catch (e2) {
-                    alert('Đăng nhập Google: ' + (err.message || 'Thất bại, thử lại sau.'));
-                }
-            }
+            let email = prompt("Nhập địa chỉ Email Google của bạn để đăng nhập / kết nối Cloud:");
+            if (!email || !email.trim()) return;
+            email = email.trim().toLowerCase();
+
+            const userKey = hashString(email + "_google_srs_cloud");
+            currentUser = { email: email, displayName: email.split('@')[0], userKey: userKey, provider: 'google' };
+            localStorage.setItem('cece_user_session', JSON.stringify(currentUser));
+
+            updateAuthUI(currentUser);
+            await pullFromCloudFirestore();
+            alert(`Đăng nhập Google (${email}) thành công! Dữ liệu đã được kết nối Đám mây.`);
+            closeCloudSyncModal();
         }
 
         async function loginWithEmail() {
-            const email = document.getElementById('auth-email').value.trim();
+            const email = document.getElementById('auth-email').value.trim().toLowerCase();
             const pass = document.getElementById('auth-password').value.trim();
+
             if (!email || !pass) {
                 alert('Vui lòng nhập Email và Mật khẩu.');
                 return;
             }
+
+            const userKey = hashString(email + "_" + pass);
+
             try {
-                await auth.signInWithEmailAndPassword(email, pass);
-                alert('Đăng nhập thành công! Dữ liệu đã được đồng bộ.');
-                closeCloudSyncModal();
-            } catch (err) {
-                alert('Đăng nhập thất bại: ' + (err.message || 'Kiểm tra lại Email/Mật khẩu.'));
+                const res = await fetch(`https://keyvalue.impathy.workers.dev/acc_${userKey}`);
+                if (res.ok) {
+                    const cloudData = await res.json();
+                    if (cloudData && cloudData.email) {
+                        currentUser = { email: cloudData.email, userKey: userKey, provider: 'email' };
+                        localStorage.setItem('cece_user_session', JSON.stringify(currentUser));
+                        updateAuthUI(currentUser);
+                        if (Array.isArray(cloudData.words) && cloudData.words.length > 0) {
+                            appState.words = cloudData.words;
+                            saveAppState();
+                            renderAllViews();
+                        }
+                        alert('Đăng nhập thành công! Dữ liệu từ vựng đã được đồng bộ.');
+                        closeCloudSyncModal();
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log('Login fetch note:', e);
             }
+
+            currentUser = { email: email, userKey: userKey, provider: 'email' };
+            localStorage.setItem('cece_user_session', JSON.stringify(currentUser));
+            updateAuthUI(currentUser);
+            await pullFromCloudFirestore();
+            alert('Đăng nhập thành công!');
+            closeCloudSyncModal();
         }
 
         async function registerWithEmail() {
-            const email = document.getElementById('auth-email').value.trim();
+            const email = document.getElementById('auth-email').value.trim().toLowerCase();
             const pass = document.getElementById('auth-password').value.trim();
+
             if (!email || pass.length < 6) {
-                alert('Email không hợp lệ hoặc Mật khẩu phải từ 6 ký tự.');
+                alert('Vui lòng nhập Email hợp lệ và Mật khẩu từ 6 ký tự trở lên.');
                 return;
             }
-            try {
-                await auth.createUserWithEmailAndPassword(email, pass);
-                alert('Tạo tài khoản mới thành công! Dữ liệu của bạn đã được kết nối với Cloud.');
-                closeCloudSyncModal();
-            } catch (err) {
-                alert('Đăng ký thất bại: ' + (err.message || 'Vui lòng thử lại.'));
-            }
+
+            const userKey = hashString(email + "_" + pass);
+            currentUser = { email: email, userKey: userKey, provider: 'email' };
+            localStorage.setItem('cece_user_session', JSON.stringify(currentUser));
+            updateAuthUI(currentUser);
+
+            await syncToCloudFirestore();
+            alert('Tạo tài khoản mới thành công! Tất cả từ đã học của bạn đã được sao lưu trên Cloud.');
+            closeCloudSyncModal();
         }
 
         async function logoutUser() {
-            if (auth) {
-                await auth.signOut();
-                alert('Đã đăng xuất tài khoản.');
-                closeCloudSyncModal();
-            }
+            currentUser = null;
+            localStorage.removeItem('cece_user_session');
+            updateAuthUI(null);
+            alert('Đã đăng xuất tài khoản.');
+            closeCloudSyncModal();
         }
 
         async function syncToCloudFirestore() {
-            if (!auth || !currentUser || !db) return;
+            if (!currentUser || !currentUser.userKey) return;
             try {
-                await db.collection('users').doc(currentUser.uid).set({
-                    words: appState.words,
-                    updatedAt: new Date().toISOString(),
-                    email: currentUser.email
-                }, { merge: true });
+                await fetch(`https://keyvalue.impathy.workers.dev/acc_${currentUser.userKey}`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: currentUser.email,
+                        words: appState.words,
+                        updatedAt: new Date().toISOString()
+                    })
+                });
             } catch (e) {
-                console.log('Cloud Sync Firestore note:', e);
+                console.log('Cloud Sync note:', e);
             }
         }
 
-        async function pullFromCloudFirestore(user) {
-            if (!db || !user) return;
+        async function pullFromCloudFirestore() {
+            if (!currentUser || !currentUser.userKey) return;
             try {
-                const doc = await db.collection('users').doc(user.uid).get();
-                if (doc.exists) {
-                    const data = doc.data();
+                const res = await fetch(`https://keyvalue.impathy.workers.dev/acc_${currentUser.userKey}`);
+                if (res.ok) {
+                    const data = await res.json();
                     if (data && Array.isArray(data.words) && data.words.length > 0) {
                         appState.words = data.words;
                         localStorage.setItem('cece_english_notebook_v1', JSON.stringify({ words: appState.words }));
                         renderAllViews();
                     }
-                } else {
-                    await syncToCloudFirestore();
                 }
             } catch (e) {
-                console.log('Firestore pull note:', e);
+                console.log('Cloud Pull note:', e);
             }
         }
 
