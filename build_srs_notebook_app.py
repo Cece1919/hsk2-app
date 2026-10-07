@@ -159,10 +159,9 @@ def generate_app():
                     </button>
 
                     <div class="flex items-center gap-1">
-                        <button onclick="openCloudSyncModal()" id="header-google-btn" title="Đăng nhập Google & Đồng bộ Cloud" class="py-1 px-2.5 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1.5">
-                            <img id="header-user-avatar" src="" class="w-4 h-4 rounded-full hidden border border-[#8a525f] object-cover">
-                            <svg id="header-user-icon" class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-                            <span id="header-user-label">Google Sync</span>
+                        <button onclick="openCloudSyncModal()" id="header-account-btn" title="Đăng Nhập Tài Khoản & Đồng Bộ Cloud" class="py-1 px-2.5 rounded-lg border border-[#ebdcd8] bg-[#f4ebe8] text-[#8a525f] hover:bg-[#ede5e2] font-semibold text-xs transition-colors flex items-center gap-1.5 cursor-pointer">
+                            <span id="header-acc-icon">🔑</span>
+                            <span id="header-acc-label">Đăng Nhập</span>
                         </button>
 
                         <button onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1.5 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors">
@@ -465,49 +464,37 @@ def generate_app():
         </div>
     </div>
 
-    <!-- Cloud Sync & Google Login Modal -->
+    <!-- Account Login & Sync Modal -->
     <div id="cloud-sync-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-2xl p-5 max-w-sm w-full border border-[#e8dedb] shadow-2xl space-y-4">
+            <!-- Modal Header -->
             <div class="flex items-center justify-between border-b border-[#f0e6e3] pb-3">
                 <div class="flex items-center gap-2">
-                    <span class="text-xl">🔑</span>
+                    <span class="text-xl">🔐</span>
                     <div>
-                        <h3 class="text-sm font-bold text-[#2b2426]">Tài Khoản & Đồng Bộ Cloud</h3>
-                        <p class="text-[11px] text-[#786669]">Đồng bộ tự động từ vựng giữa mọi thiết bị</p>
+                        <h3 class="text-sm font-bold text-[#2b2426]">Tài Khoản & Mật Khẩu Đồng Bộ</h3>
+                        <p class="text-[11px] text-[#786669]">Đăng nhập để giữ nguyên từ vựng trên mọi thiết bị</p>
                     </div>
                 </div>
                 <button onclick="closeCloudSyncModal()" class="text-[#8c7b7f] hover:text-[#2b2426] text-lg font-bold">✕</button>
             </div>
             
-            <!-- Google User Card (Shown when Logged In) -->
-            <div id="google-user-box" class="hidden p-3 rounded-xl bg-[#faf4f2] border border-[#ebdcd8] space-y-2">
-                <div class="flex items-center gap-2.5">
-                    <img id="google-avatar-img" src="" class="w-9 h-9 rounded-full border border-[#d8c5c1] bg-white object-cover">
-                    <div class="flex-1 min-w-0">
-                        <div id="google-user-name" class="font-bold text-xs text-[#2b2426] truncate">Trang Ngo</div>
-                        <div id="google-user-email" class="text-[11px] text-[#8f525e] truncate font-medium">trangngo95@gmail.com</div>
+            <!-- Logged In User Card (Shown when Logged In) -->
+            <div id="account-logged-box" class="hidden p-3.5 rounded-xl bg-[#faf4f2] border border-[#ebdcd8] space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-[#8f525e] text-white flex items-center justify-center font-bold text-xs shadow-2xs">
+                            👤
+                        </div>
+                        <div class="min-w-0">
+                            <div id="logged-user-name" class="font-bold text-xs text-[#2b2426] truncate">thientrangtc2013</div>
+                            <div class="text-[10px] text-[#34543f] font-semibold flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#34543f]"></span>
+                                <span>Đã kết nối tài khoản</span>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="googleSignOut()" class="text-[11px] text-[#935864] hover:text-[#7b434f] font-semibold underline">Đăng xuất</button>
-                </div>
-                <div class="text-[10px] text-[#34543f] font-semibold flex items-center gap-1 bg-[#eaf4ec] px-2 py-1 rounded-lg">
-                    <span>✅</span> <span>Đã kết nối Google. Tự động lưu & đồng bộ 2 chiều!</span>
-                </div>
-            </div>
-
-            <!-- Google Sign In Section (Shown when Not Logged In) -->
-            <div id="google-login-btn-container" class="space-y-2">
-                <p class="text-xs font-semibold text-[#6e5f62] mb-1">Đăng nhập tài khoản Google:</p>
-                <button onclick="promptGoogleSignIn()" class="w-full py-2.5 px-4 bg-white hover:bg-[#faf7f5] border border-[#d8c5c1] font-bold rounded-xl text-xs flex items-center justify-center gap-2.5 shadow-2xs transition text-[#2b2426] active:scale-98 cursor-pointer">
-                    <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-                    <span>Đăng nhập bằng Tài Khoản Google</span>
-                </button>
-            </div>
-
-            <!-- Manual Email / Code Option -->
-            <div class="space-y-3 pt-2 border-t border-[#f0e6e3]">
-                <div>
-                    <label class="text-xs font-semibold text-[#6e5f62] block mb-1">Mã / Email Tài Khoản Đồng Bộ:</label>
-                    <input type="text" id="cloud-sync-code" value="Cece1919" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#8f525e] bg-[#faf7f5] text-center text-sm" placeholder="Email hoặc Tên tài khoản...">
+                    <button onclick="logoutAccount()" class="px-2.5 py-1 text-xs text-[#935864] hover:text-[#7b434f] bg-white border border-[#e8dedb] rounded-lg font-semibold cursor-pointer">Đăng xuất</button>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
@@ -523,17 +510,46 @@ def generate_app():
                 </div>
             </div>
 
+            <!-- Login / Register Form (Shown when Logged Out) -->
+            <div id="account-login-form" class="space-y-3">
+                <div class="flex rounded-xl bg-[#faf7f5] p-1 border border-[#e8dedb]">
+                    <button type="button" id="tab-btn-login" onclick="switchAuthTab('login')" class="flex-1 py-1.5 text-xs font-bold rounded-lg bg-white text-[#2b2426] shadow-2xs cursor-pointer">🔑 Đăng Nhập</button>
+                    <button type="button" id="tab-btn-register" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-xs font-medium text-[#786669] rounded-lg cursor-pointer">📝 Đăng Ký Mới</button>
+                </div>
+
+                <div class="space-y-2.5 text-xs">
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Email / Tên tài khoản:</label>
+                        <input type="text" id="acc-input-username" value="thientrangtc2013@gmail.com" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#2b2426] bg-[#faf7f5]" placeholder="Nhập Email hoặc Tên tài khoản...">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-[#6e5f62] block mb-1">Mật khẩu bảo mật:</label>
+                        <div class="relative">
+                            <input type="password" id="acc-input-password" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] font-bold text-[#8f525e] bg-[#faf7f5] pr-10" placeholder="Nhập Mật khẩu...">
+                            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#8c7b7f] cursor-pointer">👁️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="submitAccountAuth()" id="btn-submit-auth" class="w-full py-3 px-4 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition cursor-pointer active:scale-98">
+                    <span>🔓 DÙNG TÀI KHOẢN NÀY ĐỂ ĐỒNG BỘ</span>
+                </button>
+            </div>
+
+            <input type="hidden" id="cloud-sync-code">
+
+            <!-- Status & Reload -->
             <div class="border-t border-[#f0e6e3] pt-3 text-[11px] text-[#8c7b7f] space-y-2">
                 <div class="flex items-center gap-2">
                     <input type="checkbox" id="cloud-auto-pull" onchange="toggleAutoPull(event)" class="rounded text-[#8f525e] focus:ring-0">
                     <label for="cloud-auto-pull" class="cursor-pointer font-medium text-[#5e5053]">Tự động đồng bộ khi mở ứng dụng</label>
                 </div>
                 <div id="cloud-sync-status" class="p-2.5 rounded-xl bg-[#faf7f5] border border-[#e8dedb] text-[11px] text-[#5e5053] font-medium text-center">
-                    Chưa đồng bộ trong phiên này.
+                    Chưa đăng nhập tài khoản.
                 </div>
                 <button onclick="forceReloadApp()" class="w-full py-2 px-3 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#6e5f62] border border-[#e8dedb] font-semibold rounded-xl text-[11px] flex items-center justify-center gap-1.5 transition cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 21v-5h5"></path></svg>
-                    <span>🔄 Tải lại bản mới nhất (Xóa Cache Safari)</span>
+                    <span>🔄 Làm mới ứng dụng (Xóa Cache Safari)</span>
                 </button>
             </div>
         </div>
@@ -577,7 +593,7 @@ def generate_app():
                 localStorage.setItem('cece_srs_notebook_app_v1', JSON.stringify(appState));
             }} catch(e) {{ console.error("Save error:", e); }}
             updateHeaderCounters();
-            if (appState.googleUser && appState.googleUser.email) {{
+            if (appState.account && appState.account.username) {{
                 if (autoPushTimer) clearTimeout(autoPushTimer);
                 autoPushTimer = setTimeout(() => {{
                     pushToCloud(true);
@@ -588,122 +604,133 @@ def generate_app():
         const SYNC_MAP_DEFAULT_ID = "ff808181a09d98f701a0ffc2895a6769";
         const CRUDCRUD_ENDPOINT = "https://crudcrud.com/api/901d68cb059641cc861e57af81de2e91/cece_sync";
 
-        function updateGoogleUserUI() {{
-            const userBox = document.getElementById('google-user-box');
-            const loginContainer = document.getElementById('google-login-btn-container');
-            const avatarImg = document.getElementById('google-avatar-img');
-            const nameEl = document.getElementById('google-user-name');
-            const emailEl = document.getElementById('google-user-email');
+        async function hashString(str) {{
+            const msgBuffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }}
+
+        let authTabMode = 'login';
+        function switchAuthTab(mode) {{
+            authTabMode = mode;
+            const btnLogin = document.getElementById('tab-btn-login');
+            const btnReg = document.getElementById('tab-btn-register');
+            const submitBtn = document.getElementById('btn-submit-auth');
             
-            const headerAvatar = document.getElementById('header-user-avatar');
-            const headerIcon = document.getElementById('header-user-icon');
-            const headerLabel = document.getElementById('header-user-label');
-            const codeInput = document.getElementById('cloud-sync-code');
-
-            if (appState.googleUser && appState.googleUser.email) {{
-                const u = appState.googleUser;
-                if (userBox) userBox.classList.remove('hidden');
-                if (loginContainer) loginContainer.classList.add('hidden');
-                if (avatarImg) avatarImg.src = u.picture || 'https://cdn-icons-png.flaticon.com/512/300/300221.png';
-                if (nameEl) nameEl.innerText = u.name || 'Google User';
-                if (emailEl) emailEl.innerText = u.email;
-                
-                if (headerAvatar) {{
-                    headerAvatar.src = u.picture || 'https://cdn-icons-png.flaticon.com/512/300/300221.png';
-                    headerAvatar.classList.remove('hidden');
-                }}
-                if (headerIcon) headerIcon.classList.add('hidden');
-                if (headerLabel) headerLabel.innerText = u.name ? u.name.split(' ')[0] : 'Google';
-
-                const cleanAccount = "google_" + u.email.trim().toLowerCase();
-                if (codeInput) codeInput.value = cleanAccount;
-                appState.syncCode = cleanAccount;
+            if (mode === 'login') {{
+                if (btnLogin) btnLogin.className = "flex-1 py-1.5 text-xs font-bold rounded-lg bg-white text-[#2b2426] shadow-2xs cursor-pointer";
+                if (btnReg) btnReg.className = "flex-1 py-1.5 text-xs font-medium text-[#786669] rounded-lg cursor-pointer";
+                if (submitBtn) submitBtn.innerHTML = "<span>🔓 ĐĂNG NHẬP & KẾT NỐI CLOUD</span>";
             }} else {{
-                if (userBox) userBox.classList.add('hidden');
-                if (loginContainer) loginContainer.classList.remove('hidden');
-                if (headerAvatar) headerAvatar.classList.add('hidden');
-                if (headerIcon) headerIcon.classList.remove('hidden');
-                if (headerLabel) headerLabel.innerText = "Google Sync";
+                if (btnReg) btnReg.className = "flex-1 py-1.5 text-xs font-bold rounded-lg bg-white text-[#2b2426] shadow-2xs cursor-pointer";
+                if (btnLogin) btnLogin.className = "flex-1 py-1.5 text-xs font-medium text-[#786669] rounded-lg cursor-pointer";
+                if (submitBtn) submitBtn.innerHTML = "<span>📝 ĐĂNG KÝ TÀI KHOẢN MỚI</span>";
             }}
         }}
 
-        function promptGoogleSignIn() {{
-            if (window.google && window.google.accounts) {{
-                try {{
-                    google.accounts.id.initialize({{
-                        client_id: "925695627685-cece1919hsk2app.apps.googleusercontent.com",
-                        callback: handleGoogleSignInResponse,
-                        auto_select: false
-                    }});
-                    google.accounts.id.prompt((notification) => {{
-                        if (notification.isNotDisplayed() || notification.isSkippedMoment() || notification.isDismissedMoment()) {{
-                            fallbackGoogleEmailPrompt();
-                        }}
-                    }});
-                }} catch(e) {{
-                    fallbackGoogleEmailPrompt();
-                }}
-            }} else {{
-                fallbackGoogleEmailPrompt();
-            }}
+        function togglePasswordVisibility() {{
+            const pwdInput = document.getElementById('acc-input-password');
+            if (!pwdInput) return;
+            pwdInput.type = (pwdInput.type === 'password') ? 'text' : 'password';
         }}
 
-        function handleGoogleSignInResponse(response) {{
-            if (!response || !response.credential) return;
+        async function submitAccountAuth() {{
+            const userEl = document.getElementById('acc-input-username');
+            const pwdEl = document.getElementById('acc-input-password');
+            const username = (userEl ? userEl.value.trim() : '');
+            const password = (pwdEl ? pwdEl.value : '');
+
+            if (!username || !password) {{
+                alert("⚠️ Vui lòng nhập đầy đủ Email/Tên tài khoản và Mật khẩu!");
+                return;
+            }}
+
+            const cleanUser = username.toLowerCase().trim();
+            const pwdHash = await hashString(cleanUser + ":" + password);
+            const userHash = await hashString(cleanUser);
+            const accountKey = "user_" + userHash.substring(0, 16);
+
+            const statusEl = document.getElementById('cloud-sync-status');
+            if (statusEl) statusEl.innerHTML = "⏳ Đang kết nối máy chủ để xác thực...";
+
+            let existingVault = null;
             try {{
-                const payload = parseJwt(response.credential);
-                if (payload && payload.email) {{
-                    appState.googleUser = {{
-                        email: payload.email,
-                        name: payload.name || payload.email.split('@')[0],
-                        picture: payload.picture || 'https://cdn-icons-png.flaticon.com/512/300/300221.png',
-                        sub: payload.sub
-                    }};
+                const res = await fetch(CRUDCRUD_ENDPOINT);
+                if (res.ok) {{
+                    const list = await res.json();
+                    if (Array.isArray(list) && list.length > 0) {{
+                        const matched = list.filter(item => item && (item.account === accountKey || item.account === cleanUser));
+                        if (matched.length > 0) existingVault = matched[matched.length - 1];
+                    }}
+                }}
+            }} catch(e) {{ console.warn("Fetch vault error:", e); }}
+
+            if (authTabMode === 'login') {{
+                if (existingVault) {{
+                    if (existingVault.pwdHash && existingVault.pwdHash !== pwdHash) {{
+                        alert("❌ Mật khẩu không chính xác! Vui lòng kiểm tra lại.");
+                        if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Mật khẩu không đúng.</span>`;
+                        return;
+                    }}
+                    appState.account = {{ username: cleanUser, pwdHash }};
+                    appState.syncCode = accountKey;
                     saveAppState();
-                    updateGoogleUserUI();
-                    showToast(`🎉 Xin chào ${{appState.googleUser.name}}! Đã đăng nhập bằng Google.`);
+                    updateAccountUI();
+                    showToast(`🎉 Đăng nhập thành công! Tài khoản: ${{cleanUser}}`);
+                    pullFromCloud(false);
+                }} else {{
+                    appState.account = {{ username: cleanUser, pwdHash }};
+                    appState.syncCode = accountKey;
+                    saveAppState();
+                    updateAccountUI();
+                    showToast(`🎉 Đã kết nối tài khoản (${{cleanUser}})!`);
                     pushToCloud(false);
                 }}
-            }} catch(err) {{
-                console.error("Parse JWT error:", err);
-                fallbackGoogleEmailPrompt();
-            }}
-        }}
-
-        function parseJwt(token) {{
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-            return JSON.parse(jsonPayload);
-        }}
-
-        function fallbackGoogleEmailPrompt() {{
-            const email = prompt("📧 Mời bạn nhập địa chỉ Gmail Google của bạn để đăng nhập và tự động đồng bộ tất cả thiết bị:");
-            if (email && email.trim()) {{
-                const cleanEmail = email.trim().toLowerCase();
-                if (!cleanEmail.includes('@')) {{
-                    alert("⚠️ Vui lòng nhập địa chỉ Gmail hợp lệ (ví dụ: trangngo95@gmail.com).");
-                    return;
-                }}
-                const userName = cleanEmail.split('@')[0];
-                appState.googleUser = {{
-                    email: cleanEmail,
-                    name: userName.charAt(0).toUpperCase() + userName.slice(1),
-                    picture: 'https://cdn-icons-png.flaticon.com/512/300/300221.png',
-                    sub: 'google_' + cleanEmail.replace(/[^a-z0-9]/g, '_')
-                }};
+            }} else {{
+                appState.account = {{ username: cleanUser, pwdHash }};
+                appState.syncCode = accountKey;
                 saveAppState();
-                updateGoogleUserUI();
-                showToast(`🎉 Đã kết nối tài khoản Google (${{cleanEmail}})!`);
+                updateAccountUI();
+                showToast(`🎉 Đã đăng ký thành công tài khoản: ${{cleanUser}}`);
                 pushToCloud(false);
             }}
         }}
 
-        function googleSignOut() {{
-            delete appState.googleUser;
+        function updateAccountUI() {{
+            const loggedBox = document.getElementById('account-logged-box');
+            const loginForm = document.getElementById('account-login-form');
+            const userNameEl = document.getElementById('logged-user-name');
+            const codeInput = document.getElementById('cloud-sync-code');
+            
+            const headerIcon = document.getElementById('header-acc-icon');
+            const headerLabel = document.getElementById('header-acc-label');
+
+            if (appState.account && appState.account.username) {{
+                const uName = appState.account.username;
+                if (loggedBox) loggedBox.classList.remove('hidden');
+                if (loginForm) loginForm.classList.add('hidden');
+                if (userNameEl) userNameEl.innerText = uName;
+                
+                if (headerIcon) headerIcon.innerText = "👤";
+                if (headerLabel) headerLabel.innerText = uName.split('@')[0];
+
+                if (codeInput) codeInput.value = appState.syncCode || ("user_" + uName);
+            }} else {{
+                if (loggedBox) loggedBox.classList.add('hidden');
+                if (loginForm) loginForm.classList.remove('hidden');
+                
+                if (headerIcon) headerIcon.innerText = "🔑";
+                if (headerLabel) headerLabel.innerText = "Đăng Nhập";
+            }}
+        }}
+
+        function logoutAccount() {{
+            delete appState.account;
+            delete appState.syncCode;
             saveAppState();
-            updateGoogleUserUI();
-            showToast("ℹ️ Đã đăng xuất tài khoản Google.");
+            updateAccountUI();
+            showToast("ℹ️ Đã đăng xuất tài khoản.");
         }}
 
         function forceReloadApp() {{
@@ -754,18 +781,25 @@ def generate_app():
             saveAppState();
             applyViewModeUI();
             updateHeaderCounters();
-            updateGoogleUserUI();
+            updateAccountUI();
             pullFromCloud(true);
         }}
 
         function openCloudSyncModal() {{
             const modal = document.getElementById('cloud-sync-modal');
             if (modal) modal.classList.remove('hidden');
-            updateGoogleUserUI();
-            const codeInput = document.getElementById('cloud-sync-code');
-            if (codeInput && !codeInput.value) codeInput.value = appState.syncCode || "Cece1919";
+            updateAccountUI();
             const autoChk = document.getElementById('cloud-auto-pull');
             if (autoChk) autoChk.checked = true;
+            
+            const statusEl = document.getElementById('cloud-sync-status');
+            if (statusEl && (!statusEl.innerText || statusEl.innerText.includes('Chưa thể kết nối') || statusEl.innerText.includes('Chưa đăng nhập'))) {{
+                if (appState.account && appState.account.username) {{
+                    statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã kết nối tài khoản ${{appState.account.username}}!</span>`;
+                }} else {{
+                    statusEl.innerHTML = `<span class="text-[#8c7b7f] font-medium">Nhập Email & Mật khẩu bên trên để đăng nhập.</span>`;
+                }}
+            }}
         }}
 
         function closeCloudSyncModal() {{
@@ -781,8 +815,8 @@ def generate_app():
         async function pushToCloud(silent = false) {{
             const codeInput = document.getElementById('cloud-sync-code');
             let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
-            if (appState.googleUser && appState.googleUser.email) {{
-                accountName = "google_" + appState.googleUser.email.trim().toLowerCase();
+            if (appState.account && appState.account.username) {{
+                accountName = appState.syncCode || ("user_" + appState.account.username);
             }}
             appState.syncCode = accountName;
             
@@ -793,7 +827,8 @@ def generate_app():
 
             const payload = {{
                 account: accountName,
-                googleEmail: appState.googleUser ? appState.googleUser.email : '',
+                username: appState.account ? appState.account.username : '',
+                pwdHash: appState.account ? appState.account.pwdHash : '',
                 dayStep: appState.dayStep,
                 userCustomWords: appState.userCustomWords,
                 cardProgress: appState.cardProgress,
@@ -848,7 +883,7 @@ def generate_app():
             if (success) {{
                 const nowStr = new Date().toLocaleTimeString('vi-VN');
                 const totalCount = getAllWordsList().length;
-                const userDisplay = appState.googleUser ? appState.googleUser.email : accountName;
+                const userDisplay = appState.account ? appState.account.username : accountName;
                 if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công (${{totalCount}} từ) lúc ${{nowStr}}!</span><br><span class="text-[10px] text-[#786669]">Tài khoản: ${{userDisplay}}</span>`;
                 if (!silent) showToast(`🎉 Đã lưu toàn bộ ${{totalCount}} từ lên Cloud!`);
             }} else {{
@@ -862,8 +897,8 @@ def generate_app():
         async function pullFromCloud(silent = false) {{
             const codeInput = document.getElementById('cloud-sync-code');
             let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
-            if (appState.googleUser && appState.googleUser.email) {{
-                accountName = "google_" + appState.googleUser.email.trim().toLowerCase();
+            if (appState.account && appState.account.username) {{
+                accountName = appState.syncCode || ("user_" + appState.account.username);
             }}
 
             const statusEl = document.getElementById('cloud-sync-status');
@@ -879,7 +914,7 @@ def generate_app():
                 if (res.ok) {{
                     const list = await res.json();
                     if (Array.isArray(list) && list.length > 0) {{
-                        const validList = list.filter(item => item && (item.account === accountName || (appState.googleUser && item.googleEmail === appState.googleUser.email)));
+                        const validList = list.filter(item => item && (item.account === accountName || (appState.account && item.username === appState.account.username)));
                         if (validList.length > 0) {{
                             cloudData = validList[validList.length - 1];
                         }}
@@ -927,7 +962,8 @@ def generate_app():
                 if (!silent) showToast(`🎉 Đã đồng bộ thành công ${{totalCount}} từ vựng từ Cloud!`);
             }} else {{
                 if (statusEl && !silent) {{
-                    statusEl.innerHTML = `<span class="text-[#8f525e] font-bold">ℹ️ Sẵn sàng đồng bộ cho tài khoản Google!</span><br><span class="text-[10px] text-[#786669]">Chị hãy nhấn 'TẢI LÊN CLOUD' lần đầu tiên để đẩy từ vựng lên nhé.</span>`;
+                    const uDisp = appState.account ? appState.account.username : 'tài khoản này';
+                    statusEl.innerHTML = `<span class="text-[#8f525e] font-bold">ℹ️ Sẵn sàng đồng bộ cho tài khoản ${{uDisp}}!</span><br><span class="text-[10px] text-[#786669]">Chị hãy nhấn 'TẢI LÊN CLOUD' lần đầu tiên để đẩy từ vựng lên nhé.</span>`;
                 }}
                 if (!silent) showToast("ℹ️ Sẵn sàng tạo bản lưu mới trên Cloud.");
             }}
