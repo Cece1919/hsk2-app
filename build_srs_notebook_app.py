@@ -385,7 +385,8 @@ def generate_app():
 
                     </div>
 
-                
+                </div>
+
                 <!-- TAB 4: CÂU CHUYỆN TỪ VỰNG HSK 2 -->
                 <div id="sec-story-view" class="space-y-4 fade-in hidden">
                     <div class="bg-white border border-[#e8dedb] rounded-2xl p-4 shadow-xs space-y-4 max-w-2xl mx-auto w-full">
