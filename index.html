@@ -2804,11 +2804,25 @@
         }
 
         function openCloudSyncModal() {
+            updateAccountHeaderUI();
+            const currentAcc = (currentUserAccount && currentUserAccount.username) ? currentUserAccount.username : 'cece1919';
+            const newAcc = prompt("🔑 Nhập Tên Tài Khoản Đồng Bộ Đa Thiết Bị (Ví dụ: cece1919):", currentAcc);
+            if (newAcc !== null) {
+                const cleanAcc = newAcc.trim();
+                if (cleanAcc) {
+                    currentUserAccount = { username: cleanAcc };
+                    localStorage.setItem('cece_user_account', JSON.stringify(currentUserAccount));
+                    updateAccountHeaderUI();
+                    showToast(`⚡ Đã kết nối tài khoản "${cleanAcc}"! Đang đồng bộ...`);
+                    pullFromCloudFirestore(false);
+                    return;
+                }
+            }
             const modal = document.getElementById('cloud-sync-modal');
-            const disp = document.getElementById('display-sync-key');
-            if (disp) disp.textContent = getCurrentSyncKey();
-            modal.style.setProperty('display', 'flex', 'important');
-            modal.classList.remove('hidden');
+            if (modal) {
+                modal.style.setProperty('display', 'flex', 'important');
+                modal.classList.remove('hidden');
+            }
         }
         function closeCloudSyncModal() {
             const modal = document.getElementById('cloud-sync-modal');
