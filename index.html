@@ -37,6 +37,10 @@
         }
         
         /* Button Clickability & Touch Fix */
+        header {
+            padding-top: max(12px, env(safe-area-inset-top, 12px)) !important;
+        }
+
         button, a, [role="button"] {
             pointer-events: auto !important;
             touch-action: manipulation;
@@ -2063,18 +2067,20 @@
         }
 
         /* --- TAB 1: AI SMART AUTO LOOKUP & FORM --- */
-        async function autoLookupEnglishWord() {
+        async function autoLookupEnglishWord(isSilent = false) {
             const wordInput = document.getElementById('input-word');
             const btn = document.getElementById('btn-lookup');
             const word = wordInput.value.trim();
             if (!word) {
-                showToast('Vui lòng nhập từ tiếng Anh để tra AI', false);
+                if (!isSilent) showToast('Vui lòng nhập từ tiếng Anh để tra AI', false);
                 return;
             }
 
-            const originalBtnText = btn.innerHTML;
-            btn.innerHTML = '⏳ AI Đang Tra...';
-            btn.disabled = true;
+            const originalBtnText = btn ? btn.innerHTML : '';
+            if (btn) {
+                btn.innerHTML = '⏳ AI Đang Tra...';
+                btn.disabled = true;
+            }
 
             try {
                 let ipa = '', pos = '', exampleTarget = '', synonyms = '';
@@ -2134,11 +2140,13 @@
                     }
                 }
 
-                showToast(`Đã tự tra AI thành công từ "${word}"!`);
+                if (!isSilent) showToast(`Đã tự tra AI thành công từ "${word}"!`);
 
             } finally {
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
+                if (btn) {
+                    btn.innerHTML = originalBtnText;
+                    btn.disabled = false;
+                }
             }
         }
 
@@ -2150,15 +2158,32 @@
             document.getElementById('input-collocation').value = collocation;
             document.getElementById('input-synonyms').value = synonyms;
             document.getElementById('input-example').value = example;
-            showToast(`Đã điền gợi ý từ "${word}"`);
+            saveCustomWordFromForm();
         }
 
-        function saveCustomWordFromForm() {
-            const word = document.getElementById('input-word').value.trim();
-            const meaning = document.getElementById('input-meaning').value.trim();
-            if (!word || !meaning) {
-                showToast('Vui lòng nhập Từ gốc và Nghĩa tiếng Việt.', false);
+        async function saveCustomWordFromForm() {
+            const wordInput = document.getElementById('input-word');
+            const word = wordInput.value.trim();
+            if (!word) {
+                showToast('Chị vui lòng nhập Từ gốc Tiếng Anh vào ô số 1 nhé!', false);
+                wordInput.focus();
                 return;
+            }
+
+            let meaning = document.getElementById('input-meaning').value.trim();
+            const btnSave = document.getElementById('btn-save-word');
+            const originalSaveText = btnSave ? btnSave.innerHTML : '';
+
+            // Auto lookup translation on the fly if meaning is missing
+            if (!meaning) {
+                if (btnSave) btnSave.innerHTML = '⏳ AI Đang Tra & Lưu Tự Động...';
+                try {
+                    await autoLookupEnglishWord(true);
+                    meaning = document.getElementById('input-meaning').value.trim();
+                } catch (e) {}
+                if (!meaning) {
+                    meaning = word;
+                }
             }
 
             const newObj = {
@@ -2193,6 +2218,7 @@
             document.getElementById('input-synonyms').value = '';
             document.getElementById('input-example').value = '';
 
+            if (btnSave) btnSave.innerHTML = originalSaveText;
             confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
             showToast(`Đã lưu "${word}" & Tự động đồng bộ 3 thiết bị!`);
             switchView('notebook');
