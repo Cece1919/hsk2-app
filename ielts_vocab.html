@@ -1830,7 +1830,9 @@
         };
 
         let currentUser = { email: "cece_master@cloud.app", displayName: "3-Device Auto Cloud", provider: 'default' };
-        let isSyncing = false;
+        let hasUnpushedChanges = false;
+        let isPushing = false;
+        let isPulling = false;
 
         /* --- TOAST & CONFIRMATION MODALS --- */
         function showToast(msg, isSuccess = true) {
@@ -1941,7 +1943,7 @@
             }
         }
 
-        function saveAppState() {
+        function saveAppState(triggerPush = true) {
             if (!appState.words || appState.words.length === 0) {
                 appState.words = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
             }
@@ -1952,7 +1954,10 @@
             localStorage.setItem('cece_english_notebook_v1', dataToSave);
 
             updateBadges();
-            syncToCloudFirestore();
+            if (triggerPush) {
+                hasUnpushedChanges = true;
+                syncToCloudFirestore();
+            }
         }
 
         function updateBadges() {
@@ -2616,10 +2621,10 @@
         }
 
         async function syncToCloudFirestore() {
-            if (isSyncing) return;
+            if (isPushing) return;
             try {
-                isSyncing = true;
-                await fetch(MASTER_CLOUD_BIN_URL, {
+                isPushing = true;
+                const res = await fetch(MASTER_CLOUD_BIN_URL, {
                     method: 'PUT',
                     headers: { 
                         'Content-Type': 'application/json',
@@ -2631,15 +2636,30 @@
                         words: appState.words
                     })
                 });
+                if (res.ok) {
+                    hasUnpushedChanges = false;
+                    const syncLabel = document.getElementById('header-cloud-label');
+                    if (syncLabel) syncLabel.textContent = '🟢 Auto-Sync 3 Thiết Bị';
+                }
             } catch (e) {
                 console.log('Cloud Sync note:', e);
             } finally {
-                isSyncing = false;
+                isPushing = false;
             }
         }
 
         async function pullFromCloudFirestore(isSilent = false) {
+            if (isPushing) return;
+            
+            // Retry pending local changes first if any failed push
+            if (hasUnpushedChanges) {
+                await syncToCloudFirestore();
+                return;
+            }
+
+            if (isPulling) return;
             try {
+                isPulling = true;
                 const res = await fetch(`${MASTER_CLOUD_BIN_URL}?_t=${Date.now()}`, {
                     method: 'GET',
                     headers: { 
@@ -2658,23 +2678,24 @@
                             appState.words = data.words;
                             appState.lastUpdatedAt = data.updatedAt || Date.now();
                             
-                            const dataToSave = JSON.stringify({ words: appState.words, updatedAt: appState.lastUpdatedAt });
-                            localStorage.setItem('cece_english_notebook_v3', dataToSave);
-                            localStorage.setItem('cece_english_notebook_v2', dataToSave);
-                            localStorage.setItem('cece_english_notebook_v1', dataToSave);
+                            saveAppState(false);
                             
-                            updateBadges();
                             if (appState.activeView === 'notebook') renderNotebookSheet();
                             if (appState.activeView === 'srs') renderSRSCard();
                             
+                            const syncLabel = document.getElementById('header-cloud-label');
+                            if (syncLabel) syncLabel.textContent = '🟢 Auto-Sync 3 Thiết Bị';
+
                             if (!isSilent) {
-                                showToast('⚡ Đã tự động cập nhật dữ liệu từ iPad!');
+                                showToast('⚡ Đã tự động cập nhật dữ liệu từ thiết bị khác!');
                             }
                         }
                     }
                 }
             } catch (e) {
                 console.log('Cloud Pull note:', e);
+            } finally {
+                isPulling = false;
             }
         }
 
