@@ -49,14 +49,16 @@
             user-select: none;
         }
 
+        /* iPhone Safari Keyboard & Input Focus Fix */
         input, textarea, select {
             pointer-events: auto !important;
-            touch-action: manipulation !important;
+            touch-action: auto !important;
+            cursor: text !important;
             -webkit-user-select: text !important;
             user-select: text !important;
-            font-size: 16px !important; /* Prevents iOS Safari auto-zoom keyboard lock */
-            -webkit-appearance: none;
-            appearance: none;
+            font-size: 16px !important; /* Crucial for iOS Safari: prevents auto-zoom keyboard drop */
+            -webkit-appearance: none !important;
+            appearance: none !important;
         }
 
         .hidden, [style*="display: none"], [style*="display:none"] {
@@ -243,7 +245,7 @@
                             <div>
                                 <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">1. Từ / Cụm Từ Tiếng Anh:</label>
                                 <div class="flex gap-2">
-                                    <input type="text" id="input-word" placeholder="Vd: Meticulous, Alleviate, Assertive..." class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-bold text-[#2b2426] bg-[#faf7f5] focus:outline-none focus:border-[#935864]">
+                                    <input type="text" id="input-word" inputmode="text" autocomplete="off" autocapitalize="off" onclick="this.focus()" onkeydown="if(event.key==='Enter') { event.preventDefault(); saveCustomWordFromForm(); }" placeholder="Vd: Meticulous, Alleviate, Assertive..." class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs font-bold text-[#2b2426] bg-[#faf7f5] focus:outline-none focus:border-[#935864]">
                                     <button type="button" onclick="autoLookupEnglishWord()" id="btn-lookup" class="px-3 py-2 bg-[#8f525e] hover:bg-[#7b434f] text-white font-semibold text-xs rounded-xl transition flex items-center gap-1 whitespace-nowrap shadow-2xs cursor-pointer">
                                         🤖 Tra & Điền AI
                                     </button>
@@ -253,33 +255,33 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">2. Phiên Âm IPA:</label>
-                                    <input type="text" id="input-ipa" placeholder="Vd: /mɪˈtɪkjələs/" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#7a4853] bg-[#faf7f5] outline-none">
+                                    <input type="text" id="input-ipa" inputmode="text" autocomplete="off" onclick="this.focus()" placeholder="Vd: /mɪˈtɪkjələs/" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs font-semibold text-[#7a4853] bg-[#faf7f5] outline-none">
                                 </div>
                                 <div>
                                     <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">3. Từ Loại:</label>
-                                    <input type="text" id="input-pos" placeholder="Vd: adj. / verb / noun" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
+                                    <input type="text" id="input-pos" inputmode="text" autocomplete="off" onclick="this.focus()" placeholder="Vd: adj. / verb / noun" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">4. Nghĩa Tiếng Việt (Tự Động Dịch AI):</label>
-                                <input type="text" id="input-meaning" placeholder="Vd: Tỉ mỉ, kỹ lưỡng, cẩn thận" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
+                                <input type="text" id="input-meaning" inputmode="text" autocomplete="off" onclick="this.focus()" placeholder="Vd: Tỉ mỉ, kỹ lưỡng, cẩn thận" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs font-semibold text-[#2b2426] bg-[#faf7f5] outline-none">
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">5. Collocation:</label>
-                                    <input type="text" id="input-collocation" placeholder="Vd: meticulous about" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
+                                    <input type="text" id="input-collocation" inputmode="text" autocomplete="off" onclick="this.focus()" placeholder="Vd: meticulous about" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
                                 </div>
                                 <div>
                                     <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">6. Từ Đồng Nghĩa:</label>
-                                    <input type="text" id="input-synonyms" placeholder="Vd: thorough, careful" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
+                                    <input type="text" id="input-synonyms" inputmode="text" autocomplete="off" onclick="this.focus()" placeholder="Vd: thorough, careful" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs text-[#2b2426] bg-[#faf7f5] outline-none">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="text-[10px] font-semibold text-[#6e5f62] block uppercase mb-1">7. Ví Dụ Dùng Từ Đó (Tiếng Anh + Dịch Việt AI):</label>
-                                <textarea id="input-example" rows="2" placeholder="Vd: She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc nghiên cứu.)" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs text-[#2b2426] bg-[#faf7f5] outline-none"></textarea>
+                                <textarea id="input-example" inputmode="text" onclick="this.focus()" rows="2" placeholder="Vd: She was meticulous about her research work. (Cô ấy rất tỉ mỉ trong công việc nghiên cứu.)" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-base sm:text-xs text-[#2b2426] bg-[#faf7f5] outline-none"></textarea>
                             </div>
                         </div>
 
