@@ -2626,10 +2626,7 @@
                 isPushing = true;
                 const res = await fetch(MASTER_CLOUD_BIN_URL, {
                     method: 'PUT',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Cache-Control': 'no-cache, no-store, must-revalidate'
-                    },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         app: 'Cece_IELTS_Notebook_SRS',
                         updatedAt: Date.now(),
@@ -2660,14 +2657,7 @@
             if (isPulling) return;
             try {
                 isPulling = true;
-                const res = await fetch(`${MASTER_CLOUD_BIN_URL}?_t=${Date.now()}`, {
-                    method: 'GET',
-                    headers: { 
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache'
-                    },
-                    cache: 'no-store'
-                });
+                const res = await fetch(`${MASTER_CLOUD_BIN_URL}?_t=${Date.now()}`);
                 if (res.ok) {
                     const data = await res.json();
                     if (data && Array.isArray(data.words) && data.words.length > 0) {
