@@ -2747,7 +2747,7 @@
                             saveAppState(false);
                             
                             if (appState.activeView === 'notebook') renderNotebookSheet();
-                            if (appState.activeView === 'srs') renderSRSCard();
+                            if (appState.activeView === 'srs') initSRSDeck();
                             
                             const syncLabel = document.getElementById('header-cloud-label');
                             if (syncLabel) syncLabel.textContent = '🟢 Auto-Sync 3 Thiết Bị';
