@@ -495,9 +495,9 @@
 
                 <!-- DIRECT ACCOUNT INPUT FORM (ALWAYS VISIBLE) -->
                 <div class="space-y-2.5 p-3.5 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl">
-                    <h4 class="text-xs font-bold text-[#2b2426]">🔑 Nhập / Đổi Tên Tài Khoản Để Đồng Bộ:</h4>
+                    <h4 class="text-xs font-bold text-[#2b2426]">🔑 Tên Tài Khoản Đồng Bộ:</h4>
                     <p class="text-[10px] text-[#786669] leading-tight">
-                        Chị chỉ cần gõ cùng Tên Tài Khoản (ví dụ: <b>cece1919</b>) trên iPhone và iPad rồi bấm Kết Nối để 2 máy tự dùng chung từ vựng!
+                        Nhập cùng Tên Tài Khoản (ví dụ: <b>cece1919</b>) trên iPad & iPhone rồi bấm <b>Kết Nối</b> để tự đồng bộ qua Cloud!
                     </p>
                     <div class="flex gap-2">
                         <input type="text" id="login-input-account" placeholder="Tên tài khoản (Ví dụ: cece1919)" class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-bold text-[#0d4d4d] bg-white focus:outline-none focus:border-[#0d4d4d]" value="cece1919">
@@ -509,17 +509,46 @@
 
                 <div class="p-3 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl space-y-1">
                     <div class="flex items-center justify-between text-xs">
-                        <span class="font-bold text-[#786669]">Mã Cloud Bin ID:</span>
+                        <span class="font-bold text-[#786669]">Mã Cloud Sync Key:</span>
                         <code id="display-sync-key" class="font-mono bg-[#e6f4f4] text-[#0d4d4d] font-bold px-2 py-0.5 rounded text-xs">beefebf</code>
                     </div>
                     <p class="text-[10px] text-[#786669] leading-tight">
-                        💡 Mỗi khi chị thêm từ mới hoặc bấm ôn tập Anki, dữ liệu sẽ tự động đẩy lên tài khoản này.
+                        💡 Thêm từ mới hay ôn Anki sẽ tự động lưu vào tài khoản này.
                     </p>
+                </div>
+
+                <!-- DIRECT SYNC CODE TRANSFER (FASTEST 1-SECOND FIX) -->
+                <div class="p-3 bg-[#fffbeb] border border-[#fef3c7] rounded-xl space-y-2">
+                    <h4 class="text-xs font-bold text-[#b45309] flex items-center gap-1">
+                        <span>📲 Chuyển Từ Vựng Trực Tiếp (1 Giây)</span>
+                    </h4>
+                    <p class="text-[10px] text-[#786669] leading-tight">
+                        Bấm <b>Chép Mã</b> trên máy này -> Dán sang iPhone/iPad để dùng ngay 100% không sợ lỗi mạng:
+                    </p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" onclick="copySyncCode()" class="py-2 px-2.5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 shadow-2xs cursor-pointer">
+                            <span>📋 Chép Mã Sync</span>
+                        </button>
+                        <button type="button" onclick="pasteSyncCode()" class="py-2 px-2.5 bg-[#d97706] hover:bg-[#b45309] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 shadow-2xs cursor-pointer">
+                            <span>📥 Dán Mã Sync</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FILE EXPORT / IMPORT -->
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button type="button" onclick="exportBackupJSON()" class="py-2 px-2.5 bg-[#f0fdf4] hover:bg-[#dcfce7] text-[#166534] font-bold rounded-xl text-xs border border-[#bbf7d0] flex items-center justify-center gap-1 cursor-pointer">
+                        <span>📥 Xuất File Backup</span>
+                    </button>
+                    <button type="button" onclick="triggerFileInputImport()" class="py-2 px-2.5 bg-[#f0fdf4] hover:bg-[#dcfce7] text-[#166534] font-bold rounded-xl text-xs border border-[#bbf7d0] flex items-center justify-center gap-1 cursor-pointer">
+                        <span>📤 Nạp File Backup</span>
+                    </button>
+                    <input type="file" id="import-file-input" accept=".json" style="display: none;" onchange="handleFileImport(event)">
                 </div>
 
                 <div class="space-y-2 pt-1">
                     <button type="button" onclick="forceSyncCloud()" class="w-full py-2.5 px-4 bg-[#0d4d4d] hover:bg-[#093636] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-2xs transition cursor-pointer">
-                        <span>☁️ Đồng bộ dữ liệu ngay</span>
+                        <span>☁️ Ép Đồng Bộ Cloud Ngay</span>
                     </button>
                 </div>
             </div>
@@ -2705,7 +2734,7 @@
 
             updateAccountHeaderUI();
             hideAccountLoginForm();
-            showToast(`⚡ Đã đăng nhập tài khoản "${accInput}"! Đang tải dữ liệu...`);
+            showToast(`⚡ Đã kết nối tài khoản "${accInput}"! Đang tải dữ liệu...`);
 
             pullFromCloudFirestore(false);
         }
@@ -2734,17 +2763,39 @@
             if (isPushing) return;
             try {
                 isPushing = true;
-                const url = getCloudBinUrl();
-                const res = await fetch(url, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        app: 'Cece_IELTS_Notebook_SRS',
-                        updatedAt: Date.now(),
-                        words: appState.words
-                    })
+                const payloadStr = JSON.stringify({
+                    app: 'Cece_IELTS_Notebook_SRS',
+                    account: currentUserAccount.username || 'cece1919',
+                    updatedAt: Date.now(),
+                    words: appState.words
                 });
-                if (res.ok) {
+
+                const url = getCloudBinUrl();
+                let success = false;
+
+                // Method A: POST with text/plain (CORS Simple Request - No preflight)
+                try {
+                    const resPost = await fetch('https://extendsclass.com/api/json-storage/bin', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: payloadStr
+                    });
+                    if (resPost.ok) success = true;
+                } catch(e1) {}
+
+                // Method B: PUT to active bin URL
+                if (!success) {
+                    try {
+                        const resPut = await fetch(url, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'text/plain' },
+                            body: payloadStr
+                        });
+                        if (resPut.ok) success = true;
+                    } catch(e2) {}
+                }
+
+                if (success) {
                     hasUnpushedChanges = false;
                     const syncLabel = document.getElementById('header-cloud-label');
                     if (syncLabel) syncLabel.textContent = '🟢 Auto-Sync 3 Thiết Bị';
@@ -2808,6 +2859,88 @@
             }
         }
 
+        function copySyncCode() {
+            try {
+                const syncData = JSON.stringify(appState.words);
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(syncData).then(() => {
+                        showToast(`📋 Đã chép mã đồng bộ (${appState.words.length} từ vựng)! Dán sang máy khác.`);
+                    }).catch(() => {
+                        prompt("📋 Copy đoạn mã từ vựng dưới đây để dán sang iPhone/iPad:", syncData);
+                    });
+                } else {
+                    prompt("📋 Copy đoạn mã từ vựng dưới đây để dán sang iPhone/iPad:", syncData);
+                }
+            } catch(e) {
+                showToast('Lỗi khi chép mã: ' + e.message, false);
+            }
+        }
+
+        function pasteSyncCode() {
+            const code = prompt("📥 Dán mã từ vựng (đoạn mã JSON) được chép từ thiết bị khác vào đây:");
+            if (code && code.trim()) {
+                try {
+                    const parsed = JSON.parse(code.trim());
+                    const words = Array.isArray(parsed) ? parsed : (parsed.words || null);
+                    if (words && Array.isArray(words) && words.length > 0) {
+                        appState.words = words;
+                        saveAppState(true);
+                        if (appState.activeView === 'notebook') renderNotebookSheet();
+                        if (appState.activeView === 'srs') initSRSDeck();
+                        updateBadges();
+                        showToast(`⚡ Nhập thành công ${words.length} từ vựng mới!`);
+                        closeCloudSyncModal();
+                    } else {
+                        showToast('Mã đồng bộ không hợp lệ!', false);
+                    }
+                } catch(e) {
+                    showToast('Định dạng mã không đúng JSON!', false);
+                }
+            }
+        }
+
+        function exportBackupJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.words, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", `IELTS_Vocab_Backup_${currentUserAccount.username || 'cece1919'}.json`);
+            document.body.appendChild(dlAnchorElem);
+            dlAnchorElem.click();
+            dlAnchorElem.remove();
+            showToast('📥 Đã xuất file backup thành công!');
+        }
+
+        function triggerFileInputImport() {
+            const el = document.getElementById('import-file-input');
+            if (el) el.click();
+        }
+
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    const words = Array.isArray(parsed) ? parsed : (parsed.words || null);
+                    if (words && Array.isArray(words) && words.length > 0) {
+                        appState.words = words;
+                        saveAppState(true);
+                        if (appState.activeView === 'notebook') renderNotebookSheet();
+                        if (appState.activeView === 'srs') initSRSDeck();
+                        updateBadges();
+                        showToast(`📥 Nạp thành công ${words.length} từ vựng từ file backup!`);
+                        closeCloudSyncModal();
+                    } else {
+                        showToast('File backup không đúng định dạng từ vựng!', false);
+                    }
+                } catch(err) {
+                    showToast('Lỗi đọc file JSON: ' + err.message, false);
+                }
+            };
+            reader.readAsText(file);
+        }
+
         async function forceSyncCloud() {
             showToast('🔄 Đang kiểm tra & đồng bộ dữ liệu...');
             await syncToCloudFirestore();
@@ -2818,19 +2951,6 @@
 
         function openCloudSyncModal() {
             updateAccountHeaderUI();
-            const currentAcc = (currentUserAccount && currentUserAccount.username) ? currentUserAccount.username : 'cece1919';
-            const newAcc = prompt("🔑 Nhập Tên Tài Khoản Đồng Bộ Đa Thiết Bị (Ví dụ: cece1919):", currentAcc);
-            if (newAcc !== null) {
-                const cleanAcc = newAcc.trim();
-                if (cleanAcc) {
-                    currentUserAccount = { username: cleanAcc };
-                    localStorage.setItem('cece_user_account', JSON.stringify(currentUserAccount));
-                    updateAccountHeaderUI();
-                    showToast(`⚡ Đã kết nối tài khoản "${cleanAcc}"! Đang đồng bộ...`);
-                    pullFromCloudFirestore(false);
-                    return;
-                }
-            }
             const modal = document.getElementById('cloud-sync-modal');
             if (modal) {
                 modal.style.setProperty('display', 'flex', 'important');
