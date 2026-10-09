@@ -2597,7 +2597,7 @@
             // Initial pull on start
             pullFromCloudFirestore(true);
 
-            // Auto pull on tab switch or window focus
+            // Auto pull on tab switch, window focus, visibility change
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') {
                     pullFromCloudFirestore(true);
@@ -2607,12 +2607,12 @@
                 pullFromCloudFirestore(true);
             });
 
-            // Silent polling every 3 seconds across all 3 devices
+            // Silent polling every 2 seconds across all devices
             setInterval(() => {
                 if (document.visibilityState === 'visible') {
                     pullFromCloudFirestore(true);
                 }
-            }, 3000);
+            }, 2000);
         }
 
         async function syncToCloudFirestore() {
@@ -2621,10 +2621,13 @@
                 isSyncing = true;
                 await fetch(MASTER_CLOUD_BIN_URL, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache, no-store, must-revalidate'
+                    },
                     body: JSON.stringify({
                         app: 'Cece_IELTS_Notebook_SRS',
-                        updatedAt: appState.lastUpdatedAt || Date.now(),
+                        updatedAt: Date.now(),
                         words: appState.words
                     })
                 });
@@ -2636,20 +2639,24 @@
         }
 
         async function pullFromCloudFirestore(isSilent = false) {
-            if (isSyncing) return;
             try {
-                const res = await fetch(MASTER_CLOUD_BIN_URL, {
-                    headers: { 'Cache-Control': 'no-cache' }
+                const res = await fetch(`${MASTER_CLOUD_BIN_URL}?_t=${Date.now()}`, {
+                    method: 'GET',
+                    headers: { 
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache'
+                    },
+                    cache: 'no-store'
                 });
                 if (res.ok) {
                     const data = await res.json();
                     if (data && Array.isArray(data.words) && data.words.length > 0) {
-                        const remoteTime = data.updatedAt || 0;
-                        const localTime = appState.lastUpdatedAt || 0;
+                        const remoteFingerprint = JSON.stringify(data.words);
+                        const localFingerprint = JSON.stringify(appState.words);
 
-                        if (data.words.length !== appState.words.length || remoteTime > localTime) {
+                        if (remoteFingerprint !== localFingerprint) {
                             appState.words = data.words;
-                            appState.lastUpdatedAt = remoteTime || Date.now();
+                            appState.lastUpdatedAt = data.updatedAt || Date.now();
                             
                             const dataToSave = JSON.stringify({ words: appState.words, updatedAt: appState.lastUpdatedAt });
                             localStorage.setItem('cece_english_notebook_v3', dataToSave);
@@ -2661,7 +2668,7 @@
                             if (appState.activeView === 'srs') renderSRSCard();
                             
                             if (!isSilent) {
-                                showToast('⚡ Đã tự động cập nhật từ mới từ thiết bị khác!');
+                                showToast('⚡ Đã tự động cập nhật dữ liệu từ iPad!');
                             }
                         }
                     }
