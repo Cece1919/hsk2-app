@@ -37,16 +37,28 @@
         }
         
         /* Button Clickability & Touch Fix */
-        button, a, input, select, textarea, [role="button"] {
+        button, a, [role="button"] {
             pointer-events: auto !important;
             touch-action: manipulation;
             cursor: pointer;
-            -webkit-user-select: auto;
-            user-select: auto;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
-        .hidden {
+        input, textarea, select {
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
+            -webkit-user-select: text !important;
+            user-select: text !important;
+            font-size: 16px !important; /* Prevents iOS Safari auto-zoom keyboard lock */
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .hidden, [style*="display: none"], [style*="display:none"] {
             display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
         }
 
         /* 3D Card Flip & Safari Fix */
