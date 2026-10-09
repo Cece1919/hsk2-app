@@ -1,0 +1,1810 @@
+
+        const BUILTIN_DICTIONARY = {"爱": {"hanzi": "爱", "pinyin": "ài", "hanviet": "Ái", "meaning": "Yêu, thích", "example": "我爱吃中国菜。(Wǒ ài chī Zhōngguó cài.)", "mnemonic": "Tấm lòng (心) che chở (宀) gửi gắm đến người mình thương ➔ Yêu (爱)."}, "八": {"hanzi": "八", "pinyin": "bā", "hanviet": "Bát", "meaning": "Số 8", "example": "我有八本书。(Wǒ yǒu bā běn shū.)", "mnemonic": "Hai nét phẩy mác xòe ra hai bên tượng hình số 8."}, "爸爸": {"hanzi": "爸爸", "pinyin": "bàba", "hanviet": "Bát bát", "meaning": "Bố, cha", "example": "爸爸在看报纸。(Bàba zài kàn bàozhǐ.)", "mnemonic": "Người cha (父) trụ cột che chở cho gia đình ➔ Bố (爸爸)."}, "杯子": {"hanzi": "杯子", "pinyin": "bēizi", "hanviet": "Bôi tử", "meaning": "Cái cốc, cái ly", "example": "杯子里有茶。(Bēizi li yǒu chá.)", "mnemonic": "Cốc ngày xưa làm từ gỗ (木) ➔ Cái cốc (杯子)."}, "北京": {"hanzi": "北京", "pinyin": "Běijīng", "hanviet": "Bắc Kinh", "meaning": "Bắc Kinh (thủ đô Trung Quốc)", "example": "我想去北京旅游。(Wǒ xiǎng qù Běijīng lǚyóu.)", "mnemonic": "Kinh thành nằm ở phương Bắc ➔ Bắc Kinh (北京)."}, "本": {"hanzi": "本", "pinyin": "běn", "hanviet": "Bổn / Bản", "meaning": "Quyển, cuốn (lượng từ cho sách)", "example": "桌子上有三本书。(Zhuōzi shang yǒu sān běn shū.)", "mnemonic": "Đánh dấu gốc rễ cây gỗ (木) ➔ Cuốn / Quyển (本)."}, "不客气": {"hanzi": "不客气", "pinyin": "bú kèqi", "hanviet": "Bất khách khí", "meaning": "Đừng khách khí, không có gì", "example": "A: 谢谢你！ B: 不客气！", "mnemonic": "Lời đáp xã giao khi được cảm ơn ➔ Không có gì (不客气)."}, "不": {"hanzi": "不", "pinyin": "bù", "hanviet": "Bất", "meaning": "Không (phó từ phủ định)", "example": "我不是老师。(Wǒ bú shì lǎoshī.)", "mnemonic": "Hình mầm cây chưa nhú lên mặt đất ➔ Không / Chưa (不)."}, "菜": {"hanzi": "菜", "pinyin": "cài", "hanviet": "Thái", "meaning": "Rau, món ăn", "example": "今天的菜很好吃。(Jīntiān de cài hěn hǎochī.)", "mnemonic": "Hái thảo mộc rau cỏ (艹) về làm thức ăn ➔ Món ăn (菜)."}, "茶": {"hanzi": "茶", "pinyin": "chá", "hanviet": "Trà", "meaning": "Trà, nước chè", "example": "请喝茶。(Qǐng hē chá.)", "mnemonic": "Con người (人) hái lá cây (艹) hái từ cây gỗ (木) ➔ Uống trà (茶)."}, "吃": {"hanzi": "吃", "pinyin": "chī", "hanviet": "Cật", "meaning": "Ăn", "example": "你想吃什么？(Nǐ xiǎng chī shénme?)", "mnemonic": "Dùng miệng (口) đưa thức ăn vào ➔ Ăn (吃)."}, "出租车": {"hanzi": "出租车", "pinyin": "chūzūchē", "hanviet": "Xuất tô xa", "meaning": "Xe taxi", "example": "我们打出租车去吧。(Wǒmen dǎ chūzūchē qù ba.)", "mnemonic": "Loại xe (车) đi ra ngoài (出) trả tiền thuê (租) ➔ Xe taxi (出租车)."}, "打电话": {"hanzi": "打电话", "pinyin": "dǎ diànhuà", "hanviet": "Đả điện thoại", "meaning": "Gọi điện thoại", "example": "他在打电话。(Tā zài dǎ diànhuà.)", "mnemonic": "Bấm máy (打) truyền sóng điện (电) phát ra lời nói (话) ➔ Gọi điện (打电话)."}, "大": {"hanzi": "大", "pinyin": "dà", "hanviet": "Đại", "meaning": "To, lớn", "example": " cái gian phòng này很大。(Zhè ge fángjiān hěn dà.)", "mnemonic": "Hình người dơ hai tay rộng ra thể hiện sự to lớn ➔ To / Lớn (大)."}, "的": {"hanzi": "的", "pinyin": "de", "hanviet": "Đích", "meaning": "Của (trợ từ sở hữu / định ngữ)", "example": "这是我的书。(Zhè shì wǒ de shū.)", "mnemonic": "Điểm mốc ngắm bắn trúng đích ➔ Của (的)."}, "点": {"hanzi": "点", "pinyin": "diǎn", "hanviet": "Điểm", "meaning": "Giờ, chút ít", "example": "现在几点了？(Xiànzài jǐ diǎn le?)", "mnemonic": "Các giọt nước nhỏ rơi xuống giọt một ➔ Giờ / Chút (点)."}, "电脑": {"hanzi": "电脑", "pinyin": "diànnǎo", "hanviet": "Điện não", "meaning": "Máy tính, máy vi tính", "example": "我买了一台新电脑。(Wǒ mǎi le yì tái xīn diànnǎo.)", "mnemonic": "Bộ óc (脑) điện tử thông minh xử lý dữ liệu ➔ Máy tính (电脑)."}, "电视": {"hanzi": "电视", "pinyin": "diànshì", "hanviet": "Điện thị", "meaning": "Tivi, truyền hình", "example": "爸爸在看电视。(Bàba zài kàn diànshì.)", "mnemonic": "Màn hình điện (电) để thị giác (视) quan sát ➔ Tivi (电视)."}, "电影": {"hanzi": "电影", "pinyin": "diànyǐng", "hanviet": "Điện ảnh", "meaning": "Phim, phim ảnh", "example": "今晚我们看电影吧。(Jīnwǎn wǒmen kàn diànyǐng ba.)", "mnemonic": "Hình ảnh (影) phát ra nhờ dòng điện ➔ Phim ảnh (电影)."}, "东西": {"hanzi": "东西", "pinyin": "dōngxi", "hanviet": "Đông tây", "meaning": "Đồ đạc, vật dụng", "example": "你买什么东西？(Nǐ mǎi shénme dōngxi?)", "mnemonic": "Đi từ phương Đông sang phương Tây mua đồ ➔ Đồ đạc (东西)."}, "都": {"hanzi": "都", "pinyin": "dōu", "hanviet": "Đô", "meaning": "Đều, tất cả", "example": "我们都是留学生。(Wǒmen dōu shì liúxuéshēng.)", "mnemonic": "Mọi người ở thành đô (都) tụ họp lại ➔ Đều / Tất cả (都)."}, "读": {"hanzi": "读", "pinyin": "dú", "hanviet": "Độc", "meaning": "Đọc", "example": "请读课文。(Qǐng dú kèwén.)", "mnemonic": "Dùng lời nói (讠) đọc to bài văn ➔ Đọc (读)."}, "对不起": {"hanzi": "对不起", "pinyin": "duìbuqǐ", "hanviet": "Đối bất khởi", "meaning": "Xin lỗi", "example": "A: 对不起！ B: 没关系！", "mnemonic": "Lời xin lỗi khi làm sai ➔ Xin lỗi (对不起)."}, "多": {"hanzi": "多", "pinyin": "duō", "hanviet": "Đa", "meaning": "Nhiều", "example": "这里的人很多。(Zhèlǐ de rén hěn duō.)", "mnemonic": "Hai buổi tối (夕) chồng lên nhau ➔ Nhiều (多)."}, "多少": {"hanzi": "多少", "pinyin": "duōshao", "hanviet": "Đa thiếu", "meaning": "Bao nhiêu", "example": " cái này多少钱？(Zhè ge duōshao qián?)", "mnemonic": "Hỏi về số lượng nhiều hay ít ➔ Bao nhiêu (多少)."}, "儿子": {"hanzi": "儿子", "pinyin": "érzi", "hanviet": "Nhi tử", "meaning": "Con trai", "example": "他的儿子六岁了。(Tā de érzi liù suì le.)", "mnemonic": "Người đứa con trai nhỏ trong nhà ➔ Con trai (儿子)."}, "二": {"hanzi": "二", "pinyin": "èr", "hanviet": "Nhị", "meaning": "Số 2", "example": "现在二点了。(Xiànzài èr diǎn le.)", "mnemonic": "Hai nét ngang song song ➔ Số 2 (二)."}, "饭店": {"hanzi": "饭店", "pinyin": "fàndiàn", "hanviet": "Phạn điếm", "meaning": "Nhà hàng, khách sạn", "example": "我们在饭店吃饭。(Wǒmen zài fàndiàn chīfàn.)", "mnemonic": "Cửa hàng (店) bán cơm thức ăn (饭) ➔ Nhà hàng (饭店)."}, "飞机": {"hanzi": "飞机", "pinyin": "fēijī", "hanviet": "Phi cơ", "meaning": "Máy bay", "example": "坐飞机去上海。(Zuò fēijī qù Shànghǎi.)", "mnemonic": "Cỗ máy (机) bay (飞) trên bầu trời ➔ Máy bay (飞机)."}, "分钟": {"hanzi": "分钟", "pinyin": "fēnzhōng", "hanviet": "Phân chung", "meaning": "Phút (thời gian)", "example": "等我五分钟。(Děng wǒ wǔ fēnzhōng.)", "mnemonic": "Một phần chia trên mặt đồng hồ (钟) ➔ Phút (分钟)."}, "高兴": {"hanzi": "高兴", "pinyin": "gāoxìng", "hanviet": "Cao hưng", "meaning": "Vui mừng, phấn khởi", "example": "认识你很高兴！(Rènshi nǐ hěn gāoxìng!)", "mnemonic": "Tâm trạng hưng phấn (兴) dâng cao (高) ➔ Vui mừng (高兴)."}, "个": {"hanzi": "个", "pinyin": "gè", "hanviet": "Cá", "meaning": "Cái, con (lượng từ chung)", "example": "我有一个哥哥。(Wǒ yǒu yí ge gēge.)", "mnemonic": "Lượng từ phổ biến nhất cho người và vật ➔ Cái / Con (个)."}, "工作": {"hanzi": "工作", "pinyin": "gōngzuò", "hanviet": "Công tác", "meaning": "Làm việc, công việc", "example": "你在哪儿工作？(Nǐ zài nǎr gōngzuò?)", "mnemonic": "Công việc (工) làm ra (作) thành quả ➔ Làm việc (工作)."}, "狗": {"hanzi": "狗", "pinyin": "gǒu", "hanviet": "Cẩu", "meaning": "Con chó", "example": "我家有一只小狗。(Wǒ jiā yǒu yì zhī xiǎogǒu.)", "mnemonic": "Loài động vật bốn chân (犭) trung thành ➔ Con chó (狗)."}, "汉语": {"hanzi": "汉语", "pinyin": "Hànyǔ", "hanviet": "Hán ngữ", "meaning": "Tiếng Trung, tiếng Hán", "example": "我在学汉语。(Wǒ zài xué Hànyǔ.)", "mnemonic": "Ngôn ngữ (语) của dân tộc Hán (汉) ➔ Tiếng Trung (汉语)."}, "好": {"hanzi": "好", "pinyin": "hǎo", "hanviet": "Hảo", "meaning": "Tốt, hay, đẹp", "example": "今天天气很好。(Jīntiān tiānqì hěn hǎo.)", "mnemonic": "Người mẹ (女) ôm đứa con (子) là điều tốt đẹp ➔ Tốt / Hay (好)."}, "喝": {"hanzi": "喝", "pinyin": "hē", "hanviet": "Hát", "meaning": "Uống", "example": "请喝茶。(Qǐng hē chá.)", "mnemonic": "Mở miệng (口) uống nước giải khát ➔ Uống (喝)."}, "和": {"hanzi": "和", "pinyin": "hé", "hanviet": "Hòa", "meaning": "Và, với (liên từ)", "example": "我和你都是学生。(Wǒ hé nǐ dōu shì xuéshēng.)", "mnemonic": "Mọi miệng (口) cùng ăn lúa (禾) hòa thuận ➔ Và / Với (和)."}, "很": {"hanzi": "很", "pinyin": "hěn", "hanviet": "Rất", "meaning": "Rất (phó từ chỉ mức độ)", "example": "汉语很好学。(Hànyǔ hěn hǎo xué.)", "mnemonic": "Rất nhiều (很) cảm xúc dâng trào."}, "后面": {"hanzi": "后面", "pinyin": "hòumian", "hanviet": "Hậu diện", "meaning": "Phía sau, đằng sau", "example": "学校后面有一家饭店。(Xuéxiào hòumian yǒu yì jiā fàndiàn.)", "mnemonic": "Mặt (面) phía sau lưng (后) ➔ Đằng sau (后面)."}, "回": {"hanzi": "回", "pinyin": "huí", "hanviet": "Hồi", "meaning": "Về, quay về", "example": "我想回家。(Wǒ xiǎng huí jiā.)", "mnemonic": "Đi một vòng tròn (囗) rồi quay về ➔ Về (回)."}, "会": {"hanzi": "会", "pinyin": "huì", "hanviet": "Hội", "meaning": "Biết (qua học tập)", "example": "我会说汉语。(Wǒ huì shuō Hànyǔ.)", "mnemonic": "Con người (人) hội tụ lại học tập ➔ Biết (会)."}, "几": {"hanzi": "几", "pinyin": "jǐ", "hanviet": "Kỷ", "meaning": "Mấy, vài", "example": "你有几个苹果？(Nǐ yǒu jǐ ge píngguǒ?)", "mnemonic": "Hỏi số lượng nhỏ dưới 10 ➔ Mấy / Vài (几)."}, "家": {"hanzi": "家", "pinyin": "jiā", "hanviet": "Gia", "meaning": "Gia đình, nhà", "example": "我家在北京。(Wǒ jiā zài Běijīng.)", "mnemonic": "Dưới mái nhà (宀) có gia súc (豕) sinh sống ➔ Nhà (家)."}, "叫": {"hanzi": "叫", "pinyin": "jiào", "hanviet": "Khiếu", "meaning": "Tên là, gọi là", "example": "你叫什么名字？(Nǐ jiào shénme míngzi?)", "mnemonic": "Dùng miệng (口) cất tiếng gọi ➔ Gọi / Tên là (叫)."}, "今天": {"hanzi": "今天", "pinyin": "jīntiān", "hanviet": "Kim thiên", "meaning": "Hôm nay", "example": "今天是星期一。(Jīntiān shì xīngqīyī.)", "mnemonic": "Ngày (天) ở thời điểm hiện tại (今) ➔ Hôm nay (今天)."}, "九": {"hanzi": "九", "pinyin": "jiǔ", "hanviet": "Cửu", "meaning": "Số 9", "example": "现在九点了。(Xiànzài jiǔ diǎn le.)", "mnemonic": "Hình cánh tay đang gập lại ➔ Số 9 (九)."}, "开": {"hanzi": "开", "pinyin": "kāi", "hanviet": "Khai", "meaning": "Mở, lái (xe)", "example": "我会开车。(Wǒ huì kāichē.)", "mnemonic": "Hai tay mở then cửa ➔ Mở / Lái xe (开)."}, "看": {"hanzi": "看", "pinyin": "kàn", "hanviet": "Khán", "meaning": "Nhìn, xem, đọc", "example": "你在看什么书？(Nǐ zài kàn shénme shū?)", "mnemonic": "Giơ bàn tay (手) che trên mắt (目) để nhìn xa ➔ Xem / Nhìn (看)."}, "看见": {"hanzi": "看见", "pinyin": "kànjiàn", "hanviet": "Khán kiến", "meaning": "Nhìn thấy", "example": "我看见了一只猫。(Wǒ kànjiàn le yì zhī māo.)", "mnemonic": "Nhìn (看) và nhận ra hình ảnh (见) ➔ Nhìn thấy (看见)."}, "块": {"hanzi": "块", "pinyin": "kuài", "hanviet": "Khối", "meaning": "Đồng (đơn vị tiền), miếng", "example": " cái này苹果三块钱。(Zhè ge píngguǒ sān kuài qián.)", "mnemonic": "Cục đất (土) hay thỏi tiền ➔ Đồng tiền / Miếng (块)."}, "来": {"hanzi": "来", "pinyin": "lái", "hanviet": "Lai", "meaning": "Đến, tới", "example": "他明天来我家。(Tā míngtiān lái wǒ jiā.)", "mnemonic": "Hình cây lúa mì từ xa tới ➔ Đến / Tới (来)."}, "老师": {"hanzi": "老师", "pinyin": "lǎoshī", "hanviet": "Lão sư", "meaning": "Thầy giáo, cô giáo", "example": "王老师是我们的汉语老师。(Wáng lǎoshī shì wǒmen de Hànyǔ lǎoshī.)", "mnemonic": "Người thầy (师) kính trọng (老) truyền kiến thức ➔ Thầy cô (老师)."}, "了": {"hanzi": "了", "pinyin": "le", "hanviet": "Liễu", "meaning": "Rồi (trợ từ hoàn thành)", "example": "我吃了饭了。(Wǒ chī le fàn le.)", "mnemonic": "Diễn tả hành động đã hoàn thành ➔ Rồi (了)."}, "冷": {"hanzi": "冷", "pinyin": "lěng", "hanviet": "Lãnh", "meaning": "Lạnh", "example": "今天天气很冷。(Jīntiān tiānqì hěn lěng.)", "mnemonic": "Băng giá (冫) phủ kín buốt giá ➔ Lạnh (冷)."}, "里": {"hanzi": "里", "pinyin": "lǐ", "hanviet": "Lý", "meaning": "Bên trong", "example": "书包里有电脑。(Shūbāo li yǒu diànnǎo.)", "mnemonic": "Thửa ruộng trong làng ➔ Bên trong (里)."}, "六": {"hanzi": "六", "pinyin": "liù", "hanviet": "Lục", "meaning": "Số 6", "example": "我有六个苹果。(Wǒ yǒu liù ge píngguǒ.)", "mnemonic": "Hình ngôi nhà có mái ➔ Số 6 (六)."}, "妈妈": {"hanzi": "妈妈", "pinyin": "māma", "hanviet": "Mã mã", "meaning": "Mẹ", "example": "妈妈在做饭。(Māma zài zuòfàn.)", "mnemonic": "Người phụ nữ (女) vất vả vì con ➔ Mẹ (妈妈)."}, "吗": {"hanzi": "吗", "pinyin": "ma", "hanviet": "Mã", "meaning": "Không? (trợ từ nghi vấn)", "example": "你是中国人吗？(Nǐ shì Zhōngguó rén ma?)", "mnemonic": "Dùng miệng (口) đặt câu hỏi cuối câu ➔ Không? (吗)."}, "猫": {"hanzi": "猫", "pinyin": "māo", "hanviet": "Miêu", "meaning": "Con mèo", "example": "小猫在椅子下面。(Xiǎomāo zài yǐzi xiàmiàn.)", "mnemonic": "Loài động vật (犭) hay kêu meo meo ➔ Con mèo (猫)."}, "没关系": {"hanzi": "没关系", "pinyin": "méi guānxi", "hanviet": "Một quan hệ", "meaning": "Không sao, không có gì", "example": "A: 对不起！ B: 没关系！", "mnemonic": "Lời đáp lại khi được xin lỗi ➔ Không sao (没关系)."}, "没有": {"hanzi": "没有", "pinyin": "méiyǒu", "hanviet": "Một hữu", "meaning": "Không có, chưa", "example": "我没有钱。(Wǒ méiyǒu qián.)", "mnemonic": "Phủ định sự tồn tại ➔ Không có (没有)."}, "米饭": {"hanzi": "米饭", "pinyin": "mǐfàn", "hanviet": "Mễ phạn", "meaning": "Cơm", "example": "我喜欢吃米饭。(Wǒ xǐhuan chī mǐfàn.)", "mnemonic": "Hạt gạo (米) nấu chín thành cơm (饭) ➔ Cơm (米饭)."}, "名字": {"hanzi": "名字", "pinyin": "míngzi", "hanviet": "Danh tự", "meaning": "Tên", "example": "你的名字叫什么？(Nǐ de míngzi jiào shénme?)", "mnemonic": "Chữ (字) ghi tên (名) gọi của một người ➔ Tên (名字)."}, "明天": {"hanzi": "明天", "pinyin": "míngtiān", "hanviet": "Minh thiên", "meaning": "Ngày mai", "example": "明天见！(Míngtiān jiàn!)", "mnemonic": "Nhật (日) Nguyệt (月) trôi qua ngày mới ➔ Ngày mai (明天)."}, "哪": {"hanzi": "哪", "pinyin": "nǎ", "hanviet": "Nào", "meaning": "Nào, cái nào", "example": "你是哪国人？(Nǐ shì nǎ guó rén?)", "mnemonic": "Từ dùng để hỏi lựa chọn ➔ Nào (哪)."}, "哪儿": {"hanzi": "哪儿", "pinyin": "nǎr", "hanviet": "Nào nhi", "meaning": "Đâu, ở đâu", "example": "你去哪儿？(Nǐ qù nǎr?)", "mnemonic": "Từ dùng để hỏi vị trí ➔ Đâu / Ở đâu (哪儿)."}, "那": {"hanzi": "那", "pinyin": "nà", "hanviet": "Na", "meaning": "Thế thì, vậy thì", "example": "那我们明天去吧。 (Nà wǒmen míngtiān qù ba. - Thế thì ngày mai chúng ta đi nhé.)", "mnemonic": ""}, "呢": {"hanzi": "呢", "pinyin": "ne", "hanviet": "Ni", "meaning": "Thì sao? (trợ từ ngắt câu)", "example": "你呢？(Nǐ ne?)", "mnemonic": "Trợ từ ngữ khí đứng cuối câu ➔ Thì sao? (呢)."}, "能": {"hanzi": "能", "pinyin": "néng", "hanviet": "Năng", "meaning": "Có thể (khả năng)", "example": "我能去吗？(Wǒ néng qù ma?)", "mnemonic": "Con gấu có sức mạnh ➔ Có thể (能)."}, "你": {"hanzi": "你", "pinyin": "nǐ", "hanviet": "Nhĩ", "meaning": "Bạn, cậu, anh", "example": "你好！(Nǐ hǎo!)", "mnemonic": "Người (亻) đối diện đang trò chuyện ➔ Bạn / Cậu (你)."}, "年": {"hanzi": "年", "pinyin": "nián", "hanviet": "Niên", "meaning": "Năm", "example": "今年是2026年。(Jīnnián shì èrlíngèrliù nián.)", "mnemonic": "Mùa thu hoạch lúa chín ➔ Năm (年)."}, "女儿": {"hanzi": "女儿", "pinyin": "nǚ'ér", "hanviet": "Nữ nhi", "meaning": "Con gái", "example": "她有一个女儿。(Tā yǒu yí ge nǚ'ér.)", "mnemonic": "Đứa con là phái nữ ➔ Con gái (女儿)."}, "朋友": {"hanzi": "朋友", "pinyin": "péngyou", "hanviet": "Bằng hữu", "meaning": "Bạn bè", "example": "他是我的好朋友。(Tā shì wǒ de hǎo péngyou.)", "mnemonic": "Hai bàn tay (友) nắm chặt gắn kết ➔ Bạn bè (朋友)."}, "漂亮": {"hanzi": "漂亮", "pinyin": "piàoliang", "hanviet": "Phiêu lượng", "meaning": "Đẹp, xinh đẹp", "example": " cái này衣服很漂亮。(Zhè ge yīfu hěn piàoliang.)", "mnemonic": "Vẻ đẹp trong trẻo lấp lánh ➔ Xinh đẹp (漂亮)."}, "苹果": {"hanzi": "苹果", "pinyin": "píngguǒ", "hanviet": "Bình quả", "meaning": "Quả táo", "example": "我想吃苹果。(Wǒ xiǎng chī píngguǒ.)", "mnemonic": "Trái cây (果) tròn trịa ➔ Quả táo (苹果)."}, "七": {"hanzi": "七", "pinyin": "qī", "hanviet": "Thất", "meaning": "Số 7", "example": "七月是夏天。(Qī yuè shì xiàtiān.)", "mnemonic": "Nét cắt vuông góc ➔ Số 7 (七)."}, "钱": {"hanzi": "钱", "pinyin": "qián", "hanviet": "Tiền", "meaning": "Tiền", "example": " cái này多少钱？(Zhè ge duōshao qián?)", "mnemonic": "Đồng kim loại (钅) dùng để trao đổi ➔ Tiền (钱)."}, "前面": {"hanzi": "前面", "pinyin": "qiánmiàn", "hanviet": "Tiền diện", "meaning": "Phía trước", "example": "他在我前面。(Tā zài wǒ qiánmiàn.)", "mnemonic": "Hướng về phía trước (前) ➔ Phía trước (前面)."}, "请": {"hanzi": "请", "pinyin": "qǐng", "hanviet": "Thỉnh", "meaning": "Mời, xin vui lòng", "example": "请进！(Qǐng jìn!)", "mnemonic": "Dùng lời nói (讠) lịch sự mời mọc ➔ Mời (请)."}, "去": {"hanzi": "去", "pinyin": "qù", "hanviet": "Khứ", "meaning": "Đi", "example": "我去学校。(Wǒ qù xuéxiào.)", "mnemonic": "Rời khỏi nơi chốn ➔ Đi (去)."}, "热": {"hanzi": "热", "pinyin": "rè", "hanviet": "Nhiệt", "meaning": "Nóng", "example": "今天天很热。(Jīntiān tiān hěn rè.)", "mnemonic": "Lửa (灬) bốc lên ngùn ngụt ➔ Nóng (热)."}, "人": {"hanzi": "人", "pinyin": "rén", "hanviet": "Nhân", "meaning": "Người", "example": "他是中国人。(Tā shì Zhōngguó rén.)", "mnemonic": "Hình người bước đi ➔ Người (人)."}, "认识": {"hanzi": "认识", "pinyin": "rènshi", "hanviet": "Nhận thức", "meaning": "Quen biết, nhận ra", "example": "很高兴认识你！(Hěn gāoxìng rènshi nǐ!)", "mnemonic": "Dùng lời nói (讠) để ghi nhận kiến thức ➔ Quen biết (认识)."}, "三": {"hanzi": "三", "pinyin": "sān", "hanviet": "Tam", "meaning": "Số 3", "example": "三个人。(Sān ge rén.)", "mnemonic": "Ba nét ngang song song ➔ Số 3 (三)."}, "商店": {"hanzi": "商店", "pinyin": "shāngdiàn", "hanviet": "Thương điếm", "meaning": "Cửa hàng, tiệm", "example": "我去商店买东西。(Wǒ qù shāngdiàn mǎi dōngxi.)", "mnemonic": "Nơi tiệm (店) buôn bán (商) hàng hóa ➔ Cửa hàng (商店)."}, "上": {"hanzi": "上", "pinyin": "shàng", "hanviet": "Thượng", "meaning": "Bên trên, lên", "example": "桌子上有一本书。(Zhuōzi shang yǒu yì běn shū.)", "mnemonic": "Nằm ở vị trí phía trên đường ngang ➔ Trên / Lên (上)."}, "上午": {"hanzi": "上午", "pinyin": "shàngwǔ", "hanviet": "Thượng ngọ", "meaning": "Buổi sáng", "example": "上午我有课。(Shàngwǔ wǒ yǒu kè.)", "mnemonic": "Thời gian trước giờ ngọ trưa ➔ Buổi sáng (上午)."}, "少": {"hanzi": "少", "pinyin": "shǎo", "hanviet": "Thiếu", "meaning": "Ít", "example": "这里人很少。(Zhèlǐ rén hěn shǎo.)", "mnemonic": "Bớt đi một chút nhỏ ➔ Ít (少)."}, "谁": {"hanzi": "谁", "pinyin": "shéi", "hanviet": "Thùy", "meaning": "Ai", "example": "他是谁？(Tā shì shéi?)", "mnemonic": "Hỏi về người nào ➔ Ai (谁)."}, "什么": {"hanzi": "什么", "pinyin": "shénme", "hanviet": "Thập ma", "meaning": "Cái gì", "example": "这是什么？(Zhè shì shénme?)", "mnemonic": "Từ dùng để hỏi vật ➔ Cái gì (什么)."}, "十": {"hanzi": "十", "pinyin": "shí", "hanviet": "Thập", "meaning": "Số 10", "example": "我有十本书。(Wǒ yǒu shí běn shū.)", "mnemonic": "Dấu thập đếm đủ 10 ➔ Số 10 (十)."}, "时候": {"hanzi": "时候", "pinyin": "shíhou", "hanviet": "Thời hậu", "meaning": "Lúc, khi", "example": "你什么时候来？(Nǐ shénme shíhou lái?)", "mnemonic": "Khoảng thời gian (时) ➔ Lúc / Khi (时候)."}, "是": {"hanzi": "是", "pinyin": "shì", "hanviet": "Thị", "meaning": "Là, phải, đúng", "example": "我是学生。(Wǒ shì xuéshēng.)", "mnemonic": "Mặt trời chiếu thẳng đứng minh bạch ➔ Là / Đúng (是)."}, "书": {"hanzi": "书", "pinyin": "shū", "hanviet": "Thư", "meaning": "Sách", "example": "我在看书。(Wǒ zài kàn shū.)", "mnemonic": "Hình tay cầm bút viết lên trang giấy ➔ Sách (书)."}, "水": {"hanzi": "水", "pinyin": "shuǐ", "hanviet": "Thủy", "meaning": "Nước", "example": "请喝水。(Qǐng hē shuǐ.)", "mnemonic": "Dòng nước chảy cuồn cuộn ➔ Nước (水)."}, "水果": {"hanzi": "水果", "pinyin": "shuǐguǒ", "hanviet": "Thủy quả", "meaning": "Trái cây, hoa quả", "example": "我想买水果。(Wǒ xiǎng mǎi shuǐguǒ.)", "mnemonic": "Trái cây (果) chứa nhiều nước (水) ➔ Hoa quả (水果)."}, "睡觉": {"hanzi": "睡觉", "pinyin": "shuìjiào", "hanviet": "Thụy giác", "meaning": "Đi ngủ", "example": "我要睡觉了。(Wǒ yào shuìjiào le.)", "mnemonic": "Nhắm mắt (目) thả lỏng đi vào giấc ngủ ➔ Đi ngủ (睡觉)."}, "说话": {"hanzi": "说话", "pinyin": "shuōhuà", "hanviet": "Thuyết thoại", "meaning": "Nói chuyện", "example": "别说话！(Bié shuōhuà!)", "mnemonic": "Mở lời (讠) nói ra suy nghĩ ➔ Nói chuyện (说话)."}, "四": {"hanzi": "四", "pinyin": "sì", "hanviet": "Tứ", "meaning": "Số 4", "example": "四个人。(Sì ge rén.)", "mnemonic": "Hình hộp chia 4 phần ➔ Số 4 (四)."}, "岁": {"hanzi": "岁", "pinyin": "suì", "hanviet": "Tuế", "meaning": "Tuổi", "example": "我二十岁了。(Wǒ èrshí suì le.)", "mnemonic": "Thời gian trôi qua thêm một tuổi ➔ Tuổi (岁)."}, "他": {"hanzi": "他", "pinyin": "tā", "hanviet": "Tha", "meaning": "Anh ấy, ông ấy", "example": "他是我的好朋友。(Tā shì wǒ de hǎo péngyou.)", "mnemonic": "Người đàn ông khác (亻) ➔ Anh ấy (他)."}, "她": {"hanzi": "她", "pinyin": "tā", "hanviet": "Tha", "meaning": "Cô ấy, chị ấy", "example": "她是我的老师。(Tā shì wǒ de lǎoshī.)", "mnemonic": "Người phụ nữ (女) ➔ Cô ấy (她)."}, "太": {"hanzi": "太", "pinyin": "tài", "hanviet": "Thái", "meaning": "Quá, rất", "example": "太好了！(Tài hǎo le!)", "mnemonic": "Thêm một chấm vào chữ 大 thể hiện vượt mức ➔ Quá (太)."}, "天气": {"hanzi": "天气", "pinyin": "tiānqì", "hanviet": "Thiên khí", "meaning": "Thời tiết", "example": "今天天气很好。(Jīntiān tiānqì hěn hǎo.)", "mnemonic": "Khí (气) của đất trời (天) ➔ Thời tiết (天气)."}, "听": {"hanzi": "听", "pinyin": "tīng", "hanviet": "Thính", "meaning": "Nghe", "example": "我在听音乐。(Wǒ zài tīng yīnyuè.)", "mnemonic": "Dùng tai lắng nghe ➔ Nghe (听)."}, "同学": {"hanzi": "同学", "pinyin": "tóngxué", "hanviet": "Đồng học", "meaning": "Bạn cùng học", "example": "我们是同学。(Wǒmen s: shì tóngxué.)", "mnemonic": "Cùng nhau (同) học tập (学) ➔ Bạn học (同学)."}, "喂": {"hanzi": "喂", "pinyin": "wèi", "hanviet": "Ủy", "meaning": "Alo (khi nghe điện thoại)", "example": "喂，你是谁？(Wèi, nǐ shì shéi?)", "mnemonic": "Dùng miệng (口) cất tiếng chào khi nghe máy ➔ Alo (喂)."}, "我": {"hanzi": "我", "pinyin": "wǒ", "hanviet": "Ngã", "meaning": "Tôi, tớ, bản thân", "example": "我是越南人。(Wǒ shì Yuènán rén.)", "mnemonic": "Bản thân tay cầm binh khí tự vệ ➔ Tôi (我)."}, "五": {"hanzi": "五", "pinyin": "wǔ", "hanviet": "Ngũ", "meaning": "Số 5", "example": "五个人。(Wǔ ge rén.)", "mnemonic": "Số 5 ➔ 五."}, "喜欢": {"hanzi": "喜欢", "pinyin": "xǐhuan", "hanviet": "Hỷ hoan", "meaning": "Thích, yêu thích", "example": "我喜欢学汉语。(Wǒ xǐhuan xué Hànyǔ.)", "mnemonic": "Cảm thấy hoan hỷ (欢) vui vẻ (喜) ➔ Yêu thích (喜欢)."}, "下": {"hanzi": "下", "pinyin": "xià", "hanviet": "Hạ", "meaning": "Bên dưới, xuống", "example": "小猫在桌子下面。(Xiǎomāo zài zhuōzi xiàmiàn.)", "mnemonic": "Nằm ở vị trí bên dưới đường ngang ➔ Dưới / Xuống (下)."}, "下午": {"hanzi": "下午", "pinyin": "xiàwǔ", "hanviet": "Hạ ngọ", "meaning": "Buổi chiều", "example": "下午我去买东西。(Xiàwǔ wǒ qù mǎi dōngxi.)", "mnemonic": "Khoảng thời gian sau giờ trưa ➔ Buổi chiều (下午)."}, "下雨": {"hanzi": "下雨", "pinyin": "xiàyǔ", "hanviet": "Hạ vũ", "meaning": "Trời mưa", "example": "外面下雨了。(Wàimiàn xiàyǔ le.)", "mnemonic": "Cơn mưa (雨) rơi xuống (下) ➔ Trời mưa (下雨)."}, "先生": {"hanzi": "先生", "pinyin": "xiānsheng", "hanviet": "Tiên sinh", "meaning": "Ông, ngài, anh", "example": "王先生很忙。(Wáng xiānsheng hěn máng.)", "mnemonic": "Cách xưng hô lịch sự với nam giới ➔ Tiên sinh / Ông (先生)."}, "现在": {"hanzi": "现在", "pinyin": "xiànzài", "hanviet": "Hiện tại", "meaning": "Bây giờ, hiện tại", "example": "现在几点了？(Xiànzài jǐ diǎn le?)", "mnemonic": "Thời điểm đang ở (在) hiện tại (现) ➔ Bây giờ (现在)."}, "想": {"hanzi": "想", "pinyin": "xiǎng", "hanviet": "Tưởng", "meaning": "Muốn, nghĩ, nhớ", "example": "我想去中国。(Wǒ xiǎng qù Zhōngguó.)", "mnemonic": "Hình ảnh ghi sâu vào trong lòng (心) ➔ Muốn / Nhớ (想)."}, "小": {"hanzi": "小", "pinyin": "xiǎo", "hanviet": "Tiểu", "meaning": "Nhỏ, bé", "example": " cái này苹果很小。(Zhè ge píngguǒ hěn xiǎo.)", "mnemonic": "Chia nhỏ vật thành 3 mẩu ➔ Nhỏ / Bé (小)."}, "小姐": {"hanzi": "小姐", "pinyin": "xiǎojiě", "hanviet": "Tiểu thư", "meaning": "Cô gái, cô", "example": "李小姐在看书。(Lǐ xiǎojiě zài kàn shū.)", "mnemonic": "Cách gọi xưng hô cô gái trẻ ➔ Cô / Tiểu thư (小姐)."}, "些": {"hanzi": "些", "pinyin": "xiē", "hanviet": "Tá", "meaning": "Một vài, một số", "example": "Những东西是我的。(Zhèxiē dōngxi shì wǒ de.)", "mnemonic": "Số lượng nhỏ không xác định ➔ Vài / Một số (些)."}, "写": {"hanzi": "写", "pinyin": "xiě", "hanviet": "Tả", "meaning": "Viết", "example": "在写汉字。(Zài xiě hànzì.)", "mnemonic": "Đặt ngọn bút nét mực lên giấy ➔ Viết (写)."}, "谢谢": {"hanzi": "谢谢", "pinyin": "xièxie", "hanviet": "Tạ tạ", "meaning": "Cảm ơn", "example": "谢谢你的帮助！(Xièxie nǐ de bāngzhù!)", "mnemonic": "Lời nói (讠) từ tâm chân thành ➔ Cảm ơn (谢谢)."}, "星期": {"hanzi": "星期", "pinyin": "xīngqī", "hanviet": "Tinh kỳ", "meaning": "Tuần, thứ", "example": "今天是星期一。(Jīntiān shì xīngqīyī.)", "mnemonic": "Chu kỳ các vì sao ➔ Tuần / Thứ (星期)."}, "学生": {"hanzi": "学生", "pinyin": "xuéshēng", "hanviet": "Học sinh", "meaning": "Học sinh, sinh viên", "example": "我是汉语学生。(Wǒ shì Hànyǔ xuéshēng.)", "mnemonic": "Người sinh ra (生) để học tập (学) ➔ Học sinh (学生)."}, "学习": {"hanzi": "学习", "pinyin": "xuéxí", "hanviet": "Học tập", "meaning": "Học tập, học", "example": "我爱学习汉语。 (Wǒ ài xuéxí Hànyǔ. - Tôi yêu học tiếng Trung.)"}, "学校": {"hanzi": "学校", "pinyin": "xuéxiào", "hanviet": "Học hiệu", "meaning": "Trường học", "example": "我们的学校很大。(Wǒmen de xuéxiào hěn dà.)", "mnemonic": "Ngôi trường (校) dạy học (学) ➔ Trường học (学校)."}, "一": {"hanzi": "一", "pinyin": "yī", "hanviet": "Nhất", "meaning": "Số 1", "example": "一个人。(Yí ge rén.)", "mnemonic": "Một nét ngang cơ bản ➔ Số 1 (一)."}, "衣服": {"hanzi": "衣服", "pinyin": "yīfu", "hanviet": "Y phục", "meaning": "Quần áo", "example": "这条衣服很漂亮。(Zhè tiáo yīfu hěn piàoliang.)", "mnemonic": "Trang phục khoác lên người ➔ Quần áo (衣服)."}, "医生": {"hanzi": "医生", "pinyin": "yīshēng", "hanviet": "Y sinh", "meaning": "Bác sĩ", "example": "他爸爸是医生。(Tā bàba shì yīshēng.)", "mnemonic": "Người chữa bệnh ngành y (医) ➔ Bác sĩ (医生)."}, "医院": {"hanzi": "医院", "pinyin": "yīyuàn", "hanviet": "Y viện", "meaning": "Bệnh viện", "example": "他在医院工作。(Tā zài yīyuàn gōngzuò.)", "mnemonic": "Tòa viện (院) khám chữa bệnh (医) ➔ Bệnh viện (医院)."}, "椅子": {"hanzi": "椅子", "pinyin": "yǐzi", "hanviet": "Ỷ tử", "meaning": "Cái ghế", "example": "请坐在椅子上。(Qǐng zuò zài yǐzi shang.)", "mnemonic": "Đồ vật bằng gỗ (木) để tựa lưng ➔ Cái ghế (椅子)."}, "有": {"hanzi": "有", "pinyin": "yǒu", "hanviet": "Hữu", "meaning": "Có", "example": "我有三本书。(Wǒ yǒu sān běn shū.)", "mnemonic": "Bàn tay cầm miếng thịt ➔ Có (有)."}, "月": {"hanzi": "月", "pinyin": "yuè", "hanviet": "Nguyệt", "meaning": "Tháng, mặt trăng", "example": "一月很冷。(Yī yuè hěn lěng.)", "mnemonic": "Hình vành trăng khuyết ➔ Tháng / Mặt trăng (月)."}, "再见": {"hanzi": "再见", "pinyin": "zàijiàn", "hanviet": "Tái kiến", "meaning": "Tạm biệt", "example": "老师，再见！(Lǎoshī, zàijiàn!)", "mnemonic": "Hẹn gặp lại (见) lần nữa (再) ➔ Tạm biệt (再见)."}, "在": {"hanzi": "在", "pinyin": "zài", "hanviet": "Tại", "meaning": "Đang, ở tại", "example": "我在家看书。(Wǒ zài jiā kàn shū.)", "mnemonic": "Hiện diện ở một vị trí trên mặt đất ➔ Ở / Đang (在)."}, "怎么": {"hanzi": "怎么", "pinyin": "zěnme", "hanviet": "Chẩm ma", "meaning": "Làm sao, thế nào", "example": " cái này字怎么读？(Zhè ge zì zěnme dú?)", "mnemonic": "Từ hỏi phương thức ➔ Thế nào (怎么)."}, "怎么样": {"hanzi": "怎么样", "pinyin": "zěnmeyàng", "hanviet": "Chẩm ma dạng", "meaning": "Thế nào, ra sao", "example": "今天天气怎么样？(Jīntiān tiānqì zěnmeyàng?)", "mnemonic": "Hỏi tính chất / ý kiến ➔ Ra sao / Thế nào (怎么样)."}, "张": {"hanzi": "张", "pinyin": "zhāng", "hanviet": "Trương", "meaning": "Tờ, bức (lượng từ vật phẳng)", "example": "一张桌子。(Yì zhāng zhuōzi.)", "mnemonic": "Mở rộng tấm phẳng ➔ Tờ / Bức (张)."}, "中国": {"hanzi": "中国", "pinyin": "Zhōngguó", "hanviet": "Trung Quốc", "meaning": "Trung Quốc", "example": "我想去中国旅游。(Wǒ xiǎng qù Zhōngguó lǚyóu.)", "mnemonic": "Đất nước ở trung tâm ➔ Trung Quốc (中国)."}, "中午": {"hanzi": "中午", "pinyin": "zhōngwǔ", "hanviet": "Trung ngọ", "meaning": "Buổi trưa", "example": "中午我们吃米饭。(Zhōngwǔ wǒmen chī mǐfàn.)", "mnemonic": "Thời điểm chính giữa giờ ngọ ➔ Buổi trưa (中午)."}, "住": {"hanzi": "住", "pinyin": "zhù", "hanviet": "Trú", "meaning": "Ở, cư trú", "example": "你住在哪儿？(Nǐ zhù zài nǎr?)", "mnemonic": "Con người (亻) định cư sinh sống ➔ Ở / Trú (住)."}, "桌子": {"hanzi": "桌子", "pinyin": "zhuōzi", "hanviet": "Trác tử", "meaning": "Cái bàn", "example": "桌子上有一台电脑。(Zhuōzi shang yǒu yì tái diànnǎo.)", "mnemonic": "Đồ vật bằng gỗ (木) có mặt phẳng ➔ Cái bàn (桌子)."}, "字": {"hanzi": "字", "pinyin": "zì", "hanviet": "Tự", "meaning": "Chữ, chữ Hán", "example": " cái này汉字怎么写？(Zhè ge hànzì zěnme xiě?)", "mnemonic": "Đứa con trong nhà học viết ➔ Chữ (字)."}, "昨天": {"hanzi": "昨天", "pinyin": "zuótiān", "hanviet": "Tạc thiên", "meaning": "Hôm qua", "example": "昨天是星期日。(Zuótiān shì xīngqīrì.)", "mnemonic": "Ngày (天) vừa trôi qua (乍) ➔ Hôm qua (昨天)."}, "坐": {"hanzi": "坐", "pinyin": "zuò", "hanviet": "Tọa", "meaning": "Ngồi, đi (xe/máy bay)", "example": "请坐！(Qǐng zuò!)", "mnemonic": "Hai người (人) ngồi cạnh nhau trên mặt đất (土) ➔ Ngồi (坐)."}, "做": {"hanzi": "做", "pinyin": "zuò", "hanviet": "Tác", "meaning": "Làm", "example": "你在做什么？(Nǐ zài zuò shénme?)", "mnemonic": "Con người (亻) hành động làm ra kết quả ➔ Làm (做)."}, "就": {"hanzi": "就", "pinyin": "jiù", "hanviet": "Tựu", "meaning": "Thì, chính, ngay (Chỉ kết luận)", "example": "就买这件吧。🔊Jiù mǎi zhè jiàn ba.Thì mua chiếc này đi.", "mnemonic": ""}, "给": {"hanzi": "给", "pinyin": "gěi", "hanviet": "Cấp", "meaning": "Cho, cho ai, đưa cho", "example": "这是给你的书。 (Zhè shì gěi nǐ de shū. - Đây là cuốn sách cho bạn.)", "mnemonic": ""}, "让": {"hanzi": "让", "pinyin": "ràng", "hanviet": "Nhượng", "meaning": "Bảo, nhường, cho phép", "example": "让我想想。 (Ràng wǒ xiǎngxiang. - Để tôi suy nghĩ một chút.)", "mnemonic": ""}, "接": {"hanzi": "接", "pinyin": "jiē", "hanviet": "Tiếp", "meaning": "Đón, nhận, tiếp theo", "example": "我去机场接朋友。 (Wǒ qù jīchǎng jiē péngyou. - Tôi đi sân bay đón bạn.)", "mnemonic": ""}, "次": {"hanzi": "次", "pinyin": "cì", "hanviet": "Thứ", "meaning": "Lần, lượt", "example": "我去过一次北京。 (Wǒ qù guo yí cì Běijīng. - Tôi từng đi Bắc Kinh một lần.)", "mnemonic": ""}, "旅游": {"hanzi": "旅游", "pinyin": "lǚyóu", "hanviet": "Lữ Du", "meaning": "Du lịch, đi chơi", "example": "九月去北京旅游最好。 (Jiǔyuè qù Běijīng lǚyóu zuì hǎo. - Đi Bắc Kinh du lịch tháng 9 tốt nhất.)", "mnemonic": ""}, "帮忙": {"hanzi": "帮忙", "pinyin": "bāngmáng", "hanviet": "Bang Mang", "meaning": "Giúp đỡ, nhờ giúp", "example": "谢谢你帮我的忙。 (Xièxie nǐ bāng wǒ de máng. - Cảm ơn bạn đã giúp tôi.)", "mnemonic": ""}, "不好意思": {"hanzi": "不好意思", "pinyin": "bù hǎoyìsi", "hanviet": "Bất Hảo Ý Tư", "meaning": "Ngại quá, xin lỗi", "example": "真不好意思，我迟到了。 (Zhēn bù hǎoyìsi, wǒ chídào le. - Thật ngại quá, tôi đến muộn rồi.)", "mnemonic": ""}, "已经": {"hanzi": "已经", "pinyin": "yǐjīng", "hanviet": "Dĩ Kinh", "meaning": "Đã, rồi", "example": "我已经吃过了。 (Wǒ yǐjīng chī guo le. - Tôi đã ăn rồi.)", "mnemonic": ""}, "介绍": {"hanzi": "介绍", "pinyin": "jièshào", "hanviet": "Giới Thiệu", "meaning": "Giới thiệu", "example": "我给你介绍一下。 (Wǒ gěi nǐ jièshào yíxià. - Tôi giới thiệu với bạn một chút.)", "mnemonic": ""}, "有时": {"hanzi": "有时", "pinyin": "yǒushí", "hanviet": "Hữu Thì", "meaning": "Có lúc, thỉnh thoảng", "example": "他有时看书，有时看电影。 (Tā yǒushí kàn shū, yǒushí kàn diànyǐng. - Cậu ấy có lúc đọc sách, có lúc xem phim.)", "mnemonic": ""}, "懂": {"hanzi": "懂", "pinyin": "dǒng", "hanviet": "Đổng", "meaning": "Hiểu, nắm rõ", "example": "我听懂了。 (Wǒ tīng dǒng le. - Tôi nghe hiểu rồi.)", "mnemonic": ""}, "意思": {"hanzi": "意思", "pinyin": "yìsi", "hanviet": "Ý tư", "meaning": "Ý nghĩa, sự thú vị", "example": "这个词是什么意思？🔊Zhège cí shì shénme yìsi?Từ này có nghĩa là gì?", "mnemonic": ""}, "公交车": {"hanzi": "公交车", "pinyin": "gōngjiāochē", "hanviet": "Công Giao Xa", "meaning": "Xe buýt, xe công cộng", "example": "我坐公交车去学校。 (Wǒ zuò gōngjiāochē qù xuéxiào. - Tôi đi xe buýt đến trường.)", "mnemonic": ""}, "但": {"hanzi": "但", "pinyin": "dàn", "hanviet": "Đản", "meaning": "Nhưng, nhưng mà", "example": "我想去，但没有时间。 (Wǒ xiǎng qù, dàn méiyǒu shíjiān. - Tôi muốn đi nhưng không có thời gian.)", "mnemonic": ""}, "车站": {"hanzi": "车站", "pinyin": "chēzhàn", "hanviet": "Xa Trạm", "meaning": "Trạm xe, bến xe", "example": "我在车站等你。 (Wǒ zài chēzhàn děng nǐ. - Tôi đợi bạn ở trạm xe.)", "mnemonic": ""}, "远": {"hanzi": "远", "pinyin": "yuǎn", "hanviet": "Viễn", "meaning": "Xa, khoảng cách xa", "example": "我家离学校不远。 (Wǒ jiā lí xuéxiào bù yuǎn. - Nhà tôi cách trường không xa.)", "mnemonic": ""}, "打车": {"hanzi": "打车", "pinyin": "dǎchē", "hanviet": "Đả Xa", "meaning": "Bắt xe taxi", "example": "太晚了，我们打车吧。 (Tài wǎn le, wǒmen dǎchē ba. - Muộn quá rồi, chúng ta bắt taxi nhé.)", "mnemonic": ""}, "还是": {"hanzi": "还是", "pinyin": "háishì", "hanviet": "Hoàn Thị", "meaning": "Hay là, vẫn là", "example": "你喝茶还是喝咖啡？ (Nǐ hē chá háishì hē kāfēi? - Bạn uống trà hay uống cà phê?)", "mnemonic": ""}, "北京大学": {"hanzi": "北京大学", "pinyin": "Běijīng Dàxué", "hanviet": "Bắc Kinh Đại Học", "meaning": "Đại học Bắc Kinh", "example": "他在北京大学学习。 (Tā zài Běijīng Dàxué xuéxí. - Cậu ấy học ở Đại học Bắc Kinh.)", "mnemonic": ""}, "啊": {"hanzi": "啊", "pinyin": "a", "hanviet": "A", "meaning": "Thán từ cảm thán (À, nhé)", "example": "好啊，我们一起去！ (Hǎo a, wǒmen yìqǐ qù! - Được nhé, chúng ta cùng đi!)", "mnemonic": ""}, "万": {"hanzi": "万", "pinyin": "wàn", "hanviet": "Vạn", "meaning": "Mười nghìn (10.000)", "example": "这本书一万字。 (Zhè běn shū yí wàn zì. - Cuốn sách này mười nghìn chữ.)", "mnemonic": ""}, "名": {"hanzi": "名", "pinyin": "míng", "hanviet": "Danh", "meaning": "Người (Lượng từ cho sinh viên, bác sĩ)", "example": "一名医生。 (Yì míng yīshēng. - Một vị bác sĩ.)", "mnemonic": ""}, "网上": {"hanzi": "网上", "pinyin": "wǎngshang", "hanviet": "Võng Thượng", "meaning": "Trên mạng, internet", "example": "我在网上买衣服。 (Wǒ zài wǎngshang mǎi yīfu. - Tôi mua quần áo trên mạng.)", "mnemonic": ""}, "外国": {"hanzi": "外国", "pinyin": "wàiguó", "hanviet": "Ngoại Quốc", "meaning": "Nước ngoài", "example": "他是外国留学生。 (Tā shì wàiguó liúxuéshēng. - Cậu ấy là lưu học sinh nước ngoài.)", "mnemonic": ""}, "间": {"hanzi": "间", "pinyin": "jiān", "hanviet": "Gian", "meaning": "Căn, phòng (Lượng từ phòng)", "example": "一间教室。 (Yì jiān jiàoshì. - Một phòng học.)", "mnemonic": ""}, "教室": {"hanzi": "教室", "pinyin": "jiàoshì", "hanviet": "Giáo Thất", "meaning": "Phòng học, lớp học", "example": "同学们在教室里。 (Tóngxuémen zài jiàoshì li. - Các bạn học sinh ở trong lớp học.)", "mnemonic": ""}, "票": {"hanzi": "票", "pinyin": "piào", "hanviet": "Phiếu", "meaning": "Vé (vé xe, vé xem phim)", "example": "我买了两张车票。 (Wǒ mǎi le liǎng zhāng chēpiào. - Tôi đã mua hai tấm vé xe.)", "mnemonic": ""}, "别": {"hanzi": "别", "pinyin": "bié", "hanviet": "Biệt", "meaning": "Đừng, không được", "example": "别说话，认真听！ (Bié shuōhuà, rènzhēn tīng! - Đừng nói chuyện, tập trung nghe!)", "mnemonic": ""}, "过来": {"hanzi": "过来", "pinyin": "guòlái", "hanviet": "Quá Lai", "meaning": "Băng qua, lại đây", "example": "请你过来一下。 (Qǐng nǐ guòlái yíxià. - Mời bạn qua đây một chút.)", "mnemonic": ""}, "回来": {"hanzi": "回来", "pinyin": "huílái", "hanviet": "Hồi Lai", "meaning": "Trở về, về đây", "example": "你什么时候回来？ (Nǐ shénme shíhou huílái? - Khi nào bạn trở về?)", "mnemonic": ""}, "这么": {"hanzi": "这么", "pinyin": "zhème", "hanviet": "Giá Ma", "meaning": "Thế này, như thế này", "example": "你怎么这么高兴？ (Nǐ zěnme zhème gāoxìng? - Sao bạn lại vui như thế này?)", "mnemonic": ""}, "完": {"hanzi": "完", "pinyin": "wán", "hanviet": "Hoàn", "meaning": "Xong, hoàn thành", "example": "我做完作业了。 (Wǒ zuò wán zuòyè le. - Tôi làm xong bài tập rồi.)", "mnemonic": ""}, "一起": {"hanzi": "一起", "pinyin": "yìqǐ", "hanviet": "Nhất Khởi", "meaning": "Cùng nhau, cùng", "example": "我们一起去吃饭吧。 (Wǒmen yìqǐ qù chī fàn ba. - Chúng ta cùng đi ăn cơm nhé.)", "mnemonic": ""}, "出去": {"hanzi": "出去", "pinyin": "chūqù", "hanviet": "Xuất Khứ", "meaning": "Đi ra ngoài", "example": "他已经出去了。 (Tā yǐjīng chūqù le. - Cậu ấy đã đi ra ngoài rồi.)", "mnemonic": ""}, "洗": {"hanzi": "洗", "pinyin": "xǐ", "hanviet": "Tẩy", "meaning": "Rửa, giặt", "example": "吃饭前要洗手。 (Chī fàn qián yào xǐ shǒu. - Trước khi ăn cơm phải rửa tay.)", "mnemonic": ""}, "自己": {"hanzi": "自己", "pinyin": "zìjǐ", "hanviet": "Tự Kỷ", "meaning": "Tự mình, bản thân", "example": "我自己去做。 (Wǒ zìjǐ qù zuò. - Tự tôi đi làm.)", "mnemonic": ""}, "拿": {"hanzi": "拿", "pinyin": "ná", "hanviet": "Nã", "meaning": "Cầm, nắm, lấy", "example": "请帮我拿一下包。 (Qǐng bāng wǒ ná yíxià bāo. - Xin giúp tôi cầm túi một chút.)", "mnemonic": ""}, "手": {"hanzi": "手", "pinyin": "shǒu", "hanviet": "Thủ", "meaning": "Bàn tay, tay", "example": "我的手很冷。 (Wǒ de shǒu hěn lěng. - Bàn tay tôi rất lạnh.)", "mnemonic": ""}, "为什么": {"hanzi": "为什么", "pinyin": "wèishénme", "hanviet": "Vi Thập Ma", "meaning": "Tại sao, vì sao", "example": "你为什么没去？ (Nǐ wèishénme méi qù? - Tại sao bạn không đi?)", "mnemonic": ""}, "不错": {"hanzi": "不错", "pinyin": "búcuò", "hanviet": "Bất thố", "meaning": "Không tệ, khá tốt, chuẩn", "example": "颜色不错。🔊Yánsè búcuò.Màu sắc khá đẹp.", "mnemonic": ""}, "送": {"hanzi": "送", "pinyin": "sòng", "hanviet": "Tống", "meaning": "Tặng, tiễn", "example": "这是我送给你的礼物。 (Zhè shì wǒ sòng gěi nǐ de lǐwù. - Đây là món quà tôi tặng bạn.)"}, "回去": {"hanzi": "回去", "pinyin": "huíqù", "hanviet": "Hồi Khứ", "meaning": "Trở về, đi về", "example": "时间不早了，我该回去了。 (Shíjiān bù zǎo le, wǒ gāi huíqù le. - Thời gian không còn sớm, tôi phải về rồi.)", "mnemonic": ""}, "每": {"hanzi": "每", "pinyin": "měi", "hanviet": "Mỗi", "meaning": "Mỗi, mọi", "example": "每个人都有自己的名字。 (Měi gè rén dōu yǒu zìjǐ de míngzi. - Mỗi người đều có tên riêng.)", "mnemonic": ""}, "累": {"hanzi": "累", "pinyin": "lèi", "hanviet": "Lụy", "meaning": "Mệt, mệt mỏi", "example": "今天工作太累了。 (Jīntiān gōngzuò tài lèi le. - Hôm nay làm việc mệt quá.)", "mnemonic": ""}, "西安": {"hanzi": "西安", "pinyin": "Xī'ān", "hanviet": "Tây An", "meaning": "Thành phố Tây An", "example": "西安有很多历史古迹。 (Xī'ān yǒu hěn duō lìshǐ gǔjì. - Tây An có rất nhiều di tích lịch sử.)", "mnemonic": ""}, "西瓜": {"hanzi": "西瓜", "pinyin": "xīguā", "hanviet": "Tây Qua", "meaning": "Dưa hấu", "example": "夏天的西瓜非常甜。 (Xiàtiān de xīguā fēicháng tián. - Dưa hấu mùa hè cực kỳ ngọt.)", "mnemonic": ""}, "甜": {"hanzi": "甜", "pinyin": "tián", "hanviet": "Điềm", "meaning": "Ngọt, vị ngọt", "example": "这个苹果真甜！ (Zhè gè píngguǒ zhēn tián! - Quả táo này thật ngọt!)", "mnemonic": ""}, "真": {"hanzi": "真", "pinyin": "zhēn", "hanviet": "Chân", "meaning": "Thật, quả thật", "example": "你真棒！ (Nǐ zhēn bàng! - Bạn thật giỏi!)", "mnemonic": ""}, "条": {"hanzi": "条", "pinyin": "tiáo", "hanviet": "Điều", "meaning": "Chiếc, sợi, con (quần, cá, đường)", "example": "一条红色的裤子。 (Yì tiáo hóngsè de kùzi. - Một chiếc quần màu đỏ.)", "mnemonic": ""}, "裤子": {"hanzi": "裤子", "pinyin": "kùzi", "hanviet": "Khố Tử", "meaning": "Quần, chiếc quần", "example": "这条裤子很合适。 (Zhè tiáo kùzi hěn héshì. - Chiếc quần này rất vừa vặn.)", "mnemonic": ""}, "衬衫": {"hanzi": "衬衫", "pinyin": "chènshān", "hanviet": "Sấn Sam", "meaning": "Áo sơ mi", "example": "他穿一件白衬衫。 (Tā chuān yí jiàn bái chènshān. - Anh ấy mặc một chiếc áo sơ mi trắng.)", "mnemonic": ""}, "元": {"hanzi": "元", "pinyin": "yuán", "hanviet": "Nguyên", "meaning": "Tệ (Đơn vị tiền tệ Trung Quốc)", "example": "一共一百元。 (Yígòng yì bǎi yuán. - Tổng cộng 100 tệ.)", "mnemonic": ""}, "旗袍": {"hanzi": "旗袍", "pinyin": "qípáo", "hanviet": "Kỳ Báo", "meaning": "Áo sườn xám", "example": "中国旗袍非常美。 (Zhōngguó qípáo fēicháng měi. - Áo sườn xám Trung Quốc rất đẹp.)", "mnemonic": ""}, "买": {"hanzi": "买", "pinyin": "mǎi", "hanviet": "Mãi", "meaning": "Mua", "example": "你想买什么？ (Nǐ xiǎng mǎi shénme? - Bạn muốn mua gì?)", "mnemonic": ""}, "试": {"hanzi": "试", "pinyin": "shì", "hanviet": "Thử", "meaning": "Thử (thử quần áo)", "example": "我能试试吗？ (Wǒ néng shìshi ma? - Tôi thử một chút được không?)", "mnemonic": ""}, "合适": {"hanzi": "合适", "pinyin": "héshì", "hanviet": "Hợp Thích", "meaning": "Thích hợp, vừa vặn", "example": "这件衣服很合适。 (Zhè jiān yīfu hěn héshì. - Bộ quần áo này rất vừa vặn.)", "mnemonic": ""}, "重": {"hanzi": "重", "pinyin": "zhòng", "hanviet": "Trọng", "meaning": "Nặng, trọng lượng lớn", "example": "这个箱子太重了。 (Zhè gè xiāngzi tài zhòng le. - Chiếc chiếc vali này nặng quá.)", "mnemonic": ""}, "轻": {"hanzi": "轻", "pinyin": "qīng", "hanviet": "Khinh", "meaning": "Nhẹ, trọng lượng nhỏ", "example": "这个包很轻。 (Zhè gè bāo hěn qīng. - Cái túi này rất nhẹ.)", "mnemonic": ""}, "便宜": {"hanzi": "便宜", "pinyin": "piányi", "hanviet": "Tiện Nghi", "meaning": "Rẻ, giá rẻ", "example": "苹果很便宜。 (Píngguǒ hěn piányi. - Táo rất rẻ.)", "mnemonic": ""}, "贵": {"hanzi": "贵", "pinyin": "guì", "hanviet": "Quý", "meaning": "Đắt, đắt tiền", "example": "太贵了，便宜一点吧。 (Tài guì le, piányi yìdiǎn ba. - Đắt quá, rẻ một chút đi.)", "mnemonic": ""}, "外面": {"hanzi": "外面", "pinyin": "wàimian", "hanviet": "Ngoại diện", "meaning": "Bên ngoài, ngoài", "example": "外面下雨了。🔊Wàimian xià yǔ le.Bên ngoài trời mưa rồi.", "mnemonic": ""}, "准备": {"hanzi": "准备", "pinyin": "zhǔnbèi", "hanviet": "Chuẩn bị", "meaning": "Chuẩn bị, dự định", "example": "我准备考试呢。🔊Wǒ zhǔnbèi kǎoshì ne.Tôi đang chuẩn bị thi.", "mnemonic": ""}, "鱼": {"hanzi": "鱼", "pinyin": "yú", "hanviet": "Ngư", "meaning": "Cá", "example": "我想做鱼。🔊Wǒ xiǎng zuò yú.Tôi muốn làm món cá.", "mnemonic": ""}, "吧": {"hanzi": "吧", "pinyin": "ba", "hanviet": "Ba", "meaning": "Nhé, đi (Trợ từ đề nghị)", "example": "在家吃吧。🔊Zàijiā chī ba.Ăn ở nhà nhé.", "mnemonic": ""}, "件": {"hanzi": "件", "pinyin": "jiàn", "hanviet": "Kiện", "meaning": "Chiếc, cái (Quần áo, việc)", "example": "这件衣服真漂亮。🔊Zhè jiàn yīfu zhēn piàoliang.Chiếc áo này thật đẹp!", "mnemonic": ""}, "还": {"hanzi": "还", "pinyin": "hái", "hanviet": "Hoàn", "meaning": "Còn, vẫn, khá (Chỉ trình độ)", "example": "价格也还行。🔊Jiàgé yě hái xíng.Giá cả cũng khá tạm được.", "mnemonic": ""}, "可以": {"hanzi": "可以", "pinyin": "kěyǐ", "hanviet": "Khả dĩ", "meaning": "Có thể, khá tốt, tạm được", "example": "听和说还可以。🔊Tīng hé shuō hái kěyǐ.Nghe và nói cũng tạm ổn.", "mnemonic": ""}, "考试": {"hanzi": "考试", "pinyin": "kǎoshì", "hanviet": "Khảo thí", "meaning": "Thi, kỳ thi, kiểm tra", "example": "这次考试不太难。🔊Zhè cì kǎoshì bú tài nán.Lần thi này không khó lắm.", "mnemonic": ""}, "咖啡": {"hanzi": "咖啡", "pinyin": "kāfēi", "hanviet": "Cà phê", "meaning": "Cà phê", "example": "你想喝咖啡吗？ (Nǐ xiǎng hē kāfēi ma? - Bạn muốn uống cà phê không?)"}, "对": {"hanzi": "对", "pinyin": "duì", "hanviet": "Đối", "meaning": "Đối với, đúng (Giới từ chỉ đối tượng)", "example": "喝牛奶对身体很好。🔊Hē niúnǎi duì shēntǐ hěn hǎo.Uống sữa rất tốt cho sức khỏe.", "mnemonic": ""}, "门": {"hanzi": "门", "pinyin": "mén", "hanviet": "Môn", "meaning": "Cửa, cổng, môn học", "example": "门外是谁？🔊Mén wài shì shéi?Bên ngoài cửa là ai thế?", "mnemonic": ""}, "自行车": {"hanzi": "自行车", "pinyin": "zìxíngchē", "hanviet": "Tự hành xa", "meaning": "Xe đạp", "example": "我骑自行车去学校。 (Wǒ qí zìxíngchē qù xuéxiào. - Tôi đi xe đạp đến trường.)"}, "羊肉": {"hanzi": "羊肉", "pinyin": "yángròu", "hanviet": "Dương nhục", "meaning": "Thịt cừu", "example": "今天的羊肉很好吃。 (Jīntiān de yángròu hěn hǎochī. - Thịt cừu hôm nay rất ngon.)"}, "好吃": {"hanzi": "好吃", "pinyin": "hǎochī", "hanviet": "Hảo cật", "meaning": "Ngon, dễ ăn", "example": "中国菜很好吃。 (Zhōngguó cài hěn hǎochī. - Món ăn Trung Quốc rất ngon.)"}, "面条": {"hanzi": "面条", "pinyin": "miàntiáo", "hanviet": "Miến điều", "meaning": "Mì, sợi mì", "example": "我想吃一碗面条。 (Wǒ xiǎng chī yì wǎn miàntiáo. - Tôi muốn ăn một bát mì.)"}, "打篮球": {"hanzi": "打篮球", "pinyin": "dǎ lánqiú", "hanviet": "Đả lam cầu", "meaning": "Chơi bóng rổ", "example": "我们去打篮球吧。 (Wǒmen qù dǎ lánqiú ba. - Chúng mình đi chơi bóng rổ nhé.)"}, "因为": {"hanzi": "因为", "pinyin": "yīnwèi", "hanviet": "Nhân vi", "meaning": "Bởi vì, vì (Chỉ nguyên nhân)", "example": "因为天气不好...🔊Yīnwèi tiānqì bù hǎo...Bởi vì thời tiết không tốt...", "mnemonic": ""}, "所以": {"hanzi": "所以", "pinyin": "suǒyǐ", "hanviet": "Sở dĩ", "meaning": "Cho nên, nên (Chỉ kết quả)", "example": "所以我们没去。🔊Suǒyǐ wǒmen méi qù.Cho nên chúng tôi không đi.", "mnemonic": ""}, "游泳": {"hanzi": "游泳", "pinyin": "yóuyǒng", "hanviet": "Du vịnh", "meaning": "Bơi lội", "example": "夏天我喜欢去游泳。 (Xiàtiān wǒ xǐhuan qù yóuyǒng. - Mùa hè tôi thích đi bơi.)"}, "经常": {"hanzi": "经常", "pinyin": "jīngcháng", "hanviet": "Kinh thường", "meaning": "Thường xuyên", "example": "他经常去图书馆。 (Tā jīngcháng qù túshūguǎn. - Cậu ấy thường xuyên đến thư viện.)"}, "公斤": {"hanzi": "公斤", "pinyin": "gōngjīn", "hanviet": "Công cân", "meaning": "Ki-lô-gam (kg)", "example": "我要买三公斤苹果。 (Wǒ yào mǎi sān gōngjīn píngguǒ. - Tôi muốn mua 3 kg táo.)"}, "姐姐": {"hanzi": "姐姐", "pinyin": "jiějie", "hanviet": "Tỷ tỷ", "meaning": "Chị gái", "example": "我姐姐是医生。 (Wǒ jiějie shì yīshēng. - Chị gái tôi là bác sĩ.)"}, "生日": {"hanzi": "生日", "pinyin": "shēngrì", "hanviet": "Sinh nhật", "meaning": "Sinh nhật", "example": "祝你生日快乐！ (Zhù nǐ shēngrì kuàilè! - Chúc bạn sinh nhật vui vẻ!)"}, "快乐": {"hanzi": "快乐", "pinyin": "kuàilè", "hanviet": "Khoái lạc", "meaning": "Vui vẻ, hạnh phúc", "example": "祝你天天快乐！ (Zhù nǐ tiāntiān kuàilè! - Chúc bạn mỗi ngày đều vui vẻ!)"}, "礼物": {"hanzi": "礼物", "pinyin": "lǐwù", "hanviet": "Lễ vật", "meaning": "Món quà, quà tặng", "example": "谢谢你的礼物。 (Xièxie nǐ de lǐwù. - Cảm ơn món quà của bạn.)"}, "晚上": {"hanzi": "晚上", "pinyin": "wǎnshang", "hanviet": "Vãn thượng", "meaning": "Buổi tối", "example": "晚上我们一起吃饭。 (Wǎnshang wǒmen yìqǐ chīfàn. - Buổi tối chúng ta cùng ăn cơm.)"}, "蛋糕": {"hanzi": "蛋糕", "pinyin": "dàngāo", "hanviet": "Đản cao", "meaning": "Bánh kem, bánh sinh nhật", "example": "这块蛋糕很好吃。 (Zhè kuài dàngāo hěn hǎochī. - Miếng bánh kem này rất ngon.)"}, "问": {"hanzi": "问", "pinyin": "wèn", "hanviet": "Vấn", "meaning": "Hỏi", "example": "我可以问你一个问题吗？ (Wǒ kěyǐ wèn nǐ yí ge wèntí ma? - Tôi có thể hỏi bạn một câu được không?)"}, "非常": {"hanzi": "非常", "pinyin": "fēicháng", "hanviet": "Phi thường", "meaning": "Rất, cực kỳ", "example": "今天我非常高兴。 (Jīntiān wǒ fēicháng gāoxìng. - Hôm nay tôi rất vui.)"}, "开始": {"hanzi": "开始", "pinyin": "kāishǐ", "hanviet": "Khai thủy", "meaning": "Bắt đầu", "example": "会议八点开始。 (Huìyì bā diǎn kāishǐ. - Cuộc họp bắt đầu lúc 8 giờ.)"}, "长": {"hanzi": "长", "pinyin": "cháng / zhǎng", "hanviet": "Trường / Trưởng", "meaning": "Dài (cháng) / Lớn lên, trưởng thành (zhǎng)", "example": "生日那天要吃长寿面。 (Shēngrì nà tiān yào chī chángshòumiàn. - Sinh nhật phải ăn mì trường thọ.)", "mnemonic": ""}, "希望": {"hanzi": "希望", "pinyin": "xīwàng", "hanviet": "Hy vọng", "meaning": "Hy vọng, mong muốn", "example": "希望你身体健康。 (Xīwàng nǐ shēntǐ jiànkāng. - Hy vọng bạn khỏe mạnh.)"}, "参加": {"hanzi": "参加", "pinyin": "cānjiā", "hanviet": "Tham Gia", "meaning": "Tham gia, dự (tiệc, cuộc họp)", "example": "你能来参加我的生日聚会吗？ (Nǐ néng lái cānjiā wǒ de shēngrì jùhuì ma? - Bạn dự tiệc sinh nhật tôi được không?)", "mnemonic": ""}, "聚会": {"hanzi": "聚会", "pinyin": "jùhuì", "hanviet": "Tụ Hội", "meaning": "Tiệc tùng, tụ họp, buổi gặp mặt", "example": "欢迎来到我的生日聚会！ (Huānyíng lái dào wǒ de shēngrì jùhuì! - Chào mừng đến tiệc sinh nhật tôi!)", "mnemonic": ""}, "祝": {"hanzi": "祝", "pinyin": "zhù", "hanviet": "Chúc", "meaning": "Chúc, cầu chúc", "example": "祝你身体健康，学习进步！ (Zhù nǐ shēntǐ jiànkāng, xuéxí jìnbù! - Chúc bạn sức khỏe, học tập tiến bộ!)", "mnemonic": ""}, "手机": {"hanzi": "手机", "pinyin": "shǒujī", "hanviet": "Thủ cơ", "meaning": "Điện thoại di động", "example": "这是我的新手机。 (Zhè shì wǒ de xīn shǒujī. - Đây là điện thoại mới của tôi.)"}, "牛奶": {"hanzi": "牛奶", "pinyin": "niúnǎi", "hanviet": "Ngưu nãi", "meaning": "Sữa bò", "example": "早上我喝了一杯牛奶。 (Zǎoshang wǒ hē le yì bēi niúnǎi. - Buổi sáng tôi uống 1 ly sữa.)"}};
+        const HSK2_DAY1_INIT = [{"id": "hsk2-d1-1", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "就", "pinyin": "jiù", "pinyin_clean": "jiu", "hanviet": "Tựu", "meaning": "Thì, ngay, chính là", "radical": "", "mnemonic": "", "example": "我们这就出发。 (Wǒmen jiù zhè chūfā. - Chúng ta xuất phát ngay bây giờ.)"}, {"id": "hsk2-d1-2", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "给", "pinyin": "gěi", "pinyin_clean": "gei", "hanviet": "Cấp", "meaning": "Cho, cho ai, đưa cho", "radical": "", "mnemonic": "", "example": "这是给你的书。 (Zhè shì gěi nǐ de shū. - Đây là cuốn sách cho bạn.)"}, {"id": "hsk2-d1-3", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "让", "pinyin": "ràng", "pinyin_clean": "rang", "hanviet": "Nhượng", "meaning": "Bảo, nhường, cho phép", "radical": "", "mnemonic": "", "example": "让我想想。 (Ràng wǒ xiǎngxiang. - Để tôi suy nghĩ một chút.)"}, {"id": "hsk2-d1-4", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "接", "pinyin": "jiē", "pinyin_clean": "jie", "hanviet": "Tiếp", "meaning": "Đón, nhận, tiếp theo", "radical": "", "mnemonic": "", "example": "我去机场接朋友。 (Wǒ qù jīchǎng jiē péngyou. - Tôi đi sân bay đón bạn.)"}, {"id": "hsk2-d1-5", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "次", "pinyin": "cì", "pinyin_clean": "ci", "hanviet": "Thứ", "meaning": "Lần, lượt", "radical": "", "mnemonic": "", "example": "我去过一次北京。 (Wǒ qù guo yí cì Běijīng. - Tôi từng đi Bắc Kinh một lần.)"}, {"id": "hsk2-d1-6", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "旅游", "pinyin": "lǚyóu", "pinyin_clean": "lvyou", "hanviet": "Lữ Du", "meaning": "Du lịch, đi chơi", "radical": "", "mnemonic": "", "example": "九月去北京旅游最好。 (Jiǔyuè qù Běijīng lǚyóu zuì hǎo. - Đi Bắc Kinh du lịch tháng 9 tốt nhất.)"}, {"id": "hsk2-d1-7", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "帮忙", "pinyin": "bāngmáng", "pinyin_clean": "bangmang", "hanviet": "Bang Mang", "meaning": "Giúp đỡ, nhờ giúp", "radical": "", "mnemonic": "", "example": "谢谢你帮我的忙。 (Xièxie nǐ bāng wǒ de máng. - Cảm ơn bạn đã giúp tôi.)"}, {"id": "hsk2-d1-8", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "不好意思", "pinyin": "bù hǎoyìsi", "pinyin_clean": "buhaoyisi", "hanviet": "Bất Hảo Ý Tư", "meaning": "Ngại quá, xin lỗi", "radical": "", "mnemonic": "", "example": "真不好意思，我迟到了。 (Zhēn bù hǎoyìsi, wǒ chídào le. - Thật ngại quá, tôi đến muộn rồi.)"}, {"id": "hsk2-d1-9", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "已经", "pinyin": "yǐjīng", "pinyin_clean": "yijing", "hanviet": "Dĩ Kinh", "meaning": "Đã, rồi", "radical": "", "mnemonic": "", "example": "我已经吃过了。 (Wǒ yǐjīng chī guo le. - Tôi đã ăn rồi.)"}, {"id": "hsk2-d1-10", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "那", "pinyin": "nà", "pinyin_clean": "na", "hanviet": "Na", "meaning": "Thế thì, vậy thì", "radical": "", "mnemonic": "", "example": "那我们明天去吧。 (Nà wǒmen míngtiān qù ba. - Thế thì ngày mai chúng ta đi nhé.)"}, {"id": "hsk2-d1-11", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "介绍", "pinyin": "jièshào", "pinyin_clean": "jieshao", "hanviet": "Giới Thiệu", "meaning": "Giới thiệu", "radical": "", "mnemonic": "", "example": "我给你介绍一下。 (Wǒ gěi nǐ jièshào yíxià. - Tôi giới thiệu với bạn một chút.)"}, {"id": "hsk2-d1-12", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "有时", "pinyin": "yǒushí", "pinyin_clean": "youshi", "hanviet": "Hữu Thì", "meaning": "Có lúc, thỉnh thoảng", "radical": "", "mnemonic": "", "example": "他有时看书，有时看电影。 (Tā yǒushí kàn shū, yǒushí kàn diànyǐng. - Cậu ấy có lúc đọc sách, có lúc xem phim.)"}, {"id": "hsk2-d1-13", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "懂", "pinyin": "dǒng", "pinyin_clean": "dong", "hanviet": "Đổng", "meaning": "Hiểu, nắm rõ", "radical": "", "mnemonic": "", "example": "我听懂了。 (Wǒ tīng dǒng le. - Tôi nghe hiểu rồi.)"}, {"id": "hsk2-d1-14", "level": "HSK 2", "day": 1, "tag": "HSK 2 • Ngày 1", "hanzi": "意思", "pinyin": "yìsi", "pinyin_clean": "yisi", "hanviet": "Ý Tư", "meaning": "Ý nghĩa, sở thích", "radical": "", "mnemonic": "", "example": "这是什么意思？ (Zhè shì shénme yìsi? - Đây là có ý nghĩa gì?)"}, {"id": "hsk2-d2-1", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "公交车", "pinyin": "gōngjiāochē", "pinyin_clean": "gongjiaoche", "hanviet": "Công Giao Xa", "meaning": "Xe buýt, xe công cộng", "radical": "", "mnemonic": "", "example": "我坐公交车去学校。 (Wǒ zuò gōngjiāochē qù xuéxiào. - Tôi đi xe buýt đến trường.)"}, {"id": "hsk2-d2-2", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "但", "pinyin": "dàn", "pinyin_clean": "dan", "hanviet": "Đản", "meaning": "Nhưng, nhưng mà", "radical": "", "mnemonic": "", "example": "我想去，但没有时间。 (Wǒ xiǎng qù, dàn méiyǒu shíjiān. - Tôi muốn đi nhưng không có thời gian.)"}, {"id": "hsk2-d2-3", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "车站", "pinyin": "chēzhàn", "pinyin_clean": "chezhan", "hanviet": "Xa Trạm", "meaning": "Trạm xe, bến xe", "radical": "", "mnemonic": "", "example": "我在车站等你。 (Wǒ zài chēzhàn děng nǐ. - Tôi đợi bạn ở trạm xe.)"}, {"id": "hsk2-d2-4", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "远", "pinyin": "yuǎn", "pinyin_clean": "yuan", "hanviet": "Viễn", "meaning": "Xa, khoảng cách xa", "radical": "", "mnemonic": "", "example": "我家离学校不远。 (Wǒ jiā lí xuéxiào bù yuǎn. - Nhà tôi cách trường không xa.)"}, {"id": "hsk2-d2-5", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "打车", "pinyin": "dǎchē", "pinyin_clean": "dache", "hanviet": "Đả Xa", "meaning": "Bắt xe taxi", "radical": "", "mnemonic": "", "example": "太晚了，我们打车吧。 (Tài wǎn le, wǒmen dǎchē ba. - Muộn quá rồi, chúng ta bắt taxi nhé.)"}, {"id": "hsk2-d2-6", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "还是", "pinyin": "háishì", "pinyin_clean": "haishi", "hanviet": "Hoàn Thị", "meaning": "Hay là, vẫn là", "radical": "", "mnemonic": "", "example": "你喝茶还是喝咖啡？ (Nǐ hē chá háishì hē kāfēi? - Bạn uống trà hay uống cà phê?)"}, {"id": "hsk2-d2-7", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "北京大学", "pinyin": "Běijīng Dàxué", "pinyin_clean": "beijingdaxue", "hanviet": "Bắc Kinh Đại Học", "meaning": "Đại học Bắc Kinh", "radical": "", "mnemonic": "", "example": "他在北京大学学习。 (Tā zài Běijīng Dàxué xuéxí. - Cậu ấy học ở Đại học Bắc Kinh.)"}, {"id": "hsk2-d2-8", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "啊", "pinyin": "a", "pinyin_clean": "a", "hanviet": "A", "meaning": "Thán từ cảm thán (À, nhé)", "radical": "", "mnemonic": "", "example": "好啊，我们一起去！ (Hǎo a, wǒmen yìqǐ qù! - Được nhé, chúng ta cùng đi!)"}, {"id": "hsk2-d2-9", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "万", "pinyin": "wàn", "pinyin_clean": "wan", "hanviet": "Vạn", "meaning": "Mười nghìn (10.000)", "radical": "", "mnemonic": "", "example": "这本书一万字。 (Zhè běn shū yí wàn zì. - Cuốn sách này mười nghìn chữ.)"}, {"id": "hsk2-d2-10", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "名", "pinyin": "míng", "pinyin_clean": "ming", "hanviet": "Danh", "meaning": "Người (Lượng từ cho sinh viên, bác sĩ)", "radical": "", "mnemonic": "", "example": "一名医生。 (Yì míng yīshēng. - Một vị bác sĩ.)"}, {"id": "hsk2-d2-11", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "网上", "pinyin": "wǎngshang", "pinyin_clean": "wangshang", "hanviet": "Võng Thượng", "meaning": "Trên mạng, internet", "radical": "", "mnemonic": "", "example": "我在网上买衣服。 (Wǒ zài wǎngshang mǎi yīfu. - Tôi mua quần áo trên mạng.)"}, {"id": "hsk2-d2-12", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "外国", "pinyin": "wàiguó", "pinyin_clean": "waiguo", "hanviet": "Ngoại Quốc", "meaning": "Nước ngoài", "radical": "", "mnemonic": "", "example": "他是外国留学生。 (Tā shì wàiguó liúxuéshēng. - Cậu ấy là lưu học sinh nước ngoài.)"}, {"id": "hsk2-d2-13", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "间", "pinyin": "jiān", "pinyin_clean": "jian", "hanviet": "Gian", "meaning": "Căn, phòng (Lượng từ phòng)", "radical": "", "mnemonic": "", "example": "一间教室。 (Yì jiān jiàoshì. - Một phòng học.)"}, {"id": "hsk2-d2-14", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "教室", "pinyin": "jiàoshì", "pinyin_clean": "jiaoshi", "hanviet": "Giáo Thất", "meaning": "Phòng học, lớp học", "radical": "", "mnemonic": "", "example": "同学们在教室里。 (Tóngxuémen zài jiàoshì li. - Các bạn học sinh ở trong lớp học.)"}, {"id": "hsk2-d2-15", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "票", "pinyin": "piào", "pinyin_clean": "piao", "hanviet": "Phiếu", "meaning": "Vé (vé xe, vé xem phim)", "radical": "", "mnemonic": "", "example": "我买了两张车票。 (Wǒ mǎi le liǎng zhāng chēpiào. - Tôi đã mua hai tấm vé xe.)"}, {"id": "hsk2-d2-16", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "别", "pinyin": "bié", "pinyin_clean": "bie", "hanviet": "Biệt", "meaning": "Đừng, không được", "radical": "", "mnemonic": "", "example": "别说话，认真听！ (Bié shuōhuà, rènzhēn tīng! - Đừng nói chuyện, tập trung nghe!)"}, {"id": "hsk2-d2-17", "level": "HSK 2", "day": 2, "tag": "HSK 2 • Ngày 2", "hanzi": "过来", "pinyin": "guòlái", "pinyin_clean": "guolai", "hanviet": "Quá Lai", "meaning": "Băng qua, lại đây", "radical": "", "mnemonic": "", "example": "请你过来一下。 (Qǐng nǐ guòlái yíxià. - Mời bạn qua đây một chút.)"}, {"id": "hsk2-d3-1", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "回来", "pinyin": "huílái", "pinyin_clean": "huilai", "hanviet": "Hồi Lai", "meaning": "Trở về, về đây", "radical": "", "mnemonic": "", "example": "你什么时候回来？ (Nǐ shénme shíhou huílái? - Khi nào bạn trở về?)"}, {"id": "hsk2-d3-2", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "这么", "pinyin": "zhème", "pinyin_clean": "zheme", "hanviet": "Giá Ma", "meaning": "Thế này, như thế này", "radical": "", "mnemonic": "", "example": "你怎么这么高兴？ (Nǐ zěnme zhème gāoxìng? - Sao bạn lại vui như thế này?)"}, {"id": "hsk2-d3-3", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "完", "pinyin": "wán", "pinyin_clean": "wan", "hanviet": "Hoàn", "meaning": "Xong, hoàn thành", "radical": "", "mnemonic": "", "example": "我做完作业了。 (Wǒ zuò wán zuòyè le. - Tôi làm xong bài tập rồi.)"}, {"id": "hsk2-d3-4", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "一起", "pinyin": "yìqǐ", "pinyin_clean": "yiqi", "hanviet": "Nhất Khởi", "meaning": "Cùng nhau, cùng", "radical": "", "mnemonic": "", "example": "我们一起去吃饭吧。 (Wǒmen yìqǐ qù chī fàn ba. - Chúng ta cùng đi ăn cơm nhé.)"}, {"id": "hsk2-d3-5", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "出去", "pinyin": "chūqù", "pinyin_clean": "chuqu", "hanviet": "Xuất Khứ", "meaning": "Đi ra ngoài", "radical": "", "mnemonic": "", "example": "他已经出去了。 (Tā yǐjīng chūqù le. - Cậu ấy đã đi ra ngoài rồi.)"}, {"id": "hsk2-d3-6", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "洗", "pinyin": "xǐ", "pinyin_clean": "xi", "hanviet": "Tẩy", "meaning": "Rửa, giặt", "radical": "", "mnemonic": "", "example": "吃饭前要洗手。 (Chī fàn qián yào xǐ shǒu. - Trước khi ăn cơm phải rửa tay.)"}, {"id": "hsk2-d3-7", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "自己", "pinyin": "zìjǐ", "pinyin_clean": "ziji", "hanviet": "Tự Kỷ", "meaning": "Tự mình, bản thân", "radical": "", "mnemonic": "", "example": "我自己去做。 (Wǒ zìjǐ qù zuò. - Tự tôi đi làm.)"}, {"id": "hsk2-d3-8", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "拿", "pinyin": "ná", "pinyin_clean": "na", "hanviet": "Nã", "meaning": "Cầm, nắm, lấy", "radical": "", "mnemonic": "", "example": "请帮我拿一下包。 (Qǐng bāng wǒ ná yíxià bāo. - Xin giúp tôi cầm túi một chút.)"}, {"id": "hsk2-d3-9", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "手", "pinyin": "shǒu", "pinyin_clean": "shou", "hanviet": "Thủ", "meaning": "Bàn tay, tay", "radical": "", "mnemonic": "", "example": "我的手很冷。 (Wǒ de shǒu hěn lěng. - Bàn tay tôi rất lạnh.)"}, {"id": "hsk2-d3-10", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "为什么", "pinyin": "wèishénme", "pinyin_clean": "weishenme", "hanviet": "Vi Thập Ma", "meaning": "Tại sao, vì sao", "radical": "", "mnemonic": "", "example": "你为什么没去？ (Nǐ wèishénme méi qù? - Tại sao bạn không đi?)"}, {"id": "hsk2-d3-11", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "不错", "pinyin": "búcuò", "pinyin_clean": "bucuo", "hanviet": "Bất Thác", "meaning": "Không tệ, khá tốt", "radical": "", "mnemonic": "", "example": "这个电影不错。 (Zhè gè diànyǐng búcuò. - Bộ phim này không tệ.)"}, {"id": "hsk2-d3-12", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "送", "pinyin": "sòng", "pinyin_clean": "song", "hanviet": "Tống", "meaning": "Tặng, biếu, tiễn", "radical": "", "mnemonic": "", "example": "这朵花送给你。 (Zhè duǒ huā sòng gěi nǐ. - Bông hoa này tặng bạn.)"}, {"id": "hsk2-d3-13", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "回去", "pinyin": "huíqù", "pinyin_clean": "huiqu", "hanviet": "Hồi Khứ", "meaning": "Trở về, đi về", "radical": "", "mnemonic": "", "example": "时间不早了，我该回去了。 (Shíjiān bù zǎo le, wǒ gāi huíqù le. - Thời gian không còn sớm, tôi phải về rồi.)"}, {"id": "hsk2-d3-14", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "每", "pinyin": "měi", "pinyin_clean": "mei", "hanviet": "Mỗi", "meaning": "Mỗi, mọi", "radical": "", "mnemonic": "", "example": "每个人都有自己的名字。 (Měi gè rén dōu yǒu zìjǐ de míngzi. - Mỗi người đều có tên riêng.)"}, {"id": "hsk2-d3-15", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "累", "pinyin": "lèi", "pinyin_clean": "lei", "hanviet": "Lụy", "meaning": "Mệt, mệt mỏi", "radical": "", "mnemonic": "", "example": "今天工作太累了。 (Jīntiān gōngzuò tài lèi le. - Hôm nay làm việc mệt quá.)"}, {"id": "hsk2-d3-16", "level": "HSK 2", "day": 3, "tag": "HSK 2 • Ngày 3", "hanzi": "西安", "pinyin": "Xī'ān", "pinyin_clean": "xian", "hanviet": "Tây An", "meaning": "Thành phố Tây An", "radical": "", "mnemonic": "", "example": "西安有很多历史古迹。 (Xī'ān yǒu hěn duō lìshǐ gǔjì. - Tây An có rất nhiều di tích lịch sử.)"}, {"id": "hsk2-d4-1", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "西瓜", "pinyin": "xīguā", "pinyin_clean": "xigua", "hanviet": "Tây Qua", "meaning": "Dưa hấu", "radical": "", "mnemonic": "", "example": "夏天的西瓜非常甜。 (Xiàtiān de xīguā fēicháng tián. - Dưa hấu mùa hè cực kỳ ngọt.)"}, {"id": "hsk2-d4-2", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "甜", "pinyin": "tián", "pinyin_clean": "tian", "hanviet": "Điềm", "meaning": "Ngọt, vị ngọt", "radical": "", "mnemonic": "", "example": "这个苹果真甜！ (Zhè gè píngguǒ zhēn tián! - Quả táo này thật ngọt!)"}, {"id": "hsk2-d4-3", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "真", "pinyin": "zhēn", "pinyin_clean": "zhen", "hanviet": "Chân", "meaning": "Thật, quả thật", "radical": "", "mnemonic": "", "example": "你真棒！ (Nǐ zhēn bàng! - Bạn thật giỏi!)"}, {"id": "hsk2-d4-4", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "条", "pinyin": "tiáo", "pinyin_clean": "tiao", "hanviet": "Điều", "meaning": "Chiếc, sợi, con (quần, cá, đường)", "radical": "", "mnemonic": "", "example": "一条红色的裤子。 (Yì tiáo hóngsè de kùzi. - Một chiếc quần màu đỏ.)"}, {"id": "hsk2-d4-5", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "裤子", "pinyin": "kùzi", "pinyin_clean": "kuzi", "hanviet": "Khố Tử", "meaning": "Quần, chiếc quần", "radical": "", "mnemonic": "", "example": "这条裤子很合适。 (Zhè tiáo kùzi hěn héshì. - Chiếc quần này rất vừa vặn.)"}, {"id": "hsk2-d4-6", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "衬衫", "pinyin": "chènshān", "pinyin_clean": "chenshan", "hanviet": "Sấn Sam", "meaning": "Áo sơ mi", "radical": "", "mnemonic": "", "example": "他穿一件白衬衫。 (Tā chuān yí jiàn bái chènshān. - Anh ấy mặc một chiếc áo sơ mi trắng.)"}, {"id": "hsk2-d4-7", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "元", "pinyin": "yuán", "pinyin_clean": "yuan", "hanviet": "Nguyên", "meaning": "Tệ (Đơn vị tiền tệ Trung Quốc)", "radical": "", "mnemonic": "", "example": "一共一百元。 (Yígòng yì bǎi yuán. - Tổng cộng 100 tệ.)"}, {"id": "hsk2-d4-8", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "旗袍", "pinyin": "qípáo", "pinyin_clean": "qipao", "hanviet": "Kỳ Báo", "meaning": "Áo sườn xám", "radical": "", "mnemonic": "", "example": "中国旗袍非常美。 (Zhōngguó qípáo fēicháng měi. - Áo sườn xám Trung Quốc rất đẹp.)"}, {"id": "hsk2-d4-9", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "买", "pinyin": "mǎi", "pinyin_clean": "mai", "hanviet": "Mãi", "meaning": "Mua", "radical": "", "mnemonic": "", "example": "你想买什么？ (Nǐ xiǎng mǎi shénme? - Bạn muốn mua gì?)"}, {"id": "hsk2-d4-10", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "试", "pinyin": "shì", "pinyin_clean": "shi", "hanviet": "Thử", "meaning": "Thử (thử quần áo)", "radical": "", "mnemonic": "", "example": "我能试试吗？ (Wǒ néng shìshi ma? - Tôi thử một chút được không?)"}, {"id": "hsk2-d4-11", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "合适", "pinyin": "héshì", "pinyin_clean": "heshi", "hanviet": "Hợp Thích", "meaning": "Thích hợp, vừa vặn", "radical": "", "mnemonic": "", "example": "这件衣服很合适。 (Zhè jiān yīfu hěn héshì. - Bộ quần áo này rất vừa vặn.)"}, {"id": "hsk2-d4-12", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "重", "pinyin": "zhòng", "pinyin_clean": "zhong", "hanviet": "Trọng", "meaning": "Nặng, trọng lượng lớn", "radical": "", "mnemonic": "", "example": "这个箱子太重了。 (Zhè gè xiāngzi tài zhòng le. - Chiếc chiếc vali này nặng quá.)"}, {"id": "hsk2-d4-13", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "轻", "pinyin": "qīng", "pinyin_clean": "qing", "hanviet": "Khinh", "meaning": "Nhẹ, trọng lượng nhỏ", "radical": "", "mnemonic": "", "example": "这个包很轻。 (Zhè gè bāo hěn qīng. - Cái túi này rất nhẹ.)"}, {"id": "hsk2-d4-14", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "便宜", "pinyin": "piányi", "pinyin_clean": "pianyi", "hanviet": "Tiện Nghi", "meaning": "Rẻ, giá rẻ", "radical": "", "mnemonic": "", "example": "苹果很便宜。 (Píngguǒ hěn piányi. - Táo rất rẻ.)"}, {"id": "hsk2-d4-15", "level": "HSK 2", "day": 4, "tag": "HSK 2 • Ngày 4", "hanzi": "贵", "pinyin": "guì", "pinyin_clean": "gui", "hanviet": "Quý", "meaning": "Đắt, đắt tiền", "radical": "", "mnemonic": "", "example": "太贵了，便宜一点吧。 (Tài guì le, piányi yìdiǎn ba. - Đắt quá, rẻ một chút đi.)"}, {"id": "hsk2-d5-1", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "外面", "pinyin": "wàimian", "pinyin_clean": "waimian", "hanviet": "Ngoại diện", "meaning": "Bên ngoài, ngoài", "radical": "", "mnemonic": "", "example": "外面下雨了。🔊Wàimian xià yǔ le.Bên ngoài trời mưa rồi."}, {"id": "hsk2-d5-2", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "准备", "pinyin": "zhǔnbèi", "pinyin_clean": "zhunbei", "hanviet": "Chuẩn bị", "meaning": "Chuẩn bị, dự định", "radical": "", "mnemonic": "", "example": "我准备考试呢。🔊Wǒ zhǔnbèi kǎoshì ne.Tôi đang chuẩn bị thi."}, {"id": "hsk2-d5-3", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "就", "pinyin": "jiù", "pinyin_clean": "jiu", "hanviet": "Tựu", "meaning": "Thì, chính, ngay (Chỉ kết luận)", "radical": "", "mnemonic": "", "example": "就买这件吧。🔊Jiù mǎi zhè jiàn ba.Thì mua chiếc này đi."}, {"id": "hsk2-d5-4", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "鱼", "pinyin": "yú", "pinyin_clean": "yu", "hanviet": "Ngư", "meaning": "Cá", "radical": "", "mnemonic": "", "example": "我想做鱼。🔊Wǒ xiǎng zuò yú.Tôi muốn làm món cá."}, {"id": "hsk2-d5-5", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "吧", "pinyin": "ba", "pinyin_clean": "ba", "hanviet": "Ba", "meaning": "Nhé, đi (Trợ từ đề nghị)", "radical": "", "mnemonic": "", "example": "在家吃吧。🔊Zàijiā chī ba.Ăn ở nhà nhé."}, {"id": "hsk2-d5-6", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "件", "pinyin": "jiàn", "pinyin_clean": "jian", "hanviet": "Kiện", "meaning": "Chiếc, cái (Quần áo, việc)", "radical": "", "mnemonic": "", "example": "这件衣服真漂亮。🔊Zhè jiàn yīfu zhēn piàoliang.Chiếc áo này thật đẹp!"}, {"id": "hsk2-d5-7", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "还", "pinyin": "hái", "pinyin_clean": "hai", "hanviet": "Hoàn", "meaning": "Còn, vẫn, khá (Chỉ trình độ)", "radical": "", "mnemonic": "", "example": "价格也还行。🔊Jiàgé yě hái xíng.Giá cả cũng khá tạm được."}, {"id": "hsk2-d5-8", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "可以", "pinyin": "kěyǐ", "pinyin_clean": "keyi", "hanviet": "Khả dĩ", "meaning": "Có thể, khá tốt, tạm được", "radical": "", "mnemonic": "", "example": "听和说还可以。🔊Tīng hé shuō hái kěyǐ.Nghe và nói cũng tạm ổn."}, {"id": "hsk2-d5-9", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "不错", "pinyin": "búcuò", "pinyin_clean": "bucuo", "hanviet": "Bất thố", "meaning": "Không tệ, khá tốt, chuẩn", "radical": "", "mnemonic": "", "example": "颜色不错。🔊Yánsè búcuò.Màu sắc khá đẹp."}, {"id": "hsk2-d5-10", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "考试", "pinyin": "kǎoshì", "pinyin_clean": "kaoshi", "hanviet": "Khảo thí", "meaning": "Thi, kỳ thi, kiểm tra", "radical": "", "mnemonic": "", "example": "这次考试不太难。🔊Zhè cì kǎoshì bú tài nán.Lần thi này không khó lắm."}, {"id": "hsk2-d5-11", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "意思", "pinyin": "yìsi", "pinyin_clean": "yisi", "hanviet": "Ý tư", "meaning": "Ý nghĩa, sự thú vị", "radical": "", "mnemonic": "", "example": "这个词是什么意思？🔊Zhège cí shì shénme yìsi?Từ này có nghĩa là gì?"}, {"id": "hsk2-d5-12", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "咖啡", "pinyin": "kāfēi", "pinyin_clean": "kafei", "hanviet": "Kha phi", "meaning": "Cà phê", "radical": "", "mnemonic": "", "example": "我想喝杯咖啡。🔊Wǒ xiǎng hē bēi kāfēi.Tôi muốn uống tách cà phê."}, {"id": "hsk2-d5-13", "level": "HSK 2", "day": 5, "tag": "HSK 2 • Ngày 5", "hanzi": "对", "pinyin": "duì", "pinyin_clean": "dui", "hanviet": "Đối", "meaning": "Đối với, đúng (Giới từ chỉ đối tượng)", "radical": "", "mnemonic": "", "example": "喝牛奶对身体很好。🔊Hē niúnǎi duì shēntǐ hěn hǎo.Uống sữa rất tốt cho sức khỏe."}];
+        const HSK1_BASELINE_INIT = [];
+        const EXTRA_BASELINE_INIT = [];
+
+        let appState = {
+            dayStep: 1,
+            userCustomWords: [],
+            cardProgress: {},
+            maskState: { pinyin: false, meaning: false, hanzi: false },
+            viewMode: 'wide', // 'mobile' or 'wide'
+            notebookLayout: 'table', // 'table' or 'card'
+            searchQuery: '',
+            filterLevel: 'all',
+            filterDue: 'all'
+        };
+
+        let srsQueue = [];
+        let srsCurrentIdx = 0;
+        let isCardFlipped = false;
+
+        function getTodayStr() {
+            const d = new Date();
+            return d.toISOString().split('T')[0];
+        }
+
+        let autoPushTimer = null;
+        function saveAppState() {
+            try {
+                localStorage.setItem('cece_srs_notebook_app_v1', JSON.stringify(appState));
+            } catch(e) { console.error("Save error:", e); }
+            updateHeaderCounters();
+            if (appState.account && appState.account.username) {
+                if (autoPushTimer) clearTimeout(autoPushTimer);
+                autoPushTimer = setTimeout(() => {
+                    pushToCloud(true);
+                }, 2500);
+            }
+        }
+
+        const SYNC_MAP_DEFAULT_ID = "ff808181a09d98f701a0ffc2895a6769";
+        const CRUDCRUD_ENDPOINT = "https://crudcrud.com/api/901d68cb059641cc861e57af81de2e91/cece_sync";
+
+        async function hashString(str) {
+            const msgBuffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        let authTabMode = 'login';
+        function switchAuthTab(mode) {
+            authTabMode = mode;
+            const btnLogin = document.getElementById('tab-btn-login');
+            const btnReg = document.getElementById('tab-btn-register');
+            const submitBtn = document.getElementById('btn-submit-auth');
+            
+            if (mode === 'login') {
+                if (btnLogin) btnLogin.className = "flex-1 py-1.5 text-xs font-bold rounded-lg bg-white text-[#2b2426] shadow-2xs cursor-pointer";
+                if (btnReg) btnReg.className = "flex-1 py-1.5 text-xs font-medium text-[#786669] rounded-lg cursor-pointer";
+                if (submitBtn) submitBtn.innerHTML = "<span>🔓 ĐĂNG NHẬP & KẾT NỐI CLOUD</span>";
+            } else {
+                if (btnReg) btnReg.className = "flex-1 py-1.5 text-xs font-bold rounded-lg bg-white text-[#2b2426] shadow-2xs cursor-pointer";
+                if (btnLogin) btnLogin.className = "flex-1 py-1.5 text-xs font-medium text-[#786669] rounded-lg cursor-pointer";
+                if (submitBtn) submitBtn.innerHTML = "<span>📝 ĐĂNG KÝ TÀI KHOẢN MỚI</span>";
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('acc-input-password');
+            if (!pwdInput) return;
+            pwdInput.type = (pwdInput.type === 'password') ? 'text' : 'password';
+        }
+
+        async function submitAccountAuth() {
+            const userEl = document.getElementById('acc-input-username');
+            const pwdEl = document.getElementById('acc-input-password');
+            const username = (userEl ? userEl.value.trim() : '');
+            const password = (pwdEl ? pwdEl.value : '');
+
+            if (!username || !password) {
+                alert("⚠️ Vui lòng nhập đầy đủ Email/Tên tài khoản và Mật khẩu!");
+                return;
+            }
+
+            const cleanUser = username.toLowerCase().trim();
+            const pwdHash = await hashString(cleanUser + ":" + password);
+            const userHash = await hashString(cleanUser);
+            const accountKey = "user_" + userHash.substring(0, 16);
+
+            const statusEl = document.getElementById('cloud-sync-status');
+            if (statusEl) statusEl.innerHTML = "⏳ Đang kết nối máy chủ để xác thực...";
+
+            let existingVault = null;
+            try {
+                const res = await fetch(CRUDCRUD_ENDPOINT);
+                if (res.ok) {
+                    const list = await res.json();
+                    if (Array.isArray(list) && list.length > 0) {
+                        const matched = list.filter(item => item && (item.account === accountKey || item.account === cleanUser));
+                        if (matched.length > 0) existingVault = matched[matched.length - 1];
+                    }
+                }
+            } catch(e) { console.warn("Fetch vault error:", e); }
+
+            if (authTabMode === 'login') {
+                if (existingVault) {
+                    if (existingVault.pwdHash && existingVault.pwdHash !== pwdHash) {
+                        alert("❌ Mật khẩu không chính xác! Vui lòng kiểm tra lại.");
+                        if (statusEl) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Mật khẩu không đúng.</span>`;
+                        return;
+                    }
+                    appState.account = { username: cleanUser, pwdHash };
+                    appState.syncCode = accountKey;
+                    saveAppState();
+                    updateAccountUI();
+                    showToast(`🎉 Đăng nhập thành công! Tài khoản: ${cleanUser}`);
+                    pullFromCloud(false);
+                } else {
+                    appState.account = { username: cleanUser, pwdHash };
+                    appState.syncCode = accountKey;
+                    saveAppState();
+                    updateAccountUI();
+                    showToast(`🎉 Đã kết nối tài khoản (${cleanUser})!`);
+                    pushToCloud(false);
+                }
+            } else {
+                appState.account = { username: cleanUser, pwdHash };
+                appState.syncCode = accountKey;
+                saveAppState();
+                updateAccountUI();
+                showToast(`🎉 Đã đăng ký thành công tài khoản: ${cleanUser}`);
+                pushToCloud(false);
+            }
+        }
+
+        function updateAccountUI() {
+            const loggedBox = document.getElementById('account-logged-box');
+            const loginForm = document.getElementById('account-login-form');
+            const userNameEl = document.getElementById('logged-user-name');
+            const codeInput = document.getElementById('cloud-sync-code');
+            
+            const headerIcon = document.getElementById('header-acc-icon');
+            const headerLabel = document.getElementById('header-acc-label');
+
+            if (appState.account && appState.account.username) {
+                const uName = appState.account.username;
+                if (loggedBox) loggedBox.classList.remove('hidden');
+                if (loginForm) loginForm.classList.add('hidden');
+                if (userNameEl) userNameEl.innerText = uName;
+                
+                if (headerIcon) headerIcon.innerText = "👤";
+                if (headerLabel) headerLabel.innerText = uName.split('@')[0];
+
+                if (codeInput) codeInput.value = appState.syncCode || ("user_" + uName);
+            } else {
+                if (loggedBox) loggedBox.classList.add('hidden');
+                if (loginForm) loginForm.classList.remove('hidden');
+                
+                if (headerIcon) headerIcon.innerText = "🔑";
+                if (headerLabel) headerLabel.innerText = "Đăng Nhập";
+            }
+        }
+
+        function logoutAccount() {
+            delete appState.account;
+            delete appState.syncCode;
+            saveAppState();
+            updateAccountUI();
+            showToast("ℹ️ Đã đăng xuất tài khoản.");
+        }
+
+        function forceReloadApp() {
+            window.location.href = window.location.pathname + '?refresh=' + Date.now();
+        }
+
+        function loadAppState() {
+            try {
+                const saved = localStorage.getItem('cece_srs_notebook_app_v1');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (parsed) {
+                        if (parsed.userCustomWords) appState.userCustomWords = parsed.userCustomWords.filter(w => w && w.id && !String(w.id).startsWith('custom-extra-'));
+                        if (parsed.cardProgress) appState.cardProgress = parsed.cardProgress;
+                        if (parsed.dayStep) appState.dayStep = parsed.dayStep;
+                        if (parsed.googleUser) appState.googleUser = parsed.googleUser;
+                        if (parsed.syncCode) appState.syncCode = parsed.syncCode;
+                    }
+                } else {
+                    initDay1DefaultState();
+                }
+            } catch(e) {
+                initDay1DefaultState();
+            }
+
+            const today = getTodayStr();
+            const validIds = new Set(getAllWordsList().map(w => w.id));
+            if (appState.cardProgress) {
+                Object.keys(appState.cardProgress).forEach(id => {
+                    if (!validIds.has(id)) {
+                        delete appState.cardProgress[id];
+                    }
+                });
+            }
+
+            getAllWordsList().forEach(w => {
+                if (!appState.cardProgress[w.id]) {
+                    appState.cardProgress[w.id] = {
+                        interval: 1,
+                        easeFactor: 2.5,
+                        repetition: 0,
+                        dueDate: today,
+                        ticks: {}
+                    };
+                }
+            });
+
+            saveAppState();
+            applyViewModeUI();
+            updateHeaderCounters();
+            updateAccountUI();
+            pullFromCloud(true);
+        }
+
+        function openCloudSyncModal() {
+            const modal = document.getElementById('cloud-sync-modal');
+            if (modal) modal.classList.remove('hidden');
+            updateAccountUI();
+            const autoChk = document.getElementById('cloud-auto-pull');
+            if (autoChk) autoChk.checked = true;
+            
+            const statusEl = document.getElementById('cloud-sync-status');
+            if (statusEl && (!statusEl.innerText || statusEl.innerText.includes('Chưa thể kết nối') || statusEl.innerText.includes('Chưa đăng nhập'))) {
+                if (appState.account && appState.account.username) {
+                    statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã kết nối tài khoản ${appState.account.username}!</span>`;
+                } else {
+                    statusEl.innerHTML = `<span class="text-[#8c7b7f] font-medium">Nhập Email & Mật khẩu bên trên để đăng nhập.</span>`;
+                }
+            }
+        }
+
+        function closeCloudSyncModal() {
+            const modal = document.getElementById('cloud-sync-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function toggleAutoPull(e) {
+            appState.autoPullCloud = e.target.checked;
+            saveAppState();
+        }
+
+        async function pushToCloud(silent = false) {
+            const codeInput = document.getElementById('cloud-sync-code');
+            let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
+            if (appState.account && appState.account.username) {
+                accountName = appState.syncCode || ("user_" + appState.account.username);
+            }
+            appState.syncCode = accountName;
+            
+            const statusEl = document.getElementById('cloud-sync-status');
+            const btnPush = document.getElementById('btn-cloud-push');
+            if (btnPush) btnPush.disabled = true;
+            if (statusEl && !silent) statusEl.innerHTML = "⏳ Đang kết nối Đám Mây để lưu từ mới & tiến trình SRS...";
+
+            const payload = {
+                account: accountName,
+                username: appState.account ? appState.account.username : '',
+                pwdHash: appState.account ? appState.account.pwdHash : '',
+                dayStep: appState.dayStep,
+                userCustomWords: appState.userCustomWords,
+                cardProgress: appState.cardProgress,
+                updatedAt: new Date().toISOString()
+            };
+
+            let success = false;
+
+            // Primary Provider: CRUDCRUD API
+            try {
+                const resPost = await fetch(CRUDCRUD_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (resPost.ok || resPost.status === 201) {
+                    const newObj = await resPost.json();
+                    if (newObj) {
+                        if (newObj._id) appState.syncObjectId = newObj._id;
+                        success = true;
+                    }
+                }
+            } catch(e) {
+                console.warn("CRUDCRUD POST failed, trying fallback...", e);
+            }
+
+            // Backup Provider: dpaste API
+            if (!success) {
+                try {
+                    const formData = new URLSearchParams();
+                    formData.append('content', JSON.stringify(payload));
+                    formData.append('format', 'url');
+                    formData.append('expiry_days', '365');
+                    const resDp = await fetch('https://dpaste.org/api/', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    if (resDp.ok) {
+                        const dpUrl = (await resDp.text()).trim();
+                        if (dpUrl && dpUrl.startsWith('http')) {
+                            appState.dpasteUrl = dpUrl.endsWith('/raw') ? dpUrl : dpUrl + '/raw';
+                            success = true;
+                        }
+                    }
+                } catch(e) {
+                    console.warn("dpaste POST failed:", e);
+                }
+            }
+
+            saveAppState();
+
+            if (success) {
+                const nowStr = new Date().toLocaleTimeString('vi-VN');
+                const totalCount = getAllWordsList().length;
+                const userDisplay = appState.account ? appState.account.username : accountName;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã tải lên Cloud thành công (${totalCount} từ) lúc ${nowStr}!</span><br><span class="text-[10px] text-[#786669]">Tài khoản: ${userDisplay}</span>`;
+                if (!silent) showToast(`🎉 Đã lưu toàn bộ ${totalCount} từ lên Cloud!`);
+            } else {
+                if (statusEl && !silent) statusEl.innerHTML = `<span class="text-[#803838] font-bold">❌ Chưa thể kết nối Cloud.</span><br><span class="text-[10px] text-[#786669]">Vui lòng kiểm tra kết nối mạng và ấn thử lại.</span>`;
+                if (!silent) showToast("⚠️ Thử lại kết nối Đám Mây.");
+            }
+
+            if (btnPush) btnPush.disabled = false;
+        }
+
+        async function pullFromCloud(silent = false) {
+            const codeInput = document.getElementById('cloud-sync-code');
+            let accountName = (codeInput ? codeInput.value.trim() : (appState.syncCode || 'Cece1919')) || 'Cece1919';
+            if (appState.account && appState.account.username) {
+                accountName = appState.syncCode || ("user_" + appState.account.username);
+            }
+
+            const statusEl = document.getElementById('cloud-sync-status');
+            const btnPull = document.getElementById('btn-cloud-pull');
+            if (btnPull) btnPull.disabled = true;
+            if (statusEl && !silent) statusEl.innerHTML = "⏳ Đang tải dữ liệu từ Cloud về máy...";
+
+            let cloudData = null;
+
+            // Attempt 1: Fetch latest snapshot from CRUDCRUD
+            try {
+                const res = await fetch(CRUDCRUD_ENDPOINT);
+                if (res.ok) {
+                    const list = await res.json();
+                    if (Array.isArray(list) && list.length > 0) {
+                        const validList = list.filter(item => item && (item.account === accountName || (appState.account && item.username === appState.account.username)));
+                        if (validList.length > 0) {
+                            cloudData = validList[validList.length - 1];
+                        }
+                    }
+                }
+            } catch(e) {
+                console.warn("CRUDCRUD pull failed:", e);
+            }
+
+            // Attempt 2: Fallback to dpaste raw URL
+            if (!cloudData && appState.dpasteUrl) {
+                try {
+                    const resDp = await fetch(appState.dpasteUrl);
+                    if (resDp.ok) {
+                        const dpData = await resDp.json();
+                        if (dpData && (dpData.userCustomWords || dpData.cardProgress)) cloudData = dpData;
+                    }
+                } catch(e) {
+                    console.warn("dpaste pull failed:", e);
+                }
+            }
+
+            if (cloudData) {
+                if (cloudData.userCustomWords && Array.isArray(cloudData.userCustomWords)) {
+                    const existingIds = new Set((appState.userCustomWords || []).map(w => w.id));
+                    cloudData.userCustomWords.forEach(w => {
+                        if (w && w.id && !existingIds.has(w.id) && !String(w.id).startsWith('custom-extra-')) {
+                            appState.userCustomWords.push(w);
+                        }
+                    });
+                }
+                if (cloudData.cardProgress) {
+                    appState.cardProgress = Object.assign({}, appState.cardProgress, cloudData.cardProgress);
+                }
+                if (cloudData.dayStep) appState.dayStep = cloudData.dayStep;
+                
+                saveAppState();
+                updateHeaderCounters();
+                renderNotebookSheet();
+                initSrsSession();
+                
+                const nowStr = new Date().toLocaleTimeString('vi-VN');
+                const totalCount = getAllWordsList().length;
+                if (statusEl) statusEl.innerHTML = `<span class="text-[#34543f] font-bold">✅ Đã đồng bộ ${totalCount} từ từ Cloud lúc ${nowStr}!</span>`;
+                if (!silent) showToast(`🎉 Đã đồng bộ thành công ${totalCount} từ vựng từ Cloud!`);
+            } else {
+                if (statusEl && !silent) {
+                    const uDisp = appState.account ? appState.account.username : 'tài khoản này';
+                    statusEl.innerHTML = `<span class="text-[#8f525e] font-bold">ℹ️ Sẵn sàng đồng bộ cho tài khoản ${uDisp}!</span><br><span class="text-[10px] text-[#786669]">Chị hãy nhấn 'TẢI LÊN CLOUD' lần đầu tiên để đẩy từ vựng lên nhé.</span>`;
+                }
+                if (!silent) showToast("ℹ️ Sẵn sàng tạo bản lưu mới trên Cloud.");
+            }
+
+            if (btnPull) btnPull.disabled = false;
+        }
+
+        function copyQuickSyncCode() {
+            try {
+                const dataStr = JSON.stringify({
+                    u: appState.userCustomWords,
+                    p: appState.cardProgress,
+                    d: appState.dayStep,
+                    t: Date.now()
+                });
+                const encoded = btoa(encodeURIComponent(dataStr));
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(encoded).then(() => {
+                        showToast("📋 Đã sao chép Mã Data vào bộ nhớ tạm!");
+                        const statusEl = document.getElementById('cloud-sync-status');
+                        if (statusEl) statusEl.innerText = "✅ Đã sao chép! Hãy dán (paste) sang Zalo/Notes.";
+                    }).catch(() => {
+                        fallbackPromptCopy(encoded);
+                    });
+                } else {
+                    fallbackPromptCopy(encoded);
+                }
+            } catch(e) {
+                showToast("⚠️ Không thể tạo mã sao chép.");
+            }
+        }
+
+        function fallbackPromptCopy(str) {
+            prompt("Hãy sao chép (Copy) toàn bộ đoạn mã dưới đây:", str);
+        }
+
+        function pasteQuickSyncCode() {
+            const code = prompt("Dán (Paste) Mã Data từ iPhone vào ô dưới đây:");
+            if (!code || !code.trim()) return;
+            try {
+                const decoded = decodeURIComponent(atob(code.trim()));
+                const parsed = JSON.parse(decoded);
+                if (parsed && (parsed.u || parsed.p)) {
+                    if (parsed.u) appState.userCustomWords = parsed.u;
+                    if (parsed.p) appState.cardProgress = parsed.p;
+                    if (parsed.d) appState.dayStep = parsed.d;
+                    saveAppState();
+                    updateHeaderCounters();
+                    if (appState.notebookLayout === 'table') renderNotebookSheet();
+                    showToast("🎉 Đã khôi phục dữ liệu từ iPhone thành công 100%!");
+                    const statusEl = document.getElementById('cloud-sync-status');
+                    if (statusEl) statusEl.innerText = "✅ Đã nạp thành công từ Mã Data!";
+                    closeCloudSyncModal();
+                } else {
+                    alert("⚠️ Mã dữ liệu không hợp lệ!");
+                }
+            } catch(e) {
+                alert("⚠️ Mã dữ liệu bị lỗi hoặc dán không chính xác!");
+            }
+        }
+
+        function initDay1DefaultState() {
+            appState.dayStep = 1;
+            appState.userCustomWords = [];
+            appState.cardProgress = {};
+            const today = getTodayStr();
+
+            getAllWordsList().forEach(w => {
+                appState.cardProgress[w.id] = {
+                    interval: 1,
+                    easeFactor: 2.5,
+                    repetition: 0,
+                    dueDate: today,
+                    ticks: {}
+                };
+            });
+
+            saveAppState();
+        }
+
+        function resetDay1Data() {
+            const answer = prompt("⚠️ KHÓA AN TOÀN: Để bảo vệ tiến trình học, nếu bạn thực sự muốn đặt lại toàn bộ dữ liệu, vui lòng gõ chữ 'XÓA' vào bên dưới:");
+            if (answer && answer.trim().toUpperCase() === "XÓA") {
+                localStorage.removeItem('cece_srs_notebook_app_v1');
+                initDay1DefaultState();
+                location.reload();
+            } else if (answer !== null) {
+                alert("🔒 Đã hủy thao tác! Dữ liệu học tập và Sổ từ của bạn được bảo vệ an toàn 100%.");
+            }
+        }
+
+        function getAllWordsList() {
+            const baseline = [...HSK2_DAY1_INIT, ...HSK1_BASELINE_INIT, ...EXTRA_BASELINE_INIT];
+            const baselineHanzi = new Set(baseline.map(w => w.hanzi));
+            const customOnly = (appState.userCustomWords || []).filter(w => w && w.hanzi && !baselineHanzi.has(w.hanzi));
+            return [...baseline, ...customOnly];
+        }
+
+        function toggleViewMode() {
+            appState.viewMode = (appState.viewMode === 'wide') ? 'mobile' : 'wide';
+            applyViewModeUI();
+            saveAppState();
+        }
+
+        function applyViewModeUI() {
+            const container = document.getElementById('content-container');
+            const btnText = document.getElementById('view-mode-text');
+            if (appState.viewMode === 'wide') {
+                if (container) {
+                    container.classList.remove('max-w-md');
+                    container.classList.add('max-w-4xl');
+                }
+                if (btnText) btnText.innerText = "Máy tính";
+            } else {
+                if (container) {
+                    container.classList.remove('max-w-4xl');
+                    container.classList.add('max-w-md');
+                }
+                if (btnText) btnText.innerText = "Di động";
+            }
+        }
+
+        function switchView(viewName) {
+            const secInput = document.getElementById('sec-input-view');
+            const secSrs = document.getElementById('sec-srs-view');
+            const secNotebook = document.getElementById('sec-notebook-view');
+            const secStory = document.getElementById('sec-story-view');
+
+            const btnInput = document.getElementById('nav-btn-input');
+            const btnSrs = document.getElementById('nav-btn-srs');
+            const btnNotebook = document.getElementById('nav-btn-notebook');
+            const btnStory = document.getElementById('nav-btn-story');
+
+            if (secInput) secInput.classList.add('hidden');
+            if (secSrs) secSrs.classList.add('hidden');
+            if (secNotebook) secNotebook.classList.add('hidden');
+            if (secStory) secStory.classList.add('hidden');
+
+            const unactiveClass = "flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all text-[#6e5f62] hover:text-[#2b2426] font-medium cursor-pointer touch-manipulation active:scale-95";
+            const activeClass = "flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-xs transition-all bg-white text-[#2b2426] shadow-xs font-semibold cursor-pointer touch-manipulation active:scale-95";
+
+            [btnInput, btnSrs, btnNotebook, btnStory].forEach(btn => {
+                if (btn) btn.className = unactiveClass;
+            });
+
+            if (viewName === 'input' && secInput && btnInput) {
+                secInput.classList.remove('hidden');
+                btnInput.className = activeClass;
+            } else if (viewName === 'srs' && secSrs && btnSrs) {
+                secSrs.classList.remove('hidden');
+                btnSrs.className = activeClass;
+                initSrsSession();
+            } else if (viewName === 'notebook' && secNotebook && btnNotebook) {
+                secNotebook.classList.remove('hidden');
+                btnNotebook.className = activeClass;
+                renderNotebookSheet();
+            } else if (viewName === 'story' && secStory && btnStory) {
+                secStory.classList.remove('hidden');
+                btnStory.className = activeClass;
+                renderStoryView();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.switchView = switchView;
+
+        function updateHeaderCounters() {
+            const allWords = getAllWordsList();
+            const today = getTodayStr();
+            let dueCount = 0;
+
+            allWords.forEach(w => {
+                const p = appState.cardProgress[w.id] || {};
+                if (!p.dueDate || p.dueDate <= today) dueCount++;
+            });
+
+            const badgeHeader = document.getElementById('header-due-badge');
+            const badgeTabDue = document.getElementById('tab-due-badge');
+            const badgeTabTotal = document.getElementById('tab-total-badge');
+
+            if (badgeHeader) badgeHeader.innerText = dueCount;
+            if (badgeTabDue) badgeTabDue.innerText = dueCount;
+            if (badgeTabTotal) badgeTabTotal.innerText = `(${allWords.length})`;
+        }
+
+        function onHanziInputChange() {
+            const hz = document.getElementById('input-hanzi').value.trim();
+            if (!hz) return;
+            if (BUILTIN_DICTIONARY[hz]) {
+                autoLookupWord();
+            }
+        }
+
+        const HANVIET_MAP = {
+            '自': 'Tự', '行': 'Hành', '车': 'Xa', '羊': 'Dương', '肉': 'Nhục', '好': 'Hảo', '吃': 'Cật',
+            '面': 'Miến', '条': 'Điều', '打': 'Đả', '篮': 'Lam', '球': 'Cầu', '游': 'Du', '泳': 'Vịnh',
+            '经': 'Kinh', '常': 'Thường', '公': 'Công', '斤': 'Cân', '姐': 'Tỷ', '生': 'Sinh', '日': 'Nhật',
+            '快': 'Khoái', '乐': 'Lạc', '送': 'Tống', '礼': 'Lễ', '物': 'Vật', '晚': 'Vãn', '上': 'Thượng',
+            '蛋': 'Đản', '糕': 'Cao', '问': 'Vấn', '非': 'Phi', '常': 'Thường', '开': 'Khai', '始': 'Thủy',
+            '希': 'Hy', '望': 'Vọng', '手': 'Thủ', '机': 'Cơ', '学': 'Học', '习': 'Tập', '咖': 'Cà',
+            '啡': 'Phê', '牛': 'Ngưu', '奶': 'Nãi', '苹': 'Bình', '果': 'Quả', '尴': 'Giam', '尬': 'Giới',
+            '考': 'Khảo', '虑': 'Lự', '努': 'Nỗ', '力': 'Lực', '验': 'Nghiệm', '明': 'Minh',
+            '确': 'Xác', '隐': 'Ẩn', '藏': 'Tàng', '模': 'Mô', '糊': 'Hồ', '意': 'Ý', '思': 'Tư',
+            '欢': 'Hoan', '迎': 'Nghênh', '整': 'Chỉnh', '理': 'Lý', '告': 'Cáo', '诉': 'Tố',
+            '朋': 'Bằng', '友': 'Hữu', '商': 'Thương', '场': 'Trường', '医': 'Y', '院': 'Viện',
+            '教': 'Giáo', '室': 'Thất', '火': 'Hỏa', '站': 'Trạm', '门': 'Môn', '说': 'Thuyết',
+            '话': 'Thoại', '看': 'Khán', '书': 'Thư', '听': 'Thính', '音': 'Âm', '写': 'Tả',
+            '字': 'Tự', '买': 'Mại', '卖': 'Mại', '少': 'Thiểu', '多': 'Đa', '大': 'Đại', '小': 'Tiểu',
+            '冷': 'Lãnh', '热': 'Nhiệt', '高': 'Cao', '矮': 'Ải', '长': 'Trường', '短': 'Đoản', '新': 'Tân',
+            '旧': 'Cựu', '贵': 'Quý', '贱': 'Tiện', '近': 'Cận', '远': 'Viễn', '错': 'Thác', '对': 'Đối'
+        };
+
+        function getHanViet(hz) {
+            if (BUILTIN_DICTIONARY[hz] && BUILTIN_DICTIONARY[hz].hanviet) {
+                return BUILTIN_DICTIONARY[hz].hanviet;
+            }
+            let res = [];
+            for (let char of hz) {
+                if (HANVIET_MAP[char]) {
+                    res.push(HANVIET_MAP[char]);
+                }
+            }
+            return res.length > 0 ? res.join(' ') : '';
+        }
+
+        function openAiKeyModal() {
+            const modal = document.getElementById('ai-key-modal');
+            const keyInput = document.getElementById('input-gemini-key');
+            if (keyInput) {
+                keyInput.value = localStorage.getItem('cece_gemini_api_key') || '';
+            }
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeAiKeyModal() {
+            const modal = document.getElementById('ai-key-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function saveAiKey() {
+            const keyInput = document.getElementById('input-gemini-key');
+            const val = keyInput ? keyInput.value.trim() : '';
+            if (val) {
+                localStorage.setItem('cece_gemini_api_key', val);
+                showToast("🔑 Đã lưu Gemini API Key!");
+            } else {
+                localStorage.removeItem('cece_gemini_api_key');
+                showToast("ℹ️ Đã sử dụng Bộ AI Tự Động Miễn Phí!");
+            }
+            closeAiKeyModal();
+        }
+
+        function clearAiKey() {
+            localStorage.removeItem('cece_gemini_api_key');
+            const keyInput = document.getElementById('input-gemini-key');
+            if (keyInput) keyInput.value = '';
+            showToast("ℹ️ Đã xóa Key, chuyển sang Bộ AI Miễn Phí!");
+            closeAiKeyModal();
+        }
+
+        async function queryGeminiAi(hz, apiKey) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            const prompt = `Bạn là trợ lý giảng dạy tiếng Trung HSK. Với từ chữ Hán "${hz}", hãy trả về duy nhất một chuỗi JSON hợp lệ (không chứa code block markdown) với định dạng:
+{
+  "pinyin": "phiên âm có dấu thanh chuẩn, viết liền (ví dụ: píngguǒ)",
+  "hanviet": "Âm Hán Việt (ví dụ: Bình quả)",
+  "meaning": "Nghĩa tiếng Việt ngắn gọn (ví dụ: Quả táo)",
+  "example": "Một câu ví dụ bằng chữ Hán kèm (Pinyin - Dịch nghĩa tiếng Việt)"
+}`;
+
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }]
+                })
+            });
+
+            if (!res.ok) throw new Error("Gemini HTTP Error: " + res.status);
+            const data = await res.json();
+            const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+            return JSON.parse(cleanText);
+        }
+
+        async function queryAutoAiFallback(hz) {
+            // Pinyin via pinyinPro or fallback
+            let pinyin = "";
+            if (window.pinyinPro && window.pinyinPro.pinyin) {
+                try {
+                    pinyin = window.pinyinPro.pinyin(hz, { toneType: 'symbol' }).replace(/\s+/g, '');
+                } catch (e) { pinyin = hz; }
+            } else { pinyin = hz; }
+
+            // Hán Việt via character lookup map
+            let hanviet = getHanViet(hz);
+
+            // Meaning via MyMemory / Google Translate API
+            let meaning = "";
+            try {
+                const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(hz)}&langpair=zh-CN|vi`);
+                const data = await res.json();
+                if (data && data.responseData && data.responseData.translatedText) {
+                    let text = data.responseData.translatedText.trim();
+                    if (text && text.toLowerCase() !== hz.toLowerCase() && !text.includes("MYMEMORY WARNING")) {
+                        meaning = text.charAt(0).toUpperCase() + text.slice(1);
+                    }
+                }
+            } catch (e) {}
+
+            if (!meaning) {
+                try {
+                    const gRes = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN|vi&dt=t&q=${encodeURIComponent(hz)}`);
+                    const gData = await gRes.json();
+                    if (gData && gData[0] && gData[0][0] && gData[0][0][0]) {
+                        meaning = gData[0][0][0].trim();
+                    }
+                } catch (e) {}
+            }
+
+            if (!meaning) meaning = "Nghĩa từ mới";
+
+            // Example sentence
+            let exPinyin = pinyin;
+            if (window.pinyinPro && window.pinyinPro.pinyin) {
+                try {
+                    exPinyin = window.pinyinPro.pinyin(`我学${hz}。`, { toneType: 'symbol' });
+                } catch (e) {}
+            }
+            let example = `我学${hz}。 (${exPinyin} - Tôi học ${meaning.toLowerCase()}.)`;
+
+            return { pinyin, hanviet, meaning, example };
+        }
+
+        async function autoLookupWord() {
+            const hzInput = document.getElementById('input-hanzi');
+            const hz = hzInput ? hzInput.value.trim() : '';
+            if (!hz) {
+                showToast("⚠️ Vui lòng nhập Chữ Hán!");
+                return;
+            }
+
+            // 1. Check local dictionary first
+            const entry = BUILTIN_DICTIONARY[hz];
+            if (entry) {
+                document.getElementById('input-pinyin').value = entry.pinyin || '';
+                document.getElementById('input-hanviet').value = entry.hanviet || '';
+                document.getElementById('input-meaning').value = entry.meaning || '';
+                document.getElementById('input-example').value = entry.example || `我用${hz}。(Wǒ yòng ${entry.pinyin || 'zhe'}.)`;
+                showToast(`✨ Đã tra thấy từ '${hz}' trong Sổ từ!`);
+                return;
+            }
+
+            // 2. Not in local dictionary -> Show AI Loading State
+            const btnAi = document.getElementById('btn-ai-lookup');
+            const origBtnHtml = btnAi ? btnAi.innerHTML : '';
+            if (btnAi) {
+                btnAi.disabled = true;
+                btnAi.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-1 h-3.5 w-3.5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>🤖 AI đang tra...</span>
+                `;
+            }
+            showToast(`🤖 AI đang kết nối tra Pinyin, Hán Việt & Ví dụ cho '${hz}'...`);
+
+            try {
+                const apiKey = localStorage.getItem('cece_gemini_api_key') || (appState && appState.geminiApiKey);
+                let aiResult = null;
+
+                if (apiKey) {
+                    try {
+                        aiResult = await queryGeminiAi(hz, apiKey);
+                    } catch (e) {
+                        console.warn("Gemini API error, falling back to smart engine:", e);
+                    }
+                }
+
+                if (!aiResult) {
+                    aiResult = await queryAutoAiFallback(hz);
+                }
+
+                if (aiResult) {
+                    if (aiResult.pinyin) document.getElementById('input-pinyin').value = aiResult.pinyin;
+                    if (aiResult.hanviet) document.getElementById('input-hanviet').value = aiResult.hanviet;
+                    if (aiResult.meaning) document.getElementById('input-meaning').value = aiResult.meaning;
+                    if (aiResult.example) document.getElementById('input-example').value = aiResult.example;
+                    showToast(`🤖 AI đã điền xong thông tin cho '${hz}'!`);
+                }
+            } catch (err) {
+                console.error("AI Lookup Error:", err);
+                showToast(`⚠️ Không thể tự động tra AI. Chị vui lòng tự nhập.`);
+            } finally {
+                if (btnAi) {
+                    btnAi.disabled = false;
+                    btnAi.innerHTML = origBtnHtml;
+                }
+            }
+        }
+
+        function fillSuggestion(hz) {
+            document.getElementById('input-hanzi').value = hz;
+            autoLookupWord();
+        }
+
+        function saveCustomWordFromForm() {
+            const hanzi = document.getElementById('input-hanzi').value.trim();
+            const pinyin = document.getElementById('input-pinyin').value.trim();
+            const hanviet = document.getElementById('input-hanviet').value.trim();
+            const meaning = document.getElementById('input-meaning').value.trim();
+            const example = document.getElementById('input-example').value.trim();
+
+            if (!hanzi || !meaning) {
+                showToast("⚠️ Vui lòng nhập Chữ Hán và Nghĩa tiếng Việt!");
+                return;
+            }
+
+            const wordId = "custom-" + Date.now();
+            const today = getTodayStr();
+
+            const newWord = {
+                id: wordId,
+                level: "Custom",
+                day: appState.dayStep + 1,
+                tag: `Chị Nạp • Từ Mới`,
+                hanzi: hanzi,
+                pinyin: pinyin || "pīnyīn",
+                pinyin_clean: (pinyin || "pinyin").toLowerCase().replace(/[^a-z]/g, ''),
+                hanviet: hanviet || "",
+                meaning: meaning,
+                example: example || `${hanzi}。`
+            };
+
+            appState.userCustomWords.push(newWord);
+            appState.cardProgress[wordId] = {
+                interval: 1,
+                easeFactor: 2.5,
+                repetition: 0,
+                dueDate: today,
+                ticks: {}
+            };
+
+            saveAppState();
+
+            document.getElementById('input-hanzi').value = '';
+            document.getElementById('input-pinyin').value = '';
+            document.getElementById('input-hanviet').value = '';
+            document.getElementById('input-meaning').value = '';
+            document.getElementById('input-example').value = '';
+
+            if (window.confetti) confetti({ particleCount: 35, spread: 50, origin: { y: 0.7 } });
+            showToast(`🎉 Đã nạp thành công từ '${hanzi}'!`);
+        }
+
+        function getPreviewIntervalStr(wordId, quality) {
+            let p = appState.cardProgress[wordId] || { interval: 0, easeFactor: 2.5, repetition: 0 };
+            let ef = p.easeFactor || 2.5;
+            let interval = p.interval || 0;
+            let nextInt = 1;
+
+            if (quality === 1) {
+                nextInt = 1;
+            } else if (quality === 2) {
+                nextInt = (interval <= 1) ? 2 : Math.max(interval + 1, Math.round(interval * 1.2));
+            } else if (quality === 3) {
+                nextInt = (interval <= 1) ? 3 : Math.max(2, Math.round(interval * ef));
+            } else if (quality === 4) {
+                nextInt = (interval <= 1) ? 5 : Math.max(3, Math.round(interval * ef * 1.3));
+            }
+            return `+${nextInt}d`;
+        }
+
+        function calculateAnkiNextInterval(wordId, quality) {
+            let p = appState.cardProgress[wordId] || { interval: 0, easeFactor: 2.5, repetition: 0 };
+            let ef = p.easeFactor || 2.5;
+            let rep = p.repetition || 0;
+            let interval = p.interval || 0;
+
+            if (quality === 1) {
+                rep = 0; 
+                interval = 1; 
+                ef = Math.max(1.3, ef - 0.2);
+            } else if (quality === 2) {
+                rep += 1; 
+                interval = (interval <= 1) ? 2 : Math.max(interval + 1, Math.round(interval * 1.2)); 
+                ef = Math.max(1.3, ef - 0.15);
+            } else if (quality === 3) {
+                rep += 1; 
+                interval = (interval <= 1) ? 3 : Math.max(2, Math.round(interval * ef));
+            } else if (quality === 4) {
+                rep += 1; 
+                interval = (interval <= 1) ? 5 : Math.max(3, Math.round(interval * ef * 1.3)); 
+                ef += 0.15;
+            }
+
+            const d = new Date();
+            d.setDate(d.getDate() + interval);
+            const nextDueDate = d.toISOString().split('T')[0];
+
+            return { interval, easeFactor: parseFloat(ef.toFixed(2)), repetition: rep, dueDate: nextDueDate, lastReviewed: getTodayStr() };
+        }
+
+        function initSrsSession() {
+            const allWords = getAllWordsList();
+            const today = getTodayStr();
+
+            srsQueue = allWords.filter(w => {
+                const p = appState.cardProgress[w.id];
+                return !p || !p.dueDate || p.dueDate <= today;
+            });
+
+            if (srsQueue.length === 0) srsQueue = allWords;
+
+            srsCurrentIdx = 0;
+            isCardFlipped = false;
+            renderSrsCard();
+        }
+
+        function flipCard() {
+            const inner = document.getElementById('card-inner-box');
+            if (inner) {
+                isCardFlipped = !isCardFlipped;
+                if (isCardFlipped) inner.classList.add('flipped');
+                else inner.classList.remove('flipped');
+            }
+        }
+
+        function renderSrsCard() {
+            const box = document.getElementById('srs-card-box');
+            const counter = document.getElementById('srs-card-counter');
+            const tagPill = document.getElementById('srs-tag-pill');
+            const progressBar = document.getElementById('srs-progress-bar');
+
+            if (!box) return;
+
+            if (srsCurrentIdx >= srsQueue.length) {
+                box.innerHTML = `
+                    <div class="bg-white rounded-2xl p-6 text-center border border-[#e8dedb] shadow-xs space-y-3 fade-in">
+                        <div class="text-4xl">🎉</div>
+                        <h3 class="text-base font-bold text-[#2b2426]">Hoàn Thành Đợt Ôn SRS Hôm Nay!</h3>
+                        <p class="text-xs text-[#786669]">Tất cả từ vựng đến hạn đã được cập nhật lịch ôn thông minh!</p>
+                        <button onclick="initSrsSession()" class="px-5 py-2.5 bg-[#8f525e] text-white font-semibold text-xs rounded-xl shadow-2xs">
+                            🔄 Ôn lại từ đầu
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const word = srsQueue[srsCurrentIdx];
+            const p = appState.cardProgress[word.id] || { easeFactor: 2.5, repetition: 0 };
+
+            if (counter) counter.innerText = `Thẻ ${srsCurrentIdx + 1} / ${srsQueue.length}`;
+            if (tagPill) tagPill.innerText = word.tag || "HSK 2 · Day 1";
+            if (progressBar) progressBar.style.width = `${((srsCurrentIdx + 1) / srsQueue.length) * 100}%`;
+
+            isCardFlipped = false;
+
+            box.innerHTML = `
+                <div class="perspective-1000 w-full min-h-[300px]">
+                    <div id="card-inner-box" onclick="flipCard()" class="card-inner w-full min-h-[300px] relative transform-style-3d cursor-pointer select-none rounded-2xl shadow-xs border border-[#e8dedb] hover:border-[#dbcac5]">
+                        
+                        <div class="absolute inset-0 w-full h-full bg-white rounded-2xl p-6 flex flex-col justify-between backface-hidden">
+                            <div class="flex items-center justify-between text-xs text-[#8c7b7f]">
+                                <span class="font-medium text-[#7a4853]">${word.tag || 'Từ Vựng'}</span>
+                                <button type="button" onclick="event.stopPropagation(); playWordAudio('${word.hanzi}');" class="w-7 h-7 rounded-lg bg-[#faf7f5] hover:bg-[#ede5e2] text-[#8a525f] flex items-center justify-center transition-colors border border-[#ebdcd8]" title="Nghe phát âm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                </button>
+                            </div>
+                            
+                            <div class="text-center py-5">
+                                <h1 class="text-5xl font-hanzi font-bold text-[#2b2426] tracking-wider">${word.hanzi}</h1>
+                                <p class="text-xs text-[#8c7b7f] mt-4 flex items-center justify-center gap-1">
+                                    <span>Chạm thẻ để lật xem Pinyin & Nghĩa</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#9c8b8f]"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-between text-[11px] text-[#8c7b7f] border-t border-[#f2eae7] pt-2.5">
+                                <span>Độ nhớ: EF ${p.easeFactor || 2.5}</span>
+                                <span>Đã lặp: ${p.repetition || 0} lần</span>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-0 w-full h-full bg-[#fdfbf9] rounded-2xl p-6 flex flex-col justify-between rotate-y-180 backface-hidden border border-[#e8dedb]">
+                            <div class="flex items-center justify-between text-xs text-[#5c4f52]">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xl font-hanzi font-bold text-[#2b2426]">${word.hanzi}</span>
+                                    <button type="button" onclick="event.stopPropagation(); playWordAudio('${word.hanzi}');" class="p-1 rounded text-[#8a525f] hover:bg-[#ede5e2]" title="Nghe lại">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                    </button>
+                                </div>
+                                <span class="text-xs font-semibold text-[#8a525f] bg-[#f4ebe8] px-2 py-0.5 rounded-md font-sans border border-[#ebdcd8]">${word.pinyin}</span>
+                            </div>
+
+                            <div class="space-y-2 py-1">
+                                <div>
+                                    <span class="text-[10px] font-medium text-[#8c7b7f] uppercase tracking-wider">NGHĨA TIẾNG VIỆT</span>
+                                    <p class="text-sm font-semibold text-[#2b2426] leading-snug mt-0.5">${word.meaning}</p>
+                                    ${word.hanviet ? `<p class="text-[11px] text-[#7a4853] font-medium mt-0.5">Hán Việt: ${word.hanviet.toUpperCase()}</p>` : ''}
+                                </div>
+
+                                ${word.example ? `
+                                    <div class="p-2.5 bg-white rounded-xl border border-[#ebdcd8] text-xs">
+                                        <div class="flex items-center justify-between text-[10px] text-[#8c7b7f] mb-1">
+                                            <span>Ví dụ</span>
+                                            <button type="button" onclick="event.stopPropagation(); playWordAudio('${word.example.split('(')[0]}');" class="text-[#8a525f] hover:text-[#2b2426]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                            </button>
+                                        </div>
+                                        <p class="font-hanzi text-[#2b2426] text-xs">${word.example}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+
+                            <div class="text-center text-[10px] text-[#8c7b7f] border-t border-[#ebdcd8] pt-2">
+                                <span>Đánh giá độ nhớ bên dưới để SRS lên lịch ôn</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white border border-[#e8dedb] rounded-xl p-2.5 shadow-2xs">
+                    <form onsubmit="handleRecallTest(event)" class="flex items-center gap-2">
+                        <input id="srs-typing-input" placeholder="Gõ Pinyin hoặc Nghĩa để thử phản xạ..." class="flex-1 text-xs px-3 py-1.5 bg-[#faf7f5] rounded-lg border border-[#e2d5d1] focus:outline-none focus:border-[#8a525f] text-[#2b2426]" type="text">
+                        <button type="submit" class="px-3 py-1.5 bg-[#faf7f5] hover:bg-[#ede5e2] text-[#4a3e41] text-xs font-medium rounded-lg border border-[#e2d5d1] transition-colors whitespace-nowrap">Thử</button>
+                    </form>
+                </div>
+
+                <div class="pt-1">
+                    <span class="block text-center text-[11px] font-medium text-[#786669] mb-1.5">Đánh giá trí nhớ (Thuật toán SM-2)</span>
+                    <div class="grid grid-cols-4 gap-1.5">
+                        <button onclick="rateSrsCard(1)" class="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-[#f7edeb] hover:bg-[#f2e1df] border border-[#ebd3cf] text-[#803838] transition-all active:scale-95 shadow-2xs">
+                            <span class="text-xs font-semibold">Quên</span>
+                            <span class="text-[10px] text-[#9c5050] font-normal mt-0.5">${getPreviewIntervalStr(word.id, 1)}</span>
+                        </button>
+                        <button onclick="rateSrsCard(2)" class="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-[#f7f1e9] hover:bg-[#efe6d8] border border-[#eddcc9] text-[#7d5027] transition-all active:scale-95 shadow-2xs">
+                            <span class="text-xs font-semibold">Khó</span>
+                            <span class="text-[10px] text-[#916238] font-normal mt-0.5">${getPreviewIntervalStr(word.id, 2)}</span>
+                        </button>
+                        <button onclick="rateSrsCard(3)" class="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-[#edf3ef] hover:bg-[#dfede3] border border-[#cfdfd4] text-[#34543f] transition-all active:scale-95 shadow-2xs">
+                            <span class="text-xs font-semibold">Tốt</span>
+                            <span class="text-[10px] text-[#41694f] font-normal mt-0.5">${getPreviewIntervalStr(word.id, 3)}</span>
+                        </button>
+                        <button onclick="rateSrsCard(4)" class="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-[#edf2f6] hover:bg-[#deebf2] border border-[#cedde6] text-[#344b5c] transition-all active:scale-95 shadow-2xs">
+                            <span class="text-xs font-semibold">Dễ</span>
+                            <span class="text-[10px] text-[#446075] font-normal mt-0.5">${getPreviewIntervalStr(word.id, 4)}</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleRecallTest(e) {
+            e.preventDefault();
+            const input = document.getElementById('srs-typing-input').value.trim().toLowerCase();
+            const word = srsQueue[srsCurrentIdx];
+            if (!input) return;
+            const cleanTyped = input.replace(/[^a-z0-9]/g, '');
+            if (cleanTyped === (word.pinyin_clean || '') || input === word.hanzi || word.meaning.toLowerCase().includes(input)) {
+                showToast("✨ Chính xác! Thẻ đã lật.");
+                flipCard();
+            } else {
+                showToast("💡 Chưa chính xác, hãy lật xem nghĩa.");
+                flipCard();
+            }
+        }
+
+        function rateSrsCard(quality) {
+            const word = srsQueue[srsCurrentIdx];
+            if (word) {
+                const updatedSRS = calculateAnkiNextInterval(word.id, quality);
+                appState.cardProgress[word.id] = updatedSRS;
+                saveAppState();
+            }
+            srsCurrentIdx++;
+            renderSrsCard();
+        }
+
+        function toggleMask(type) {
+            appState.maskState[type] = !appState.maskState[type];
+            ['pinyin', 'meaning', 'hanzi'].forEach(t => {
+                const btn = document.getElementById('btn-mask-' + (t === 'meaning' ? 'vi' : (t === 'pinyin' ? 'py' : 'hz')));
+                if (btn) {
+                    if (appState.maskState[t]) {
+                        btn.className = "px-3 py-1.5 rounded-xl border border-[#935864] bg-[#8f525e] text-white text-xs font-medium transition-colors flex items-center gap-1 shadow-2xs";
+                    } else {
+                        btn.className = "px-3 py-1.5 rounded-xl border border-[#e2d5d1] bg-[#faf7f5] hover:bg-[#ede5e2] text-[#2b2426] text-xs font-medium transition-colors flex items-center gap-1";
+                    }
+                }
+            });
+            renderNotebookSheet();
+        }
+
+        function switchNotebookLayout(mode) {
+            appState.notebookLayout = mode;
+            const btnCard = document.getElementById('btn-layout-card');
+            const btnTable = document.getElementById('btn-layout-table');
+            if (mode === 'table') {
+                if (btnTable) btnTable.className = "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs";
+                if (btnCard) btnCard.className = "px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]";
+            } else {
+                if (btnCard) btnCard.className = "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white text-[#2b2426] shadow-2xs";
+                if (btnTable) btnTable.className = "px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-[#6e5f62]";
+            }
+            renderNotebookSheet();
+        }
+
+        function onNotebookSearchChange() {
+            const q = document.getElementById('notebook-search-input').value.trim().toLowerCase();
+            appState.searchQuery = q;
+            renderNotebookSheet();
+        }
+
+        function renderNotebookSheet() {
+            const container = document.getElementById('notebook-sheet-container');
+            const countEl = document.getElementById('notebook-rendered-count');
+            if (!container) return;
+
+            let allWords = getAllWordsList();
+            const totalWordsCount = allWords.length;
+
+            const searchQ = (document.getElementById('notebook-search-input') ? document.getElementById('notebook-search-input').value.trim().toLowerCase() : appState.searchQuery);
+            const levelFilter = document.getElementById('notebook-filter-level') ? document.getElementById('notebook-filter-level').value : 'all';
+            const dueFilter = document.getElementById('notebook-filter-due') ? document.getElementById('notebook-filter-due').value : 'all';
+
+            const today = getTodayStr();
+
+            // Filter by Search Query
+            if (searchQ) {
+                allWords = allWords.filter(w => 
+                    w.hanzi.toLowerCase().includes(searchQ) ||
+                    w.pinyin.toLowerCase().includes(searchQ) ||
+                    (w.pinyin_clean && w.pinyin_clean.includes(searchQ)) ||
+                    (w.meaning && w.meaning.toLowerCase().includes(searchQ)) ||
+                    (w.hanviet && w.hanviet.toLowerCase().includes(searchQ)) ||
+                    (w.tag && w.tag.toLowerCase().includes(searchQ))
+                );
+            }
+
+            // Filter by Level
+            if (levelFilter === 'hsk2') {
+                allWords = allWords.filter(w => w.level === 'HSK 2' || (w.tag && w.tag.includes('HSK 2')) || (w.day && w.day >= 1 && w.day <= 7));
+            } else if (levelFilter === 'hsk2-d1') {
+                allWords = allWords.filter(w => w.day === 1 || (w.tag && w.tag.includes('Ngày 1')));
+            } else if (levelFilter === 'hsk2-d2') {
+                allWords = allWords.filter(w => w.day === 2 || (w.tag && w.tag.includes('Ngày 2')));
+            } else if (levelFilter === 'hsk2-d3') {
+                allWords = allWords.filter(w => w.day === 3 || (w.tag && w.tag.includes('Ngày 3')));
+            } else if (levelFilter === 'hsk2-d4') {
+                allWords = allWords.filter(w => w.day === 4 || (w.tag && w.tag.includes('Ngày 4')));
+            } else if (levelFilter === 'hsk2-d5') {
+                allWords = allWords.filter(w => w.day === 5 || (w.tag && w.tag.includes('Ngày 5')));
+            } else if (levelFilter === 'hsk2-d6') {
+                allWords = allWords.filter(w => w.day === 6 || (w.tag && w.tag.includes('Ngày 6')));
+            } else if (levelFilter === 'hsk2-d7') {
+                allWords = allWords.filter(w => w.day === 7 || (w.tag && w.tag.includes('Ngày 7')));
+            } else if (levelFilter === 'hsk1') {
+                allWords = allWords.filter(w => w.level === 'HSK 1' || (w.tag && w.tag.includes('HSK 1')));
+            } else if (levelFilter === 'custom') {
+                allWords = allWords.filter(w => w.level === 'Custom' || String(w.id).startsWith('custom-'));
+            }
+
+            // Filter by Due Date
+            if (dueFilter === 'due') {
+                allWords = allWords.filter(w => {
+                    const p = appState.cardProgress[w.id] || {};
+                    return !p.dueDate || p.dueDate <= today;
+                });
+            } else if (dueFilter === 'future') {
+                allWords = allWords.filter(w => {
+                    const p = appState.cardProgress[w.id] || {};
+                    return p.dueDate && p.dueDate > today;
+                });
+            }
+
+            if (countEl) countEl.innerText = `${allWords.length} / ${totalWordsCount} từ`;
+
+            if (allWords.length === 0) {
+                container.innerHTML = `
+                    <div class="py-10 text-center text-xs text-[#8c7b7f] space-y-1">
+                        <p class="text-base">🔍</p>
+                        <p class="font-medium">Không tìm thấy từ vựng nào khớp với bộ lọc.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // RENDER TABLE LAYOUT (EXACT SCREENSHOT SPECIFICATION)
+            if (appState.notebookLayout === 'table') {
+                container.innerHTML = `
+                    <table class="w-full text-left text-xs border-collapse min-w-[750px]">
+                        <thead>
+                            <tr class="border-b border-[#ebdcd8] text-[#786669] font-semibold text-[11px]">
+                                <th class="py-2.5 px-3">Chữ Hán</th>
+                                <th class="py-2.5 px-3">Pinyin</th>
+                                <th class="py-2.5 px-3">Hán Việt</th>
+                                <th class="py-2.5 px-3">Nghĩa Việt</th>
+                                <th class="py-2.5 px-3">Ví dụ Minh Họa</th>
+                                <th class="py-2.5 px-3">Cấp độ</th>
+                                <th class="py-2.5 px-3">Kỳ hạn SRS</th>
+                                <th class="py-2.5 px-3 text-right">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#f2eae7]">
+                            ${allWords.map(w => {
+                                const p = appState.cardProgress[w.id] || {};
+                                const isDue = !p.dueDate || p.dueDate <= today;
+                                const isCustom = w.level === 'Custom' || String(w.id).startsWith('custom-');
+                                const exText = w.example || '';
+
+                                return `
+                                    <tr class="hover:bg-[#faf4f2] transition-colors">
+                                        <td class="py-3 px-3 font-hanzi font-bold text-base text-[#2b2426] whitespace-nowrap">
+                                            <div class="flex items-center gap-1">
+                                                <span class="${appState.maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
+                                                <button onclick="playWordAudio('${w.hanzi}')" class="text-[#8a525f] hover:text-[#2b2426] p-0.5" title="Nghe âm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-3 font-semibold text-[#8a525f] whitespace-nowrap">
+                                            <span class="${appState.maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
+                                        </td>
+                                        <td class="py-3 px-3 font-medium text-[#7a4853] text-[11px] uppercase whitespace-nowrap">
+                                            ${w.hanviet || '-'}
+                                        </td>
+                                        <td class="py-3 px-3 text-[#2b2426] font-medium max-w-xs">
+                                            <span class="${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                                        </td>
+                                        <td class="py-3 px-3 text-[#5e5053] font-normal text-[11px] max-w-xs leading-snug">
+                                            ${exText ? `
+                                                <div class="flex items-center gap-1 font-hanzi">
+                                                    <span>${exText}</span>
+                                                    <button onclick="playWordAudio('${exText.split('(')[0].replace(/'/g, "\'")}')" class="text-[#8a525f] hover:text-[#2b2426] p-0.5 shrink-0" title="Nghe ví dụ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+                                                    </button>
+                                                </div>
+                                            ` : '-'}
+                                        </td>
+                                        <td class="py-3 px-3 whitespace-nowrap">
+                                            <span class="text-[10px] bg-[#f4ebe8] text-[#7d4e58] font-semibold px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.level || 'HSK 2'}</span>
+                                        </td>
+                                        <td class="py-3 px-3 whitespace-nowrap">
+                                            ${isDue ? 
+                                                `<span class="text-[10px] bg-[#f7edeb] text-[#803838] font-bold px-2 py-0.5 rounded-md border border-[#ebd3cf]">⚡ Đến hạn</span>` : 
+                                                `<span class="text-[10px] bg-[#edf3ef] text-[#34543f] font-semibold px-2 py-0.5 rounded-md border border-[#cfdfd4]">Sau ${p.interval || 1}d (${p.dueDate ? p.dueDate.split('-').reverse().slice(0,2).join('/') : ''})</span>`
+                                            }
+                                        </td>
+                                        <td class="py-3 px-3 text-right whitespace-nowrap">
+                                            <div class="flex items-center justify-end gap-1.5">
+                                                <button onclick="openEditModal('${w.id}')" class="p-1 text-[#786669] hover:text-[#935864] hover:bg-[#f4ebe8] rounded-md transition-colors" title="Sửa từ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                                </button>
+                                                ${isCustom ? `
+                                                    <button onclick="deleteCustomWord('${w.id}')" class="p-1 text-[#8c7b7f] hover:text-[#9c5050] hover:bg-[#f7edeb] rounded-md transition-colors" title="Xóa từ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                                    </button>
+                                                ` : ''}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                // GRID CARDS LAYOUT
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${allWords.map((w, idx) => {
+                            const p = appState.cardProgress[w.id] || { ticks: {} };
+                            const ticks = p.ticks || {};
+                            const isDue = !p.dueDate || p.dueDate <= today;
+
+                            return `
+                                <div class="bg-white rounded-2xl p-3.5 border border-[#e8dedb] shadow-2xs space-y-2.5">
+                                    <div class="flex items-center justify-between border-b border-[#f2eae7] pb-1.5">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="text-[10px] font-semibold bg-[#f4ebe8] text-[#7d4e58] px-2 py-0.5 rounded-md border border-[#ebdcd8]">${w.tag || 'Từ Vựng'}</span>
+                                            ${isDue ? `<span class="text-[9px] bg-[#f7edeb] text-[#803838] font-bold px-1.5 py-0.5 rounded-md">⚡ Đến Hạn</span>` : `<span class="text-[9px] bg-[#edf3ef] text-[#34543f] font-semibold px-1.5 py-0.5 rounded-md">Ôn sau ${p.interval || 1}d</span>`}
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <button onclick="openEditModal('${w.id}')" class="p-1 text-[#786669] hover:text-[#935864]" title="Sửa">✏️</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 gap-2 items-center text-center">
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">CHỮ HÁN</span>
+                                            <span class="font-hanzi text-xl font-bold text-[#2b2426] ${appState.maskState.hanzi ? 'hide-text' : ''}">${w.hanzi}</span>
+                                        </div>
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">PINYIN</span>
+                                            <span class="text-xs font-semibold text-[#8a525f] ${appState.maskState.pinyin ? 'hide-text' : ''}">${w.pinyin}</span>
+                                        </div>
+                                        <div class="bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]">
+                                            <span class="text-[9px] text-[#8c7b7f] block font-semibold">NGHĨA VIỆT</span>
+                                            <span class="text-xs font-semibold text-[#2b2426] ${appState.maskState.meaning ? 'hide-text' : ''}">${w.meaning}</span>
+                                        </div>
+                                    </div>
+
+                                    ${w.example ? `<div class="text-[11px] text-[#5e5053] bg-[#faf7f5] p-2 rounded-xl border border-[#e8dedb]"><strong>💡 Ví dụ:</strong> ${w.example}</div>` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function openEditModal(wordId) {
+            const allWords = getAllWordsList();
+            const w = allWords.find(item => item.id === wordId);
+            if (!w) return;
+
+            document.getElementById('edit-word-id').value = w.id;
+            document.getElementById('edit-hanzi').value = w.hanzi;
+            document.getElementById('edit-pinyin').value = w.pinyin;
+            document.getElementById('edit-hanviet').value = w.hanviet || '';
+            document.getElementById('edit-meaning').value = w.meaning;
+            document.getElementById('edit-example').value = w.example || '';
+
+            document.getElementById('edit-word-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-word-modal').classList.add('hidden');
+        }
+
+        function saveEditedWord() {
+            const wordId = document.getElementById('edit-word-id').value;
+            const allWords = getAllWordsList();
+            const w = allWords.find(item => item.id === wordId);
+            if (!w) return;
+
+            w.hanzi = document.getElementById('edit-hanzi').value.trim();
+            w.pinyin = document.getElementById('edit-pinyin').value.trim();
+            w.pinyin_clean = w.pinyin.toLowerCase().replace(/[^a-z]/g, '');
+            w.hanviet = document.getElementById('edit-hanviet').value.trim();
+            w.meaning = document.getElementById('edit-meaning').value.trim();
+            w.example = document.getElementById('edit-example').value.trim();
+
+            saveAppState();
+            closeEditModal();
+            renderNotebookSheet();
+            showToast("✨ Đã cập nhật từ vựng thành công!");
+        }
+
+        function deleteCustomWord(wordId) {
+            if (confirm("Chị có chắc chắn muốn xóa từ vựng này khỏi sổ tay?")) {
+                appState.userCustomWords = appState.userCustomWords.filter(w => w.id !== wordId);
+                delete appState.cardProgress[wordId];
+                saveAppState();
+                renderNotebookSheet();
+                showToast("🗑️ Đã xóa từ vựng khỏi sổ tay!");
+            }
+        }
+
+        function playWordAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'zh-CN';
+                utter.rate = 0.9;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notify');
+            const msgEl = document.getElementById('toast-msg');
+            if (!toast || !msgEl) return;
+            msgEl.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+        }
+
+        function showInstallModal() {
+            alert(`📲 CHỈ DẪN THÊM APP VÀO MÀN HÌNH CHÍNH:
+
+- iPhone (Safari): Bấm Nút Chia sẻ (Share) ➔ Chọn 'Thêm vào Màn hình chính' (Add to Home Screen).
+- Android (Chrome): Bấm Menu 3 chấm ➔ Chọn 'Thêm vào Màn hình chính'.`);
+        }
+
+        function exportDataJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", `cece_srs_notebook_backup_${getTodayStr()}.json`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+            showToast("📥 Đã xuất dữ liệu sao lưu JSON!");
+        }
+
+        function triggerImportJSON() {
+            document.getElementById('import-json-file').click();
+        }
+
+        function importDataJSON(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const imported = JSON.parse(evt.target.result);
+                    if (imported && imported.cardProgress) {
+                        appState = Object.assign(appState, imported);
+                        saveAppState();
+                        location.reload();
+                    } else { showToast("⚠️ Tệp JSON không đúng định dạng!"); }
+                } catch(err) { showToast("⚠️ Lỗi đọc tệp JSON!"); }
+            };
+            reader.readAsText(file);
+        }
+
+        function bindTabNavigationEvents() {
+            ['input', 'srs', 'notebook'].forEach(v => {
+                const btn = document.getElementById('nav-btn-' + v);
+                if (btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        switchView(v);
+                    });
+                }
+            });
+        }
+
+        window.onload = function() {
+            loadAppState();
+            initSrsSession();
+            bindTabNavigationEvents();
+        };
+        // Built-in HSK 2 Stories Data
+        const HSK2_STORIES = {
+            day1: {
+                id: 'day1',
+                titleZh: 'Cece 的快乐周末',
+                titleVi: 'Cuối Tuần Vui Vẻ Của Cece',
+                description: 'Câu chuyện bài 1-2: Sử dụng các từ 旅游, 运动, 眼睛, 足球, 觉得, 最, 也...',
+                paragraphs: [
+                    {
+                        zh: 'Cece 喜欢 旅游 和 运动。',
+                        pinyin: 'Cece xǐhuan lǚyóu hé yùndòng.',
+                        vi: 'Cece thích đi du lịch và tập thể thao.',
+                        words: [
+                            { word: '旅游', pinyin: 'lǚyóu', meaning: 'du lịch' },
+                            { word: '运动', pinyin: 'yùndòng', meaning: 'thể thao, vận động' }
+                        ]
+                    },
+                    {
+                        zh: '今天 天气 很好，她 觉得 最 好的 运动 是 踢足球。',
+                        pinyin: 'Jīntiān tiānqì hěn hǎo, tā juéde zuì hǎo de yùndòng shì tī zúqiú.',
+                        vi: 'Hôm nay thời tiết rất tốt, cô ấy thấy môn thể thao tốt nhất là đá bóng.',
+                        words: [
+                            { word: '觉得', pinyin: 'juéde', meaning: 'cảm thấy, thấy' },
+                            { word: '最', pinyin: 'zuì', meaning: 'nhất' },
+                            { word: '踢足球', pinyin: 'tī zúqiú', meaning: 'đá bóng' }
+                        ]
+                    },
+                    {
+                        zh: '她的 眼睛 很 大，笑起来 也 非常 好看。',
+                        pinyin: 'Tā de yǎnjing hěn dà, xiào qǐlái yě fēicháng hǎokàn.',
+                        vi: 'Đôi mắt của cô ấy rất to, mỉm cười lên cũng cực kỳ xinh đẹp.',
+                        words: [
+                            { word: '眼睛', pinyin: 'yǎnjing', meaning: 'đôi mắt' },
+                            { word: '也', pinyin: 'yě', meaning: 'cũng' },
+                            { word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }
+                        ]
+                    },
+                    {
+                        zh: '下午 她 和 朋友 一起 去 跑步。',
+                        pinyin: 'Xiàwǔ tā hé péngyou yìqǐ qù pǎobù.',
+                        vi: 'Buổi chiều cô ấy cùng bạn bè đi chạy bộ.',
+                        words: [
+                            { word: '一起', pinyin: 'yìqǐ', meaning: 'cùng nhau' },
+                            { word: '跑步', pinyin: 'pǎobù', meaning: 'chạy bộ' }
+                        ]
+                    }
+                ]
+            },
+            day2: {
+                id: 'day2',
+                titleZh: '健康 的 生活',
+                titleVi: 'Lối Sống Khỏe Mạnh',
+                description: 'Câu chuyện bài 3-4: Sử dụng các từ 服务员, 生病, 休息, 药, 身体, 起床, 早上...',
+                paragraphs: [
+                    {
+                        zh: '早上 六点，小明 就 起床 了。',
+                        pinyin: 'Zǎoshang liù diǎn, Xiǎomíng jiù qǐchuáng le.',
+                        vi: '6 giờ sáng, Tiểu Minh đã thức dậy rồi.',
+                        words: [
+                            { word: '早上', pinyin: 'zǎoshang', meaning: 'buổi sáng' },
+                            { word: '起床', pinyin: 'qǐchuáng', meaning: 'thức dậy' }
+                        ]
+                    },
+                    {
+                        zh: '因为 昨天 他 生病 了，所以 医生 让 他 多 休息。',
+                        pinyin: 'Yīnwèi zuótiān tā shēngbìng le, suǒyǐ yīshēng ràng tā duō xiūxi.',
+                        vi: 'Vì hôm qua cậu ấy bị ốm, cho nên bác sĩ bảo cậu ấy nghỉ ngơi nhiều.',
+                        words: [
+                            { word: '生病', pinyin: 'shēngbìng', meaning: 'bị ốm, bị bệnh' },
+                            { word: '休息', pinyin: 'xiūxi', meaning: 'nghỉ ngơi' }
+                        ]
+                    },
+                    {
+                        zh: '吃了 药 以后，他的 身体 好了 很多。',
+                        pinyin: 'Chī le yào yǐhòu, tā de shēntǐ hǎo le hěn duō.',
+                        vi: 'Sau khi uống thuốc, cơ thể của cậu ấy đã tốt hơn rất nhiều.',
+                        words: [
+                            { word: '药', pinyin: 'yào', meaning: 'thuốc' },
+                            { word: '身体', pinyin: 'shēntǐ', meaning: 'cơ thể, sức khỏe' }
+                        ]
+                    },
+                    {
+                        zh: '晚上 他 去 饭馆 吃饭，服务员 很 热情。',
+                        pinyin: 'Wǎnshang tā qù fànguǎn chīfàn, fúwùyuán hěn rèqíng.',
+                        vi: 'Buổi tối cậu ấy đến nhà hàng ăn cơm, người phục vụ rất nhiệt tình.',
+                        words: [
+                            { word: '服务员', pinyin: 'fúwùyuán', meaning: 'người phục vụ' }
+                        ]
+                    }
+                ]
+            },
+            day3: {
+                id: 'day3',
+                titleZh: '姐姐 的 生日 聚会',
+                titleVi: 'Bữa Tiệc Sinh Nhật Của Chị Gái',
+                description: 'Câu chuyện bài 5-6: Sử dụng các từ 生日, 快乐, 送, 礼物, 姐姐, 蛋糕, 希望...',
+                paragraphs: [
+                    {
+                        zh: '今天是 姐姐 的 生日，大家 都 祝 她 生日快乐！',
+                        pinyin: 'Jīntiān shì jiějie de shēngrì, dàjiā dōu zhù tā shēngrì kuàilè!',
+                        vi: 'Hôm nay là sinh nhật của chị gái, mọi người đều chúc chị sinh nhật vui vẻ!',
+                        words: [
+                            { word: '姐姐', pinyin: 'jiějie', meaning: 'chị gái' },
+                            { word: '生日', pinyin: 'shēngrì', meaning: 'sinh nhật' },
+                            { word: '快乐', pinyin: 'kuàilè', meaning: 'vui vẻ' }
+                        ]
+                    },
+                    {
+                        zh: '我 送给 姐姐 一部 新 手机 作为 礼物。',
+                        pinyin: 'Wǒ sòng gěi jiějie yí bù xīn shǒujī zuòwéi lǐwù.',
+                        vi: 'Tôi tặng chị gái một chiếc điện thoại mới làm món quà.',
+                        words: [
+                            { word: '送', pinyin: 'sòng', meaning: 'tặng, tiễn' },
+                            { word: '手机', pinyin: 'shǒujī', meaning: 'điện thoại di động' },
+                            { word: '礼物', pinyin: 'lǐwù', meaning: 'món quà' }
+                        ]
+                    },
+                    {
+                        zh: '我们 一起 吃 蛋糕，喝 咖啡，非常 高兴。',
+                        pinyin: 'Wǒmen yìqǐ chī dàngāo, hē kāfēi, fēicháng gāoxìng.',
+                        vi: 'Chúng tôi cùng nhau ăn bánh kem, uống cà phê, vô cùng vui vẻ.',
+                        words: [
+                            { word: '蛋糕', pinyin: 'dàngāo', meaning: 'bánh kem' },
+                            { word: '咖啡', pinyin: 'kāfēi', meaning: 'cà phê' },
+                            { word: '非常', pinyin: 'fēicháng', meaning: 'rất, cực kỳ' }
+                        ]
+                    },
+                    {
+                        zh: '我 希望 姐姐 天天 快乐，学习 越来越 好！',
+                        pinyin: 'Wǒ xīwàng jiějie tiāntiān kuàilè, xuéxí yuè lái yuè hǎo!',
+                        vi: 'Tôi hy vọng chị gái mỗi ngày đều vui vẻ, học tập ngày càng tốt hơn!',
+                        words: [
+                            { word: '希望', pinyin: 'xīwàng', meaning: 'hy vọng' },
+                            { word: '学习', pinyin: 'xuéxí', meaning: 'học tập' }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let currentStoryId = 'day1';
+        let showPinyinState = true;
+        let showViState = true;
+
+        function selectStoryDay(dayId) {
+            currentStoryId = dayId;
+            ['day1', 'day2', 'day3', 'custom'].forEach(id => {
+                const btn = document.getElementById('story-tab-' + id);
+                if (btn) {
+                    if (id === dayId) {
+                        btn.className = "px-3 py-1.5 rounded-xl font-semibold bg-[#8f525e] text-white shadow-2xs cursor-pointer whitespace-nowrap";
+                    } else {
+                        btn.className = "px-3 py-1.5 rounded-xl font-medium bg-[#faf7f5] text-[#6e5f62] border border-[#e8dedb] cursor-pointer whitespace-nowrap";
+                    }
+                }
+            });
+
+            const promptBox = document.getElementById('story-custom-prompt-box');
+            if (dayId === 'custom') {
+                if (promptBox) promptBox.classList.remove('hidden');
+                renderCustomStoryCheckboxes();
+                renderStoryView();
+            } else {
+                if (promptBox) promptBox.classList.add('hidden');
+                renderStoryView();
+            }
+        }
+
+        function renderStoryView() {
+            const box = document.getElementById('story-content-box');
+            if (!box) return;
+
+            const story = HSK2_STORIES[currentStoryId] || HSK2_STORIES.day1;
+            if (currentStoryId === 'custom') {
+                box.innerHTML = `
+                    <div class="text-center py-4 space-y-2">
+                        <div class="text-2xl">✨</div>
+                        <h3 class="text-sm font-bold text-[#2b2426]">Tạo Câu Chuyện Tùy Chỉnh Bằng AI</h3>
+                        <p class="text-xs text-[#786669] max-w-sm mx-auto">Chị hãy tích chọn các từ vựng chị muốn luyện tập ở bảng bên dưới, sau đó bấm <strong>📋 SAO CHÉP PROMPT AI</strong> để dán vào ChatGPT / Gemini nhé!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div class="flex items-center justify-between border-b border-[#ebdcd8] pb-2.5">
+                    <div>
+                        <h3 class="text-base font-bold text-[#2b2426] flex items-center gap-2">
+                            <span>${story.titleZh}</span>
+                            <span class="text-xs font-normal text-[#8c7b7f]">(${story.titleVi})</span>
+                        </h3>
+                        <p class="text-[11px] text-[#786669] mt-0.5">${story.description}</p>
+                    </div>
+                    <button onclick="playStoryAudio('${story.id}')" class="px-3 py-1.5 bg-[#8f525e] hover:bg-[#7b434f] text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs cursor-pointer shrink-0">
+                        <span>🔊 Đọc Bài</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-[#6e5f62] py-1">
+                    <div class="flex items-center gap-2">
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="checkbox" ${showPinyinState ? 'checked' : ''} onchange="togglePinyinDisplay(this.checked)" class="rounded text-[#8f525e]">
+                            <span>Pinyin</span>
+                        </label>
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="checkbox" ${showViState ? 'checked' : ''} onchange="toggleViDisplay(this.checked)" class="rounded text-[#8f525e]">
+                            <span>Dịch Việt</span>
+                        </label>
+                    </div>
+                    <span class="text-[10px] text-[#8c7b7f]">💡 Bấm từ màu nổi để nghe đọc</span>
+                </div>
+
+                <div class="space-y-4 pt-1">
+            `;
+
+            story.paragraphs.forEach((p, idx) => {
+                const wordsList = p.words || [];
+                const targetWords = wordsList.map(w => w.word);
+
+                let formattedZh = '';
+                const parts = p.zh.split(' ');
+                const pyParts = p.pinyin.split(' ');
+
+                parts.forEach((part, pIdx) => {
+                    const py = pyParts[pIdx] || '';
+                    const isTarget = targetWords.includes(part);
+                    if (isTarget) {
+                        const targetObj = wordsList.find(w => w.word === part);
+                        const mean = targetObj ? targetObj.meaning : '';
+                        formattedZh += `<ruby onclick="speakWord('${part}', 'zh-CN'); showToast('${part} (${py}): ${mean}')" class="cursor-pointer bg-[#f4ebe8] text-[#8a525f] px-1 py-0.5 rounded font-bold hover:bg-[#ebdcd8] transition">${part}<rt class="${showPinyinState ? '' : 'hidden'} text-[#935864]">${py}</rt></ruby> `;
+                    } else {
+                        formattedZh += `<ruby>${part}<rt class="${showPinyinState ? '' : 'hidden'} text-[#64748b]">${py}</rt></ruby> `;
+                    }
+                });
+
+                html += `
+                    <div class="p-3 bg-white rounded-xl border border-[#e8dedb] space-y-2">
+                        <div class="text-base text-[#2b2426] leading-relaxed">
+                            ${formattedZh}
+                        </div>
+                        <div class="story-vi-text ${showViState ? '' : 'hidden'} text-xs text-[#5e5053] font-medium pt-1 border-t border-[#f4ebe8]">
+                            👉 ${p.vi}
+                        </div>
+                    </div>
+                `;
+            });
+
+            let allStoryWords = [];
+            story.paragraphs.forEach(p => {
+                if (p.words) allStoryWords.push(...p.words);
+            });
+
+            html += `
+                </div>
+                <div class="pt-2 border-t border-[#ebdcd8]">
+                    <div class="text-xs font-bold text-[#2b2426] mb-2 flex items-center gap-1.5">
+                        <span>🏷️ Từ vựng cốt lõi trong bài:</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+            `;
+
+            allStoryWords.forEach(w => {
+                html += `
+                    <button onclick="speakWord('${w.word}', 'zh-CN'); showToast('${w.word} (${w.pinyin}): ${w.meaning}')" class="px-2.5 py-1 bg-white border border-[#e8dedb] hover:border-[#8f525e] rounded-lg text-xs font-semibold text-[#8a525f] flex items-center gap-1 cursor-pointer transition">
+                        <span>${w.word}</span>
+                        <span class="text-[10px] text-[#8c7b7f] font-normal">(${w.meaning})</span>
+                    </button>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            box.innerHTML = html;
+        }
+
+        function togglePinyinDisplay(checked) {
+            showPinyinState = checked;
+            renderStoryView();
+        }
+
+        function toggleViDisplay(checked) {
+            showViState = checked;
+            renderStoryView();
+        }
+
+        function playStoryAudio(storyId) {
+            const story = HSK2_STORIES[storyId];
+            if (!story) return;
+            const fullText = story.paragraphs.map(p => p.zh).join(' ');
+            speakWord(fullText, 'zh-CN');
+            showToast("🔊 Đang đọc toàn bộ câu chuyện tiếng Trung...");
+        }
+
+        function copyCurrentStoryPrompt() {
+            const story = HSK2_STORIES[currentStoryId] || HSK2_STORIES.day1;
+            let wordsStr = "";
+            if (currentStoryId === 'custom') {
+                const checked = Array.from(document.querySelectorAll('.story-word-cb:checked')).map(cb => cb.value);
+                wordsStr = checked.join(', ');
+            } else {
+                let allW = [];
+                story.paragraphs.forEach(p => { if (p.words) allW.push(...p.words.map(w => w.word)); });
+                wordsStr = allW.join(', ');
+            }
+
+            if (!wordsStr) wordsStr = "旅游, 运动, 眼睛, 足球, 觉得, 最, 医生, 休息, 手机, 学习";
+
+            const promptText = `Hãy viết cho tôi một câu chuyện ngắn tiếng Trung HSK 2 khoảng 100-150 từ sinh động, dễ đọc, kèm theo phiên âm Pinyin và dịch nghĩa tiếng Việt chi tiết từng câu, trong đó bắt buộc sử dụng các từ vựng sau:
+
+👉 Từ vựng: ${wordsStr}`;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                showToast("📋 Đã sao chép Prompt cho AI! Chị hãy mở ChatGPT / Gemini và dán vào nhé.");
+            }).catch(() => {
+                alert("Prompt AI của chị:
+
+" + promptText);
+            });
+        }
+
+        function renderCustomStoryCheckboxes() {
+            const container = document.getElementById('story-word-checkboxes');
+            if (!container) return;
+
+            const allWords = getAllWordsList();
+            let html = '';
+            allWords.forEach((w, idx) => {
+                html += `
+                    <label class="flex items-center gap-1.5 p-1.5 rounded-lg bg-white border border-[#e8dedb] text-xs cursor-pointer hover:bg-[#faf7f5]">
+                        <input type="checkbox" value="${w.hanzi}" class="story-word-cb rounded text-[#8f525e]" ${idx < 8 ? 'checked' : ''}>
+                        <span class="font-bold text-[#2b2426]">${w.hanzi}</span>
+                        <span class="text-[10px] text-[#8c7b7f] truncate">(${w.meaning})</span>
+                    </label>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectAllStoryWords() {
+            const cbs = document.querySelectorAll('.story-word-cb');
+            cbs.forEach(cb => cb.checked = true);
+        }
+
+        function generateCustomStoryPrompt() {
+            const checked = Array.from(document.querySelectorAll('.story-word-cb:checked')).map(cb => cb.value);
+            if (checked.length === 0) {
+                alert("⚠️ Vui lòng tích chọn ít nhất 1 từ vựng!");
+                return;
+            }
+
+            const promptText = `Hãy viết cho tôi một câu chuyện ngắn tiếng Trung HSK 2 khoảng 100-150 từ sinh động, dễ đọc, kèm theo phiên âm Pinyin và dịch nghĩa tiếng Việt chi tiết từng câu, trong đó bắt buộc sử dụng các từ vựng sau:
+
+👉 Từ vựng: ${checked.join(', ')}`;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                showToast(`🎉 Đã sao chép Prompt (${checked.length} từ)! Chị dán vào ChatGPT / Gemini là có ngay câu chuyện nhé.`);
+            }).catch(() => {
+                alert("Prompt AI của chị:
+
+" + promptText);
+            });
+        }
+
+
+    

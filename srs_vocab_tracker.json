@@ -1,0 +1,581 @@
+{
+  "user_info": {
+    "book_title": "新 HSK 教程 2 (New HSK Course 2 - FLTRP 2026)",
+    "book_pdf": "1041759323-HSK2-3-0.pdf",
+    "target": "Dual SRS: HSK 1 Review + New HSK 2 Coursebook",
+    "daily_hsk1_review": 10,
+    "daily_hsk2_new": 5,
+    "last_updated": "2026-09-27"
+  },
+  "hsk1_bank": {
+    "total": 150,
+    "status": "mastered_initial",
+    "sample_review_today": [
+      {
+        "hanzi": "猫",
+        "pinyin": "māo",
+        "meaning": "Con mèo"
+      },
+      {
+        "hanzi": "狗",
+        "pinyin": "gǒu",
+        "meaning": "Con chó"
+      },
+      {
+        "hanzi": "椅子",
+        "pinyin": "yǐzi",
+        "meaning": "Cái ghế"
+      },
+      {
+        "hanzi": "桌子",
+        "pinyin": "zhuōzi",
+        "meaning": "Cái bàn"
+      },
+      {
+        "hanzi": "电脑",
+        "pinyin": "diànnǎo",
+        "meaning": "Máy tính"
+      },
+      {
+        "hanzi": "电视",
+        "pinyin": "diànshì",
+        "meaning": "Tivi"
+      },
+      {
+        "hanzi": "电影",
+        "pinyin": "diànyǐng",
+        "meaning": "Phim ảnh"
+      },
+      {
+        "hanzi": "天气",
+        "pinyin": "tiānqì",
+        "meaning": "Thời tiết"
+      },
+      {
+        "hanzi": "热",
+        "pinyin": "rè",
+        "meaning": "Nóng"
+      },
+      {
+        "hanzi": "冷",
+        "pinyin": "lěng",
+        "meaning": "Lạnh"
+      }
+    ]
+  },
+  "hsk2_lessons": {
+    "Lesson_1": {
+      "title": "第一课 她请我们吃了北京烤鸭",
+      "learned_date": "2026-09-12"
+    },
+    "Lesson_2": {
+      "title": "第二课 还是打车去北大吧",
+      "learned_date": "2026-09-15"
+    },
+    "Lesson_3": {
+      "title": "第三课 我想去西安旅游",
+      "learned_date": "2026-09-19",
+      "words": [
+        {
+          "hanzi": "一起",
+          "pinyin": "yìqǐ",
+          "meaning": "Cùng nhau"
+        },
+        {
+          "hanzi": "出去",
+          "pinyin": "chūqù",
+          "meaning": "Đi ra ngoài"
+        },
+        {
+          "hanzi": "洗",
+          "pinyin": "xǐ",
+          "meaning": "Rửa, giặt"
+        },
+        {
+          "hanzi": "自己",
+          "pinyin": "zìjǐ",
+          "meaning": "Tự mình"
+        },
+        {
+          "hanzi": "拿",
+          "pinyin": "ná",
+          "meaning": "Cầm, lấy"
+        },
+        {
+          "hanzi": "手",
+          "pinyin": "shǒu",
+          "meaning": "Bàn tay"
+        }
+      ]
+    },
+    "Lesson_4": {
+      "title": "第四课 你穿红色的很好看 (You look pretty good in red)",
+      "status": "completed",
+      "learned_date": "2026-09-20",
+      "words": [
+        {
+          "hanzi": "穿",
+          "pinyin": "chuān",
+          "hanviet": "Xuyên",
+          "type": "động từ",
+          "meaning": "Mặc (quần áo), đi (giày dép)",
+          "radical": "穴 (Bộ Huyệt) + 牙 (Bộ Nha)",
+          "mnemonic": "Luồn chân/tay xỏ (穴) qua trang phục $\rightarrow$ Mặc / Đeo (穿).",
+          "example": "你穿红色的很好看。(Nǐ chuān hóngsè de hěn hǎokàn. - Bạn mặc màu đỏ rất đẹp.)"
+        },
+        {
+          "hanzi": "商场",
+          "pinyin": "shāngchǎng",
+          "hanviet": "Thương tràng",
+          "type": "danh từ",
+          "meaning": "Trung tâm thương mại, siêu thị lớn",
+          "radical": "商 (Thương: Buôn bán) + 场 (Tràng: Quảng trường/Sân)",
+          "mnemonic": "Khu vực quảng trường (场) mua bán sầm uất (商) $\rightarrow$ Trung tâm thương mại.",
+          "example": "我和妈妈去了一家商场。(Wǒ hé māma qùle yì jiā shāngchǎng. - Tôi và mẹ đã đi một trung tâm thương mại.)"
+        },
+        {
+          "hanzi": "裤子",
+          "pinyin": "kùzi",
+          "hanviet": "Khố tử",
+          "type": "danh từ",
+          "meaning": "Chiếc quần (quần dài/ngắn)",
+          "radical": "衤 (Bộ Y: Quần áo) + 库 (Kho)",
+          "mnemonic": "Trang phục quần áo (衤) che giấu đôi chân $\rightarrow$ Chiếc quần (裤子).",
+          "example": "我想买这条白色的裤子。(Wǒ xiǎng mǎi zhè tiáo báisè de kùzi. - Tôi muốn mua chiếc quần màu trắng này.)"
+        },
+        {
+          "hanzi": "红色",
+          "pinyin": "hóngsè",
+          "hanviet": "Hồng sắc",
+          "type": "danh từ",
+          "meaning": "Màu đỏ",
+          "radical": "纟 (Bộ Mịch: Sợi tơ) + 工 (Công) + 色 (Sắc)",
+          "mnemonic": "Màu sắc (色) rực rỡ của tơ lụa nhuộm đỏ (红) $\rightarrow$ Màu đỏ (红色).",
+          "example": "你试试那条红色的吧。(Nǐ shìshi nà tiáo hóngsè de ba. - Bạn mặc thử chiếc màu đỏ kia đi.)"
+        },
+        {
+          "hanzi": "因为...所以...",
+          "pinyin": "yīnwèi... suǒyǐ...",
+          "hanviet": "Nhân vị... sở dĩ...",
+          "type": "liên từ đôi",
+          "meaning": "Bởi vì... cho nên...",
+          "radical": "因 (Nhân) + 为 (Vị) + 所 (Sở) + 以 (Dĩ)",
+          "mnemonic": "Cấu trúc câu biểu thị nguyên nhân (因为) và kết quả (所以).",
+          "example": "就是因为没穿过，所以要试试啊！(Jiùshì yīnwèi méi chuānguò, suǒyǐ yào shìshi a! - Chính vì chưa từng mặc qua nên mới phải thử chứ!)"
+        },
+        {
+          "hanzi": "颜色",
+          "pinyin": "yánsè",
+          "hanviet": "Nhan sắc",
+          "type": "danh từ",
+          "meaning": "Màu sắc",
+          "radical": "颜 (Nhan: Khuôn mặt) + 色 (Sắc)",
+          "mnemonic": "Màu sắc (色) rực rỡ hiện lên diện mạo (颜) $\rightarrow$ Màu sắc (颜色).",
+          "example": "商场里的衣服颜色很多。(Shāngchǎng lǐ de yīfu yánsè hěn duō. - Quần áo trong TTTM có rất nhiều màu sắc.)"
+        }
+      ]
+    },
+    "Lesson_5": {
+      "title": "第五课 第一次去中国朋友家 (Visiting a Chinese friend's home for the first time)",
+      "status": "completed",
+      "learned_date": "2026-09-21",
+      "words": [
+        {
+          "hanzi": "礼物",
+          "pinyin": "lǐwù",
+          "hanviet": "Lễ vật",
+          "type": "danh từ",
+          "meaning": "Quà tặng, món quà",
+          "radical": "礼 (Lễ: Lễ nghi) + 物 (Vật: Đồ vật)",
+          "mnemonic": "Đồ vật (物) mang ý nghĩa lễ nghi (礼) tình cảm $\rightarrow$ Quà tặng (礼物).",
+          "example": "这是送给你们 orders/của bạn: 这是送给你们的礼物。(Zhè shì sòng gěi nǐmen de lǐwù. - Đây là quà tặng mọi người.)"
+        },
+        {
+          "hanzi": "准备",
+          "pinyin": "zhǔnbèi",
+          "hanviet": "Chuẩn bị",
+          "type": "động từ",
+          "meaning": "Chuẩn bị, sắm sửa",
+          "radical": "准 (Chuẩn: Chuẩn xác) + 备 (Bị: Trang bị/Sẵn sàng)",
+          "mnemonic": "Sắp xếp trang bị (备) cho đúng chuẩn (准) $\rightarrow$ Chuẩn bị (准备).",
+          "example": "这是给孩子们准备的礼物。(Zhè shì gěi háizimen zhǔnbèi de lǐwù. - Đây là quà chuẩn bị cho các bé.)"
+        },
+        {
+          "hanzi": "奶茶",
+          "pinyin": "nǎichá",
+          "hanviet": "Nãi trà",
+          "type": "danh từ",
+          "meaning": "Trà sữa",
+          "radical": "奶 (Nãi: Sữa) + 茶 (Trà: Trá)",
+          "mnemonic": "Sữa thơm (奶) hòa quyện cùng lá trà (茶) $\rightarrow$ Trà sữa (奶茶).",
+          "example": "我还没喝过 meiyou heguo 这么好喝的奶茶。(Wǒ hái méi hēguo zhème hǎohē de nǎichá. - Tôi chưa từng uống trà sữa nào ngon thế này.)"
+        },
+        {
+          "hanzi": "进来",
+          "pinyin": "jìnlái",
+          "hanviet": "Tiến lai",
+          "type": "động từ hướng",
+          "meaning": "Đi vào, bước vào (về phía người nói)",
+          "radical": "进 (Tiến: Đi vào) + 来 (Lai: Đến)",
+          "mnemonic": "Di chuyển tiến (进) về phía người nói (来) $\rightarrow$ Đi vào (进来).",
+          "example": "家月、安妮，快进来！(Jiāyuè, Ānnī, kuài jìnlái! - Gia Nguyệt, Annie, mau vào nhà đi!)"
+        },
+        {
+          "hanzi": "跟",
+          "pinyin": "gēn",
+          "hanviet": "Cân",
+          "type": "giới từ / liên từ",
+          "meaning": "Cùng với, theo, và",
+          "radical": "足 (Bộ Túc: Bàn chân) + 艮 (Cấn)",
+          "mnemonic": "Bước bàn chân (足) đi sát gót người phía trước $\rightarrow$ Đi theo / Cùng với (跟).",
+          "example": "吃完饭你们可以跟我去看看。(Chīwán fàn nǐmen kěyǐ gēn wǒ qù kànkan. - Ăn cơm xong mọi người có thể đi cùng tôi xem thử.)"
+        },
+        {
+          "hanzi": "酒店",
+          "pinyin": "jiǔdiàn",
+          "hanviet": "Tửu điếm",
+          "type": "danh từ",
+          "meaning": "Khách sạn (lớn), khách sạn lưu trú",
+          "radical": "酒 (Tửu: Rượu) + 店 (Điếm: Cửa hàng)",
+          "mnemonic": "Cửa tiệm (店) ngày xưa có rượu ngon (酒) và phòng nghỉ $\rightarrow$ Khách sạn (酒店).",
+          "example": "我们是走回酒店的。(Wǒmen shì zǒuhuí jiǔdiàn de. - Chúng tôi đi bộ về lại khách sạn.)"
+        }
+      ]
+    },
+    "Lesson_6": {
+      "title": "第六课 小雪，生日快乐！ (Happy birthday, Xiaoxue!)",
+      "status": "completed",
+      "learned_date": "2026-09-22",
+      "words": [
+        {
+          "hanzi": "生日",
+          "pinyin": "shēngrì",
+          "hanviet": "Sinh nhật",
+          "type": "danh từ",
+          "meaning": "Ngày sinh nhật",
+          "radical": "生 (Sinh: Sinh ra) + 日 (Nhật: Ngày)",
+          "mnemonic": "Ngày (日) mình được sinh ra (生) trên đời $\rightarrow$ Sinh nhật (生日).",
+          "example": "明天就是女儿的生日了。(Míngtiān jiùshì nǚ'ér de shēngrì le. - Ngày mai là sinh nhật con gái rồi.)"
+        },
+        {
+          "hanzi": "蛋糕",
+          "pinyin": "dàngāo",
+          "hanviet": "Đản cao",
+          "type": "danh từ",
+          "meaning": "Bánh sinh nhật, bánh ngọt",
+          "radical": "蛋 (Đản: Trứng) + 糕 (Cao: Bánh hấp)",
+          "mnemonic": "Món bánh cao cấp (糕) làm từ trứng (蛋) ngọt thơm $\rightarrow$ Bánh ngọt / Bánh sinh nhật (蛋糕).",
+          "example": "我再给她买个大大的生日蛋糕。(Wǒ zài gěi tā mǎi ge dàdà de shēngrì dàngāo. - Tôi sẽ mua thêm cho con chiếc bánh sinh nhật to đùng.)"
+        },
+        {
+          "hanzi": "快乐",
+          "pinyin": "kuàilè",
+          "hanviet": "Khoái lạc",
+          "type": "tính từ",
+          "meaning": "Vui vẻ, hạnh phúc",
+          "radical": "快 (Khoái: Nhanh/Vui) + 乐 (Lạc: Âm nhạc/Vui vẻ)",
+          "mnemonic": "Tâm trạng sảng khoái (快) ngập tràn niềm vui (乐) $\rightarrow$ Vui vẻ, hạnh phúc (快乐).",
+          "example": "祝你生日快乐！(Zhù nǐ shēngrì kuàilè! - Chúc bạn sinh nhật vui vẻ!)"
+        },
+        {
+          "hanzi": "打开",
+          "pinyin": "dǎkāi",
+          "hanviet": "Đả khai",
+          "type": "động từ",
+          "meaning": "Mở ra, bóc out (quà, cửa, hộp)",
+          "radical": "打 (Đả: Đánh/Làm) + 开 (Khai: Mở)",
+          "mnemonic": "Thao tác tay (打) để làm cho vật bung ra (开) $\rightarrow$ Mở ra / Bóc ra (打开).",
+          "example": "你打开看看喜欢不喜欢。(Nǐ dǎkāi kànkan xǐhuan bù xǐhuan. - Con bóc ra xem có thích không.)"
+        },
+        {
+          "hanzi": "舒服",
+          "pinyin": "shūfu",
+          "hanviet": "Thư phục",
+          "type": "tính từ",
+          "meaning": "Dễ chịu, thoải mái, sảng khoái",
+          "radical": "舒 (Thư: Thư thái) + 服 (Phục: Phục tùng/Trang phục)",
+          "mnemonic": "Thân thể thư thái (舒) dễ chịu $\rightarrow$ Dễ chịu / Thoải mái (舒服).",
+          "example": "他们说要舒舒服服地睡一觉。(Tāmen shuō yào shūshūfúfú de shuì yí jiào. - Các con bảo muốn ngủ một giấc thật thoải mái.)"
+        },
+        {
+          "hanzi": "忘",
+          "pinyin": "wàng",
+          "hanviet": "Vong",
+          "type": "động từ",
+          "meaning": "Quên, quên mất",
+          "radical": "亡 (Vong: Mất) + 心 (Tâm: Trái tim/Trí óc)",
+          "mnemonic": "Trí óc (心) để mất mát (亡) thông tin $\rightarrow$ Quên (忘).",
+          "example": "你看，你不说我还真忘了！(Nǐ kàn, nǐ bù shuō wǒ hái zhēn wàng le! - Kìa, em không nói anh quên mất thật đấy!)"
+        }
+      ]
+    },
+    "Lesson_7": {
+      "title": "第七课 他篮球打得很好 (He plays basketball very well)",
+      "status": "completed",
+      "learned_date": "2026-09-23",
+      "words": [
+        {
+          "hanzi": "篮球",
+          "pinyin": "lánqiú",
+          "hanviet": "Lam cầu",
+          "type": "danh từ",
+          "meaning": "Môn bóng rổ",
+          "radical": "篮 (Lam: Cái giỏ/Rổ) + 球 (Cầu: Quả bóng)",
+          "mnemonic": "Ném quả bóng (球) vào chiếc rổ (篮) cao $\rightarrow$ Môn bóng rổ (篮球).",
+          "example": "我们一起去打篮球吧。(Wǒmen yìqǐ qù dǎ lánqiú ba. - Chúng mình cùng đi chơi bóng rổ nhé.)"
+        },
+        {
+          "hanzi": "足球",
+          "pinyin": "zúqiú",
+          "hanviet": "Túc cầu",
+          "type": "danh từ",
+          "meaning": "Môn bóng đá",
+          "radical": "足 (Túc: Bàn chân) + 球 (Cầu: Quả bóng)",
+          "mnemonic": "Dùng bàn chân (足) đá quả bóng (球) trên sân $\rightarrow$ Môn bóng đá (足球).",
+          "example": "到星期天就跟朋友们去踢足球。(Dào Xīngqītiān jiù gēn péngyoumen qù tī zúqiú. - Đến Chủ nhật là đi đá bóng cùng bạn bè.)"
+        },
+        {
+          "hanzi": "跑步",
+          "pinyin": "pǎobù",
+          "hanviet": "Bào bộ",
+          "type": "động từ",
+          "meaning": "Chạy bộ",
+          "radical": "跑 (Chạy) + 步 (Bước chân)",
+          "mnemonic": "Sải bước chân (步) nhanh nhạn chạy (跑) gia tăng sức khỏe $\rightarrow$ Chạy bộ (跑步).",
+          "example": "你跑得快不快？(Nǐ pǎo de kuài bù kuài? - Bạn chạy có nhanh không?)"
+        },
+        {
+          "hanzi": "游泳",
+          "pinyin": "yóuyǒng",
+          "hanviet": "Du dũng",
+          "type": "động từ",
+          "meaning": "Bơi lội",
+          "radical": "氵 (Bộ Thủy: Nước) + 游 (Bơi) + 泳 (Lội)",
+          "mnemonic": "Vùng vẫy dưới làn nước (氵) tung tăng du ngoạn $\rightarrow$ Bơi lội (游泳).",
+          "example": "我游泳游得不快。(Wǒ yóuyǒng yóu de bù kuài. - Tôi bơi không nhanh lắm.)"
+        },
+        {
+          "hanzi": "运动",
+          "pinyin": "yùndòng",
+          "hanviet": "Vận động",
+          "type": "danh từ / động từ",
+          "meaning": "Thể thao, vận động",
+          "radical": "运 (Vận: Vận chuyển/Xoay) + 动 (Động: Cử động)",
+          "mnemonic": "Cử động (动) thân thể để luân chuyển (运) năng lượng $\rightarrow$ Tập thể thao / Vận động (运动).",
+          "example": "你还喜欢什么运动？(Nǐ hái xǐhuan shénme yùndòng? - Bạn còn thích môn thể thao nào nữa?)"
+        },
+        {
+          "hanzi": "爱好",
+          "pinyin": "àihào",
+          "hanviet": "Ái hảo",
+          "type": "danh từ / động từ",
+          "meaning": "Sở thích, yêu thích",
+          "radical": "爱 (Ái: Yêu) + 好 (Hảo: Thích/Tốt)",
+          "mnemonic": "Niềm yêu (爱) thích (好) dành cho một hoạt động đặc biệt $\rightarrow$ Sở thích (爱好).",
+          "example": "我的爱好是运动。(Wǒ de àihào shì yùndòng. - Sở thích của tôi là tập thể thao.)"
+        }
+      ]
+    },
+    "Lesson_8": {
+      "title": "第八课 虽然你忘了，但是我记得 (Even though you forgot, I remembered)",
+      "status": "completed",
+      "learned_date": "2026-09-25",
+      "words": [
+        {
+          "hanzi": "手表",
+          "pinyin": "shǒubiǎo",
+          "hanviet": "Thủ biểu",
+          "type": "danh từ",
+          "meaning": "Đồng hồ đeo tay",
+          "radical": "手 (Thủ: Bàn tay) + 表 (Biểu: Mặt đồng hồ)",
+          "mnemonic": "Mặt đồng hồ (表) đeo gọn gàng trên cổ tay (手) $\rightarrow$ Đồng hồ đeo tay (手表).",
+          "example": "你看，这两块手表怎么样？(Nǐ kàn, zhè liǎng kuài shǒubiǎo zěnmeyàng? - Anh xem, hai chiếc đồng hồ này thế nào?)"
+        },
+        {
+          "hanzi": "记得",
+          "pinyin": "jìde",
+          "hanviet": "Ký đắc",
+          "type": "động từ",
+          "meaning": "Ghi nhớ, nhớ lại",
+          "radical": "记 (Ghi nhớ) + 得 (Được)",
+          "mnemonic": "Ghi khắc vào trí óc (记) để giữ lại được (得) $\rightarrow$ Ghi nhớ / Nhớ (记得).",
+          "example": "虽然你忘了，但是我记得。(Suīrán nǐ wàng le, dànshì wǒ jìde. - Tuy em quên rồi nhưng anh vẫn nhớ.)"
+        },
+        {
+          "hanzi": "有意思",
+          "pinyin": "yǒu yìsi",
+          "hanviet": "Hữu ý tư",
+          "type": "tính từ",
+          "meaning": "Hay, thú vị, có ý nghĩa",
+          "radical": "有 (Có) + 意 (Ý) + 思 (Tư)",
+          "mnemonic": "Có hàm chứa ý nghĩa (意) và suy tư (思) sâu sắc $\rightarrow$ Thú vị / Hay (有意思).",
+          "example": "这个电影比那个爱情片更有意思。(Zhège diànyǐng bǐ nàge àiqíngpiàn gèng yǒu yìsi. - Bộ phim này hay hơn phim tình cảm kia.)"
+        },
+        {
+          "hanzi": "虽然...但是...",
+          "pinyin": "suīrán... dànshì...",
+          "hanviet": "Tuy nhiên... đản thị...",
+          "type": "liên từ đôi",
+          "meaning": "Tuy... nhưng...",
+          "radical": "虽 (Tuy) + 然 (Nhiên) + 但 (Đản/Nhưng) + 是 (Thị)",
+          "mnemonic": "Cấu trúc câu biểu thị sự chuyển ngoặt, nhượng bộ giữa hai vế.",
+          "example": "虽然花了一些钱，但是我们过了一个快乐的生日。(Suīrán huāle yìxiē qián, dànshì wǒmen guòle yí ge kuàilè de shēngrì. - Tuy tiêu tốn chút tiền nhưng chúng ta đã đón sinh nhật thật vui.)"
+        },
+        {
+          "hanzi": "花",
+          "pinyin": "huā",
+          "hanviet": "Hoa",
+          "type": "động từ",
+          "meaning": "Tiêu (tiền), tốn (thời gian)",
+          "radical": "艹 (Bộ Thảo: Cỏ cây)",
+          "mnemonic": "Tiền bạc tản ra như cánh hoa (花) rơi rải rác $\rightarrow$ Tiêu tiền / Tốn thời gian (花).",
+          "example": "今天花了不少钱吧？(Jīntiān huāle bù shǎo qián ba? - Hôm nay chắc tốn không ít tiền nhỉ?)"
+        },
+        {
+          "hanzi": "丈夫 & 妻子",
+          "pinyin": "zhàngfu & qīzi",
+          "hanviet": "Trượng phu & Thê tử",
+          "type": "danh từ đôi",
+          "meaning": "Chồng & Vợ",
+          "radical": "丈 (Trượng) + 夫 (Phu) / 妻 (Thê) + 子 (Tử)",
+          "mnemonic": "Trượng phu (丈夫) là người chồng gánh vác, thê tử (妻子) là người vợ chăm sóc gia đình.",
+          "example": "虽然妻子忘了，但是丈夫记得。(Suīrán qīzi wàng le, dànshì zhàngfu jìde. - Tuy người vợ quên nhưng người chồng vẫn nhớ.)"
+        }
+      ]
+    },
+    "Lesson_9": {
+      "title": "第九课 我去买杯奶茶 (I'm going to buy a cup of bubble tea)",
+      "status": "completed",
+      "learned_date": "2026-09-26",
+      "words": [
+        {
+          "hanzi": "咖啡",
+          "pinyin": "kāfēi",
+          "hanviet": "Cà phê",
+          "type": "danh từ",
+          "meaning": "Cà phê (đồ uống)",
+          "radical": "口 (Bộ Khẩu: Miệng) + 咖 + 啡",
+          "mnemonic": "Món đồ uống thơm ngon dùng miệng (口) thưởng thức $\rightarrow$ Cà phê (咖啡).",
+          "example": "我想喝咖啡，还是去咖啡店吧。(Wǒ xiǎng hē kāfēi, háishi qù kāfēidiàn ba. - Tôi muốn uống cà phê, hay là đi quán cà phê đi.)"
+        },
+        {
+          "hanzi": "离",
+          "pinyin": "lí",
+          "hanviet": "Ly",
+          "type": "động từ / giới từ",
+          "meaning": "Cách (về địa lý hoặc thời gian)",
+          "radical": "离 (Bộ Ly: Rời khỏi/Khoảng cách)",
+          "mnemonic": "Biểu thị cự cự cách xa, khoảng cách rời xa giữa hai mốc $\rightarrow$ Cách (离).",
+          "example": "咖啡店离这儿有点儿远。(Kāfēidiàn lí zhèr yǒudiǎnr yuǎn. - Quán cà phê cách đây hơi xa.)"
+        },
+        {
+          "hanzi": "近",
+          "pinyin": "jìn",
+          "hanviet": "Cận",
+          "type": "tính từ",
+          "meaning": "Gần, ở sát",
+          "radical": "辶 (Bộ Quai Sước: Di chuyển) + 斤 (Cân)",
+          "mnemonic": "Bước chân di chuyển (辶) chỉ cách nhau chút xíu cân (斤) nấc $\rightarrow$ Gần (近).",
+          "example": "这里离家很近，还是走路吧。(Zhèlǐ lí jiā hěn jìn, háishi zǒulù ba. - Ở đây cách nhà rất gần, hay là đi bộ đi.)"
+        },
+        {
+          "hanzi": "走路",
+          "pinyin": "zǒulù",
+          "hanviet": "Tẩu lộ",
+          "type": "động từ",
+          "meaning": "Đi bộ, cuốc bộ",
+          "radical": "走 (Tẩu: Đi) + 路 (Lộ: Con đường)",
+          "mnemonic": "Dùng hai chân bước đi (走) trên con đường (路) $\rightarrow$ Đi bộ (走路).",
+          "example": "走半个多小时就到了。(Zǒu bàn ge duō xiǎoshí jiù dào le. - Đi bộ hơn nửa tiếng là tới nơi rồi.)"
+        },
+        {
+          "hanzi": "旁边",
+          "pinyin": "pángbiān",
+          "hanviet": "Bàng biên",
+          "type": "danh từ chỉ vị trí",
+          "meaning": "Bên cạnh, kế bên",
+          "radical": "旁 (Bên cạnh) + 边 (Biên: Ranh giới)",
+          "mnemonic": "Vị trí ở sát bên ranh giới (边) bên hông (旁) $\rightarrow$ Bên cạnh (旁边).",
+          "example": "旁边那个男孩儿就穿了这样的裤子。(Pángbiān nàge nánháir jiù chuānle zhèyàng de kùzi. - Cậu bé bên cạnh mặc chiếc quần kiểu thế này đấy.)"
+        },
+        {
+          "hanzi": "个子",
+          "pinyin": "gèzi",
+          "hanviet": "Cá tử",
+          "type": "danh từ",
+          "meaning": "Chiều cao, vóc dáng con người",
+          "radical": "个 (Cá) + 子 (Tử)",
+          "mnemonic": "Vóc dáng chiều cao cá nhân (个) của một con người $\rightarrow$ Chiều cao / Vóc dáng (个子).",
+          "example": "儿子的个子没有他那么高。(Érzi de gèzi méiyǒu tā nàme gāo. - Chiều cao của con trai không cao đến thế như cậu ấy.)"
+        }
+      ]
+    },
+    "Lesson_10": {
+      "title": "第十课 就要考试了 (The exam is about to start)",
+      "status": "learning_today",
+      "learned_date": "2026-09-27",
+      "words": [
+        {
+          "hanzi": "考试",
+          "pinyin": "kǎoshì",
+          "hanviet": "Khảo thí",
+          "type": "danh từ / động từ",
+          "meaning": "Kỳ thi, thi cử",
+          "radical": "考 (Khảo: Kiểm tra) + 试 (Thí: Thử nghiệm)",
+          "mnemonic": "Kiểm tra (考) và dùng bài thử nghiệm (试) đánh giá năng lực $\rightarrow$ Kỳ thi / Thi (考试).",
+          "example": "就要考试了，妈妈让我看做错的题。(Jiùyào kǎoshì le, māma ràng wǒ kàn zuòcuò de tí. - Sắp thi rồi, mẹ bảo tôi xem lại các câu làm sai.)"
+        },
+        {
+          "hanzi": "帮",
+          "pinyin": "bāng",
+          "hanviet": "Bang",
+          "type": "động từ",
+          "meaning": "Giúp đỡ, phụ giúp",
+          "radical": "巾 (Bộ Cân: Khăn) + 邦 (Bang)",
+          "mnemonic": "Xắn tay áo giơ dải khăn (巾) ra hỗ trợ bạn bè $\rightarrow$ Giúp / Giúp đỡ (帮).",
+          "example": "爸爸帮弟弟准备书包、本子和笔。(Bàba bāng dìdi zhǔnbèi shūbāo, běnzi hé bǐ. - Bố giúp em trai chuẩn bị cặp sách, vở và bút.)"
+        },
+        {
+          "hanzi": "本子 & 笔",
+          "pinyin": "běnzi & bǐ",
+          "hanviet": "Bổn tử & Bút",
+          "type": "danh từ đôi",
+          "meaning": "Quyển vở & Cây bút",
+          "radical": "本 (Bổn: Vở/Sách) + 笔 (Bút: Trúc + Thiết)",
+          "mnemonic": "Dùng cây bút (笔) nắn nếp viết chữ lên từng trang quyển vở (本子).",
+          "example": "本子上做错的题也要看一看。(Běnzi shang zuòcuò de tí yě yào kàn yi kàn. - Các câu làm sai trong vở cũng phải xem lại đấy.)"
+        },
+        {
+          "hanzi": "错 & 题",
+          "pinyin": "cuò & tí",
+          "hanviet": "Thác & Đề",
+          "type": "danh từ / tính từ",
+          "meaning": "Câu sai & Đề bài",
+          "radical": "错 (Sai/Nhầm) + 题 (Đề bài)",
+          "mnemonic": "Đề bài (题) bài tập có những chỗ nhầm lẫn làm sai (错).",
+          "example": "我看过做错的题了。(Wǒ kànguo zuòcuò de tí le. - Tôi đã xem lại các câu làm sai rồi.)"
+        },
+        {
+          "hanzi": "快要...了 / 就要...了",
+          "pinyin": "kuàiyào... le / jiùyào... le",
+          "hanviet": "Khoái yếu... liễu",
+          "type": "cấu trúc câu",
+          "meaning": "Sắp... rồi (diễn tả sự việc sắp xảy ra)",
+          "radical": "快 + 要 + 了 / 就 + 要 + 了",
+          "mnemonic": "Mẫu câu thời thì tương lai gần, báo hiệu sự việc chuẩn bị diễn ra.",
+          "example": "饭菜快要做好了。(Fàncài kuàiyào zuòhǎo le. - Cơm nước sắp làm xong rồi.)"
+        },
+        {
+          "hanzi": "笑",
+          "pinyin": "xiào",
+          "hanviet": "Tiếu",
+          "type": "động từ",
+          "meaning": "Cười, mỉm cười",
+          "radical": "竹 (Bộ Trúc: Cây trúc) + 夭 (Yêu)",
+          "mnemonic": "Gió thổi khóm trúc (竹) lay động rào rạt như tiếng người mỉm cười (笑).",
+          "example": "我问完，他们都笑了。(Wǒ wènwán, tāmen dōu xiào le. - Tôi hỏi xong, bố mẹ đều cười mỉm.)"
+        }
+      ]
+    }
+  }
+}

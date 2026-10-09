@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học & Ôn Tập Từ Vựng SRS - Ngày 25/09/2026 (新 HSK 教程 2)</title>
+    <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .zh {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .tab-btn.active {
+            border-bottom: 3px solid #1e3a8a;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+        .audio-btn {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .audio-btn:hover {
+            transform: scale(1.08);
+        }
+        .audio-btn:active {
+            transform: scale(0.95);
+        }
+        .perspective { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { 
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important; 
+        }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        /* PRINT STYLESHEET */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tab-content { 
+                display: block !important; 
+                opacity: 1 !important; 
+                visibility: visible !important;
+                page-break-before: always;
+                margin-top: 20px;
+            }
+            #sec-new-vocab { page-break-before: avoid; }
+            .hidden { display: block !important; }
+            .perspective { perspective: none !important; }
+            .rotate-y-180 { transform: none !important; position: static !important; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 max-w-5xl mx-auto">
+
+    <!-- HEADER BAR -->
+    <header class="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white p-6 md:p-8 rounded-2xl shadow-xl mb-6 relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-bold zh select-none">颜色</div>
+        <div class="relative z-10">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-2">
+                <span class="bg-blue-500/30 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full border border-blue-400/30">HỆ THỐNG LẶP LẠI NGẮT QUẢNG (SRS DUAL-LOOP)</span>
+                <span class="text-xs text-blue-200 opacity-90 font-medium">📅 Ngày học: 25/09/2026</span>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-extrabold mb-1 text-white tracking-wide">
+                Học & Ôn Tập Từ Vựng Tiếng Trung HSK
+            </h1>
+            <p class="text-blue-100 text-sm md:text-base opacity-90">
+                Theo giáo trình 《新 HSK 教程 2》 (FLTRP 2026) | Tệp 1041759323-HSK2-3-0.pdf
+            </p>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <div class="no-print flex space-x-2 md:space-x-4 border-b border-slate-200 mb-6 overflow-x-auto pb-1 text-xs md:text-sm font-medium">
+        <button onclick="showTab('new-vocab')" id="tab-new-vocab" class="tab-btn active px-4 py-2.5 text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5">
+            <span>✨</span> <span>Từ mới Bài 8 (13 từ)</span>
+        </button>
+        <button onclick="showTab('review-hsk2')" id="tab-review-hsk2" class="tab-btn px-4 py-2.5 text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5">
+            <span>⚡</span> <span>Ôn HSK 2 Bài 7 (14 từ)</span>
+        </button>
+        <button onclick="showTab('review-hsk1')" id="tab-review-hsk1" class="tab-btn px-4 py-2.5 text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5">
+            <span>🔄</span> <span>Ôn lướt HSK 1 (15 từ)</span>
+        </button>
+        <button onclick="showTab('quiz')" id="tab-quiz" class="tab-btn px-4 py-2.5 text-slate-600 hover:text-blue-900 transition flex items-center gap-1.5">
+            <span>📝</span> <span>Trắc nghiệm SRS</span>
+        </button>
+    </div>
+
+    <!-- TAB 1: TỪ MỚI HSK 2 -->
+    <div id="sec-new-vocab" class="tab-content space-y-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <span class="text-blue-600">📚</span> 第八课 虽然你忘了， me 但我记得
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">13 từ vựng trọng tâm trích xuất từ giáo trình 《新 HSK 教程 2》</p>
+                </div>
+                <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full">Nạp từ mới ngày 25/09/2026</span>
+            </div>
+
+            <div class="space-y-4">
+                
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('颜色')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">颜色</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">yánsè</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Nhan sắc)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Màu sắc</span></p>
+                        <p><strong>Bộ thủ:</strong> 颜 (Nhan) + 色 (Sắc)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Màu sắc (色) rực rỡ hiện lên khuôn mặt (颜) -> Màu sắc.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('你喜欢什么颜色？')">你喜欢什么颜色？ 🔊</span>
+            <div class="text-emerald-700 font-mono">Nǐ xǐhuan shénme yánsè?</div>
+            <div class="text-slate-500 italic">Bạn thích màu sắc gì?</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('红色')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">红色</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">hóngsè</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Hồng sắc)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Màu đỏ</span></p>
+                        <p><strong>Bộ thủ:</strong> 红 (Đỏ) + 色 (Sắc)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Sắc màu rực rỡ tơ lụa nhuộm son -> Màu đỏ.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('我穿红色的衣服。')">我穿红色的衣服。 🔊</span>
+            <div class="text-emerald-700 font-mono">Wǒ chuān hóngsè de yīfu.</div>
+            <div class="text-slate-500 italic">Tôi mặc quần áo màu đỏ.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('粉色')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">粉色</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">fěnsè</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Phấn sắc)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Màu hồng</span></p>
+                        <p><strong>Bộ thủ:</strong> 粉 (Phấn) + 色 (Sắc)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Sắc màu dịu nhẹ như phấn hoa -> Màu hồng.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('这双鞋是粉色的。')">这双鞋是粉色的。 🔊</span>
+            <div class="text-emerald-700 font-mono">Zhè shuāng xié shì fěnsè de.</div>
+            <div class="text-slate-500 italic">Đôi giày này màu hồng.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('虽然')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">虽然</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">suīrán</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Tuy nhiên)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Liên từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Mặc dù, tuy</span></p>
+                        <p><strong>Bộ thủ:</strong> 虽 + 然</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Mở đầu mệnh đề nhượng bộ -> Mặc dù.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('虽然下雨了，但是我要去。')">虽然下雨了，但是我要去。 🔊</span>
+            <div class="text-emerald-700 font-mono">Suīrán xià yǔ le, dànshì wǒ yào qù.</div>
+            <div class="text-slate-500 italic">Mặc dù trời mưa rồi nhưng tôi vẫn muốn đi.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('但是')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">但是</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">dànshì</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Đản thị)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Liên từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Nhưng, nhưng mà</span></p>
+                        <p><strong>Bộ thủ:</strong> 但 (Đản) + 是 (Thị)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Biểu thị sự chuyển ngoặt câu chữ -> Nhưng mà.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('但是我很开心。')">但是我很开心。 🔊</span>
+            <div class="text-emerald-700 font-mono">Dànshì wǒ hěn kāixīn.</div>
+            <div class="text-slate-500 italic">Nhưng mà tôi rất vui.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('记得')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">记得</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">jìde</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Ký đắc)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Động từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Nhớ, ghi nhớ</span></p>
+                        <p><strong>Bộ thủ:</strong> 记 (Ghi) + 得 (Được)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Ghi chép (记) lưu giữ trong trí óc -> Ghi nhớ.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('我还记得他的名字。')">我还记得他的名字。 🔊</span>
+            <div class="text-emerald-700 font-mono">Wǒ hái jìde tā de míngzi.</div>
+            <div class="text-slate-500 italic">Tôi vẫn còn nhớ tên cậu ấy.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('报纸')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">报纸</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">bàozhǐ</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Báo chỉ)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Tờ báo, tin tức</span></p>
+                        <p><strong>Bộ thủ:</strong> 报 (Báo) + 纸 (Giấy)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Trang giấy (纸) in thông tin thông báo (报) -> Tờ báo.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('爸爸看报纸。')">爸爸看报纸。 🔊</span>
+            <div class="text-emerald-700 font-mono">Bàba kàn bàozhǐ.</div>
+            <div class="text-slate-500 italic">Bố xem tờ báo.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('手表')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">手表</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">shǒubiǎo</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Thủ biểu)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Đồng hồ đeo tay</span></p>
+                        <p><strong>Bộ thủ:</strong> 手 (Tay) + 表 (Đồng hồ)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Đồng hồ đo thời gian (表) đeo trên cổ tay (手) -> Đồng hồ đeo tay.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('这块手表三千元。')">这块手表三千元。 🔊</span>
+            <div class="text-emerald-700 font-mono">Zhè kuài shǒubiǎo sān qiān yuán.</div>
+            <div class="text-slate-500 italic">Chiếc đồng hồ đeo tay này 3000 tệ.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('千')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">千</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">qiān</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Thiên)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Số từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Nghìn, ngàn</span></p>
+                        <p><strong>Bộ thủ:</strong> 千 (Bộ Thiên)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Chữ chỉ hàng đơn vị nghìn (1000) -> Nghìn.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('一千多块钱。')">一千多块钱。 🔊</span>
+            <div class="text-emerald-700 font-mono">Yì qiān duō kuài qián.</div>
+            <div class="text-slate-500 italic">Hơn một nghìn tệ.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('旁')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">旁</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">páng</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Bàng)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Bên, hướng bên</span></p>
+                        <p><strong>Bộ thủ:</strong> 亠 + 方</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Vị trí ở phương hướng bên cạnh -> Bên.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('身旁。')">身旁。 🔊</span>
+            <div class="text-emerald-700 font-mono">Shēnpáng.</div>
+            <div class="text-slate-500 italic">Bên mình.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('旁边')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">旁边</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">pángbiān</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Bàng biên)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Danh từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Bên cạnh</span></p>
+                        <p><strong>Bộ thủ:</strong> 旁 (Bên) + 边 (Ranh giới)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Khu vực sát ranh giới bên cạnh -> Bên cạnh.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('医院在学校旁边。')">医院在学校旁边。 🔊</span>
+            <div class="text-emerald-700 font-mono">Yīyuàn zài xuéxiào pángbiān.</div>
+            <div class="text-slate-500 italic">Bệnh viện ở bên cạnh trường học.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('说话')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">说话</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">shuōhuà</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Thuyết thoại)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Động từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Nói chuyện, phát ngôn</span></p>
+                        <p><strong>Bộ thủ:</strong> 讠 (Bộ Ngôn) + 说/话</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Dùng lời nói (讠) giao tiếp đối thoại -> Nói chuyện.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('请不要说话。')">请不要说话。 🔊</span>
+            <div class="text-emerald-700 font-mono">Qǐng búyào shuōhuà.</div>
+            <div class="text-slate-500 italic">Xin đừng nói chuyện.</div>
+        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-3">
+                            <button onclick="speakText('几')" class="audio-btn p-2 rounded-lg bg-blue-900 text-white text-xs font-semibold shadow">🔊</button>
+                            <div>
+                                <span class="text-2xl font-bold text-blue-900 zh">几</span>
+                                <span class="ml-2 text-base font-semibold text-emerald-600 font-mono">jǐ</span>
+                                <span class="ml-2 text-xs font-medium text-slate-500">(Hán Việt: Kỷ)</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">Đại từ</span>
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-1 mt-2">
+                        <p><strong>Nghĩa:</strong> <span class="text-blue-900 font-semibold">Mấy, vài</span></p>
+                        <p><strong>Bộ thủ:</strong> 几 (Bộ Kỷ)</p>
+                        <div class="p-2 bg-amber-50/80 rounded-lg text-xs text-amber-900 border border-amber-200">🧠 <strong>Mẹo chiết tự:</strong> Số từ hỏi số lượng nhỏ dưới 10 -> Mấy / Vài.</div>
+                        
+        <div class="text-xs text-slate-600 pt-1">
+            <strong>Ví dụ:</strong> <span class="zh font-medium cursor-pointer hover:text-blue-700" onclick="speakText('几块手表。')">几块手表。 🔊</span>
+            <div class="text-emerald-700 font-mono">Jǐ kuài shǒubiǎo.</div>
+            <div class="text-slate-500 italic">Mấy chiếc đồng hồ.</div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLASHCARD VIEWER INTEGRATED IN TAB 1 -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <span>🎴</span> <span>Thẻ Flashcard 3D Lật Mới (Bài 8)</span>
+                </h3>
+                <span id="fc-counter" class="text-xs font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full">Thẻ 1 / 13</span>
+            </div>
+
+            <!-- 3D CARD -->
+            <div class="perspective h-64 cursor-pointer" onclick="flipFlashcard()">
+                <div id="fc-inner" class="transform-style-3d relative w-full h-full transition-transform duration-500 shadow-md rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-900 to-blue-900 text-white flex flex-col justify-center items-center p-6 text-center">
+                    
+                    <!-- FRONT -->
+                    <div class="backface-hidden absolute inset-0 flex flex-col justify-center items-center p-6">
+                        <span class="text-xs uppercase tracking-widest text-blue-300 font-semibold mb-2">Chạm để lật xem đáp án</span>
+                        <div id="fc-hanzi" class="text-5xl font-extrabold zh mb-2">颜色</div>
+                        <span class="text-xs text-slate-400">HSK 2 - Bài 8</span>
+                    </div>
+
+                    <!-- BACK -->
+                    <div class="backface-hidden rotate-y-180 absolute inset-0 flex flex-col justify-center items-center p-6 bg-slate-800 rounded-2xl">
+                        <div id="fc-title-back" class="text-2xl font-bold zh text-blue-300 mb-1">颜色</div>
+                        <div id="fc-pinyin" class="text-base font-semibold text-emerald-400 font-mono">yánsè</div>
+                        <div id="fc-hanviet" class="text-xs text-slate-400 mb-2">(Hán Việt: Nhan sắc)</div>
+                        <div id="fc-meaning" class="text-lg font-bold text-white mb-2">Màu sắc</div>
+                        <div id="fc-example" class="text-xs text-slate-300 italic max-w-md">颜色 - 你喜欢什么颜色？</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="no-print flex items-center justify-between mt-4">
+                <button onclick="prevFC()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
+                    ← Thẻ trước
+                </button>
+                <div class="flex space-x-2">
+                    <button onclick="speakCurrentCard()" class="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold text-xs rounded-lg transition flex items-center gap-1">
+                        🔊 Phát âm
+                    </button>
+                    <button onclick="assessFC('good')" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-semibold text-xs rounded-lg transition">
+                        Đã thuộc (SRS)
+                    </button>
+                </div>
+                <button onclick="nextFC()" class="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-xs rounded-xl transition">
+                    Thẻ tiếp →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: ÔN HSK 2 BÀI CŨ -->
+    <div id="sec-review-hsk2" class="tab-content space-y-6 hidden">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <span class="text-amber-500">⚡</span> Ôn HSK 2 Bài 7: 他篮球打得很好 (14 từ)
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Lặp lại ngắt quãng từ vựng HSK 2 đã nạp từ các bài học trước</p>
+                </div>
+                <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-3 py-1 rounded-full">Chu kỳ SRS 1 ngày</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">篮球</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">lánqiú</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Bóng rổ, môn bóng rổ</div>
+                    </div>
+                    <button onclick="speakText('篮球')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">得</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">de</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Trợ từ bổ ngữ trình độ</div>
+                    </div>
+                    <button onclick="speakText('得')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">唱</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">chàng</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Hát</div>
+                    </div>
+                    <button onclick="speakText('唱')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">歌</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">gē</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Bài hát</div>
+                    </div>
+                    <button onclick="speakText('歌')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">跳舞</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">tiàowǔ</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Nhảy múa</div>
+                    </div>
+                    <button onclick="speakText('跳舞')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">跳</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">tiào</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Nhảy, bật nảy</div>
+                    </div>
+                    <button onclick="speakText('跳')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">舞</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">wǔ</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Điệu nhảy, vũ điệu</div>
+                    </div>
+                    <button onclick="speakText('舞')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">机场</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">jīchǎng</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Sân bay</div>
+                    </div>
+                    <button onclick="speakText('机场')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">路</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">lù</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Con đường, tuyến đường</div>
+                    </div>
+                    <button onclick="speakText('路')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">离</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">lí</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Cách (khoảng cách)</div>
+                    </div>
+                    <button onclick="speakText('离')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">近</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">jìn</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Gần, ở sát</div>
+                    </div>
+                    <button onclick="speakText('近')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">远</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">yuǎn</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Xa, cách xa</div>
+                    </div>
+                    <button onclick="speakText('远')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">走路</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">zǒulù</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Đi bộ</div>
+                    </div>
+                    <button onclick="speakText('走路')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-blue-900 zh">占</span>
+                            <span class="text-sm font-semibold text-emerald-600 font-mono">zhàn</span>
+                        </div>
+                        <div class="text-xs text-slate-500 mt-1">Chiếm, giữ vị trí</div>
+                    </div>
+                    <button onclick="speakText('占')" class="audio-btn p-2 rounded-lg bg-slate-200 text-slate-700 text-xs font-semibold">🔊</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: ÔN LƯỚT HSK 1 -->
+    <div id="sec-review-hsk1" class="tab-content space-y-6 hidden">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <span class="text-indigo-600">🔄</span> Ôn Lướt HSK 1 (15 Từ Hôm Nay)
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Vòng lặp SRS dài duy trì phản xạ từ vựng HSK 1 cơ bản</p>
+                </div>
+                <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-3 py-1 rounded-full">Duy trì HSK 1 (15 từ)</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">1. 学习</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">xuéxí</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Học tập</span>
+                        <button onclick="speakText('学习')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">2. 工作</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">gōngzuò</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Làm việc</span>
+                        <button onclick="speakText('工作')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">3. 睡觉</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">shuìjiào</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Ngủ</span>
+                        <button onclick="speakText('睡觉')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">4. 打电话</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">dǎ diànhuà</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Gọi điện thoại</span>
+                        <button onclick="speakText('打电话')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">5. 去</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">qù</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Đi</span>
+                        <button onclick="speakText('去')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">6. 来</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">lái</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Đến, tới</span>
+                        <button onclick="speakText('来')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">7. 回</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">huí</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Trở về</span>
+                        <button onclick="speakText('回')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">8. 想</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">xiǎng</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Muốn, nhớ</span>
+                        <button onclick="speakText('想')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">9. 喜欢</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">xǐhuan</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Thích</span>
+                        <button onclick="speakText('喜欢')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">10. 认识</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">rènshi</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Quen biết</span>
+                        <button onclick="speakText('认识')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">11. 能</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">néng</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Có thể</span>
+                        <button onclick="speakText('能')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">12. 会</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">huì</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Biết, sẽ</span>
+                        <button onclick="speakText('会')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">13. 请</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">qǐng</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Mời, xin</span>
+                        <button onclick="speakText('请')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">14. 谢谢</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">xièxie</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Cảm ơn</span>
+                        <button onclick="speakText('谢谢')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="text-lg font-bold text-blue-900 zh">15. 再见</span>
+                        <span class="ml-2 text-sm text-emerald-600 font-mono">zàijiàn</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-2 py-1 rounded border">Tạm biệt</span>
+                        <button onclick="speakText('再见')" class="audio-btn p-1.5 rounded bg-slate-200 text-slate-700 text-xs">🔊</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: QUIZ -->
+    <div id="sec-quiz" class="tab-content space-y-6 hidden">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+            <h2 class="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                <span>📝</span> Bài Tập Củng Cố SRS Tương Tác Ngày 25/09/2026
+            </h2>
+            
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <p class="font-bold text-sm text-slate-900">Câu 1: Cặp liên từ nhượng bộ "虽然...但是..." có nghĩa tiếng Việt là gì?</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <button onclick="checkAnswer(1, 'A', true)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">A. Mặc dù... nhưng...</button>
+<button onclick="checkAnswer(1, 'B', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">B. Bởi vì... cho nên...</button>
+<button onclick="checkAnswer(1, 'C', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">C. Vừa... vừa...</button>
+<button onclick="checkAnswer(1, 'D', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">D. Nếu... thì...</button>
+
+                </div>
+                <div id="res-1" class="text-xs font-bold hidden pt-1"></div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <p class="font-bold text-sm text-slate-900">Câu 2: Từ nào biểu thị "Đồng hồ đeo tay"?</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <button onclick="checkAnswer(2, 'A', true)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">A. 手表 (shǒubiǎo)</button>
+<button onclick="checkAnswer(2, 'B', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">B. 报纸 (bàozhǐ)</button>
+<button onclick="checkAnswer(2, 'C', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">C. 电脑 (diànnǎo)</button>
+<button onclick="checkAnswer(2, 'D', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">D. 电视 (diànshì)</button>
+
+                </div>
+                <div id="res-2" class="text-xs font-bold hidden pt-1"></div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <p class="font-bold text-sm text-slate-900">Câu 3: Đơn vị số đếm "千" (qiān) tương ứng với giá trị nào?</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <button onclick="checkAnswer(3, 'A', true)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">A. Nghìn (1.000)</button>
+<button onclick="checkAnswer(3, 'B', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">B. Trăm (100)</button>
+<button onclick="checkAnswer(3, 'C', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">C. Vạn (10.000)</button>
+<button onclick="checkAnswer(3, 'D', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">D. Mười (10)</button>
+
+                </div>
+                <div id="res-3" class="text-xs font-bold hidden pt-1"></div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <p class="font-bold text-sm text-slate-900">Câu 4: Động từ "记得" (jìde) dịch sang tiếng Việt là gì?</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <button onclick="checkAnswer(4, 'A', true)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">A. Nhớ, ghi nhớ</button>
+<button onclick="checkAnswer(4, 'B', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">B. Quên mất</button>
+<button onclick="checkAnswer(4, 'C', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">C. Hỏi thăm</button>
+<button onclick="checkAnswer(4, 'D', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">D. Nói chuyện</button>
+
+                </div>
+                <div id="res-4" class="text-xs font-bold hidden pt-1"></div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                <p class="font-bold text-sm text-slate-900">Câu 5: Dịch câu sau: "虽然下雨了，但是我要去。"</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <button onclick="checkAnswer(5, 'A', true)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">A. Mặc dù trời mưa rồi nhưng tôi vẫn muốn đi.</button>
+<button onclick="checkAnswer(5, 'B', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">B. Bởi vì trời mưa nên tôi không đi.</button>
+<button onclick="checkAnswer(5, 'C', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">C. Tôi mua chiếc đồng hồ màu hồng này.</button>
+<button onclick="checkAnswer(5, 'D', false)" class="p-2.5 rounded-lg border bg-white hover:bg-blue-50 text-left font-medium">D. Bố tôi thích đọc tờ báo này.</button>
+
+                </div>
+                <div id="res-5" class="text-xs font-bold hidden pt-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function speakText(text) {
+            if (!text) return;
+            try {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const msg = new SpeechSynthesisUtterance(text);
+                    msg.lang = 'zh-CN';
+                    msg.rate = 0.85;
+                    
+                    const voices = window.speechSynthesis.getVoices();
+                    const zhVoice = voices.find(v => v.lang.includes('zh') || v.lang.includes('CN') || v.lang.includes('Chinese'));
+                    if (zhVoice) msg.voice = zhVoice;
+                    
+                    window.speechSynthesis.speak(msg);
+                } else {
+                    playAudioFallback(text);
+                }
+            } catch(e) {
+                console.error("Speech error:", e);
+                playAudioFallback(text);
+            }
+        }
+
+        function playAudioFallback(text) {
+            try {
+                const url = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encodeURIComponent(text) + "&tl=zh-CN&client=tw-ob";
+                const a = new Audio(url);
+                a.play().catch(function(e){ console.log(e); });
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+        function speakCurrentCard() {
+            if (fcData && fcData[fcIndex]) {
+                speakText(fcData[fcIndex].hanzi);
+            }
+        }
+
+        function showTab(tabName) {
+            const tabs = ['new-vocab', 'review-hsk2', 'review-hsk1', 'quiz'];
+            tabs.forEach(t => {
+                document.getElementById(`tab-${t}`).classList.remove('active');
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+            });
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+        }
+
+        const fcData = [
+            { hanzi: "颜色", pinyin: "yánsè", hanviet: "Nhan sắc", meaning: "Màu sắc", example: "颜色 - 你喜欢什么颜色？" },
+            { hanzi: "红色", pinyin: "hóngsè", hanviet: "Hồng sắc", meaning: "Màu đỏ", example: "红色 - 我穿红色的衣服。" },
+            { hanzi: "粉色", pinyin: "fěnsè", hanviet: "Phấn sắc", meaning: "Màu hồng", example: "粉色 - 这双鞋是粉色的。" },
+            { hanzi: "虽然", pinyin: "suīrán", hanviet: "Tuy nhiên", meaning: "Mặc dù, tuy", example: "虽然 - 虽然下雨了，但是我要去。" },
+            { hanzi: "但是", pinyin: "dànshì", hanviet: "Đản thị", meaning: "Nhưng, nhưng mà", example: "但是 - 但是我很开心。" },
+            { hanzi: "记得", pinyin: "jìde", hanviet: "Ký đắc", meaning: "Nhớ, ghi nhớ", example: "记得 - 我还记得他的名字。" },
+            { hanzi: "报纸", pinyin: "bàozhǐ", hanviet: "Báo chỉ", meaning: "Tờ báo, tin tức", example: "报纸 - 爸爸看报纸。" },
+            { hanzi: "手表", pinyin: "shǒubiǎo", hanviet: "Thủ biểu", meaning: "Đồng hồ đeo tay", example: "手表 - 这块手表三千元。" },
+            { hanzi: "千", pinyin: "qiān", hanviet: "Thiên", meaning: "Nghìn, ngàn", example: "千 - 一千多块钱。" },
+            { hanzi: "旁", pinyin: "páng", hanviet: "Bàng", meaning: "Bên, hướng bên", example: "旁 - 身旁。" },
+            { hanzi: "旁边", pinyin: "pángbiān", hanviet: "Bàng biên", meaning: "Bên cạnh", example: "旁边 - 医院在学校旁边。" },
+            { hanzi: "说话", pinyin: "shuōhuà", hanviet: "Thuyết thoại", meaning: "Nói chuyện, phát ngôn", example: "说话 - 请不要说话。" },
+            { hanzi: "几", pinyin: "jǐ", hanviet: "Kỷ", meaning: "Mấy, vài", example: "几 - 几块手表。" }
+        ];
+
+        let fcIndex = 0;
+        let fcIsFlipped = false;
+
+        function updateFC() {
+            const data = fcData[fcIndex];
+            document.getElementById('fc-counter').textContent = `Thẻ ${fcIndex + 1} / ${fcData.length}`;
+            document.getElementById('fc-hanzi').textContent = data.hanzi;
+            document.getElementById('fc-title-back').textContent = data.hanzi;
+            document.getElementById('fc-pinyin').textContent = data.pinyin;
+            document.getElementById('fc-hanviet').textContent = data.hanviet;
+            document.getElementById('fc-meaning').textContent = data.meaning;
+            document.getElementById('fc-example').textContent = data.example;
+
+            if (fcIsFlipped) {
+                document.getElementById('fc-inner').classList.remove('rotate-y-180');
+                fcIsFlipped = false;
+            }
+        }
+
+        function flipFlashcard() {
+            fcIsFlipped = !fcIsFlipped;
+            const inner = document.getElementById('fc-inner');
+            if (fcIsFlipped) {
+                inner.classList.add('rotate-y-180');
+            } else {
+                inner.classList.remove('rotate-y-180');
+            }
+        }
+
+        function prevFC() {
+            fcIndex = (fcIndex - 1 + fcData.length) % fcData.length;
+            updateFC();
+        }
+
+        function nextFC() {
+            fcIndex = (fcIndex + 1) % fcData.length;
+            updateFC();
+        }
+
+        function assessFC(type) {
+            nextFC();
+        }
+
+        function checkAnswer(qNum, opt, isCorrect) {
+            const resEl = document.getElementById(`res-${qNum}`);
+            resEl.classList.remove('hidden');
+            if (isCorrect) {
+                resEl.className = "text-xs font-bold text-emerald-600 pt-1";
+                resEl.textContent = "🎉 Chính xác! Bạn trả lời rất tốt.";
+            } else {
+                resEl.className = "text-xs font-bold text-red-600 pt-1";
+                resEl.textContent = "❌ Chưa chính xác. Hãy chọn lại nhé!";
+            }
+        }
+    </script>
+</body>
+</html>

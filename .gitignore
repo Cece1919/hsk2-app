@@ -1,0 +1,4 @@
+*.pdf
+SÁCH TIẾNG TRUNG/
+node_modules/
+.DS_Store
