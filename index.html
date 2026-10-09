@@ -194,9 +194,13 @@
                     </div>
 
                     <button type="button" onclick="openCloudSyncModal()" id="header-cloud-btn" title="Quản lý Tài khoản & Đồng bộ Đa Thiết Bị" class="py-1.5 px-3 rounded-xl border border-[#0d4d4d]/30 bg-[#e6f4f4] text-[#0d4d4d] hover:bg-[#d5eeee] font-extrabold text-xs transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer">
-                        <span>👤 Tài Khoản:</span>
+                        <span>👤 TK:</span>
                         <span id="header-account-label" class="font-mono underline">cece1919</span>
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    </button>
+
+                    <button type="button" onclick="forceSyncCloud()" id="btn-header-force-sync" title="Đồng bộ thủ công ngay lập tức" class="py-1.5 px-3 rounded-xl border border-[#0d4d4d] bg-[#0d4d4d] text-white hover:bg-[#093636] font-extrabold text-xs transition-colors flex items-center gap-1 shadow-2xs cursor-pointer">
+                        <span>⚡ Đồng Bộ Ngay</span>
                     </button>
 
                     <button type="button" onclick="exportDataJSON()" title="Xuất file dữ liệu JSON" class="p-1 rounded-lg border border-[#e3d8d5] text-[#5e5053] hover:text-[#2b2426] hover:bg-[#f6efed] transition-colors cursor-pointer">
@@ -2755,7 +2759,6 @@
         async function pullFromCloudFirestore(isSilent = false) {
             if (isPushing) return;
             
-            // Retry pending local changes first if any failed push
             if (hasUnpushedChanges) {
                 await syncToCloudFirestore();
                 return;
@@ -2767,25 +2770,33 @@
                 const url = getCloudBinUrl();
                 const res = await fetch(`${url}?_t=${Date.now()}`);
                 if (res.ok) {
-                    const data = await res.json();
-                    if (data && Array.isArray(data.words) && data.words.length > 0) {
-                        const remoteFingerprint = JSON.stringify(data.words);
+                    const rawData = await res.json();
+                    let payload = rawData;
+                    if (rawData && typeof rawData.data === 'string') {
+                        try { payload = JSON.parse(rawData.data); } catch(e) {}
+                    } else if (rawData && typeof rawData.data === 'object') {
+                        payload = rawData.data;
+                    }
+
+                    const wordsList = payload ? (payload.words || (Array.isArray(payload) ? payload : null)) : null;
+
+                    if (wordsList && Array.isArray(wordsList) && wordsList.length > 0) {
+                        const remoteFingerprint = JSON.stringify(wordsList);
                         const localFingerprint = JSON.stringify(appState.words);
 
                         if (remoteFingerprint !== localFingerprint) {
-                            appState.words = data.words;
-                            appState.lastUpdatedAt = data.updatedAt || Date.now();
+                            appState.words = wordsList;
+                            appState.lastUpdatedAt = (payload && payload.updatedAt) ? payload.updatedAt : Date.now();
                             
                             saveAppState(false);
                             
                             if (appState.activeView === 'notebook') renderNotebookSheet();
                             if (appState.activeView === 'srs') initSRSDeck();
                             
-                            const syncLabel = document.getElementById('header-cloud-label');
-                            if (syncLabel) syncLabel.textContent = '🟢 Auto-Sync 3 Thiết Bị';
+                            updateBadges();
 
                             if (!isSilent) {
-                                showToast('⚡ Đã tự động cập nhật dữ liệu từ thiết bị khác!');
+                                showToast(`⚡ Đã đồng bộ ${wordsList.length} từ vựng mới nhất từ Cloud!`);
                             }
                         }
                     }
@@ -2798,8 +2809,10 @@
         }
 
         async function forceSyncCloud() {
+            showToast('🔄 Đang kiểm tra & đồng bộ dữ liệu...');
             await syncToCloudFirestore();
-            showToast('⚡ Đã đồng bộ dữ liệu lên Cloud thành công!');
+            await pullFromCloudFirestore(false);
+            showToast(`⚡ Đồng bộ thành công! Hiện có ${appState.words.length} từ vựng.`);
             closeCloudSyncModal();
         }
 
