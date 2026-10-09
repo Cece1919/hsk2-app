@@ -442,7 +442,7 @@
             </div>
             
             <!-- VIEW WHEN LOGGED IN -->
-            <div id="auth-user-view" class="space-y-3.5 hidden">
+            <div id="auth-user-view" class="space-y-3.5">
                 <div class="p-3 bg-[#fbf7f6] border border-[#eee4e1] rounded-xl flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-[#935864] text-white flex items-center justify-center font-bold text-sm shadow-2xs" id="auth-user-avatar">
                         ⚡
@@ -461,11 +461,6 @@
                         <span>☁️ Đồng bộ dữ liệu ngay</span>
                     </button>
                 </div>
-            </div>
-
-            <!-- VIEW WHEN NOT LOGGED IN -->
-            <div id="auth-guest-view" class="space-y-3.5">
-                <p class="text-xs text-[#786669]">Kênh Auto-Sync Master đang tự động kích hoạt trên cả 3 thiết bị của chị!</p>
             </div>
         </div>
     </div>
@@ -486,6 +481,22 @@
 
     <!-- APP SCRIPT LOGIC -->
     <script>
+        // Automatic Service Worker Unregister & Stale Cache Purger
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+            if (window.caches) {
+                caches.keys().then(names => {
+                    for (let name of names) {
+                        caches.delete(name);
+                    }
+                });
+            }
+        }
+
         const DEFAULT_VOCAB = [
   {
     "id": "en_ielts_001",
@@ -2553,12 +2564,12 @@
                 pullFromCloudFirestore(true);
             });
 
-            // Silent polling every 4 seconds across all 3 devices
+            // Silent polling every 3 seconds across all 3 devices
             setInterval(() => {
                 if (document.visibilityState === 'visible') {
                     pullFromCloudFirestore(true);
                 }
-            }, 4000);
+            }, 3000);
         }
 
         async function syncToCloudFirestore() {
