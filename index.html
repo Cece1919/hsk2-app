@@ -476,42 +476,34 @@
             </div>
             
             <div id="auth-user-view" class="space-y-3.5">
-                <div class="p-3 bg-[#f0fdf4] border border-[#bbf7d0] rounded-xl flex items-center justify-between">
-                    <div class="flex items-center gap-2 min-w-0">
-                        <div class="w-9 h-9 rounded-full bg-[#0d4d4d] text-white flex items-center justify-center font-bold text-xs shadow-2xs flex-shrink-0">
-                            👤
-                        </div>
-                        <div class="min-w-0">
-                            <div class="text-xs font-bold text-[#0d4d4d] truncate" id="auth-account-title">Tài Khoản: cece1919</div>
-                            <div class="text-[10px] text-[#15803d] font-semibold flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                <span>🟢 Auto-Sync Cloud Đã Kết Nối</span>
-                            </div>
+                <div class="p-3 bg-[#f0fdf4] border border-[#bbf7d0] rounded-xl flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-[#0d4d4d] text-white flex items-center justify-center font-bold text-xs shadow-2xs flex-shrink-0">
+                        👤
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="text-xs font-bold text-[#0d4d4d] truncate" id="auth-account-title">Đang dùng TK: cece1919</div>
+                        <div class="text-[10px] text-[#15803d] font-semibold flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span>🟢 Trạng thái: Đã kết nối Cloud Auto-Sync</span>
                         </div>
                     </div>
-                    <button type="button" onclick="showAccountLoginForm()" class="px-2.5 py-1 text-[11px] font-bold text-[#0d4d4d] bg-white border border-[#bce3e3] rounded-lg cursor-pointer hover:bg-[#e6f4f4] flex-shrink-0">
-                        🔑 Đổi TK
-                    </button>
                 </div>
 
-                <!-- ACCOUNT LOGIN FORM (Toggleable) -->
-                <div id="account-login-form" class="space-y-2.5 p-3.5 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl hidden">
-                    <h4 class="text-xs font-bold text-[#2b2426]">🔑 Đăng Nhập / Nhập Tên Tài Khoản:</h4>
+                <!-- DIRECT ACCOUNT INPUT FORM (ALWAYS VISIBLE) -->
+                <div class="space-y-2.5 p-3.5 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl">
+                    <h4 class="text-xs font-bold text-[#2b2426]">🔑 Nhập / Đổi Tên Tài Khoản Để Đồng Bộ:</h4>
                     <p class="text-[10px] text-[#786669] leading-tight">
-                        Chị chỉ cần nhập cùng <b>Tên Tài Khoản</b> (ví dụ: <b>cece1919</b>) trên iPhone và iPad để 2 máy tự động dùng chung kho từ vựng Anki!
+                        Chị chỉ cần gõ cùng Tên Tài Khoản (ví dụ: <b>cece1919</b>) trên iPhone và iPad rồi bấm Kết Nối để 2 máy tự dùng chung từ vựng!
                     </p>
-                    <input type="text" id="login-input-account" placeholder="Tên tài khoản (Ví dụ: cece1919)" class="w-full px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs bg-white focus:outline-none focus:border-[#0d4d4d]" value="cece1919">
-                    <div class="grid grid-cols-2 gap-2 pt-1">
-                        <button type="button" onclick="handleAccountLogin()" class="py-2 px-3 bg-[#0d4d4d] hover:bg-[#093636] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer shadow-2xs">
+                    <div class="flex gap-2">
+                        <input type="text" id="login-input-account" placeholder="Tên tài khoản (Ví dụ: cece1919)" class="flex-1 px-3 py-2 rounded-xl border border-[#e2d5d1] text-xs font-bold text-[#0d4d4d] bg-white focus:outline-none focus:border-[#0d4d4d]" value="cece1919">
+                        <button type="button" onclick="handleAccountLogin()" class="py-2 px-3 bg-[#0d4d4d] hover:bg-[#093636] text-white font-bold rounded-xl text-xs whitespace-nowrap cursor-pointer shadow-2xs">
                             ✅ Kết Nối
                         </button>
-                        <button type="button" onclick="hideAccountLoginForm()" class="py-2 px-3 bg-white text-[#786669] font-semibold rounded-xl text-xs border border-[#e2d5d1] cursor-pointer">
-                            Hủy
-                        </button>
                     </div>
                 </div>
 
-                <div class="p-3 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl space-y-2">
+                <div class="p-3 bg-[#faf7f5] border border-[#e2d5d1] rounded-xl space-y-1">
                     <div class="flex items-center justify-between text-xs">
                         <span class="font-bold text-[#786669]">Mã Cloud Bin ID:</span>
                         <code id="display-sync-key" class="font-mono bg-[#e6f4f4] text-[#0d4d4d] font-bold px-2 py-0.5 rounded text-xs">beefebf</code>
