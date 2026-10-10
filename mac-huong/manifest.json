@@ -1,0 +1,17 @@
+{
+  "name": "Mặc Hương Từ Điển",
+  "short_name": "Mặc Hương",
+  "description": "Ứng dụng học từ vựng tiếng Trung cổ phong thanh lịch với FSRS Spaced Repetition",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

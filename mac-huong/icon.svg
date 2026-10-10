@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDFBF7" />
+      <stop offset="100%" stop-color="#F2ECE4" />
+    </radialGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4A282D" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="none" stroke="#D9C2B8" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="256" cy="256" r="180" fill="#FCFAF6" stroke="#9E3A4A" stroke-width="3" filter="url(#softShadow)"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#D4A7A0" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <!-- Classical Chinese character "墨" (Ink) and floral petal flourish -->
+  <g fill="#9E3A4A" opacity="0.85">
+    <!-- Stylized petal elements -->
+    <path d="M256 120 C240 100 216 112 224 136 C232 160 256 180 256 180 C256 180 280 160 288 136 C296 112 272 100 256 120 Z" />
+    <path d="M180 200 C156 190 152 216 172 230 C192 244 220 248 220 248 C220 248 210 220 196 204 C190 198 184 196 180 200 Z" opacity="0.6"/>
+    <path d="M332 200 C356 190 360 216 340 230 C320 244 292 248 292 248 C292 248 302 220 316 204 C322 198 328 196 332 200 Z" opacity="0.6"/>
+  </g>
+  <text x="256" y="296" font-family="'Noto Serif SC', 'Songti SC', serif" font-size="124" font-weight="700" fill="#3D2024" text-anchor="middle" dominant-baseline="middle">墨</text>
+  <text x="256" y="380" font-family="'Be Vietnam Pro', sans-serif" font-size="24" font-weight="600" letter-spacing="4" fill="#845358" text-anchor="middle">MẶC HƯƠNG</text>
+</svg>
