@@ -1981,14 +1981,117 @@ def generate_app():
             }}
         }}
 
-        function playWordAudio(text) {{
-            if ('speechSynthesis' in window) {{
-                window.speechSynthesis.cancel();
-                const utter = new SpeechSynthesisUtterance(text);
-                utter.lang = 'zh-CN';
-                utter.rate = 0.9;
-                window.speechSynthesis.speak(utter);
+        // ==========================================
+        // 🔊 BỘ ĐIỀU KHIỂN ÂM THANH BẢO MẬT & CHỐNG CÂM CHO IPHONE (iOS Safari & PWA)
+        // ==========================================
+        let globalAudioObj = null;
+        window._activeUtterance = null;
+        window._iosAudioUnlocked = false;
+
+        function unlockIOSAudio() {{
+            if (!window._iosAudioUnlocked) {{
+                try {{
+                    const silentAudio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==");
+                    silentAudio.play().then(() => {{
+                        window._iosAudioUnlocked = true;
+                    }}).catch(() => {{}});
+                }} catch(e) {{}}
             }}
+        }}
+
+        if (typeof window !== 'undefined') {{
+            window.addEventListener('touchstart', unlockIOSAudio, {{ once: true, passive: true }});
+            window.addEventListener('click', unlockIOSAudio, {{ once: true, passive: true }});
+        }}
+
+        function playWordAudio(text) {{
+            if (!text) return;
+            // Loại bỏ phiên âm trong ngoặc nếu có
+            const clean = text.replace(/\[.*?\]/g, '').replace(/[()（）]/g, '').trim();
+            if (!clean) return;
+
+            unlockIOSAudio();
+
+            // 1. Dừng âm thanh cũ nếu đang phát
+            if (globalAudioObj) {{
+                try {{
+                    globalAudioObj.pause();
+                    globalAudioObj.currentTime = 0;
+                }} catch(e) {{}}
+                globalAudioObj = null;
+            }}
+
+            // 2. TẦNG 1: Với từ vựng đơn / từ ghép (<= 6 ký tự không dấu chấm phẩy)
+            // Ưu tiên phát file MP3 người thật từ Youdao có tham số le=zh
+            // Tương thích 100% với iPhone không cần cài đặt giọng nói trong iOS
+            const isWord = clean.length <= 6 && !clean.includes(' ') && !clean.includes('，') && !clean.includes('。');
+            if (isWord) {{
+                const audioUrl = `https://dict.youdao.com/dictvoice?le=zh&audio=${{encodeURIComponent(clean)}}`;
+                const audio = new Audio(audioUrl);
+                audio.playbackRate = 0.9;
+                globalAudioObj = audio;
+
+                audio.onerror = () => {{
+                    playViaWebSpeechFallback(clean);
+                }};
+
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {{
+                    playPromise.catch(() => {{
+                        playViaWebSpeechFallback(clean);
+                    }});
+                }}
+                return;
+            }}
+
+            // 3. TẦNG 2: Với câu dài / ví dụ -> Web Speech API chuẩn WebKit Safari
+            playViaWebSpeechFallback(clean);
+        }}
+
+        function playViaWebSpeechFallback(cleanText) {{
+            if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+            try {{
+                // Fix lỗi Safari WebKit: resume nếu đang paused
+                if (window.speechSynthesis.paused) {{
+                    window.speechSynthesis.resume();
+                }}
+
+                // Chỉ cancel nếu đang nói dở, không cancel đột ngột
+                if (window.speechSynthesis.speaking) {{
+                    window.speechSynthesis.cancel();
+                }}
+
+                const utter = new SpeechSynthesisUtterance(cleanText);
+                utter.lang = 'zh-CN';
+                utter.rate = 0.85;
+
+                const voices = window.speechSynthesis.getVoices();
+                const zhVoice = voices.find(v => v.lang === 'zh-CN' || v.lang === 'zh_CN' || v.lang.startsWith('zh'));
+                if (zhVoice) {{
+                    utter.voice = zhVoice;
+                }}
+
+                // Fix bug Safari Garbage Collector: Lưu vào biến window
+                window._activeUtterance = utter;
+                utter.onend = () => {{
+                    window._activeUtterance = null;
+                }};
+                utter.onerror = () => {{
+                    window._activeUtterance = null;
+                }};
+
+                setTimeout(() => {{
+                    window.speechSynthesis.speak(utter);
+                }}, 50);
+            }} catch(err) {{
+                console.error("Speech error:", err);
+            }}
+        }}
+
+        // Đồng bộ hàm speakWord cho các nút bấm trong mục Câu Chuyện
+        function speakWord(text, lang) {{
+            playWordAudio(text);
         }}
 
         function showToast(msg) {{
