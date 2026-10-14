@@ -1,0 +1,17 @@
+{
+  "name": "Emma App",
+  "short_name": "Emma App",
+  "description": "Emma App - Học từ vựng tiếng Trung thông minh với thuật toán Anki SM-2 / FSRS & Đồng bộ tức thì đa thiết bị",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
