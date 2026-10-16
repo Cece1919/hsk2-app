@@ -716,6 +716,17 @@
           audioTotalDuration.textContent = formatTime(audioElement.duration);
         }
       };
+
+      // Resilient fallback to raw GitHub CDN if GitHub Pages cache is warming up
+      audioElement.onerror = () => {
+        if (audioElement.src && !audioElement.src.includes('raw.githubusercontent.com') && audioElement.src.includes('audio_dialogues/')) {
+          const parts = audioElement.src.split('audio_dialogues/');
+          const filename = parts[parts.length - 1].split('?')[0];
+          console.log('Switching to instant GitHub CDN audio fallback for:', filename);
+          audioElement.src = 'https://raw.githubusercontent.com/Cece1919/hsk2-app/main/audio_dialogues/' + filename;
+          audioElement.play().catch(e => console.warn('Fallback play error:', e));
+        }
+      };
     }
 
     function formatTime(seconds) {
