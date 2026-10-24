@@ -15,6 +15,23 @@
     <meta name="apple-mobile-web-app-title" content="Emma App" />
     <link rel="apple-touch-icon" href="./icon.svg" />
     <link rel="manifest" href="./manifest.json" />
+    <!-- Cache Buster & Freshness Assurance -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script>
+      // Force clean up of legacy Service Workers and stale caches on mobile devices
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          for (var i = 0; i < regs.length; i++) { regs[i].unregister(); }
+        }).catch(function() {});
+      }
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          for (var i = 0; i < keys.length; i++) { caches.delete(keys[i]); }
+        }).catch(function() {});
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Fonts: Be Vietnam Pro & Noto Serif with full Vietnamese diacritics & Pinyin tone coverage -->
@@ -35,8 +52,8 @@
         }
       }, true);
     </script>
-    <script type="module" crossorigin src="./assets/index-BbsAnNDJ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DQGGovke.css">
+    <script type="module" crossorigin src="./assets/index-C6Ivrf0z.js?v=1792816184"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DQGGovke.css?v=1792816184">
   </head>
   <body class="bg-[#FAF7F2] text-[#2C2825] antialiased selection:bg-[#E8C5C8] selection:text-[#4A2328]">
     <div id="root">

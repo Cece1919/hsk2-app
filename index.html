@@ -11,6 +11,14 @@
     <meta name="apple-mobile-web-app-title" content="HSK 2 Cece App">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/chinese-dragon.png">
     <title>HSK 2 Cece App - Ứng dụng Tự Học Tiếng Trung</title>
+    <script>
+      // Automatically redirect to latest Emma App if accessing root repo
+      if (window.location.pathname.endsWith('/hsk2-app/') || window.location.pathname.endsWith('/hsk2-app')) {
+        if (!window.location.search && !window.location.hash) {
+          window.location.replace("./emma-app/");
+        }
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
