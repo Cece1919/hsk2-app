@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CLB Toán M32 — Ôn Luyện Thi TIMO Khối 6</title>
+  <link rel="icon" type="image/png" href="logo_m32.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              700: '#205295',
+              800: '#144272',
+              900: '#0A2647',
+              950: '#05162B',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Canvas Confetti for celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Google Firebase Web SDK (Compat - Sẵn sàng kết nối Cloud) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+    
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .katex {
+      font-size: 1.08em;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-navy-800 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm backdrop-blur-md bg-white/95">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <!-- Logo & Brand Title -->
+      <div class="flex items-center gap-3">
+        <img src="logo_m32.png" alt="Logo CLB Toán M32" class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-navy-900 shadow-sm object-cover">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base md:text-lg font-black text-navy-950 tracking-tight leading-tight">
+              CLB TOÁN M32
+            </h1>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-100 text-navy-900">
+              TIMO Khối 6
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium hidden sm:block">
+            Ôn luyện thi Vòng Chung kết Quốc gia TIMO — Đề & Lời giải chuẩn Lớp 6
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Utility Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Language Switcher -->
+        <div class="bg-slate-100 p-1 rounded-xl flex items-center text-xs font-bold border border-slate-200">
+          <button data-lang="bilingual" class="px-2 py-1 rounded-lg bg-navy-700 text-white shadow transition-all">
+            Song ngữ
+          </button>
+          <button data-lang="vi" class="px-2 py-1 rounded-lg text-slate-600 hover:bg-slate-200 transition-all">
+            VI
+          </button>
+          <button data-lang="en" class="px-2 py-1 rounded-lg text-slate-600 hover:bg-slate-200 transition-all">
+            EN
+          </button>
+        </div>
+
+        <!-- Student Profile / Cloud Login Chip -->
+        <button id="btn-user-profile" onclick="window.timoApp.openAuthModal()" 
+          class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-navy-950 flex items-center gap-2 transition-all shadow-sm"
+          title="Thông tin tài khoản học viên & Đám mây">
+          <div class="w-6 h-6 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] shadow-sm">
+            <i class="fa-solid fa-user-graduate"></i>
+          </div>
+          <div class="text-left hidden md:block">
+            <div id="user-display-name" class="leading-none text-navy-900 font-extrabold truncate max-w-[110px]">
+              Đang tải...
+            </div>
+            <div id="user-sync-status" class="text-[9px] text-emerald-600 font-bold leading-tight flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đám mây M32
+            </div>
+          </div>
+        </button>
+
+        <!-- Scratchpad Toggle Button -->
+        <button id="btn-scratchpad-toggle" 
+          class="w-9 h-9 md:w-auto md:px-3 md:py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+          title="Mở Bảng nháp điện tử cảm ứng">
+          <i class="fa-solid fa-pen-ruler text-sm"></i>
+          <span class="hidden lg:inline">Bảng nháp</span>
+        </button>
+
+        <!-- Sound Toggle Button -->
+        <button id="btn-sound-toggle" 
+          class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center text-sm transition-colors"
+          title="Bật/Tắt âm thanh">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <nav class="max-w-6xl mx-auto px-4 flex items-center gap-2 md:gap-6 border-t border-slate-100 overflow-x-auto text-xs md:text-sm scrollbar-none">
+      <button data-tab="practice" class="py-3 px-1 border-b-2 border-navy-900 text-navy-900 font-bold whitespace-nowrap transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-layer-group text-blue-600"></i> Luyện theo chuyên đề
+      </button>
+
+      <button data-tab="exam" class="py-3 px-1 border-b-2 border-transparent text-slate-500 font-medium hover:text-navy-900 whitespace-nowrap transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-stopwatch"></i> Thi thử 90 phút
+      </button>
+
+      <button data-tab="mistakes" class="py-3 px-1 border-b-2 border-transparent text-slate-500 font-medium hover:text-navy-900 whitespace-nowrap transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Sổ tay câu sai
+        <span id="mistake-badge" style="display: none;" class="px-1.5 py-0.2 rounded-full text-[10px] font-black bg-rose-500 text-white leading-tight">
+          0
+        </span>
+      </button>
+
+      <button data-tab="journal" class="py-3 px-1 border-b-2 border-transparent text-slate-500 font-medium hover:text-navy-900 whitespace-nowrap transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-chart-line text-blue-600"></i> Nhật ký của tôi
+      </button>
+
+      <button data-tab="formulas" class="py-3 px-1 border-b-2 border-transparent text-slate-500 font-medium hover:text-navy-900 whitespace-nowrap transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-book-sparkles text-amber-500"></i> Bí kíp công thức
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 md:py-8">
+    <div id="main-content">
+      <!-- Dynamic Views rendered by app.js -->
+    </div>
+  </main>
+
+  <!-- MODAL ĐĂNG NHẬP / TÀI KHOẢN HỌC VIÊN -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 animate-fade-in">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200">
+      <!-- Modal Header -->
+      <div class="bg-navy-900 text-white p-5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <img src="logo_m32.png" alt="M32" class="w-8 h-8 rounded-full border border-white/20">
+          <div>
+            <h3 class="font-extrabold text-sm tracking-tight leading-tight">Tài Khoản Học Viên M32</h3>
+            <p class="text-[11px] text-slate-300">Đồng bộ câu sai & lịch sử thi đám mây</p>
+          </div>
+        </div>
+        <button onclick="window.timoApp.closeAuthModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Current Profile Box if logged in -->
+      <div id="auth-current-profile" class="p-5 bg-blue-50/60 border-b border-blue-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-navy-900 text-white flex items-center justify-center text-base font-bold shadow">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400 font-semibold uppercase">Đang đăng nhập:</div>
+            <div id="modal-user-name" class="font-black text-navy-950 text-base">Bảo Nam</div>
+            <div id="modal-user-code" class="text-xs text-slate-500 font-mono">Mã: baonam</div>
+          </div>
+        </div>
+        <button onclick="window.timoApp.handleLogout()" class="px-3 py-1.5 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold rounded-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Đăng xuất
+        </button>
+      </div>
+
+      <!-- Quick Switch Sample Profiles -->
+      <div class="p-4 bg-slate-50 border-b border-slate-200">
+        <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+          Chuyển nhanh tài khoản mẫu:
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="window.timoApp.quickSwitchStudent('baonam')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-navy-900 text-xs font-bold text-navy-900 shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-user-check text-blue-600"></i> Bảo Nam
+          </button>
+          <button onclick="window.timoApp.quickSwitchStudent('minhanh')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-navy-900 text-xs font-bold text-navy-900 shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-user-check text-purple-600"></i> Minh Anh
+          </button>
+        </div>
+      </div>
+
+      <!-- Form Đăng nhập hoặc Tạo học viên mới -->
+      <div class="p-5 space-y-4">
+        <!-- Auth Tabs -->
+        <div class="flex border-b border-slate-200 text-xs font-bold">
+          <button id="tab-login-btn" onclick="window.timoApp.setAuthTab('login')" class="pb-2 border-b-2 border-navy-900 text-navy-900 flex-1 text-center">
+            Đăng nhập
+          </button>
+          <button id="tab-register-btn" onclick="window.timoApp.setAuthTab('register')" class="pb-2 border-b-2 border-transparent text-slate-400 flex-1 text-center">
+            Đăng ký học viên mới
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" onsubmit="window.timoApp.handleLoginForm(event)" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Mã học sinh / Tên đăng nhập:</label>
+            <input type="text" id="login-username" placeholder="Ví dụ: baonam" required
+              class="w-full px-3.5 py-2 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 focus:bg-white outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Mật khẩu:</label>
+            <input type="password" id="login-password" placeholder="Mật khẩu (mặc định: 123456)"
+              class="w-full px-3.5 py-2 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 focus:bg-white outline-none">
+          </div>
+          <button type="submit" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white font-extrabold text-sm rounded-xl shadow-md transition-all">
+            <i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập ngay
+          </button>
+        </form>
+
+        <!-- Register Form (hidden by default) -->
+        <form id="form-register" onsubmit="window.timoApp.handleRegisterForm(event)" class="space-y-3 hidden">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Họ và tên học sinh:</label>
+            <input type="text" id="reg-fullname" placeholder="Ví dụ: Trần Minh Anh" required
+              class="w-full px-3.5 py-2 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 focus:bg-white outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Mã học sinh (viết liền, không dấu):</label>
+            <input type="text" id="reg-username" placeholder="Ví dụ: minhanh" required
+              class="w-full px-3.5 py-2 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 focus:bg-white outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Mật khẩu:</label>
+            <input type="password" id="reg-password" placeholder="Tự đặt mật khẩu" required
+              class="w-full px-3.5 py-2 text-sm font-bold bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 focus:bg-white outline-none">
+          </div>
+          <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm rounded-xl shadow-md transition-all">
+            <i class="fa-solid fa-user-plus mr-1"></i> Tạo tài khoản học viên
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- BẢNG NHÁP ĐIỆN TỬ MODAL (CANVAS SCRATCHPAD) -->
+  <div id="scratchpad-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 md:p-6 animate-fade-in">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden border border-slate-200">
+      <!-- Scratchpad Header Toolbar -->
+      <div class="bg-navy-900 text-white px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-2 font-bold text-sm">
+          <i class="fa-solid fa-pen-ruler text-amber-400"></i>
+          <span>Bảng nháp điện tử CLB Toán M32 (Hỗ trợ chuột & Bút cảm ứng iPad)</span>
+        </div>
+
+        <button id="btn-close-scratchpad" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Scratchpad Drawing Canvas Area -->
+      <div class="relative flex-grow bg-white touch-none">
+        <canvas id="scratchpad-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+
+      <!-- Scratchpad Bottom Controls -->
+      <div class="bg-slate-50 px-4 py-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <!-- Color Palette -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-500 uppercase">Màu bút:</span>
+          <button data-color="#0a2647" class="w-6 h-6 rounded-full bg-[#0a2647] ring-2 ring-navy-900 scale-110 shadow-sm transition-all"></button>
+          <button data-color="#2563eb" class="w-6 h-6 rounded-full bg-[#2563eb] shadow-sm transition-all"></button>
+          <button data-color="#dc2626" class="w-6 h-6 rounded-full bg-[#dc2626] shadow-sm transition-all"></button>
+          <button data-color="#16a34a" class="w-6 h-6 rounded-full bg-[#16a34a] shadow-sm transition-all"></button>
+          <button data-color="#d97706" class="w-6 h-6 rounded-full bg-[#d97706] shadow-sm transition-all"></button>
+        </div>
+
+        <!-- Tool Actions -->
+        <div class="flex items-center gap-2">
+          <button id="btn-tool-eraser" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-eraser text-slate-500"></i> Tẩy
+          </button>
+          <button id="btn-tool-clear" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-trash-can"></i> Xóa sạch
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500 space-y-2">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2 font-bold text-navy-900">
+        <img src="logo_m32.png" alt="M32" class="w-6 h-6 rounded-full">
+        <span>CLB TOÁN M32 & Trung tâm Học thuật CoreLink Academy</span>
+      </div>
+      <div>
+        Sưu tầm, biên soạn & số hóa lời giải: <strong class="text-navy-900">Thầy Trần Xuân Thắng</strong>
+      </div>
+      <div class="text-[11px] text-slate-400">
+        Hệ thống Đồng bộ Đám mây Cá nhân hóa — Phiên bản 2.0
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data and Core Scripts -->
+  <script src="js/data_mock_exams.js"></script>
+  <script src="js/data_topics.js"></script>
+  <script src="js/cloud_storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
