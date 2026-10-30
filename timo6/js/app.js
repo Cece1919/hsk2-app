@@ -181,6 +181,14 @@ class TimoApp {
     const modal = document.getElementById('auth-modal');
     if (modal) modal.classList.remove('hidden');
     this.updateUserHeader();
+
+    const input = document.getElementById('firebase-config-input');
+    if (input && !input.value) {
+      const cfg = this.storage.getFirebaseConfig();
+      if (cfg && cfg.apiKey) {
+        input.value = JSON.stringify(cfg, null, 2);
+      }
+    }
   }
 
   closeAuthModal() {
@@ -260,6 +268,41 @@ class TimoApp {
       this.renderHeaderStats();
       this.renderCurrentView();
       this.playSound('correct');
+    }
+  }
+
+  handleSaveFirebaseConfig() {
+    const input = document.getElementById('firebase-config-input');
+    const msg = document.getElementById('firebase-connect-msg');
+    if (!input || !msg) return;
+
+    try {
+      const configStr = input.value.trim();
+      if (!configStr) {
+        msg.textContent = 'Vui lòng dán mã JSON!';
+        msg.className = 'text-[10px] font-bold text-rose-600';
+        return;
+      }
+      const configObj = JSON.parse(configStr);
+      if (!configObj.apiKey || !configObj.projectId) {
+        msg.textContent = 'Mã thiếu apiKey hoặc projectId!';
+        msg.className = 'text-[10px] font-bold text-rose-600';
+        return;
+      }
+
+      const ok = this.storage.saveFirebaseConfig(configObj);
+      if (ok) {
+        msg.textContent = 'Đã kết nối Firebase Cloud thành công!';
+        msg.className = 'text-[10px] font-bold text-emerald-600';
+        this.updateUserHeader();
+        this.playSound('correct');
+      } else {
+        msg.textContent = 'Không thể lưu cấu hình!';
+        msg.className = 'text-[10px] font-bold text-rose-600';
+      }
+    } catch (err) {
+      msg.textContent = 'Định dạng JSON chưa hợp lệ!';
+      msg.className = 'text-[10px] font-bold text-rose-600';
     }
   }
 
