@@ -290,7 +290,9 @@ class M32CloudStorage {
 
       // 4. Cập nhật giao diện nếu đang mở
       if (window.timoApp) {
-        window.timoApp.updateMistakeBadge();
+        if (typeof window.timoApp.renderHeaderStats === 'function') {
+          window.timoApp.renderHeaderStats();
+        }
         if (window.timoApp.currentMode === 'journal' || window.timoApp.currentMode === 'mistakes') {
           window.timoApp.renderCurrentView();
         }
