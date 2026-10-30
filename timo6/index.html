@@ -141,6 +141,14 @@
             </div>
           </button>
 
+          <!-- Nút Đăng nhập (hiển thị khi là Tài khoản học thử, bấm vào hiện bảng đăng nhập) -->
+          <button id="btn-header-login" onclick="window.timoApp.openAuthModal('login')" 
+            class="px-3 py-1.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
+            title="Đăng nhập tài khoản học viên">
+            <i class="fa-solid fa-right-to-bracket text-amber-400"></i>
+            <span>Đăng nhập</span>
+          </button>
+
           <!-- Nút đăng xuất (chỉ hiển thị khi có học sinh đăng nhập, ẩn khi là Tài khoản học thử) -->
           <button id="btn-header-logout" onclick="window.timoApp.handleLogout()" 
             class="hidden px-2.5 py-1.5 rounded-xl bg-white hover:bg-rose-50 text-rose-600 border border-slate-200 hover:border-rose-300 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"

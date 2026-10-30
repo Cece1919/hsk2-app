@@ -163,6 +163,7 @@ class TimoApp {
   updateUserHeader() {
     const user = this.storage.getCurrentUser();
     const nameEl = document.getElementById('user-display-name');
+    const headerLoginBtn = document.getElementById('btn-header-login');
     const headerLogoutBtn = document.getElementById('btn-header-logout');
     const modalLogoutBar = document.getElementById('modal-logout-bar');
     const modalStudentName = document.getElementById('modal-student-name');
@@ -172,28 +173,23 @@ class TimoApp {
     if (isRealStudent) {
       const displayName = user.fullName || user.username;
       if (nameEl) nameEl.textContent = displayName;
+      if (headerLoginBtn) headerLoginBtn.classList.add('hidden');
       if (headerLogoutBtn) headerLogoutBtn.classList.remove('hidden');
       if (modalLogoutBar) modalLogoutBar.classList.remove('hidden');
       if (modalStudentName) modalStudentName.textContent = displayName;
     } else {
       if (nameEl) nameEl.textContent = 'Tài khoản học thử';
+      if (headerLoginBtn) headerLoginBtn.classList.remove('hidden');
       if (headerLogoutBtn) headerLogoutBtn.classList.add('hidden');
       if (modalLogoutBar) modalLogoutBar.classList.add('hidden');
     }
   }
 
-  openAuthModal() {
+  openAuthModal(defaultTab = 'login') {
     const modal = document.getElementById('auth-modal');
     if (modal) modal.classList.remove('hidden');
+    this.setAuthTab(defaultTab);
     this.updateUserHeader();
-
-    const input = document.getElementById('firebase-config-input');
-    if (input && !input.value) {
-      const cfg = this.storage.getFirebaseConfig();
-      if (cfg && cfg.apiKey) {
-        input.value = JSON.stringify(cfg, null, 2);
-      }
-    }
   }
 
   closeAuthModal() {
