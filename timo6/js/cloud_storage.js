@@ -132,7 +132,7 @@ class M32CloudStorage {
     const newUser = {
       username: cleanUsername,
       fullName: fullName.trim(),
-      password: password || '123456',
+      password: password ? password.trim() : '',
       createdAt: new Date().toISOString()
     };
 
