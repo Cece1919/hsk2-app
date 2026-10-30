@@ -1559,7 +1559,80 @@ class TimoApp {
   // CHẾ ĐỘ 5: BÍ KÍP CÔNG THỨC (CHEATSHEET)
   // ==========================================
   renderFormulasView(container) {
-    const cardsHtml = FORMULA_CHEATSHEET.map((f, idx) => `
+    const formulas = window.FORMULA_CHEATSHEET || [
+      {
+        title: "Hàm phi Euler $\\varphi(n)$",
+        category: "Lý thuyết số",
+        summary: "Đếm số các số nguyên dương nhỏ hơn $n$ và nguyên tố cùng nhau với $n$.",
+        formula: "\\varphi(n) = n \\times \\left(1 - \\frac{1}{p_1}\\right) \\left(1 - \\frac{1}{p_2}\\right) \\dots \\left(1 - \\frac{1}{p_k}\\right)",
+        example: "Với $1386 = 2 \\times 3^2 \\times 7 \\times 11$:<br>$\\varphi(1386) = 1386 \\times \\frac{1}{2} \\times \\frac{2}{3} \\times \\frac{6}{7} \\times \\frac{10}{11} = 360$."
+      },
+      {
+        title: "Công thức Legendre (Số chữ số 0 tận cùng của $n!$)",
+        category: "Lý thuyết số",
+        summary: "Tính số mũ của thừa số nguyên tố $p$ (đặc biệt $p = 5$) trong phân tích tiêu chuẩn của $n!$.",
+        formula: "E_p(n!) = \\left\\lfloor \\frac{n}{p} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^2} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^3} \\right\\rfloor + \\dots",
+        example: "Số chữ số 0 tận cùng của $150!$ bằng số mũ của thừa số 5:<br>$E_5(150!) = \\lfloor 150/5 \\rfloor + \\lfloor 150/25 \\rfloor + \\lfloor 150/125 \\rfloor = 30 + 6 + 1 = 37$."
+      },
+      {
+        title: "Số lượng ước số nguyên dương của một số tự nhiên",
+        category: "Lý thuyết số",
+        summary: "Nếu $N = p_1^{a_1} \\cdot p_2^{a_2} \\dots p_k^{a_k}$ là phân tích thừa số nguyên tố của $N$, thì tổng số ước nguyên dương được tính theo công thức:",
+        formula: "d(N) = (a_1 + 1)(a_2 + 1) \\dots (a_k + 1)",
+        example: "Với $360 = 2^3 \\times 3^2 \\times 5^1$:<br>Số ước nguyên dương là: $d(360) = (3 + 1)(2 + 1)(1 + 1) = 4 \\times 3 \\times 2 = 24$ ước."
+      },
+      {
+        title: "Chuỗi sai phân triệt tiêu (Telescoping)",
+        category: "Số học",
+        summary: "Tách phân số có mẫu là tích 2 số cách đều $k$ đơn vị để triệt tiêu phần giữa khi cộng dồn.",
+        formula: "\\frac{k}{n(n+k)} = \\frac{1}{n} - \\frac{1}{n+k}",
+        example: "$\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\dots + \\frac{1}{20 \\times 21} = 1 - \\frac{1}{21} = \\frac{20}{21}$."
+      },
+      {
+        title: "Tổng dãy số cách đều & Số số hạng",
+        category: "Số học",
+        summary: "Công thức tính nhanh số số hạng và tổng của một cấp số cộng có khoảng cách $d$ không đổi.",
+        formula: "\\text{Số số hạng} = \\frac{\\text{Cuối} - \\text{Đầu}}{d} + 1, \\quad S = \\frac{(\\text{Đầu} + \\text{Cuối}) \\times \\text{Số số hạng}}{2}",
+        example: "Tính $S = 2 + 5 + 8 + \\dots + 59$:<br>Số số hạng $= (59 - 2)/3 + 1 = 20$. Tổng $S = (2 + 59) \\times 20 / 2 = 610$."
+      },
+      {
+        title: "Bổ đề diện tích điểm trong hình bình hành / hình chữ nhật",
+        category: "Hình học",
+        summary: "Với mọi điểm $P$ nằm trong hình bình hành $ABCD$, tổng diện tích 2 tam giác đối đỉnh bằng đúng một nửa diện tích hình bình hành.",
+        formula: "S(\\Delta APD) + S(\\Delta BCP) = S(\\Delta ABP) + S(\\Delta CDP) = 50\\% \\times S(ABCD)",
+        example: "Nếu $S(\\Delta APD) = 74$ và $S(\\Delta BCP) = 13\\% S$, thì $74 + 13\\% S = 50\\% S \\implies 37\\% S = 74 \\implies S = 200$."
+      },
+      {
+        title: "Góc trong & Tổng góc trong của đa giác $n$ cạnh",
+        category: "Hình học",
+        summary: "Tổng số đo tất cả các góc trong của đa giác lồi $n$ cạnh và số đo mỗi góc trong của đa giác đều.",
+        formula: "\\sum = (n - 2) \\times 180^\\circ, \\quad \\text{Góc đều} = \\frac{(n - 2) \\times 180^\\circ}{n}",
+        example: "Thập nhị giác đều ($n = 12$ cạnh):<br>Tổng góc $= (12 - 2) \\times 180^\\circ = 1800^\\circ$. Mỗi góc $= 1800^\\circ / 12 = 150^\\circ$."
+      },
+      {
+        title: "Tối ưu hóa chu vi hình chữ nhật",
+        category: "Hình học",
+        summary: "Khi diện tích hình chữ nhật cố định, chu vi nhỏ nhất khi hai kích thước chiều dài và chiều rộng gần bằng nhau nhất.",
+        formula: "a \\times b = S \\implies P = 2(a + b) \\text{ đạt min khi } |a - b| \\text{ nhỏ nhất}",
+        example: "Với $S = 504$, vì $\\sqrt{504} \\approx 22.45$, ta chọn cặp ước nguyên gần 22 nhất là $21 \\times 24 = 504 \\implies P_{\\min} = 2(21 + 24) = 90$."
+      },
+      {
+        title: "Nguyên lý lồng chim bồ câu (Dirichlet)",
+        category: "Tổ hợp",
+        summary: "Nếu nhốt $n + 1$ chú thỏ vào $n$ chiếc lồng thì luôn có ít nhất một lồng chứa từ 2 chú thỏ trở lên.",
+        formula: "\\text{Số phần tử cần chọn} = \\text{Số lượng tối đa trường hợp xấu nhất} + 1",
+        example: "Để chọn các số từ 1 đến 222 sao cho có 2 số có hiệu bằng 32: Số tối đa chọn được mà không cặp nào có hiệu bằng 32 là 126 $\\implies$ Cần chọn ít nhất $126 + 1 = 127$ số."
+      },
+      {
+        title: "Tổ hợp chọn cặp đôi $\\binom{n}{2}$ & Số đường chéo đa giác",
+        category: "Tổ hợp",
+        summary: "Số cách chọn 2 phần tử tùy ý từ $n$ phần tử không phân biệt thứ tự, và số đường chéo của đa giác $n$ đỉnh.",
+        formula: "\\binom{n}{2} = \\frac{n(n - 1)}{2}, \\quad \\text{Số đường chéo} = \\frac{n(n - 3)}{2}",
+        example: "Chọn 2 người bắt tay từ 10 người: $\\binom{10}{2} = \\frac{10 \\times 9}{2} = 45$ cái bắt tay.<br>Bát giác ($n = 8$) có: $8 \\times (8 - 3) / 2 = 20$ đường chéo."
+      }
+    ];
+
+    const cardsHtml = formulas.map((f, idx) => `
       <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all p-6 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-navy-900 uppercase tracking-wider">
