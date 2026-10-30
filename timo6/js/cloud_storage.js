@@ -90,17 +90,14 @@ class M32CloudStorage {
 
   ensureSeedData() {
     const users = this.getAllUsers();
-    // Tạo sẵn 2 học sinh mẫu nếu chưa có
-    if (!users['baonam']) {
-      this.register('baonam', 'Nguyễn Bảo Nam', '123456', false);
-    }
-    if (!users['minhanh']) {
-      this.register('minhanh', 'Trần Minh Anh', '123456', false);
+    // Tạo sẵn tài khoản học thử nếu chưa có
+    if (!users['hocthu']) {
+      this.register('hocthu', 'Tài khoản học thử', '123456', false);
     }
 
-    // Nếu chưa ai đăng nhập, tự động đăng nhập bạn Bảo Nam làm mẫu
-    if (!this.currentUser) {
-      this.login('baonam', '123456');
+    // Nếu chưa ai đăng nhập hoặc đang lưu session cũ baonam, tự động đăng nhập Tài khoản học thử
+    if (!this.currentUser || this.currentUser.username === 'baonam') {
+      this.login('hocthu', '123456');
     }
   }
 
