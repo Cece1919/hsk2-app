@@ -239,6 +239,13 @@ class TimoApp {
     const fullName = document.getElementById('reg-fullname').value;
     const username = document.getElementById('reg-username').value;
     const pass = document.getElementById('reg-password').value;
+    const passConfirm = document.getElementById('reg-password-confirm')?.value;
+
+    if (passConfirm !== undefined && pass !== passConfirm) {
+      alert('Mật khẩu nhập lại không khớp! Vui lòng kiểm tra lại để ghi nhớ chính xác.');
+      document.getElementById('reg-password-confirm')?.focus();
+      return;
+    }
 
     const res = this.storage.register(username, fullName, pass, true);
     if (res.success) {
