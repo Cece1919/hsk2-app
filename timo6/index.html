@@ -222,21 +222,6 @@
         </button>
       </div>
 
-      <!-- Quick Switch Sample Profiles -->
-      <div class="p-4 bg-slate-50 border-b border-slate-200">
-        <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-          Chuyển nhanh tài khoản mẫu:
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="window.timoApp.quickSwitchStudent('baonam')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-navy-900 text-xs font-bold text-navy-900 shadow-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-user-check text-blue-600"></i> Bảo Nam
-          </button>
-          <button onclick="window.timoApp.quickSwitchStudent('minhanh')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-navy-900 text-xs font-bold text-navy-900 shadow-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-user-check text-purple-600"></i> Minh Anh
-          </button>
-        </div>
-      </div>
-
       <!-- Form Đăng nhập hoặc Tạo học viên mới -->
       <div class="p-5 space-y-4">
         <!-- Auth Tabs -->
@@ -287,30 +272,6 @@
             <i class="fa-solid fa-user-plus mr-1"></i> Tạo tài khoản học viên
           </button>
         </form>
-
-        <!-- Cấu hình Google Firebase Cloud (Dành cho Giáo viên) -->
-        <details class="pt-3 border-t border-slate-200 text-xs">
-          <summary class="font-bold text-slate-500 cursor-pointer hover:text-navy-900 flex items-center justify-between py-1 select-none">
-            <span class="flex items-center gap-1.5">
-              <i class="fa-solid fa-cloud text-blue-600"></i> Cấu hình Đám mây Firebase
-            </span>
-            <span class="text-[10px] text-slate-400">Dành cho Giáo viên</span>
-          </summary>
-          <div class="mt-2 p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-            <p class="text-[11px] text-slate-600 leading-relaxed">
-              Dán đoạn mã cấu hình Firebase JSON vào đây để kích hoạt đồng bộ xuyên suốt mọi thiết bị:
-            </p>
-            <textarea id="firebase-config-input" rows="3" placeholder='{"apiKey": "AIza...", "projectId": "...", "appId": "..."}'
-              class="w-full p-2 text-[11px] font-mono bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy-900 outline-none"></textarea>
-            <div class="flex items-center justify-between">
-              <button type="button" onclick="window.timoApp.handleSaveFirebaseConfig()"
-                class="px-3 py-1.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg text-xs shadow-sm">
-                Lưu & Kết nối
-              </button>
-              <span id="firebase-connect-msg" class="text-[10px] font-bold text-emerald-600"></span>
-            </div>
-          </div>
-        </details>
       </div>
     </div>
   </div>
