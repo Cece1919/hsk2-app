@@ -163,17 +163,22 @@ class TimoApp {
   updateUserHeader() {
     const user = this.storage.getCurrentUser();
     const nameEl = document.getElementById('user-display-name');
-    const modalNameEl = document.getElementById('modal-user-name');
-    const modalCodeEl = document.getElementById('modal-user-code');
+    const headerLogoutBtn = document.getElementById('btn-header-logout');
+    const modalLogoutBar = document.getElementById('modal-logout-bar');
+    const modalStudentName = document.getElementById('modal-student-name');
 
-    if (user) {
-      if (nameEl) nameEl.textContent = user.fullName || user.username;
-      if (modalNameEl) modalNameEl.textContent = user.fullName || user.username;
-      if (modalCodeEl) modalCodeEl.textContent = `Mã học viên: ${user.username}`;
+    const isRealStudent = user && user.username !== 'hocthu';
+
+    if (isRealStudent) {
+      const displayName = user.fullName || user.username;
+      if (nameEl) nameEl.textContent = displayName;
+      if (headerLogoutBtn) headerLogoutBtn.classList.remove('hidden');
+      if (modalLogoutBar) modalLogoutBar.classList.remove('hidden');
+      if (modalStudentName) modalStudentName.textContent = displayName;
     } else {
-      if (nameEl) nameEl.textContent = 'Đăng nhập';
-      if (modalNameEl) modalNameEl.textContent = 'Chưa đăng nhập';
-      if (modalCodeEl) modalCodeEl.textContent = 'Vui lòng chọn tài khoản';
+      if (nameEl) nameEl.textContent = 'Tài khoản học thử';
+      if (headerLogoutBtn) headerLogoutBtn.classList.add('hidden');
+      if (modalLogoutBar) modalLogoutBar.classList.add('hidden');
     }
   }
 
@@ -254,10 +259,12 @@ class TimoApp {
 
   handleLogout() {
     this.storage.logout();
+    this.storage.ensureSeedData();
+    this.closeAuthModal();
     this.updateUserHeader();
     this.renderHeaderStats();
     this.renderCurrentView();
-    alert("Đã đăng xuất tài khoản!");
+    alert("Đã đăng xuất! Hệ thống quay về Tài khoản học thử.");
   }
 
   quickSwitchStudent(username) {

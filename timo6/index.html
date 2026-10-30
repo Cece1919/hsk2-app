@@ -123,22 +123,32 @@
           </button>
         </div>
 
-        <!-- Student Profile / Cloud Login Chip -->
-        <button id="btn-user-profile" onclick="window.timoApp.openAuthModal()" 
-          class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-navy-950 flex items-center gap-2 transition-all shadow-sm"
-          title="Thông tin tài khoản học viên & Đám mây">
-          <div class="w-6 h-6 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] shadow-sm">
-            <i class="fa-solid fa-user-graduate"></i>
-          </div>
-          <div class="text-left hidden md:block">
-            <div id="user-display-name" class="leading-none text-navy-900 font-extrabold truncate max-w-[140px]">
-              Tài khoản học thử
+        <!-- Student Profile / Cloud Login Chip & Logout Option -->
+        <div class="flex items-center gap-1.5">
+          <button id="btn-user-profile" onclick="window.timoApp.openAuthModal()" 
+            class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-navy-950 flex items-center gap-2 transition-all shadow-sm"
+            title="Thông tin tài khoản học viên & Đám mây">
+            <div class="w-6 h-6 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] shadow-sm">
+              <i class="fa-solid fa-user-graduate"></i>
             </div>
-            <div id="user-sync-status" class="text-[9px] text-emerald-600 font-bold leading-tight flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đám mây M32
+            <div class="text-left hidden md:block">
+              <div id="user-display-name" class="leading-none text-navy-900 font-extrabold truncate max-w-[140px]">
+                Tài khoản học thử
+              </div>
+              <div id="user-sync-status" class="text-[9px] text-emerald-600 font-bold leading-tight flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đám mây M32 (Online)
+              </div>
             </div>
-          </div>
-        </button>
+          </button>
+
+          <!-- Nút đăng xuất (chỉ hiển thị khi có học sinh đăng nhập, ẩn khi là Tài khoản học thử) -->
+          <button id="btn-header-logout" onclick="window.timoApp.handleLogout()" 
+            class="hidden px-2.5 py-1.5 rounded-xl bg-white hover:bg-rose-50 text-rose-600 border border-slate-200 hover:border-rose-300 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
+            title="Đăng xuất tài khoản">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="hidden sm:inline">Đăng xuất</span>
+          </button>
+        </div>
 
         <!-- Scratchpad Toggle Button -->
         <button id="btn-scratchpad-toggle" 
@@ -208,6 +218,21 @@
         </button>
       </div>
 
+      <!-- Quick Logout Bar if a real student is logged in -->
+      <div id="modal-logout-bar" class="hidden px-5 py-3 bg-blue-50/70 border-b border-blue-100 flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-navy-900 text-white flex items-center justify-center text-xs shadow-sm">
+            <i class="fa-solid fa-user-graduate"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-400 font-bold uppercase block">Đang đăng nhập:</span>
+            <strong id="modal-student-name" class="text-navy-950 font-black text-sm"></strong>
+          </div>
+        </div>
+        <button onclick="window.timoApp.handleLogout()" class="px-3 py-1.5 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 rounded-xl text-xs font-bold transition-colors shadow-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+        </button>
+      </div>
 
       <!-- Form Đăng nhập hoặc Tạo học viên mới -->
       <div class="p-5 space-y-4">
