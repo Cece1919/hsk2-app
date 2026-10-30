@@ -1,4 +1,4 @@
-// CLB TOÁN M32 & CORELINK ACADEMY
+// CLB TOÁN M32
 // CẤU HÌNH KẾT NỐI GOOGLE FIREBASE CLOUD (DUAL-ENGINE REAL-TIME STORAGE)
 // Tự động đồng bộ lịch sử bài thi và sổ tay câu sai trên mọi thiết bị và tên miền
 
