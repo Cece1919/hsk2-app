@@ -91,11 +91,29 @@ class M32CloudStorage {
     }
   }
 
+  toCleanKey(str) {
+    if (!str) return '';
+    return str
+      .trim()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/đ/g, 'd')
+      .replace(/[^a-z0-9]/g, '');
+  }
+
   ensureSeedData() {
     const users = this.getAllUsers();
     // Tạo sẵn tài khoản học thử nếu chưa có
     if (!users['hocthu']) {
-      this.register('hocthu', 'Tài khoản học thử', '123456', false);
+      users['hocthu'] = {
+        username: 'hocthu',
+        fullName: 'Tài khoản học thử',
+        password: '123456',
+        grade: 'timo2',
+        createdAt: new Date().toISOString()
+      };
+      this.saveAllUsers(users);
     }
 
     // Nếu chưa ai đăng nhập, tự động đăng nhập Tài khoản học thử
@@ -122,14 +140,26 @@ class M32CloudStorage {
     } catch (e) {}
   }
 
-  register(username, fullName, password, setAsCurrent = true) {
-    const cleanUsername = username.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
-    if (!cleanUsername) return { success: false, message: 'Tên đăng nhập không hợp lệ (chỉ gồm chữ thường, số, dấu gạch dưới)!' };
-    if (!fullName || !fullName.trim()) return { success: false, message: 'Vui lòng nhập họ và tên học sinh!' };
+  register(fullName, password, setAsCurrent = true) {
+    if (!fullName || !fullName.trim()) {
+      return { success: false, message: 'Vui lòng nhập họ và tên học sinh!' };
+    }
+
+    const cleanUsername = this.toCleanKey(fullName);
+    if (!cleanUsername) {
+      return { success: false, message: 'Họ và tên học sinh chưa hợp lệ!' };
+    }
 
     const users = this.getAllUsers();
+    
+    // Nếu tên này đã tồn tại và đúng mật khẩu thì cho phép đăng nhập luôn
     if (users[cleanUsername]) {
-      return { success: false, message: 'Mã học sinh / Tên đăng nhập này đã tồn tại!' };
+      if (password && users[cleanUsername].password === password.trim()) {
+        if (setAsCurrent) this.setSession(users[cleanUsername]);
+        return { success: true, user: users[cleanUsername], isExisting: true };
+      } else {
+        return { success: false, message: `Học sinh "${fullName.trim()}" đã có tài khoản trên hệ thống. Nếu đây là bạn, vui lòng sang mục "Đăng nhập"!` };
+      }
     }
 
     const newUser = {
@@ -155,20 +185,34 @@ class M32CloudStorage {
     return { success: true, user: newUser };
   }
 
-  login(username, password) {
-    const cleanUsername = username.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+  login(identifier, password) {
+    if (!identifier || !identifier.trim()) {
+      return { success: false, message: 'Vui lòng nhập họ và tên học sinh!' };
+    }
+
+    const cleanKey = this.toCleanKey(identifier);
     const users = this.getAllUsers();
-    const user = users[cleanUsername];
+    
+    // Tìm kiếm thông minh: trực tiếp theo cleanKey hoặc so sánh họ tên
+    let user = users[cleanKey];
+    if (!user) {
+      for (const k in users) {
+        if (users[k].username === cleanKey || this.toCleanKey(users[k].fullName) === cleanKey) {
+          user = users[k];
+          break;
+        }
+      }
+    }
 
     if (!user) {
       // Nếu chưa có cục bộ, kiểm tra xem có trên Cloud không
       if (this.isCloudConnected && this.firestore) {
-        this.fetchUserFromCloud(cleanUsername, password);
+        this.fetchUserFromCloud(cleanKey, password);
       }
-      return { success: false, message: 'Không tìm thấy học sinh với mã này. Hãy kiểm tra lại hoặc Đăng ký mới!' };
+      return { success: false, message: 'Không tìm thấy học sinh với tên này. Hãy kiểm tra lại hoặc sang mục Đăng ký mới!' };
     }
 
-    if (password && user.password && user.password !== password) {
+    if (password && user.password && user.password !== password.trim()) {
       return { success: false, message: 'Mật khẩu chưa chính xác!' };
     }
 
@@ -176,7 +220,7 @@ class M32CloudStorage {
 
     // Tự động kéo dữ liệu mới nhất từ Cloud
     if (this.isCloudConnected && this.firestore) {
-      this.pullUserData(cleanUsername);
+      this.pullUserData(user.username);
     }
 
     return { success: true, user };
@@ -187,7 +231,7 @@ class M32CloudStorage {
       const doc = await this.firestore.collection(this.FIRESTORE_COLLECTION).doc(cleanUsername).get();
       if (doc.exists) {
         const cloudUser = doc.data();
-        if (password && cloudUser.password && cloudUser.password !== password) {
+        if (password && cloudUser.password && cloudUser.password !== password.trim()) {
           alert('Mật khẩu chưa chính xác!');
           return;
         }

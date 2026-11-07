@@ -248,7 +248,6 @@ class TimoApp {
   handleRegisterForm(e) {
     e.preventDefault();
     const fullName = document.getElementById('reg-fullname').value;
-    const username = document.getElementById('reg-username').value;
     const pass = document.getElementById('reg-password').value;
     const passConfirm = document.getElementById('reg-password-confirm')?.value;
 
@@ -258,7 +257,7 @@ class TimoApp {
       return;
     }
 
-    const res = this.storage.register(username, fullName, pass, true);
+    const res = this.storage.register(fullName, pass, true);
     if (res.success) {
       this.closeAuthModal();
       this.updateUserHeader();
