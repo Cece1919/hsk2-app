@@ -1643,42 +1643,42 @@ class TimoApp {
         title: "Quy tắc Chẵn – Lẻ trong Phép toán (Even & Odd)",
         category: "Lý thuyết số",
         summary: "Xác định nhanh tính chẵn/lẻ của tổng hoặc tích mà không cần tính cụ thể từng số.",
-        formula: "\\text{Chẵn} \\pm \\text{Chẵn} = \\text{Chẵn}, \\quad \\text{Lẻ} \\pm \\text{Lẻ} = \\text{Chẵn}, \\quad \\text{Chẵn} \\pm \\text{Lẻ} = \\text{Lẻ}",
+        formula: "\\begin{aligned} \\text{Chẵn} \\pm \\text{Chẵn} &= \\text{Chẵn}, & \\text{Lẻ} \\pm \\text{Lẻ} &= \\text{Chẵn} \\\\[2pt] \\text{Chẵn} \\pm \\text{Lẻ} &= \\text{Lẻ} \\end{aligned}",
         example: "Tổng của một số chẵn các số lẻ luôn là số chẵn.<br>Ví dụ: $1 + 3 + 5 + \\dots + 19$ gồm 10 số lẻ $\\implies$ Tổng là một số **Chẵn (Even)**."
       },
       {
         title: "Công thức đếm số đoạn thẳng trên một đường thẳng",
         category: "Hình học",
         summary: "Nếu trên một đường thẳng có $n$ điểm phân biệt, số đoạn thẳng tạo thành bằng tổng các số tự nhiên liên tiếp từ 1 đến $n - 1$.",
-        formula: "\\text{Số đoạn thẳng} = 1 + 2 + 3 + \\dots + (n - 1) = \\frac{n \\times (n - 1)}{2}",
+        formula: "\\text{Số đoạn thẳng} = 1 + 2 + \\dots + (n - 1) = \\frac{n \\times (n - 1)}{2}",
         example: "Trên đoạn thẳng có 6 điểm phân biệt: Số đoạn thẳng $= 1 + 2 + 3 + 4 + 5 = \\frac{6 \\times 5}{2} = 15$ đoạn thẳng."
       },
       {
         title: "Phương pháp đếm khối lập phương nhỏ (Unit Cubes)",
         category: "Hình học",
         summary: "Đếm số khối lập phương theo từng cột hoặc từng tầng (tầng 1 ở đáy, tầng 2, tầng 3...) để tránh bỏ sót các khối bị che khuất.",
-        formula: "\\text{Tổng khối} = \\sum (\\text{Số khối mỗi cột}) = \\text{Tầng 1} + \\text{Tầng 2} + \\text{Tầng 3} + \\dots",
+        formula: "\\text{Tổng khối} = \\sum (\\text{Số khối mỗi cột}) = \\text{Tầng 1} + \\text{Tầng 2} + \\dots",
         example: "Cột cao 3 khối ghi số 3. Cột cao 2 khối ghi số 2. Cột cao 1 khối ghi số 1. Cộng tổng các số trên mặt đáy để ra kết quả chính xác."
       },
       {
         title: "Bài toán xếp hàng thứ tự (Trước – Sau / Trái – Phải)",
         category: "Tư duy logic",
         summary: "Xác định tổng số bạn trong hàng khi biết vị trí của một bạn hoặc số bạn đứng ở phía trước và phía sau.",
-        formula: "\\text{Tổng số người} = \\text{Số người phía trước} + \\text{Số người phía sau} + 1",
+        formula: "\\text{Tổng số người} = \\text{Số người trước} + \\text{Số người sau} + 1",
         example: "Alice xếp hàng dọc, có 8 bạn đứng sau Alice, cả hàng có 23 bạn. Hỏi có bao nhiêu bạn đứng trước Alice?<br>Số bạn đứng trước Alice $= 23 - 8 - 1 = 14$ bạn."
       },
       {
         title: "Tính ngày trong tuần & Chu kỳ 7 ngày (Calendar)",
         category: "Tư duy logic",
         summary: "Một tuần có 7 ngày, sau đúng 7 ngày (hoặc bội số của 7) thì thứ trong tuần sẽ lặp lại như cũ.",
-        formula: "\\text{Số ngày trôi qua} = 7 \\times k + r \\implies \\text{Cộng thêm } r \\text{ ngày vào thứ ban đầu}",
+        formula: "\\text{Số ngày} = 7 \\times k + r \\implies \\text{Cộng thêm } r \\text{ ngày}",
         example: "Hôm nay là Thứ Năm. Hỏi sau 23 ngày nữa là Thứ mấy?<br>Vì $23 = 7 \\times 3 + 2$ (dư 2 ngày).<br>Thứ Năm cộng thêm 2 ngày $\\implies$ **Thứ Bảy**."
       },
       {
         title: "Bài toán bốc đồ vật – Tình huống xấu nhất (Worst-case)",
         category: "Tổ hợp",
         summary: "Để chắc chắn lấy được đồ vật màu mong muốn trong bóng tối, ta giả định gặp tình huống xui xẻo nhất (bốc hết tất cả các màu khác trước).",
-        formula: "\\text{Số vật cần bốc} = (\\text{Tổng số vật các màu khác}) + (\\text{Số vật cần lấy})",
+        formula: "\\text{Số vật cần bốc} = (\\text{Số vật các màu khác}) + 1",
         example: "Trong hộp có 10 viên bi đỏ và 8 viên bi xanh. Hỏi phải bốc ít nhất bao nhiêu viên để chắc chắn có 1 viên bi đỏ?<br>Tình huống xấu nhất: Bốc hết 8 viên bi xanh. Thêm 1 viên nữa chắc chắn là đỏ $\\implies$ Cần bốc ít nhất $8 + 1 = 9$ viên."
       }
     ];
@@ -1700,8 +1700,8 @@ class TimoApp {
           ${f.summary}
         </p>
 
-        <div class="p-4 bg-gradient-to-r from-blue-900 to-navy-900 text-white rounded-2xl text-center shadow-inner overflow-x-auto">
-          <div class="text-base md:text-lg font-mono font-bold">
+        <div class="py-3 px-3 bg-gradient-to-r from-blue-900 to-navy-900 text-white rounded-2xl text-center shadow-inner flex items-center justify-center min-h-[58px] overflow-hidden formula-box">
+          <div class="font-bold w-full flex items-center justify-center">
             $$${f.formula}$$
           </div>
         </div>
