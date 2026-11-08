@@ -63,12 +63,18 @@
     .katex .text {
       font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
     }
+    .formula-box {
+      scrollbar-width: none;
+    }
+    .formula-box::-webkit-scrollbar {
+      display: none;
+    }
     .formula-box .katex-display {
       margin: 0 !important;
     }
     .formula-box .katex {
-      font-size: clamp(0.78rem, 1.8vw, 0.98rem) !important;
-      line-height: 1.35;
+      font-size: clamp(0.72rem, 1.55vw, 0.92rem) !important;
+      line-height: 1.4;
     }
 
     ::-webkit-scrollbar {

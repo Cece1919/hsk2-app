@@ -1650,14 +1650,14 @@ class TimoApp {
         title: "Bài toán Trồng cây (Đoạn thẳng & Khép kín)",
         category: "Tư duy logic",
         summary: "Mối liên hệ giữa số cây và số khoảng cách tùy thuộc vào trồng cây trên đoạn thẳng có 2 đầu hay trên đường viền khép kín.",
-        formula: "\\text{Đoạn thẳng: } \\text{Số cây} = \\frac{L}{d} + 1, \\quad \\text{Khép kín: } \\text{Số cây} = \\frac{\\text{Chu vi}}{d}",
+        formula: "\\begin{aligned} \\text{Đoạn thẳng: } \\text{Số cây} &= \\frac{L}{d} + 1 \\\\ \\text{Khép kín: } \\text{Số cây} &= \\frac{\\text{Chu vi}}{d} \\end{aligned}",
         example: "Đoạn đường dài 120m, cách 6m trồng một cây và hai đầu đều có cây:<br>Số cây $= 120 / 6 + 1 = 21$ cây."
       },
       {
         title: "Dãy số cách đều & Tổng cấp số cộng",
         category: "Số học",
         summary: "Công thức tính nhanh số số hạng và tổng của một dãy số tự nhiên có khoảng cách $d$ không đổi.",
-        formula: "\\text{Số số hạng} = \\frac{\\text{Cuối} - \\text{Đầu}}{d} + 1, \\quad S = \\frac{(\\text{Đầu} + \\text{Cuối}) \\times \\text{Số số hạng}}{2}",
+        formula: "\\begin{aligned} \\text{Số số hạng} &= \\frac{\\text{Cuối} - \\text{Đầu}}{d} + 1 \\\\ S &= \\frac{(\\text{Đầu} + \\text{Cuối}) \\times \\text{Số số hạng}}{2} \\end{aligned}",
         example: "Tính $S = 4 + 7 + 10 + \\dots + 61$ ($d = 3$):<br>Số số hạng $= (61 - 4)/3 + 1 = 20$. Tổng $S = (4 + 61) \\times 20 / 2 = 650$."
       },
       {
@@ -1685,21 +1685,21 @@ class TimoApp {
         title: "Dấu hiệu chia hết nâng cao (4, 8, 11)",
         category: "Lý thuyết số",
         summary: "Chia hết cho 4 nếu 2 chữ số tận cùng $\\vdots 4$; chia hết cho 8 nếu 3 chữ số tận cùng $\\vdots 8$; chia hết cho 11 nếu hiệu $|S_{\\text{lẻ}} - S_{\\text{chẵn}}| \\vdots 11$.",
-        formula: "\\overline{a_n\\dots a_1a_0} \\vdots 4 \\iff \\overline{a_1a_0} \\vdots 4, \\quad \\overline{a_n\\dots a_0} \\vdots 11 \\iff |S_{\\text{lẻ}} - S_{\\text{chẵn}}| \\vdots 11",
+        formula: "\\begin{aligned} \\overline{a_n\\dots a_1a_0} \\vdots 4 &\\iff \\overline{a_1a_0} \\vdots 4 \\\\ \\overline{a_n\\dots a_0} \\vdots 11 &\\iff |S_{\\text{lẻ}} - S_{\\text{chẵn}}| \\vdots 11 \\end{aligned}",
         example: "Số $\\overline{202a}$ chia hết cho 4 khi $\\overline{2a} \\in \\{20, 24, 28\\} \\implies a \\in \\{0, 4, 8\\}$."
       },
       {
         title: "Đếm số hình chữ nhật & Hình vuông trên lưới ô vuông",
         category: "Hình học",
         summary: "Trên lưới ô vuông $m \\times n$, công thức tính số hình chữ nhật và số hình vuông các kích cỡ.",
-        formula: "\\text{Số HCN} = \\frac{m(m+1)}{2} \\times \\frac{n(n+1)}{2}, \\quad \\text{Số HV } (n \\times n) = \\sum_{k=1}^n k^2 = \\frac{n(n+1)(2n+1)}{6}",
+        formula: "\\begin{aligned} \\text{Số HCN} &= \\frac{m(m+1)}{2} \\times \\frac{n(n+1)}{2} \\\\ \\text{Số HV } (n \\times n) &= \\frac{n(n+1)(2n+1)}{6} \\end{aligned}",
         example: "Lưới $4 \\times 4$ ô vuông có:<br>Số hình vuông $= 1^2 + 2^2 + 3^2 + 4^2 = 1 + 4 + 9 + 16 = 30$ hình vuông."
       },
       {
         title: "Kỹ thuật dời cạnh tính chu vi hình bậc thang & đa giác góc vuông",
         category: "Hình học",
         summary: "Dời các đoạn thẳng thụt vào ra ngoài để quy đổi chu vi hình bậc thang phức tạp về chu vi hình chữ nhật bao quanh.",
-        formula: "\\text{Chu vi hình bậc thang} = \\text{Chu vi hình chữ nhật bao} = 2 \\times (\\text{Dài} + \\text{Rộng})",
+        formula: "\\begin{aligned} \\text{Chu vi bậc thang} &= \\text{Chu vi hình chữ nhật bao} \\\\ &= 2 \\times (\\text{Dài} + \\text{Rộng}) \\end{aligned}",
         example: "Hình bậc thang có chiều dài bao 18cm, chiều rộng bao 12cm có chu vi là:<br>$P = 2 \\times (18 + 12) = 60\\text{ cm}$."
       },
       {
@@ -1728,7 +1728,7 @@ class TimoApp {
           ${f.summary}
         </p>
 
-        <div class="py-3 px-3 bg-gradient-to-r from-blue-900 to-navy-900 text-white rounded-2xl text-center shadow-inner flex items-center justify-center min-h-[58px] overflow-hidden formula-box">
+        <div class="py-3 px-3 bg-gradient-to-r from-blue-900 to-navy-900 text-white rounded-2xl text-center shadow-inner flex items-center justify-center min-h-[64px] overflow-x-auto scrollbar-none formula-box">
           <div class="font-bold w-full flex items-center justify-center">
             $$${f.formula}$$
           </div>
