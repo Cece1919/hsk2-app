@@ -1629,85 +1629,85 @@ class TimoApp {
         title: "Phương pháp Giả thiết tạm (Gà & Chó / Tính điểm thi đấu)",
         category: "Tư duy logic",
         summary: "Giả định tất cả đều đúng (hoặc tất cả đều là con nhiều chân), tính độ chênh lệch điểm để tìm số câu làm sai (hoặc con ít chân).",
-        formula: "\text{Số câu sai} = \frac{\text{Điểm tối đa giả định} - \text{Điểm thực tế}}{\text{Điểm đúng} + \text{Điểm trừ}}",
-        example: "Đề 20 câu, đúng $+5$ điểm, sai/không làm $-2$ điểm. Amy được 58 điểm:<br>Số câu sai $= (20 \times 5 - 58) / (5 + 2) = 42 / 7 = 6$ câu.<br>Số câu đúng $= 20 - 6 = 14$ câu."
+        formula: "\\text{Số câu sai} = \\frac{\\text{Điểm tối đa giả định} - \\text{Điểm thực tế}}{\\text{Điểm đúng} + \\text{Điểm trừ}}",
+        example: "Đề 20 câu, đúng $+5$ điểm, sai/không làm $-2$ điểm. Amy được 58 điểm:<br>Số câu sai $= (20 \\times 5 - 58) / (5 + 2) = 42 / 7 = 6$ câu.<br>Số câu đúng $= 20 - 6 = 14$ câu."
       },
       {
         title: "Bài toán Hiệu số tuổi không đổi theo thời gian",
         category: "Tư duy logic",
         summary: "Mỗi năm mỗi người đều tăng thêm 1 tuổi nên khoảng cách tuổi giữa hai người không bao giờ thay đổi.",
-        formula: "\text{Hiệu số tuổi} = \text{Tuổi người lớn} - \text{Tuổi người bé} = \text{Hằng số}",
+        formula: "\\text{Hiệu số tuổi} = \\text{Tuổi người lớn} - \\text{Tuổi người bé} = \\text{Hằng số}",
         example: "Khi Lucas 5 tuổi thì bố 34 tuổi (hiệu là $34 - 5 = 29$ tuổi). Khi bố 45 tuổi thì Lucas: $45 - 29 = 16$ tuổi."
       },
       {
         title: "Chu kỳ thứ trong tuần & Lịch năm nhuận",
         category: "Tư duy logic",
         summary: "Lấy tổng số ngày trôi qua chia cho 7 lấy số dư $r$ để cộng thêm vào thứ ban đầu. Một năm thường có 365 ngày (dư 1), năm nhuận có 366 ngày (dư 2).",
-        formula: "\text{Số ngày} = 7 \times k + r \implies \text{Cộng thêm } r \text{ ngày}",
-        example: "Hôm nay là Thứ Ba, 100 ngày sau là thứ mấy?<br>Vì $100 : 7 = 14$ dư 2 ngày. Thứ Ba cộng thêm 2 ngày $\implies$ **Thứ Năm (Thursday)**."
+        formula: "\\text{Số ngày} = 7 \\times k + r \\implies \\text{Cộng thêm } r \\text{ ngày}",
+        example: "Hôm nay là Thứ Ba, 100 ngày sau là thứ mấy?<br>Vì $100 : 7 = 14$ dư 2 ngày. Thứ Ba cộng thêm 2 ngày $\\implies$ **Thứ Năm (Thursday)**."
       },
       {
         title: "Bài toán Trồng cây (Đoạn thẳng & Khép kín)",
         category: "Tư duy logic",
         summary: "Mối liên hệ giữa số cây và số khoảng cách tùy thuộc vào trồng cây trên đoạn thẳng có 2 đầu hay trên đường viền khép kín.",
-        formula: "\text{Đoạn thẳng: } \text{Số cây} = \frac{L}{d} + 1, \quad \text{Khép kín: } \text{Số cây} = \frac{\text{Chu vi}}{d}",
+        formula: "\\text{Đoạn thẳng: } \\text{Số cây} = \\frac{L}{d} + 1, \\quad \\text{Khép kín: } \\text{Số cây} = \\frac{\\text{Chu vi}}{d}",
         example: "Đoạn đường dài 120m, cách 6m trồng một cây và hai đầu đều có cây:<br>Số cây $= 120 / 6 + 1 = 21$ cây."
       },
       {
         title: "Dãy số cách đều & Tổng cấp số cộng",
         category: "Số học",
         summary: "Công thức tính nhanh số số hạng và tổng của một dãy số tự nhiên có khoảng cách $d$ không đổi.",
-        formula: "\text{Số số hạng} = \frac{\text{Cuối} - \text{Đầu}}{d} + 1, \quad S = \frac{(\text{Đầu} + \text{Cuối}) \times \text{Số số hạng}}{2}",
-        example: "Tính $S = 4 + 7 + 10 + \dots + 61$ ($d = 3$):<br>Số số hạng $= (61 - 4)/3 + 1 = 20$. Tổng $S = (4 + 61) \times 20 / 2 = 650$."
+        formula: "\\text{Số số hạng} = \\frac{\\text{Cuối} - \\text{Đầu}}{d} + 1, \\quad S = \\frac{(\\text{Đầu} + \\text{Cuối}) \\times \\text{Số số hạng}}{2}",
+        example: "Tính $S = 4 + 7 + 10 + \\dots + 61$ ($d = 3$):<br>Số số hạng $= (61 - 4)/3 + 1 = 20$. Tổng $S = (4 + 61) \\times 20 / 2 = 650$."
       },
       {
         title: "Chuỗi sai phân triệt tiêu (Telescoping Series)",
         category: "Số học",
         summary: "Tách phân số có mẫu là tích của 2 thừa số cách nhau $k$ đơn vị thành hiệu hai phân số để triệt tiêu các số hạng ở giữa.",
-        formula: "\frac{k}{n \times (n + k)} = \frac{1}{n} - \frac{1}{n + k}",
-        example: "$\frac{1}{1 \times 2} + \frac{1}{2 \times 3} + \dots + \frac{1}{19 \times 20} = 1 - \frac{1}{20} = \frac{19}{20}$."
+        formula: "\\frac{k}{n \\times (n + k)} = \\frac{1}{n} - \\frac{1}{n + k}",
+        example: "$\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\dots + \\frac{1}{19 \\times 20} = 1 - \\frac{1}{20} = \\frac{19}{20}$."
       },
       {
         title: "Chu kỳ chữ số tận cùng của lũy thừa",
         category: "Lý thuyết số",
         summary: "Chữ số tận cùng của các số có đuôi 2, 3, 7, 8 lặp lại theo chu kỳ 4 lần; đuôi 4, 9 lặp lại theo chu kỳ 2 lần.",
-        formula: "2^{4k+1} \to 2, \quad 2^{4k+2} \to 4, \quad 2^{4k+3} \to 8, \quad 2^{4k} \to 6",
-        example: "Tìm chữ số tận cùng của $2^{2021}$:<br>Vì $2021 = 4 \times 505 + 1$ (dư 1) nên $2^{2021}$ có tận cùng bằng **2**."
+        formula: "2^{4k+1} \\to 2, \\quad 2^{4k+2} \\to 4, \\quad 2^{4k+3} \\to 8, \\quad 2^{4k} \\to 6",
+        example: "Tìm chữ số tận cùng của $2^{2021}$:<br>Vì $2021 = 4 \\times 505 + 1$ (dư 1) nên $2^{2021}$ có tận cùng bằng **2**."
       },
       {
         title: "Số chữ số 0 tận cùng của tích tự nhiên liên tiếp",
         category: "Lý thuyết số",
-        summary: "Mỗi chữ số 0 tận cùng sinh ra từ tích $2 \times 5$. Do số thừa số 2 luôn nhiều hơn 5, số chữ số 0 bằng số thừa số 5.",
-        formula: "\text{Số chữ số 0 của } n! = \left\lfloor \frac{n}{5} \right\rfloor + \left\lfloor \frac{n}{25} \right\rfloor + \left\lfloor \frac{n}{125} \right\rfloor + \dots",
-        example: "Tích $1 \times 2 \times 3 \times \dots \times 50$ có số chữ số 0 tận cùng là:<br>$\lfloor 50 / 5 \rfloor + \lfloor 50 / 25 \rfloor = 10 + 2 = 12$ chữ số 0."
+        summary: "Mỗi chữ số 0 tận cùng sinh ra từ tích $2 \\times 5$. Do số thừa số 2 luôn nhiều hơn 5, số chữ số 0 bằng số thừa số 5.",
+        formula: "\\text{Số chữ số 0 của } n! = \\left\\lfloor \\frac{n}{5} \\right\\rfloor + \\left\\lfloor \\frac{n}{25} \\right\\rfloor + \\left\\lfloor \\frac{n}{125} \\right\\rfloor + \\dots",
+        example: "Tích $1 \\times 2 \\times 3 \\times \\dots \\times 50$ có số chữ số 0 tận cùng là:<br>$\\lfloor 50 / 5 \\rfloor + \\lfloor 50 / 25 \\rfloor = 10 + 2 = 12$ chữ số 0."
       },
       {
         title: "Dấu hiệu chia hết nâng cao (4, 8, 11)",
         category: "Lý thuyết số",
-        summary: "Chia hết cho 4 nếu 2 chữ số tận cùng $\vdots 4$; chia hết cho 8 nếu 3 chữ số tận cùng $\vdots 8$; chia hết cho 11 nếu hiệu $|S_{\text{lẻ}} - S_{\text{chẵn}}| \vdots 11$.",
-        formula: "\overline{a_n\dots a_1a_0} \vdots 4 \iff \overline{a_1a_0} \vdots 4, \quad \overline{a_n\dots a_0} \vdots 11 \iff |S_{\text{lẻ}} - S_{\text{chẵn}}| \vdots 11",
-        example: "Số $\overline{202a}$ chia hết cho 4 khi $\overline{2a} \in \{20, 24, 28\} \implies a \in \{0, 4, 8\}$."
+        summary: "Chia hết cho 4 nếu 2 chữ số tận cùng $\\vdots 4$; chia hết cho 8 nếu 3 chữ số tận cùng $\\vdots 8$; chia hết cho 11 nếu hiệu $|S_{\\text{lẻ}} - S_{\\text{chẵn}}| \\vdots 11$.",
+        formula: "\\overline{a_n\\dots a_1a_0} \\vdots 4 \\iff \\overline{a_1a_0} \\vdots 4, \\quad \\overline{a_n\\dots a_0} \\vdots 11 \\iff |S_{\\text{lẻ}} - S_{\\text{chẵn}}| \\vdots 11",
+        example: "Số $\\overline{202a}$ chia hết cho 4 khi $\\overline{2a} \\in \\{20, 24, 28\\} \\implies a \\in \\{0, 4, 8\\}$."
       },
       {
         title: "Đếm số hình chữ nhật & Hình vuông trên lưới ô vuông",
         category: "Hình học",
-        summary: "Trên lưới ô vuông $m \times n$, công thức tính số hình chữ nhật và số hình vuông các kích cỡ.",
-        formula: "\text{Số HCN} = \frac{m(m+1)}{2} \times \frac{n(n+1)}{2}, \quad \text{Số HV } (n \times n) = \sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}",
-        example: "Lưới $4 \times 4$ ô vuông có:<br>Số hình vuông $= 1^2 + 2^2 + 3^2 + 4^2 = 1 + 4 + 9 + 16 = 30$ hình vuông."
+        summary: "Trên lưới ô vuông $m \\times n$, công thức tính số hình chữ nhật và số hình vuông các kích cỡ.",
+        formula: "\\text{Số HCN} = \\frac{m(m+1)}{2} \\times \\frac{n(n+1)}{2}, \\quad \\text{Số HV } (n \\times n) = \\sum_{k=1}^n k^2 = \\frac{n(n+1)(2n+1)}{6}",
+        example: "Lưới $4 \\times 4$ ô vuông có:<br>Số hình vuông $= 1^2 + 2^2 + 3^2 + 4^2 = 1 + 4 + 9 + 16 = 30$ hình vuông."
       },
       {
         title: "Kỹ thuật dời cạnh tính chu vi hình bậc thang & đa giác góc vuông",
         category: "Hình học",
         summary: "Dời các đoạn thẳng thụt vào ra ngoài để quy đổi chu vi hình bậc thang phức tạp về chu vi hình chữ nhật bao quanh.",
-        formula: "\text{Chu vi hình bậc thang} = \text{Chu vi hình chữ nhật bao} = 2 \times (\text{Dài} + \text{Rộng})",
-        example: "Hình bậc thang có chiều dài bao 18cm, chiều rộng bao 12cm có chu vi là:<br>$P = 2 \times (18 + 12) = 60\text{ cm}$."
+        formula: "\\text{Chu vi hình bậc thang} = \\text{Chu vi hình chữ nhật bao} = 2 \\times (\\text{Dài} + \\text{Rộng})",
+        example: "Hình bậc thang có chiều dài bao 18cm, chiều rộng bao 12cm có chu vi là:<br>$P = 2 \\times (18 + 12) = 60\\text{ cm}$."
       },
       {
         title: "Nguyên lý Dirichlet (Bài toán bốc đồ vật trường hợp xấu nhất)",
         category: "Tổ hợp",
         summary: "Để chắc chắn lấy được đủ số vật mong muốn trong bóng tối, ta giả định gặp tình huống xấu nhất (bốc hết các vật không mong muốn trước rồi cộng thêm $k$).",
-        formula: "\text{Số vật cần bốc} = (\text{Tổng số vật thuộc các nhóm khác}) + k",
-        example: "Trong hộp có 12 bi đỏ, 9 bi xanh, 7 bi vàng. Cần bốc ít nhất bao nhiêu viên để chắc chắn có 1 bi đỏ?<br>Tình huống xấu nhất: $9 \text{ xanh} + 7 \text{ vàng} = 16$ viên. Thêm 1 viên nữa $\implies 16 + 1 = 17$ viên."
+        formula: "\\text{Số vật cần bốc} = (\\text{Tổng số vật thuộc các nhóm khác}) + k",
+        example: "Trong hộp có 12 bi đỏ, 9 bi xanh, 7 bi vàng. Cần bốc ít nhất bao nhiêu viên để chắc chắn có 1 bi đỏ?<br>Tình huống xấu nhất: $9 \\text{ xanh} + 7 \\text{ vàng} = 16$ viên. Thêm 1 viên nữa $\\implies 16 + 1 = 17$ viên."
       }
     ];
 
