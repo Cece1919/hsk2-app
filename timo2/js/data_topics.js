@@ -1087,8 +1087,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "16"
       ],
       "unit": "",
-      "hint": "Phương pháp đếm đoạn thẳng trên từng trục thành phần.",
-      "solution": "Phân tích các đoạn thẳng trên từng đường thẳng:\n1) Trên trục ngang chính có 5 điểm: Số đoạn thẳng là (5 × 4) : 2 = 10 (đoạn thẳng).\n2) Nhánh rẽ đứng thứ nhất có 3 điểm (tính cả điểm giao): Số đoạn thẳng là (3 × 2) : 2 = 3 (đoạn thẳng).\n3) Nhánh rẽ đứng thứ hai có 3 điểm (tính cả điểm giao): Số đoạn thẳng là (3 × 2) : 2 = 3 (đoạn thẳng).\nTổng số đoạn thẳng trong hình là:\n10 + 3 + 3 = 16 (đoạn thẳng)."
+      "hint": "Phương pháp đếm đoạn thẳng trên từng trục thành phần theo tư duy trực quan.",
+      "solution": "Phân tích và đếm số đoạn thẳng trên từng đường thẳng:\n1) Trên trục nằm ngang (gồm 5 điểm, chia thành 4 đoạn đơn nhỏ):\n- Đoạn đơn (ghép từ 1 đoạn nhỏ): có 4 đoạn.\n- Đoạn đôi (ghép từ 2 đoạn nhỏ kề nhau): có 3 đoạn.\n- Đoạn ba (ghép từ 3 đoạn nhỏ kề nhau): có 2 đoạn.\n- Đoạn bốn (ghép từ cả 4 đoạn nhỏ): có 1 đoạn.\n=> Số đoạn thẳng trên trục ngang là:\n4 + 3 + 2 + 1 = 10 (đoạn thẳng).\n(Quy tắc đếm nhanh: Với 4 đoạn đơn, tổng số đoạn thẳng là 1 + 2 + 3 + 4 = 10 đoạn).\n\n2) Trên nhánh rẽ đứng thứ nhất (gồm 3 điểm, chia thành 2 đoạn đơn nhỏ):\n- Đoạn đơn: có 2 đoạn.\n- Đoạn đôi: có 1 đoạn.\n=> Số đoạn thẳng trên nhánh này là: 2 + 1 = 3 (đoạn thẳng).\n\n3) Trên nhánh rẽ đứng thứ hai (gồm 3 điểm, chia thành 2 đoạn đơn nhỏ):\n- Tương tự, số đoạn thẳng trên nhánh này là: 2 + 1 = 3 (đoạn thẳng).\n\nTổng số đoạn thẳng có trong hình vẽ là:\n10 + 3 + 3 = 16 (đoạn thẳng)."
     },
     {
       "id": 1047,
@@ -1175,8 +1175,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "11"
       ],
       "unit": "",
-      "hint": "Công thức đếm số hình vuông trong lưới chữ nhật m × n.",
-      "solution": "Lưới ô vuông có kích thước 2 hàng và 4 cột:\n1) Số hình vuông kích thước 1×1 là: 2 × 4 = 8 (hình vuông).\n2) Số hình vuông kích thước 2×2 là: (2 – 1) × (4 – 1) = 1 × 3 = 3 (hình vuông).\nTổng số hình vuông có trong lưới là:\n8 + 3 = 11 (hình vuông)."
+      "hint": "Phân loại và đếm hình vuông theo kích thước trong lưới chữ nhật.",
+      "solution": "Phân tích và đếm các hình vuông theo từng kích thước:\n1) Đếm hình vuông đơn vị 1 × 1 (gồm 1 ô vuông nhỏ):\nLưới gồm 2 hàng và 4 cột ô vuông nhỏ.\nSố hình vuông kích thước 1 × 1 là:\n2 × 4 = 8 (hình vuông).\n\n2) Đếm hình vuông ghép kích thước 2 × 2 (ghép từ 4 ô nhỏ dạng 2 hàng × 2 cột):\nVì chiều dọc của lưới chỉ có 2 hàng, nên hình vuông 2 × 2 có chiều cao bằng đúng chiều dọc của lưới.\nKhi dịch chuyển khối 2 × 2 theo chiều ngang (gồm 4 cột), ta có các vị trí:\n- Vị trí 1: Chiếm Cột 1 và Cột 2.\n- Vị trí 2: Chiếm Cột 2 và Cột 3.\n- Vị trí 3: Chiếm Cột 3 và Cột 4.\nNhư vậy có 3 vị trí đặt khối 2 × 2, tương ứng có 3 hình vuông kích thước 2 × 2.\n(Giải thích: Trên 4 cột có 4 – 1 = 3 cặp cột liền kề).\n\n3) Không thể tạo thành hình vuông kích thước 3 × 3 vì chiều rộng của lưới chỉ có 2 hàng.\n\nTổng số hình vuông có trong lưới là:\n8 + 3 = 11 (hình vuông)."
     },
     {
       "id": 1051,
@@ -1307,8 +1307,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "12"
       ],
       "unit": "",
-      "hint": "Đếm đoạn thẳng trên các cạnh của hình tam giác.",
-      "solution": "Đếm số đoạn thẳng trên từng đường thẳng:\n1) Trên cạnh đáy có 4 điểm: Số đoạn thẳng là (4 × 3) : 2 = 6 (đoạn thẳng).\n2) Trên cạnh bên thứ nhất có 3 điểm: Số đoạn thẳng là (3 × 2) : 2 = 3 (đoạn thẳng).\n3) Trên cạnh bên thứ hai có 3 điểm: Số đoạn thẳng là (3 × 2) : 2 = 3 (đoạn thẳng).\nTổng số đoạn thẳng có trong hình vẽ là:\n6 + 3 + 3 = 12 (đoạn thẳng)."
+      "hint": "Phương pháp đếm đoạn thẳng trên các cạnh của hình tam giác.",
+      "solution": "Phân tích và đếm số đoạn thẳng trên từng cạnh của hình tam giác:\n1) Trên cạnh đáy (gồm 4 điểm, chia thành 3 đoạn đơn nhỏ):\n- Đoạn đơn (ghép từ 1 đoạn nhỏ): có 3 đoạn.\n- Đoạn đôi (ghép từ 2 đoạn nhỏ kề nhau): có 2 đoạn.\n- Đoạn ba (ghép từ cả 3 đoạn nhỏ): có 1 đoạn.\n=> Số đoạn thẳng trên cạnh đáy là: 3 + 2 + 1 = 6 (đoạn thẳng).\n(Quy tắc đếm nhanh: Với 3 đoạn đơn, tổng số đoạn thẳng là 1 + 2 + 3 = 6 đoạn).\n\n2) Trên cạnh bên thứ nhất (gồm 3 điểm, chia thành 2 đoạn đơn nhỏ):\n- Đoạn đơn: có 2 đoạn.\n- Đoạn đôi: có 1 đoạn.\n=> Số đoạn thẳng trên cạnh bên thứ nhất là: 2 + 1 = 3 (đoạn thẳng).\n\n3) Trên cạnh bên thứ hai (gồm 3 điểm, chia thành 2 đoạn đơn nhỏ):\n- Tương tự, số đoạn thẳng trên cạnh bên thứ hai là: 2 + 1 = 3 (đoạn thẳng).\n\nTổng số đoạn thẳng có trong hình vẽ là:\n6 + 3 + 3 = 12 (đoạn thẳng)."
     },
     {
       "id": 1057,
@@ -1351,8 +1351,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "18"
       ],
       "unit": "",
-      "hint": "Công thức đếm số hình chữ nhật trong lưới chữ nhật m × n.",
-      "solution": "Lưới có kích thước 2 hàng và 3 cột:\n- Số đoạn thẳng theo chiều dọc (chiều cao) là: (2 × 3) : 2 = 3 đoạn.\n- Số đoạn thẳng theo chiều ngang (chiều dài) là: (3 × 4) : 2 = 6 đoạn.\nMỗi hình chữ nhật được tạo thành bởi 1 cặp đoạn thẳng dọc và 1 cặp đoạn thẳng ngang.\nTổng số hình chữ nhật có trong lưới là:\n3 × 6 = 18 (hình chữ nhật)."
+      "hint": "Phân loại đếm hình chữ nhật và quy tắc kết hợp đoạn thẳng ngang - dọc.",
+      "solution": "Lưới có kích thước gồm 2 hàng và 3 cột (tổng cộng 6 ô vuông nhỏ 1 × 1).\n\nCách 1: Đếm phân loại hình chữ nhật theo kích thước (Phương pháp trực quan Lớp 2):\n- Hình chữ nhật 1 × 1 (1 ô nhỏ): có 2 × 3 = 6 (hình).\n- Hình chữ nhật 1 × 2 (ghép 2 ô nằm ngang): mỗi hàng có 2 hình, gồm 2 hàng nên có: 2 × 2 = 4 (hình).\n- Hình chữ nhật 1 × 3 (ghép 3 ô nằm ngang): mỗi hàng có 1 hình, gồm 2 hàng nên có: 1 × 2 = 2 (hình).\n- Hình chữ nhật 2 × 1 (ghép 2 ô dựng đứng): mỗi cột có 1 hình, gồm 3 cột nên có: 1 × 3 = 3 (hình).\n- Hình chữ nhật 2 × 2 (ghép 4 ô dạng 2 hàng × 2 cột): có 2 (hình).\n- Hình chữ nhật 2 × 3 (toàn bộ lưới lớn): có 1 (hình).\nTổng số hình chữ nhật trong lưới là:\n6 + 4 + 2 + 3 + 2 + 1 = 18 (hình chữ nhật).\n\nCách 2: Giải thích quy tắc đếm nhanh bằng phép nhân đoạn thẳng:\nMỗi hình chữ nhật được tạo thành bởi 1 cặp đoạn thẳng theo chiều ngang và 1 cặp đoạn thẳng theo chiều dọc:\n1) Xét theo chiều ngang (chiều dài gồm 3 ô nhỏ):\n   Số đoạn thẳng ngang là: 1 + 2 + 3 = 6 (đoạn).\n2) Xét theo chiều dọc (chiều rộng gồm 2 ô nhỏ):\n   Số đoạn thẳng dọc là: 1 + 2 = 3 (đoạn).\n3) Kết hợp mỗi đoạn thẳng ngang với mỗi đoạn thẳng dọc tạo thành 1 hình chữ nhật:\n   Tổng số hình chữ nhật trong lưới là: 6 × 3 = 18 (hình chữ nhật)."
     },
     {
       "id": 1059,
@@ -1389,14 +1389,14 @@ const TIMO_TOPICAL_PRACTICE = {
       "questionVi": "Một hình tròn được chia bởi 4 bán kính xuất phát từ tâm. Hỏi có bao nhiêu hình quạt tròn được tạo thành?",
       "vocab": "Circle: Hình tròn; Radii: Bán kính; Sectors: Hình quạt tròn.",
       "image": null,
-      "answer": "8",
+      "answer": "12",
       "acceptableAnswers": [
-        "8",
-        "8"
+        "12",
+        "12"
       ],
       "unit": "",
-      "hint": "Đếm hình quạt tròn đơn và hình quạt tròn ghép.",
-      "solution": "4 bán kính xuất phát từ tâm chia hình tròn thành 4 hình quạt tròn đơn:\n- Số hình quạt tròn đơn (chứa 1 phần): có 4 hình.\n- Số hình quạt tròn ghép từ 2 phần kề nhau: có 4 hình.\nTổng số hình quạt tròn nhỏ hơn nửa hình tròn hoặc bằng nửa hình tròn tạo thành là 8 hình quạt tròn."
+      "hint": "Phân loại đếm hình quạt tròn theo số phần thành phần (gồm cả quạt lớn hơn nửa hình tròn).",
+      "solution": "4 bán kính xuất phát từ tâm chia hình tròn thành 4 phần quạt tròn nhỏ (gọi là 4 phần cơ bản: phần 1, 2, 3, 4).\nTa đếm số hình quạt tròn được tạo thành theo các trường hợp:\n1) Hình quạt tròn đơn (chứa 1 phần cơ bản):\n   Gồm các hình quạt nhỏ: phần 1, phần 2, phần 3, phần 4.\n   => Có 4 hình.\n\n2) Hình quạt tròn đôi (ghép từ 2 phần kề nhau):\n   Gồm: (phần 1 + 2), (phần 2 + 3), (phần 3 + 4), (phần 4 + 1).\n   => Có 4 hình.\n\n3) Hình quạt tròn ba (ghép từ 3 phần kề nhau — đây chính là các hình quạt tròn lớn hơn nửa hình tròn):\n   Gồm: (phần 1 + 2 + 3), (phần 2 + 3 + 4), (phần 3 + 4 + 1), (phần 4 + 1 + 2).\n   => Có 4 hình.\n\n(Lưu ý: Nếu lấy cả 4 phần thì tạo thành toàn bộ hình tròn đầy đủ, không phải là hình quạt giới hạn bởi 2 bán kính phân biệt).\n\nTổng số hình quạt tròn được tạo thành là:\n4 + 4 + 4 = 12 (hình quạt tròn)."
     },
     {
       "id": 1061,
