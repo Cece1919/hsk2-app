@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HSK Master - Học Từ Vựng Tiếng Trung Spaced Repetition</title>
+    <script>
+      // Suppress benign Vite HMR WebSocket connection errors in AI Studio iframe environment
+      (function() {
+        if (typeof window !== 'undefined') {
+          var RealWebSocket = window.WebSocket;
+          if (RealWebSocket) {
+            window.WebSocket = function(url, protocols) {
+              if (
+                protocols === 'vite-hmr' ||
+                (typeof url === 'string' && (url.includes('vite') || url.includes('.run.app') || url.includes('token=')))
+              ) {
+                var ws = new EventTarget();
+                ws.url = url;
+                ws.protocols = protocols;
+                ws.readyState = 1;
+                ws.bufferedAmount = 0;
+                ws.extensions = '';
+                ws.protocol = protocols || '';
+                ws.binaryType = 'blob';
+                ws.send = function() {};
+                ws.close = function() { ws.readyState = 3; };
+                setTimeout(function() {
+                  var evt = new Event('open');
+                  ws.dispatchEvent(evt);
+                  if (typeof ws.onopen === 'function') ws.onopen(evt);
+                }, 5);
+                return ws;
+              }
+              return new RealWebSocket(url, protocols);
+            };
+            window.WebSocket.prototype = RealWebSocket.prototype;
+            window.WebSocket.CONNECTING = 0;
+            window.WebSocket.OPEN = 1;
+            window.WebSocket.CLOSING = 2;
+            window.WebSocket.CLOSED = 3;
+          }
+
+          var origConsoleError = console.error;
+          console.error = function() {
+            for (var i = 0; i < arguments.length; i++) {
+              var arg = arguments[i];
+              var str = (arg && (arg.message || arg.stack || String(arg))) || '';
+              if (
+                str.includes('WebSocket closed without opened') ||
+                (str.includes('WebSocket') && str.includes('[vite]'))
+              ) {
+                return;
+              }
+            }
+            return origConsoleError.apply(console, arguments);
+          };
+
+          window.addEventListener('error', function(event) {
+            var msg = (event && (event.message || (event.error && event.error.message))) || '';
+            if (msg.includes('WebSocket closed without opened') || msg.includes('vite-hmr')) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              return true;
+            }
+          }, true);
+
+          window.addEventListener('unhandledrejection', function(event) {
+            var reason = String((event && (event.reason && (event.reason.message || event.reason))) || '');
+            if (reason.includes('WebSocket closed without opened') || reason.includes('vite-hmr')) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+            }
+          }, true);
+        }
+      })();
+    </script>
+    <meta name="description" content="Ứng dụng học từ vựng Tiếng Trung HSK 1-6 chuẩn phương pháp lặp lại ngắt quãng (Spaced Repetition SM-2), hỗ trợ phát âm, viết chữ Hán, Hán Việt và đồng bộ tài khoản Google." />
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <meta name="theme-color" content="#2D5A46" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+
+    <meta property="og:title" content="HSK Master - Học Từ Vựng Tiếng Trung Spaced Repetition" />
+    <meta property="og:description" content="Ứng dụng học từ vựng Tiếng Trung HSK 1-6 chuẩn phương pháp lặp lại ngắt quãng (Spaced Repetition SM-2), hỗ trợ phát âm, viết chữ Hán, Hán Việt và đồng bộ tài khoản Google." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="./assets/index-D-9M-0Hd.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CBhgy0rq.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
+  <body class="bg-[#F5F7F3] text-[#1E2D24] antialiased selection:bg-[#D5E4D8] selection:text-[#1E3B2C]">
+    <div id="root">
+      <!-- Fast inline splash to prevent white screen on iOS / Android startup -->
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #F5F7F3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background-color: #2D5A46; display: flex; align-items: center; justify-content: center; color: #FAFBF9; font-size: 26px; font-weight: 900; box-shadow: 0 4px 14px rgba(45, 90, 70, 0.25);">
+          汉
+        </div>
+        <div style="margin-top: 14px; font-size: 16px; font-weight: 700; color: #1E2D24; letter-spacing: -0.02em;">
+          HSK Master
+        </div>
+        <div style="margin-top: 6px; font-size: 12px; color: #6E7D73;">
+          Đang khởi động ứng dụng...
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
