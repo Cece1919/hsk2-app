@@ -1053,13 +1053,13 @@ const TIMO_TOPICAL_PRACTICE = {
       "questionVi": "Có bao nhiêu hình tam giác vuông trong hình dưới đây?",
       "vocab": "Right-angled triangles: Tam giác vuông; Figure: Hình.",
       "image": "images/de6_q17.png",
-      "answer": "20",
+      "answer": "16",
       "acceptableAnswers": [
-        "20"
+        "16"
       ],
       "unit": "",
-      "hint": "Phương pháp Đếm phân tầng theo kích thước hình.",
-      "solution": "Hình vuông lớn được chia bởi 2 đường chéo và 2 đường trung bình cắt nhau tại tâm O tạo thành 8 tam giác vuông nhỏ đơn vị.\nTa phân loại và đếm các hình tam giác vuông như sau:\n• Loại 1 (gồm 1 tam giác nhỏ đơn vị): Có 8 hình tam giác vuông tại tâm O.\n• Loại 2 (ghép từ 2 tam giác nhỏ đơn vị):\n  - 4 tam giác vuông tạo bởi 2 tam giác nhỏ kề nhau có góc vuông tại 4 đỉnh của hình vuông lớn.\n  - 4 tam giác vuông tạo bởi 2 tam giác nhỏ kề nhau có góc vuông tại tâm O.\n  => Tổng cộng Loại 2 có: 4 + 4 = 8 (hình).\n• Loại 3 (ghép từ 4 tam giác nhỏ đơn vị):\n  Là các tam giác vuông bằng một nửa hình vuông lớn tạo bởi 2 đường chéo chính: có 4 hình.\nTổng số hình tam giác vuông trong hình là:\n8 + 8 + 4 = 20 (hình)"
+      "hint": "Phương pháp Đếm phân loại theo kích thước hình tam giác vuông.",
+      "solution": "Hình vuông lớn ABCD được chia bởi 2 đường chéo AC, BD và 2 đường trung bình MP, NQ cắt nhau tại tâm O tạo thành 8 tam giác vuông nhỏ đơn vị.\nTa phân loại và đếm các hình tam giác vuông như sau:\n• Loại 1 (gồm 1 tam giác nhỏ đơn vị):\n  Có 8 hình tam giác vuông nhỏ chung đỉnh tại tâm O (gồm: AMO, BMO, BNO, CNO, CPO, DPO, DQO, AQO).\n• Loại 2 (ghép từ 2 tam giác nhỏ đơn vị):\n  Có 4 hình tam giác vuông có đỉnh vuông tại tâm O (gồm: tam giác ABO, BCO, CDO, DAO).\n  (Lưu ý: Hai tam giác nhỏ kề nhau tại mỗi góc của hình vuông lớn ghép lại tạo thành một hình vuông con có diện tích bằng 1/4 hình vuông lớn, không phải là hình tam giác).\n• Loại 3 (ghép từ 4 tam giác nhỏ đơn vị = nửa hình vuông lớn):\n  Có 4 hình tam giác vuông lớn có đỉnh vuông tại 4 góc A, B, C, D của hình vuông lớn (gồm: tam giác ABC, BCD, CDA, DAB).\nTổng số hình tam giác vuông trong hình là:\n8 + 4 + 4 = 16 (hình tam giác vuông)"
     },
     {
       "id": 1048,
@@ -1226,8 +1226,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "45"
       ],
       "unit": "",
-      "hint": "Phương pháp Đếm tam giác chung đỉnh theo từng tầng đáy.",
-      "solution": "Hình vẽ gồm đỉnh chung A và đáy lớn được chia thành 5 đoạn thẳng đơn vị bởi 6 điểm.\n• Xét tầng đáy dưới cùng: Số tam giác có đỉnh A và đáy nằm trên đường này là:\n5 × (5 + 1) : 2 = 15 (tam giác)\n• Vì hình có 3 tầng đường thẳng song song với đáy, mỗi tầng đường thẳng đều tạo thành 15 hình tam giác có đỉnh A.\nTổng số hình tam giác trong hình là:\n15 × 3 = 45 (tam giác)"
+      "hint": "Phương pháp Đếm số đoạn thẳng trên cạnh đáy & Nhân số tầng đáy.",
+      "solution": "Mỗi hình tam giác có đỉnh A được tạo bởi đỉnh A nối với hai đầu mút của một đoạn thẳng nằm trên một đường nằm ngang.\n• Bước 1: Đếm số tam giác có đáy nằm trên đường đáy lớn dưới cùng.\n  Đường đáy dưới cùng gồm 6 điểm chia thành 5 đoạn thẳng đơn vị. Số đoạn thẳng nằm trên đường này được đếm theo từng loại độ dài:\n  - Đoạn thẳng gồm 1 đoạn đơn vị: có 5 đoạn.\n  - Đoạn thẳng ghép từ 2 đoạn đơn vị: có 4 đoạn.\n  - Đoạn thẳng ghép từ 3 đoạn đơn vị: có 3 đoạn.\n  - Đoạn thẳng ghép từ 4 đoạn đơn vị: có 2 đoạn.\n  - Đoạn thẳng ghép từ 5 đoạn đơn vị: có 1 đoạn.\n  Số đoạn thẳng trên đường đáy dưới cùng là:\n  5 + 4 + 3 + 2 + 1 = 15 (đoạn thẳng).\n  Tương ứng có 15 hình tam giác có đỉnh A và đáy nằm trên đường đáy dưới cùng.\n• Bước 2: Tính tổng số tam giác ở tất cả các tầng.\n  Hình vẽ có 3 đường nằm ngang song song chia tam giác thành 3 tầng. Mỗi đường nằm ngang đều được chia thành 5 đoạn đơn vị bởi các tia xuất phát từ đỉnh A, do đó mỗi tầng đều tạo ra đúng 15 hình tam giác có đỉnh A.\nTổng số hình tam giác có trong hình là:\n15 × 3 = 45 (tam giác)"
     },
     {
       "id": 1056,
@@ -1415,8 +1415,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "34"
       ],
       "unit": "",
-      "hint": "Phương pháp Quy nạp & Dãy số Fibonacci.",
-      "solution": "Gọi số cách bước lên bậc thứ n là S(n).\nĐể bước lên bậc thứ n, bước cuối cùng có thể bước 1 bậc (từ bậc n - 1) hoặc bước 2 bậc (từ bậc n - 2).\nDo đó ta có quy luật: S(n) = S(n - 1) + S(n - 2).\nTa tính số cách cho từng bậc:\n• Bậc 1: có 1 cách (1)\n• Bậc 2: có 2 cách (1+1, 2)\n• Bậc 3: có 1 + 2 = 3 (cách)\n• Bậc 4: có 2 + 3 = 5 (cách)\n• Bậc 5: có 3 + 5 = 8 (cách)\n• Bậc 6: có 5 + 8 = 13 (cách)\n• Bậc 7: có 8 + 13 = 21 (cách)\n• Bậc 8: có 13 + 21 = 34 (cách)\nVậy có 34 cách khác nhau để bước lên bậc thứ 8."
+      "hint": "Phương pháp Phân loại trường hợp (Tổ hợp Tiểu học) & Tư duy cộng dồn số bước.",
+      "solution": "Cách 1: Phân loại theo số lần bước 2 bậc (Chuẩn tư duy Tổ hợp Tiểu học):\n• Trường hợp 1: Không có bước 2 bậc nào (bước 8 lần 1 bậc):\n  Có 1 cách duy nhất.\n• Trường hợp 2: Có 1 bước 2 bậc và 6 bước 1 bậc (tổng cộng 7 bước đi):\n  Bước 2 bậc có thể ở bất kỳ vị trí nào trong 7 bước đi đó => Có 7 cách.\n• Trường hợp 3: Có 2 bước 2 bậc và 4 bước 1 bậc (tổng cộng 6 bước đi):\n  Số cách chọn 2 vị trí trong 6 bước để đặt bước 2 bậc là:\n  6 × 5 : 2 = 15 (cách).\n• Trường hợp 4: Có 3 bước 2 bậc và 2 bước 1 bậc (tổng cộng 5 bước đi):\n  Số cách chọn 2 vị trí trong 5 bước để đặt bước 1 bậc là:\n  5 × 4 : 2 = 10 (cách).\n• Trường hợp 5: Có 4 bước 2 bậc và 0 bước 1 bậc:\n  Có 1 cách duy nhất.\nTổng số cách khác nhau để bước lên bậc thứ 8 là:\n1 + 7 + 15 + 10 + 1 = 34 (cách).\n\nCách 2: Tư duy cộng dồn số bước chân:\nĐể bước lên một bậc thang, bước cuối cùng chỉ có thể là bước 1 bậc (từ bậc liền kề trước đó) hoặc bước 2 bậc (từ bậc cách đó 2 bậc). Do đó, số cách đến một bậc luôn bằng tổng số cách đến hai bậc ngay trước nó:\n• Bậc 1: có 1 cách\n• Bậc 2: có 2 cách (1+1 hoặc bước thẳng 2 bậc)\n• Bậc 3: 1 + 2 = 3 (cách)\n• Bậc 4: 2 + 3 = 5 (cách)\n• Bậc 5: 3 + 5 = 8 (cách)\n• Bậc 6: 5 + 8 = 13 (cách)\n• Bậc 7: 8 + 13 = 21 (cách)\n• Bậc 8: 13 + 21 = 34 (cách)"
     },
     {
       "id": 1065,
@@ -1520,8 +1520,8 @@ const TIMO_TOPICAL_PRACTICE = {
         "44"
       ],
       "unit": "",
-      "hint": "Phương pháp Quy nạp dãy Tribonacci.",
-      "solution": "Gọi T(n) là số cách bước lên bậc thứ n.\nĐể bước lên bậc thứ n, bước cuối cùng có thể bước 1 bậc (từ bậc n-1), bước 2 bậc (từ bậc n-2) hoặc bước 3 bậc (từ bậc n-3).\nDo đó ta có quy luật: T(n) = T(n-1) + T(n-2) + T(n-3).\nTa tính số cách cho từng bậc:\n• Bậc 1: có 1 cách (1)\n• Bậc 2: có 2 cách (1+1, 2)\n• Bậc 3: có 4 cách (1+1+1, 1+2, 2+1, 3)\n• Bậc 4: 1 + 2 + 4 = 7 (cách)\n• Bậc 5: 2 + 4 + 7 = 13 (cách)\n• Bậc 6: 4 + 7 + 13 = 24 (cách)\n• Bậc 7: 7 + 13 + 24 = 44 (cách)\nVậy có 44 cách khác nhau để bước lên bậc thứ 7."
+      "hint": "Phương pháp Tư duy cộng dồn số bước chân (Quy tắc cộng dồn 3 bậc kề trước).",
+      "solution": "Để bước lên một bậc thang bất kỳ, bước chân cuối cùng chỉ có thể là bước 1 bậc (từ bậc ngay trước nó), bước 2 bậc (từ bậc cách nó 2 bậc) hoặc bước 3 bậc (từ bậc cách nó 3 bậc).\nDo đó, số cách bước lên một bậc luôn bằng tổng số cách bước lên của 3 bậc ngay trước nó:\n• Bậc 1: có 1 cách (bước 1 bậc)\n• Bậc 2: có 2 cách (1+1 hoặc bước thẳng 2 bậc)\n• Bậc 3: có 4 cách (1+1+1, 1+2, 2+1, 3)\n• Bậc 4: 1 + 2 + 4 = 7 (cách)\n• Bậc 5: 2 + 4 + 7 = 13 (cách)\n• Bậc 6: 4 + 7 + 13 = 24 (cách)\n• Bậc 7: 7 + 13 + 24 = 44 (cách)\nVậy có 44 cách khác nhau để bước lên bậc thứ 7."
     },
     {
       "id": 1070,
