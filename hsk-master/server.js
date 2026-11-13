@@ -9014,6 +9014,251 @@ var COMPREHENSIVE_DICTIONARY = [
       { zh: "\u4ECA\u5929\u6211\u8EAB\u4F53\u6709\u70B9\u513F\u4E0D\u8212\u670D\uFF0C\u60F3\u8BF7\u5047\u4F11\u606F\u3002", pinyin: "J\u012Bnti\u0101n w\u01D2 sh\u0113nt\u01D0 y\u01D2udi\u01CEnr b\xF9 sh\u016Bfu, xi\u01CEng q\u01D0ngji\xE0 xi\u016Bxi.", vi: "H\xF4m nay trong ng\u01B0\u1EDDi t\xF4i h\u01A1i kh\xF3 ch\u1ECBu, mu\u1ED1n xin ngh\u1EC9 ph\xE9p ngh\u1EC9 ng\u01A1i." }
     ],
     tips: "Th\u01B0 (\u8212 - du\u1ED7i ra khoan kho\xE1i, b\u1ED9 Thi\u1EC7t \u820C) + Ph\u1EE5c (\u670D - thu\u1EA7n ph\u1EE5c \xEAm thu\u1EADn, b\u1ED9 Nh\u1EE5c \u6708). Tr\u1EA1ng th\xE1i tinh th\u1EA7n v\xE0 th\u1EC3 ch\u1EA5t th\u01B0 th\xE1i, d\u1EC5 ch\u1ECBu."
+  },
+  {
+    hanzi: "\u771F",
+    pinyin: "zh\u0113n",
+    hanViet: "Ch\xE2n",
+    vietnamese: "Th\u1EADt, qu\u1EA3 th\u1EADt, th\u1EF1c s\u1EF1 (ph\xF3 t\u1EEB ch\u1EC9 m\u1EE9c \u0111\u1ED9, th\u01B0\u1EDDng d\xF9ng \u0111\u1EC3 khen ng\u1EE3i)",
+    partOfSpeech: "Ph\xF3 t\u1EEB",
+    level: 2,
+    category: "T\xEDnh ch\u1EA5t & C\u1EA3m x\xFAc",
+    radical: "\u76EE (M\u1EE5c)",
+    strokeCount: 10,
+    examples: [
+      { zh: "\u8FD9\u4EF6\u8863\u670D\u771F\u6F02\u4EAE\uFF01", pinyin: "Zh\xE8 ji\xE0n y\u012Bfu zh\u0113n pi\xE0oliang!", vi: "B\u1ED9 qu\u1EA7n \xE1o n\xE0y \u0111\u1EB9p th\u1EADt \u0111\u1EA5y!" },
+      { zh: "\u65F6\u95F4\u8FC7\u5F97\u771F\u5FEB\uFF0C\u6211\u4EEC\u8981\u56DE\u53BB\u4E86\u3002", pinyin: "Sh\xEDji\u0101n gu\xF2 de zh\u0113n ku\xE0i, w\u01D2men y\xE0o hu\xEDq\xF9 le.", vi: "Th\u1EDDi gian tr\xF4i th\u1EADt nhanh, ch\xFAng t\xF4i ph\u1EA3i v\u1EC1 r\u1ED3i." },
+      { zh: "\u4ECA\u5929\u7684\u5929\u6C14\u771F\u597D\uFF0C\u6211\u4EEC\u51FA\u53BB\u6563\u6B65\u5427\u3002", pinyin: "J\u012Bnti\u0101n de ti\u0101nq\xEC zh\u0113n h\u01CEo, w\u01D2men ch\u016Bq\xF9 s\xE0nb\xF9 ba.", vi: "Th\u1EDDi ti\u1EBFt h\xF4m nay th\u1EADt \u0111\u1EB9p, ch\xFAng ta ra ngo\xE0i d\u1EA1o b\u1ED9 nh\xE9." }
+    ],
+    tips: "Ch\u1EEF Ch\xE2n (\u771F) c\xF3 b\u1ED9 M\u1EE5c \u76EE \u1EDF gi\u1EEFa. D\xF9ng l\xE0m ph\xF3 t\u1EEB \u0111\u1EE9ng tr\u01B0\u1EDBc t\xEDnh t\u1EEB \u0111\u1EC3 bi\u1EC3u th\u1ECB s\u1EF1 t\xE1n th\u01B0\u1EDFng ch\xE2n th\xE0nh."
+  },
+  {
+    hanzi: "\u7D2F",
+    pinyin: "l\xE8i",
+    hanViet: "Luy",
+    vietnamese: "M\u1EC7t, m\u1EC7t m\u1ECFi, v\u1EA5t v\u1EA3",
+    partOfSpeech: "T\xEDnh t\u1EEB",
+    level: 2,
+    category: "C\u1EA3m gi\xE1c & S\u1EE9c kh\u1ECFe",
+    radical: "\u7530 (\u0110i\u1EC1n)",
+    strokeCount: 11,
+    examples: [
+      { zh: "\u4ECA\u5929\u5DE5\u4F5C\u592A\u5FD9\u4E86\uFF0C\u6211\u89C9\u5F97\u5F88\u7D2F\u3002", pinyin: "J\u012Bnti\u0101n g\u014Dngzu\xF2 t\xE0i m\xE1ng le, w\u01D2 ju\xE9de h\u011Bn l\xE8i.", vi: "H\xF4m nay c\xF4ng vi\u1EC7c b\u1EADn r\u1ED9n qu\xE1, t\xF4i c\u1EA3m th\u1EA5y r\u1EA5t m\u1EC7t." },
+      { zh: "\u4F60\u7D2F\u4E0D\u7D2F\uFF1F\u5750\u4E0B\u6765\u4F11\u606F\u4E00\u4E0B\u5427\u3002", pinyin: "N\u01D0 l\xE8i bu l\xE8i? Zu\xF2 xi\xE0l\xE1i xi\u016Bxi y\xEDxi\xE0 ba.", vi: "B\u1EA1n c\xF3 m\u1EC7t kh\xF4ng? Ng\u1ED3i xu\u1ED1ng ngh\u1EC9 ng\u01A1i m\u1ED9t ch\xFAt nh\xE9." },
+      { zh: "\u867D\u7136\u5F88\u7D2F\uFF0C\u4F46\u662F\u4ED6\u5F88\u5F00\u5FC3\u3002", pinyin: "Su\u012Br\xE1n h\u011Bn l\xE8i, d\xE0nsh\xEC t\u0101 h\u011Bn k\u0101ix\u012Bn.", vi: "Tuy r\u1EA5t m\u1EC7t, nh\u01B0ng anh \u1EA5y r\u1EA5t vui v\u1EBB." }
+    ],
+    tips: "B\xEAn tr\xEAn l\xE0 b\u1ED9 \u0110i\u1EC1n \u7530 (ru\u1ED9ng \u0111\u1ED3ng), b\xEAn d\u01B0\u1EDBi l\xE0 s\u1EE3i t\u01A1. L\xE0m vi\u1EC7c tr\xEAn ru\u1ED9ng \u0111\u1ED3ng v\u1EA5t v\u1EA3 to\xE1t m\u1ED3 h\xF4i n\xEAn c\u1EA3m th\u1EA5y m\u1EC7t m\u1ECFi."
+  },
+  {
+    hanzi: "\u73A9",
+    pinyin: "w\xE1n",
+    hanViet: "Ngo\u1EA1n",
+    vietnamese: "Ch\u01A1i, vui ch\u01A1i, \u0111i ch\u01A1i, gi\u1EA3i tr\xED",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB",
+    level: 2,
+    category: "H\xE0nh \u0111\u1ED9ng & \u0110\u1EDDi s\u1ED1ng",
+    radical: "\u738B (V\u01B0\u01A1ng / Ng\u1ECDc)",
+    strokeCount: 8,
+    examples: [
+      { zh: "\u5468\u672B\u4F60\u6253\u7B97\u53BB\u54EA\u513F\u73A9\uFF1F", pinyin: "Zh\u014Dum\xF2 n\u01D0 d\u01CEsu\xE0n q\xF9 n\u01CEr w\xE1n?", vi: "Cu\u1ED1i tu\u1EA7n b\u1EA1n d\u1EF1 \u0111\u1ECBnh \u0111i \u0111\xE2u ch\u01A1i?" },
+      { zh: "\u5C0F\u5B69\u5B50\u4EEC\u5728\u516C\u56ED\u91CC\u73A9\u5F97\u5F88\u9AD8\u5174\u3002", pinyin: "Xi\u01CEoh\xE1izimen z\xE0i g\u014Dngyu\xE1n l\u01D0 w\xE1n de h\u011Bn g\u0101ox\xECng.", vi: "B\u1ECDn tr\u1EBB ch\u01A1i \u0111\xF9a \u1EDF c\xF4ng vi\xEAn r\u1EA5t vui v\u1EBB." },
+      { zh: "\u522B\u73A9\u624B\u673A\u4E86\uFF0C\u5FEB\u53BB\u590D\u4E60\u529F\u8BFE\u5427\u3002", pinyin: "Bi\xE9 w\xE1n sh\u01D2uj\u012B le, ku\xE0i q\xF9 f\xF9x\xED g\u014Dngk\xE8 ba.", vi: "\u0110\u1EEBng ngh\u1ECBch \u0111i\u1EC7n tho\u1EA1i n\u1EEFa, mau \u0111i \xF4n b\xE0i \u0111i." }
+    ],
+    tips: "B\u1ED9 V\u01B0\u01A1ng \u738B (ng\u1ECDc qu\xFD) + ch\u1EEF Nguy\xEAn \u5143: tay m\xE2n m\xEA c\u1EA7m ng\u1ECDc qu\xFD th\u01B0\u1EDFng ngo\u1EA1n, m\u1EDF r\u1ED9ng ngh\u0129a th\xE0nh vui ch\u01A1i."
+  },
+  {
+    hanzi: "\u5B8C",
+    pinyin: "w\xE1n",
+    hanViet: "Ho\xE0n",
+    vietnamese: "Xong, h\u1EBFt, ho\xE0n th\xE0nh (th\u01B0\u1EDDng l\xE0m b\u1ED5 ng\u1EEF k\u1EBFt qu\u1EA3 \u0111\u1EE9ng sau \u0111\u1ED9ng t\u1EEB)",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB / B\u1ED5 ng\u1EEF",
+    level: 2,
+    category: "H\xE0nh \u0111\u1ED9ng & K\u1EBFt qu\u1EA3",
+    radical: "\u5B80 (Mi\xEAn)",
+    strokeCount: 7,
+    examples: [
+      { zh: "\u6211\u5DF2\u7ECF\u505A\u5B8C\u4ECA\u5929\u7684\u4F5C\u4E1A\u4E86\u3002", pinyin: "W\u01D2 y\u01D0j\u012Bng zu\xF2 w\xE1n j\u012Bnti\u0101n de zu\xF2y\xE8 le.", vi: "T\xF4i \u0111\xE3 l\xE0m xong b\xE0i t\u1EADp h\xF4m nay r\u1ED3i." },
+      { zh: "\u8FD9\u672C\u4E66\u4F60\u770B\u5B8C\u4E86\u5417\uFF1F", pinyin: "Zh\xE8 b\u011Bn sh\u016B n\u01D0 k\xE0n w\xE1n le ma?", vi: "Cu\u1ED1n s\xE1ch n\xE0y b\u1EA1n \u0111\xE3 \u0111\u1ECDc xong ch\u01B0a?" },
+      { zh: "\u6211\u4EEC\u5403\u5B8C\u996D\u518D\u53BB\u5546\u5E97\u4E70\u4E1C\u897F\u3002", pinyin: "W\u01D2men ch\u012B w\xE1n f\xE0n z\xE0i q\xF9 sh\u0101ngdi\xE0n m\u01CEi d\u014Dngxi.", vi: "Ch\xFAng ta \u0103n c\u01A1m xong r\u1ED3i h\xE3y \u0111i c\u1EEDa h\xE0ng mua \u0111\u1ED3." }
+    ],
+    tips: "B\u1ED9 Mi\xEAn \u5B80 (m\xE1i nh\xE0) + ch\u1EEF Nguy\xEAn \u5143: d\u1EF1ng xong m\xE1i n\xF3c c\u0103n nh\xE0, bi\u1EC3u th\u1ECB c\xF4ng vi\u1EC7c \u0111\xE3 ho\xE0n t\u1EA5t, tr\u1ECDn v\u1EB9n."
+  },
+  {
+    hanzi: "\u5143",
+    pinyin: "yu\xE1n",
+    hanViet: "Nguy\xEAn",
+    vietnamese: "\u0110\u1ED3ng, t\u1EC7 (\u0111\u01A1n v\u1ECB ti\u1EC1n t\u1EC7 ch\xEDnh th\u1EE9c c\u1EE7a Trung Qu\u1ED1c)",
+    partOfSpeech: "L\u01B0\u1EE3ng t\u1EEB / Danh t\u1EEB",
+    level: 2,
+    category: "Mua s\u1EAFm & Ti\u1EC1n t\u1EC7",
+    radical: "\u513F (Nhi) / \u4E8C (Nh\u1ECB)",
+    strokeCount: 4,
+    examples: [
+      { zh: "\u8FD9\u676F\u5496\u5561\u4E8C\u5341\u4E94\u5143\u3002", pinyin: "Zh\xE8 b\u0113i k\u0101f\u0113i \xE8rsh\xEDw\u01D4 yu\xE1n.", vi: "C\u1ED1c c\xE0 ph\xEA n\xE0y 25 t\u1EC7 (\u0111\u1ED3ng)." },
+      { zh: "\u8FD9\u4EF6\u8863\u670D\u4E00\u5171\u662F\u4E00\u767E\u4E94\u5341\u5143\u3002", pinyin: "Zh\xE8 ji\xE0n y\u012Bfu y\xEDg\xF2ng sh\xEC y\xECb\u01CEi w\u01D4sh\xED yu\xE1n.", vi: "B\u1ED9 qu\u1EA7n \xE1o n\xE0y t\u1ED5ng c\u1ED9ng l\xE0 150 t\u1EC7." },
+      { zh: "\u8FD9\u672C\u6C49\u8BED\u8BCD\u5178\u53EA\u8981\u4E09\u5341\u5143\uFF0C\u5F88\u4FBF\u5B9C\u3002", pinyin: "Zh\xE8 b\u011Bn H\xE0ny\u01D4 c\xEDdi\u01CEn zh\u01D0 y\xE0o s\u0101nsh\xED yu\xE1n, h\u011Bn pi\xE1nyi.", vi: "Cu\u1ED1n t\u1EEB \u0111i\u1EC3n ti\u1EBFng H\xE1n n\xE0y ch\u1EC9 c\xF3 30 t\u1EC7, r\u1EA5t r\u1EBB." }
+    ],
+    tips: "Ch\u1EEF Nguy\xEAn \u5143 bi\u1EC3u th\u1ECB \u0111\u01A1n v\u1ECB ti\u1EC1n t\u1EC7 ch\xEDnh th\u1EE9c trong v\u0103n vi\u1EBFt, kh\u1EA9u ng\u1EEF th\u01B0\u1EDDng d\xF9ng \u5757 (ku\xE0i)."
+  },
+  {
+    hanzi: "\u9519",
+    pinyin: "cu\xF2",
+    hanViet: "Th\xE1c",
+    vietnamese: "Sai, l\u1ED7i sai, nh\u1EA7m l\u1EABn; (\u4E0D\u9519) kh\xF4ng t\u1EC7, r\u1EA5t t\u1ED1t",
+    partOfSpeech: "T\xEDnh t\u1EEB / Danh t\u1EEB",
+    level: 2,
+    category: "\u0110\xE1nh gi\xE1 & Nh\u1EADn x\xE9t",
+    radical: "\u9485 (Kim)",
+    strokeCount: 13,
+    examples: [
+      { zh: "\u8FD9\u9053\u9898\u4F60\u505A\u9519\u4E86\uFF0C\u518D\u7B97\u4E00\u904D\u5427\u3002", pinyin: "Zh\xE8 d\xE0o t\xED n\u01D0 zu\xF2 cu\xF2 le, z\xE0i su\xE0n y\xED bi\xE0n ba.", vi: "C\xE2u n\xE0y b\u1EA1n l\xE0m sai r\u1ED3i, t\xEDnh l\u1EA1i m\u1ED9t l\u1EA7n n\u1EEFa nh\xE9." },
+      { zh: "\u8FD9\u5BB6\u9910\u9986\u7684\u4E2D\u56FD\u83DC\u771F\u4E0D\u9519\uFF01", pinyin: "Zh\xE8 ji\u0101 c\u0101ngu\u01CEn de Zh\u014Dnggu\xF3 c\xE0i zh\u0113n b\xFAcu\xF2!", vi: "M\xF3n \u0103n Trung Qu\u1ED1c c\u1EE7a qu\xE1n n\xE0y th\u1EADt kh\xF4ng t\u1EC7 (r\u1EA5t ngon)!" }
+    ],
+    tips: "B\u1ED9 Kim \u9485 + ch\u1EEF T\xEDch \u6614: ban \u0111\u1EA7u l\xE0 m\u1EA1 v\xE0ng kh\u1EA3m ng\u1ECDc, sau d\xF9ng ch\u1EC9 s\u1EF1 sai l\u1EC7ch, l\u1EA7m l\u1EABn."
+  },
+  {
+    hanzi: "\u5BF9",
+    pinyin: "du\xEC",
+    hanViet: "\u0110\u1ED1i",
+    vietnamese: "\u0110\xFAng, ch\xEDnh x\xE1c; \u0111\u1ED1i v\u1EDBi, h\u01B0\u1EDBng v\u1EC1",
+    partOfSpeech: "T\xEDnh t\u1EEB / Gi\u1EDBi t\u1EEB",
+    level: 1,
+    category: "\u0110\xE1nh gi\xE1 & Ng\u1EEF ph\xE1p",
+    radical: "\u5BF8 (Th\u1ED1n)",
+    strokeCount: 5,
+    examples: [
+      { zh: "\u4F60\u8BF4\u5F97\u5F88\u5BF9\uFF0C\u6211\u4E5F\u8FD9\u4E48\u89C9\u5F97\u3002", pinyin: "N\u01D0 shu\u014D de h\u011Bn du\xEC, w\u01D2 y\u011B zh\xE8me ju\xE9de.", vi: "B\u1EA1n n\xF3i r\u1EA5t \u0111\xFAng, t\xF4i c\u0169ng c\u1EA3m th\u1EA5y nh\u01B0 v\u1EADy." },
+      { zh: "\u591A\u559D\u70ED\u6C34\u5BF9\u8EAB\u4F53\u5F88\u597D\u3002", pinyin: "Du\u014D h\u0113 r\xE8shu\u01D0 du\xEC sh\u0113nt\u01D0 h\u011Bn h\u01CEo.", vi: "U\u1ED1ng nhi\u1EC1u n\u01B0\u1EDBc \u1EA5m r\u1EA5t t\u1ED1t \u0111\u1ED1i v\u1EDBi s\u1EE9c kh\u1ECFe." }
+    ],
+    tips: "H\u1EEFu \u53C8 + Th\u1ED1n \u5BF8: \u0111o \u0111\u1EA1c ch\xEDnh x\xE1c, \u1EE9ng \u0111\u1ED1i chu\u1EA9n m\u1EF1c. Ph\u1ED3n th\u1EC3: \u5C0D."
+  },
+  {
+    hanzi: "\u8D35",
+    pinyin: "gu\xEC",
+    hanViet: "Qu\xFD",
+    vietnamese: "\u0110\u1EAFt, \u0111\u1EAFt \u0111\u1ECF; qu\xFD gi\xE1, t\xF4n k\xEDnh",
+    partOfSpeech: "T\xEDnh t\u1EEB",
+    level: 2,
+    category: "Mua s\u1EAFm & \u0110\u1EDDi s\u1ED1ng",
+    radical: "\u8D1D (B\u1ED1i)",
+    strokeCount: 9,
+    examples: [
+      { zh: "\u8FD9\u4EF6\u8863\u670D\u592A\u8D35\u4E86\uFF0C\u4FBF\u5B9C\u4E00\u70B9\u513F\u5427\u3002", pinyin: "Zh\xE8 ji\xE0n y\u012Bfu t\xE0i gu\xEC le, pi\xE1nyi y\xECdi\u01CEnr ba.", vi: "B\u1ED9 qu\u1EA7n \xE1o n\xE0y \u0111\u1EAFt qu\xE1, r\u1EBB b\u1EDBt m\u1ED9t ch\xFAt \u0111i." },
+      { zh: "\u8BF7\u95EE\u60A8\u8D35\u59D3\uFF1F", pinyin: "Q\u01D0ngw\xE8n n\xEDn gu\xEC x\xECng?", vi: "Xin h\u1ECFi qu\xFD t\xEDnh (h\u1ECD) c\u1EE7a ng\xE0i l\xE0 g\xEC?" }
+    ],
+    tips: "B\xEAn d\u01B0\u1EDBi c\xF3 b\u1ED9 B\u1ED1i \u8D1D (v\u1ECF s\xF2 - ti\u1EC1n t\u1EC7 th\u1EDDi x\u01B0a), bi\u1EC3u th\u1ECB \u0111\u1ED3 v\u1EADt c\xF3 gi\xE1 tr\u1ECB cao, \u0111\u1EAFt gi\xE1."
+  },
+  {
+    hanzi: "\u6162",
+    pinyin: "m\xE0n",
+    hanViet: "M\u1EA1n",
+    vietnamese: "Ch\u1EADm, t\u1EEB t\u1EEB",
+    partOfSpeech: "T\xEDnh t\u1EEB",
+    level: 2,
+    category: "H\xE0nh \u0111\u1ED9ng & T\u1ED1c \u0111\u1ED9",
+    radical: "\u5FC4 (T\xE2m \u0111\u1EE9ng)",
+    strokeCount: 14,
+    examples: [
+      { zh: "\u8BF7\u60A8\u8BF4\u5F97\u6162\u4E00\u70B9\u513F\uFF0C\u6211\u542C\u4E0D\u61C2\u3002", pinyin: "Q\u01D0ng n\xEDn shu\u014D de m\xE0n y\xECdi\u01CEnr, w\u01D2 t\u012Bng b\xF9 d\u01D2ng.", vi: "Xin ng\xE0i n\xF3i ch\u1EADm l\u1EA1i m\u1ED9t ch\xFAt, t\xF4i nghe kh\xF4ng hi\u1EC3u." },
+      { zh: "\u8DEF\u4E0A\u8F66\u591A\uFF0C\u4F60\u5F00\u8F66\u6162\u70B9\u513F\u3002", pinyin: "L\xF9shang ch\u0113 du\u014D, n\u01D0 k\u0101ich\u0113 m\xE0n di\u01CEnr.", vi: "Tr\xEAn \u0111\u01B0\u1EDDng nhi\u1EC1u xe, b\u1EA1n l\xE1i xe ch\u1EADm m\u1ED9t ch\xFAt nh\xE9." }
+    ],
+    tips: "B\u1ED9 T\xE2m \u0111\u1EE9ng \u5FC4 + M\u1EA1n \u66FC: t\xE2m th\xE1i khoan thai, h\xE0nh \u0111\u1ED9ng ch\u1EADm r\xE3i, t\u1EEB t\u1ED1n."
+  },
+  {
+    hanzi: "\u5FEB",
+    pinyin: "ku\xE0i",
+    hanViet: "Kho\xE1i",
+    vietnamese: "Nhanh, mau l\u1EB9; s\u1EAFp (s\u1EAFp s\u1EEDa)",
+    partOfSpeech: "T\xEDnh t\u1EEB / Ph\xF3 t\u1EEB",
+    level: 2,
+    category: "H\xE0nh \u0111\u1ED9ng & Th\u1EDDi gian",
+    radical: "\u5FC4 (T\xE2m \u0111\u1EE9ng)",
+    strokeCount: 7,
+    examples: [
+      { zh: "\u5FEB\u70B9\u513F\u8D70\uFF0C\u706B\u8F66\u5FEB\u8981\u5F00\u4E86\uFF01", pinyin: "Ku\xE0i di\u01CEnr z\u01D2u, hu\u01D2ch\u0113 ku\xE0iy\xE0o k\u0101i le!", vi: "\u0110i nhanh l\xEAn m\u1ED9t ch\xFAt, t\xE0u h\u1ECFa s\u1EAFp ch\u1EA1y r\u1ED3i!" },
+      { zh: "\u4ED6\u7684\u6C49\u8BED\u8FDB\u6B65\u5F97\u771F\u5FEB\u3002", pinyin: "T\u0101 de H\xE0ny\u01D4 j\xECnb\xF9 de zh\u0113n ku\xE0i.", vi: "Ti\u1EBFng H\xE1n c\u1EE7a anh \u1EA5y ti\u1EBFn b\u1ED9 th\u1EADt l\xE0 nhanh." }
+    ],
+    tips: "B\u1ED9 T\xE2m \u0111\u1EE9ng \u5FC4 + Quy\u1EBFt \u592C: t\xE2m tr\u1EA1ng s\u1EA3ng kho\xE1i, b\u01B0\u1EDBc ch\xE2n nhanh nh\u1EB9n, mau l\u1EB9."
+  },
+  {
+    hanzi: "\u7A7F",
+    pinyin: "chu\u0101n",
+    hanViet: "Xuy\xEAn",
+    vietnamese: "M\u1EB7c (qu\u1EA7n \xE1o), \u0111i (gi\xE0y d\xE9p, t\u1EA5t)",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB",
+    level: 2,
+    category: "Trang ph\u1EE5c & Sinh ho\u1EA1t",
+    radical: "\u7A74 (Huy\u1EC7t)",
+    strokeCount: 9,
+    examples: [
+      { zh: "\u4ECA\u5929\u5916\u9762\u51B7\uFF0C\u591A\u7A7F\u4EF6\u5927\u8863\u5427\u3002", pinyin: "J\u012Bnti\u0101n w\xE0imi\xE0n l\u011Bng, du\u014D chu\u0101n ji\xE0n d\xE0y\u012B ba.", vi: "H\xF4m nay b\xEAn ngo\xE0i tr\u1EDDi l\u1EA1nh, m\u1EB7c th\xEAm chi\u1EBFc \xE1o kho\xE1c d\xE0y nh\xE9." },
+      { zh: "\u8FD9\u53CC\u65B0\u978B\u7A7F\u8D77\u6765\u5F88\u8212\u670D\u3002", pinyin: "Zh\xE8 shu\u0101ng x\u012Bn xi\xE9 chu\u0101n q\u01D0l\xE1i h\u011Bn sh\u016Bfu.", vi: "\u0110\xF4i gi\xE0y m\u1EDBi n\xE0y \u0111i v\xE0o r\u1EA5t tho\u1EA3i m\xE1i \xEAm \xE1i." }
+    ],
+    tips: "B\u1ED9 Huy\u1EC7t \u7A74 (hang h\u1ED1c) + Nha \u7259: lu\u1ED3n tay ch\xE2n qua trang ph\u1EE5c nh\u01B0 \u0111i xuy\xEAn qua hang, ngh\u0129a l\xE0 m\u1EB7c/mang v\xE0o."
+  },
+  {
+    hanzi: "\u7B11",
+    pinyin: "xi\xE0o",
+    hanViet: "Ti\u1EBFu",
+    vietnamese: "C\u01B0\u1EDDi, m\u1EC9m c\u01B0\u1EDDi, ch\xEA c\u01B0\u1EDDi",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB",
+    level: 2,
+    category: "C\u1EA3m x\xFAc & Khu\xF4n m\u1EB7t",
+    radical: "\u7AF9 (Tr\xFAc)",
+    strokeCount: 10,
+    examples: [
+      { zh: "\u5979\u7B11\u8D77\u6765\u7684\u6837\u5B50\u975E\u5E38\u53EF\u7231\u3002", pinyin: "T\u0101 xi\xE0o q\u01D0l\xE1i de y\xE0ngzi f\u0113ich\xE1ng k\u011B'\xE0i.", vi: "D\xE1ng v\u1EBB m\u1EC9m c\u01B0\u1EDDi c\u1EE7a c\xF4 \u1EA5y v\xF4 c\xF9ng \u0111\xE1ng y\xEAu." },
+      { zh: "\u5927\u5BB6\u90FD\u5F00\u5FC3\u5730\u7B11\u4E86\u3002", pinyin: "D\xE0ji\u0101 d\u014Du k\u0101ix\u012Bn de xi\xE0o le.", vi: "M\u1ECDi ng\u01B0\u1EDDi ai n\u1EA5y \u0111\u1EC1u n\u1EDF n\u1EE5 c\u01B0\u1EDDi vui v\u1EBB." }
+    ],
+    tips: "B\xEAn tr\xEAn l\xE0 b\u1ED9 Tr\xFAc \u7AF9, b\xEAn d\u01B0\u1EDBi l\xE0 ch\u1EEF Y\xEAu \u592D: gi\xF3 th\u1ED5i c\xE0nh tr\xFAc lay \u0111\u1ED9ng nh\u01B0 n\u1EE5 c\u01B0\u1EDDi vui v\u1EBB."
+  },
+  {
+    hanzi: "\u5E2E\u52A9",
+    pinyin: "b\u0101ngzh\xF9",
+    hanViet: "Bang Tr\u1EE3",
+    vietnamese: "Gi\xFAp \u0111\u1EE1, s\u1EF1 tr\u1EE3 gi\xFAp",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB / Danh t\u1EEB",
+    level: 2,
+    category: "Giao ti\u1EBFp & H\xE0nh \u0111\u1ED9ng",
+    radical: "\u5DFE (C\xE2n) + \u529B (L\u1EF1c)",
+    strokeCount: 16,
+    examples: [
+      { zh: "\u975E\u5E38\u611F\u8C22\u4F60\u5BF9\u6211\u7684\u5E2E\u52A9\uFF01", pinyin: "F\u0113ich\xE1ng g\u01CEnxi\xE8 n\u01D0 du\xEC w\u01D2 de b\u0101ngzh\xF9!", vi: "V\xF4 c\xF9ng c\u1EA3m \u01A1n b\u1EA1n v\xEC s\u1EF1 gi\xFAp \u0111\u1EE1 d\xE0nh cho t\xF4i!" },
+      { zh: "\u4E92\u76F8\u5E2E\u52A9\u80FD\u8BA9\u53CB\u8C0A\u66F4\u6DF1\u539A\u3002", pinyin: "H\xF9xi\u0101ng b\u0101ngzh\xF9 n\xE9ng r\xE0ng y\u01D2uy\xEC g\xE8ng sh\u0113nh\xF2u.", vi: "Gi\xFAp \u0111\u1EE1 l\u1EABn nhau gi\xFAp t\xECnh b\u1EA1n ng\xE0y c\xE0ng s\xE2u s\u1EAFc h\u01A1n." }
+    ],
+    tips: "Bang \u5E2E (h\u1ED7 tr\u1EE3) + Tr\u1EE3 \u52A9 (g\xF3p s\u1EE9c l\u1EF1c): chung tay gi\xFAp s\u1EE9c cho ng\u01B0\u1EDDi kh\xE1c v\u01B0\u1EE3t qua kh\xF3 kh\u0103n."
+  },
+  {
+    hanzi: "\u9001",
+    pinyin: "s\xF2ng",
+    hanViet: "T\u1ED1ng",
+    vietnamese: "T\u1EB7ng, bi\u1EBFu; \u0111\u01B0a ti\u1EC5n",
+    partOfSpeech: "\u0110\u1ED9ng t\u1EEB",
+    level: 2,
+    category: "Giao ti\u1EBFp & L\u1EC5 nghi",
+    radical: "\u8FB6 (X\u01B0\u1EDBc)",
+    strokeCount: 9,
+    examples: [
+      { zh: "\u670B\u53CB\u9001\u7ED9\u6211\u4E00\u672C\u5F88\u6709\u8DA3\u7684\u4E66\u3002", pinyin: "P\xE9ngyou s\xF2ng g\u011Bi w\u01D2 y\xEC b\u011Bn h\u011Bn y\u01D2uq\xF9 de sh\u016B.", vi: "B\u1EA1n t\xF4i t\u1EB7ng cho t\xF4i m\u1ED9t cu\u1ED1n s\xE1ch r\u1EA5t th\xFA v\u1ECB." },
+      { zh: "\u6211\u53BB\u98DE\u673A\u573A\u9001\u4E00\u4F4D\u5916\u56FD\u670B\u53CB\u3002", pinyin: "W\u01D2 q\xF9 f\u0113ij\u012Bch\u01CEng s\xF2ng y\xED w\xE8i w\xE0igu\xF3 p\xE9ngyou.", vi: "T\xF4i \u0111\u1EBFn s\xE2n bay \u0111\u1EC3 ti\u1EC5n m\u1ED9t ng\u01B0\u1EDDi b\u1EA1n n\u01B0\u1EDBc ngo\xE0i." }
+    ],
+    tips: "B\u1ED9 Quai x\u01B0\u1EDBc \u8FB6 (b\u01B0\u1EDBc \u0111i) + Quan \u5173: c\u1EA5t b\u01B0\u1EDBc \u0111i theo \u0111\u1EC3 ti\u1EC5n bi\u1EC7t ho\u1EB7c mang \u0111\u1ED3 t\u1EDBi trao t\u1EB7ng."
+  },
+  {
+    hanzi: "\u8003\u8BD5",
+    pinyin: "k\u01CEosh\xEC",
+    hanViet: "Kh\u1EA3o Th\xED",
+    vietnamese: "K\u1EF3 thi, thi c\u1EED, ki\u1EC3m tra",
+    partOfSpeech: "Danh t\u1EEB / \u0110\u1ED9ng t\u1EEB",
+    level: 2,
+    category: "H\u1ECDc t\u1EADp & Gi\xE1o d\u1EE5c",
+    radical: "\u8002 (L\xE3o) + \u8BA0 (Ng\xF4n)",
+    strokeCount: 14,
+    examples: [
+      { zh: "\u660E\u5929\u6211\u4EEC\u8981\u53C2\u52A0\u6C49\u8BED\u6C34\u5E73\u8003\u8BD5\u3002", pinyin: "M\xEDngti\u0101n w\u01D2men y\xE0o c\u0101nji\u0101 H\xE0ny\u01D4 shu\u01D0p\xEDng k\u01CEosh\xEC.", vi: "Ng\xE0y mai ch\xFAng t\xF4i ph\u1EA3i tham gia k\u1EF3 thi ki\u1EC3m tra tr\xECnh \u0111\u1ED9 ti\u1EBFng H\xE1n (HSK)." },
+      { zh: "\u8FD9\u6B21\u8003\u8BD5\u5927\u5BB6\u90FD\u8003\u5F97\u5F88\u597D\u3002", pinyin: "Zh\xE8 c\xEC k\u01CEosh\xEC d\xE0ji\u0101 d\u014Du k\u01CEo de h\u011Bn h\u01CEo.", vi: "K\u1EF3 thi l\u1EA7n n\xE0y m\u1ECDi ng\u01B0\u1EDDi \u0111\u1EC1u l\xE0m b\xE0i r\u1EA5t t\u1ED1t." }
+    ],
+    tips: "Kh\u1EA3o \u8003 (ki\u1EC3m tra r\xE0 so\xE1t) + Th\xED \u8BD5 (th\u1EED nghi\u1EC7m ki\u1EBFn th\u1EE9c): cu\u1ED9c s\xE1t h\u1EA1ch ki\u1EC3m tra n\u0103ng l\u1EF1c."
   }
 ];
 var HANZI_MASTER_MAP = {
@@ -9228,10 +9473,45 @@ var HANZI_MASTER_MAP = {
   "\u5730": { pinyin: "de", hanViet: "\u0110\u1ECBa", radical: "\u571F", strokes: 6 },
   "\u5E8A": { pinyin: "chu\xE1ng", hanViet: "S\xE0ng", radical: "\u5E7F", strokes: 7 },
   "\u8212": { pinyin: "sh\u016B", hanViet: "Th\u01B0", radical: "\u820C", strokes: 12 },
-  "\u670D": { pinyin: "f\xFA", hanViet: "Ph\u1EE5c", radical: "\u6708", strokes: 8 }
+  "\u670D": { pinyin: "f\xFA", hanViet: "Ph\u1EE5c", radical: "\u6708", strokes: 8 },
+  "\u73A9": { pinyin: "w\xE1n", hanViet: "Ngo\u1EA1n", radical: "\u738B", strokes: 8 },
+  "\u5B8C": { pinyin: "w\xE1n", hanViet: "Ho\xE0n", radical: "\u5B80", strokes: 7 },
+  "\u5143": { pinyin: "yu\xE1n", hanViet: "Nguy\xEAn", radical: "\u513F", strokes: 4 },
+  "\u9519": { pinyin: "cu\xF2", hanViet: "Th\xE1c", radical: "\u9485", strokes: 13 },
+  "\u5BF9": { pinyin: "du\xEC", hanViet: "\u0110\u1ED1i", radical: "\u5BF8", strokes: 5 },
+  "\u7A7F": { pinyin: "chu\u0101n", hanViet: "Xuy\xEAn", radical: "\u7A74", strokes: 9 },
+  "\u7B11": { pinyin: "xi\xE0o", hanViet: "Ti\u1EBFu", radical: "\u7AF9", strokes: 10 },
+  "\u54ED": { pinyin: "k\u016B", hanViet: "Kh\u1ED1c", radical: "\u53E3", strokes: 10 },
+  "\u627E": { pinyin: "zh\u01CEo", hanViet: "Tr\u1EA3o", radical: "\u624C", strokes: 7 },
+  "\u5E2E": { pinyin: "b\u0101ng", hanViet: "Bang", radical: "\u5DFE", strokes: 9 },
+  "\u52A9": { pinyin: "zh\xF9", hanViet: "Tr\u1EE3", radical: "\u529B", strokes: 7 },
+  "\u9001": { pinyin: "s\xF2ng", hanViet: "T\u1ED1ng", radical: "\u8FB6", strokes: 9 },
+  "\u6B21": { pinyin: "c\xEC", hanViet: "Th\u1EE9", radical: "\u6B20", strokes: 6 },
+  "\u4EF6": { pinyin: "ji\xE0n", hanViet: "Ki\u1EC7n", radical: "\u4EBB", strokes: 6 },
+  "\u5F20": { pinyin: "zh\u0101ng", hanViet: "Tr\u01B0\u01A1ng", radical: "\u5F13", strokes: 7 },
+  "\u53CC": { pinyin: "shu\u0101ng", hanViet: "Song", radical: "\u53C8", strokes: 4 },
+  "\u95EE": { pinyin: "w\xE8n", hanViet: "V\u1EA5n", radical: "\u95E8", strokes: 6 },
+  "\u7B54": { pinyin: "d\xE1", hanViet: "\u0110\xE1p", radical: "\u7AF9", strokes: 12 },
+  "\u9898": { pinyin: "t\xED", hanViet: "\u0110\u1EC1", radical: "\u9875", strokes: 15 },
+  "\u61C2": { pinyin: "d\u01D2ng", hanViet: "Hi\u1EC3u", radical: "\u5FC4", strokes: 15 },
+  "\u77EE": { pinyin: "\u01CEi", hanViet: "O\u1EA3i", radical: "\u77E2", strokes: 13 },
+  "\u80D6": { pinyin: "p\xE0ng", hanViet: "B\xE0n", radical: "\u6708", strokes: 9 },
+  "\u7626": { pinyin: "sh\xF2u", hanViet: "S\u1EA5u", radical: "\u7592", strokes: 14 }
 };
 function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride, hanVietOverride) {
-  const chars = Array.from(rawQuery.trim());
+  const cleanTerm = rawQuery.trim();
+  const allDictWords = [...COMPREHENSIVE_DICTIONARY, ...HSK_WORDS, ...COMMON_EXTRA_WORDS];
+  const existingWord = allDictWords.find((w) => w.hanzi === cleanTerm);
+  if (existingWord) {
+    return {
+      ...existingWord,
+      hanzi: cleanTerm,
+      vietnamese: vietnameseOverride?.trim() || existingWord.vietnamese,
+      pinyin: pinyinOverride?.trim() || existingWord.pinyin,
+      hanViet: hanVietOverride?.trim() || existingWord.hanViet
+    };
+  }
+  const chars = Array.from(cleanTerm);
   let combinedPinyin = "";
   let combinedHanViet = "";
   let totalStrokes = 0;
@@ -9248,7 +9528,7 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
       totalStrokes += 6;
     }
   }
-  const pinyinFormatted = pinyinOverride || combinedPinyin || rawQuery;
+  const pinyinFormatted = pinyinOverride || combinedPinyin || cleanTerm;
   const hanVietFormatted = hanVietOverride || combinedHanViet || "";
   const radicalFormatted = radicals.length > 0 ? radicals.join(", ") : "Ch\u1EEF H\xE1n";
   let finalVietnamese = (vietnameseOverride || "").trim();
@@ -9256,23 +9536,23 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
     if (hanVietFormatted) {
       finalVietnamese = hanVietFormatted;
     } else {
-      finalVietnamese = `Ngh\u0129a t\u1EEB: ${rawQuery.trim()}`;
+      finalVietnamese = cleanTerm;
     }
   }
   const examples = [
     {
-      zh: `\u6211\u4ECA\u5929\u5B66\u4E86\u201C${rawQuery}\u201D\u8FD9\u4E2A\u8BCD\u3002`,
-      pinyin: `W\u01D2 j\u012Bnti\u0101n xu\xE9 le \u201C${rawQuery}\u201D zh\xE8ge c\xED.`,
-      vi: `H\xF4m nay t\xF4i \u0111\xE3 h\u1ECDc \u0111\u01B0\u1EE3c t\u1EEB \u201C${rawQuery}\u201D (${finalVietnamese}).`
+      zh: `\u5728\u65E5\u5E38\u4E2D\u6587\u4EA4\u6D41\u4E2D\uFF0C\u201C${cleanTerm}\u201D\u662F\u4E00\u4E2A\u975E\u5E38\u5B9E\u7528\u7684\u8BCD\u6C47\u3002`,
+      pinyin: `Z\xE0i r\xECch\xE1ng Zh\u014Dngw\xE9n ji\u0101oli\xFA zh\u014Dng, \u201C${cleanTerm}\u201D sh\xEC y\xED g\xE8 f\u0113ich\xE1ng sh\xEDy\xF2ng de c\xEDhu\xEC.`,
+      vi: `Trong giao ti\u1EBFp ti\u1EBFng Trung h\xE0ng ng\xE0y, \u201C${cleanTerm}\u201D (${finalVietnamese}) l\xE0 m\u1ED9t t\u1EEB v\u1EF1ng r\u1EA5t thi\u1EBFt th\u1EF1c.`
     },
     {
-      zh: `\u8BF7\u95EE\u201C${rawQuery}\u201D\u5728\u4E2D\u6587\u91CC\u600E\u4E48\u7528\uFF1F`,
-      pinyin: `Q\u01D0ngw\xE8n \u201C${rawQuery}\u201D z\xE0i zh\u014Dngw\xE9n l\u01D0 z\u011Bnme y\xF2ng?`,
-      vi: `Xin h\u1ECFi t\u1EEB \u201C${rawQuery}\u201D d\xF9ng th\u1EBF n\xE0o trong ti\u1EBFng Trung?`
+      zh: `\u638C\u63E1\u201C${cleanTerm}\u201D\u7684\u7528\u6CD5\u80FD\u5E2E\u52A9\u6211\u4EEC\u66F4\u81EA\u4FE1\u5730\u8868\u8FBE\u3002`,
+      pinyin: `Zh\u01CEngw\xF2 \u201C${cleanTerm}\u201D de y\xF2ngf\u01CE n\xE9ng b\u0101ngzh\xF9 w\u01D2men g\xE8ng z\xECx\xECn de bi\u01CEod\xE1.`,
+      vi: `N\u1EAFm v\u1EEFng c\xE1ch d\xF9ng c\u1EE7a \u201C${cleanTerm}\u201D s\u1EBD gi\xFAp ch\xFAng ta t\u1EF1 tin h\u01A1n khi di\u1EC5n \u0111\u1EA1t.`
     }
   ];
   return {
-    hanzi: rawQuery.trim(),
+    hanzi: cleanTerm,
     pinyin: pinyinFormatted,
     hanViet: hanVietFormatted || "H\xE1n t\u1EF1",
     vietnamese: finalVietnamese,
@@ -9282,7 +9562,7 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
     radical: radicalFormatted,
     strokeCount: totalStrokes || chars.length * 7,
     examples,
-    tips: hanVietFormatted ? `T\u1EEB g\u1ED3m c\xE1c ch\u1EEF H\xE1n: ${chars.join(" + ")}. \xC2m H\xE1n Vi\u1EC7t t\u01B0\u01A1ng \u1EE9ng l\xE0: ${hanVietFormatted}.` : `T\u1EEB ti\u1EBFng Trung: ${rawQuery.trim()}. D\u1ECBch ngh\u0129a ti\u1EBFng Vi\u1EC7t: ${finalVietnamese}.`
+    tips: hanVietFormatted ? `T\u1EEB g\u1ED3m c\xE1c ch\u1EEF H\xE1n: ${chars.join(" + ")}. \xC2m H\xE1n Vi\u1EC7t t\u01B0\u01A1ng \u1EE9ng l\xE0: ${hanVietFormatted}. Ngh\u0129a: ${finalVietnamese}.` : `T\u1EEB ti\u1EBFng Trung: ${cleanTerm}. D\u1ECBch ngh\u0129a: ${finalVietnamese}.`
   };
 }
 
