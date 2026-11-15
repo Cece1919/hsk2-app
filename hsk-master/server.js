@@ -11427,7 +11427,9 @@ app.post("/api/ai/lookup-word", async (req, res) => {
         return await ai.models.generateContent({
           model: modelName,
           contents: `B\u1EA1n l\xE0 chuy\xEAn gia t\u1EEB \u0111i\u1EC3n HSK ti\u1EBFng Trung - ti\u1EBFng Vi\u1EC7t chu\u1EA9n m\u1EF1c. H\xE3y ph\xE2n t\xEDch t\u1EEB kh\xF3a: "${cleanQuery}".
-Y\xEAu c\u1EA7u b\u1EAFt bu\u1ED9c: Tr\u01B0\u1EDDng "vietnamese" PH\u1EA2I ch\u1EE9a ngh\u0129a ti\u1EBFng Vi\u1EC7t chi ti\u1EBFt, r\xF5 r\xE0ng, ph\u1ED5 bi\u1EBFn c\u1EE7a t\u1EEB n\xE0y (v\xED d\u1EE5: m\xE1y t\xEDnh, c\xE0 ph\xEA, qu\u1EA3 t\xE1o, c\u1ED1 g\u1EAFng...), tuy\u1EC7t \u0111\u1ED1i KH\xD4NG \u0111\u01B0\u1EE3c \u0111\u1EC3 tr\u1ED1ng ho\u1EB7c ghi chung chung "T\u1EEB H\xE1n Ng\u1EEF".`,
+Y\xEAu c\u1EA7u b\u1EAFt bu\u1ED9c:
+1. Tr\u01B0\u1EDDng "vietnamese" PH\u1EA2I ch\u1EE9a ngh\u0129a ti\u1EBFng Vi\u1EC7t chi ti\u1EBFt, r\xF5 r\xE0ng, ph\u1ED5 bi\u1EBFn c\u1EE7a t\u1EEB n\xE0y (v\xED d\u1EE5: m\xE1y t\xEDnh, c\xE0 ph\xEA, qu\u1EA3 t\xE1o, c\u1ED1 g\u1EAFng...), tuy\u1EC7t \u0111\u1ED1i KH\xD4NG \u0111\u01B0\u1EE3c \u0111\u1EC3 tr\u1ED1ng ho\u1EB7c ghi chung chung "T\u1EEB H\xE1n Ng\u1EEF".
+2. C\xE1c c\xE2u v\xED d\u1EE5 PH\u1EA2I l\xE0 c\xE2u giao ti\u1EBFp th\u1EF1c t\u1EBF \u0111\u1EDDi th\u01B0\u1EDDng, t\u1EF1 nhi\xEAn m\xE0 ng\u01B0\u1EDDi b\u1EA3n x\u1EE9 hay d\xF9ng. TUY\u1EC6T \u0110\u1ED0I KH\xD4NG d\xF9ng c\xE2u m\u1EABu r\u1EADp khu\xF4n s\xE1o r\u1ED7ng nh\u01B0: "\u5728\u65E5\u5E38\u4E2D\u6587\u4EA4\u6D41\u4E2D...", "\u638C\u63E1...\u80FD\u5E2E\u52A9...", "\u6211\u4ECA\u5929\u5B66\u4E86...", "\u8BF7\u95EE...\u600E\u4E48\u7528". M\u1ED7i c\xE2u c\xF3 \u0111\u1EE7 ch\u1EEF H\xE1n, Pinyin c\xF3 d\u1EA5u thanh v\xE0 d\u1ECBch ngh\u0129a ti\u1EBFng Vi\u1EC7t t\u1EF1 nhi\xEAn.`,
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -11464,14 +11466,14 @@ Y\xEAu c\u1EA7u b\u1EAFt bu\u1ED9c: Tr\u01B0\u1EDDng "vietnamese" PH\u1EA2I ch\u
       let response = null;
       try {
         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("AI timeout")), 6e3));
-        response = await Promise.race([callAIModel("gemini-3.1-flash-lite"), timeoutPromise]);
+        response = await Promise.race([callAIModel("gemini-2.5-flash"), timeoutPromise]);
       } catch (liteErr) {
-        console.warn("gemini-3.1-flash-lite failed or timed out, trying gemini-3.8-flash...", liteErr);
+        console.warn("gemini-2.5-flash failed or timed out, trying gemini-1.5-flash...", liteErr);
         try {
           const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("AI timeout")), 5e3));
-          response = await Promise.race([callAIModel("gemini-3.8-flash"), timeoutPromise]);
+          response = await Promise.race([callAIModel("gemini-1.5-flash"), timeoutPromise]);
         } catch (flashErr) {
-          console.warn("gemini-3.8-flash also failed:", flashErr);
+          console.warn("gemini-1.5-flash also failed:", flashErr);
         }
       }
       if (response && response.text) {
