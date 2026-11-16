@@ -226,6 +226,11 @@
 
           <!-- Slide Action Buttons -->
           <div class="flex items-center space-x-2">
+            <!-- Toggle Stress Highlighting Mode (A few YEARS AGO) -->
+            <button id="btnToggleStressMode" onclick="window.toggleStressMode()" class="px-3 py-1.5 rounded-xl bg-amber-100 border border-amber-300 hover:bg-amber-200 text-amber-900 transition flex items-center gap-1.5 text-xs font-bold shadow-xs" title="Bật/Tắt chế độ in to trọng âm câu (Ví dụ: A few YEARS AGO)">
+              <span>🔤</span>
+              <span id="stressModeBtnLabel">Trọng Âm: BẬT</span>
+            </button>
             <!-- Toggle Translation for this slide -->
             <button id="btnToggleSlideTrans" onclick="window.toggleSlideTrans()" class="px-3 py-1.5 rounded-xl bg-white border border-[#E5DDD0] hover:border-[#2F6F68] text-[#363A38] hover:text-[#2F6F68] transition flex items-center gap-1.5 text-xs font-semibold shadow-sm">
               <span>👁️</span>
@@ -656,6 +661,94 @@
     let currentTestIdx = 0;
     let currentSlideIdx = 0;
     let isGlobalTranslateOn = true;
+    // SENTENCE STRESS ENGINE (Trọng âm câu: In to các từ nhấn như "A few YEARS AGO")
+    let isStressModeOn = true;
+
+    const UNSTRESSED_WORDS = new Set([
+      'a', 'an', 'the',
+      'in', 'on', 'at', 'to', 'for', 'from', 'of', 'with', 'by', 'as', 'into', 'onto', 'upon', 'about', 'through', 'over',
+      'i', 'you', 'he', 'she', 'it', 'we', 'they',
+      'me', 'him', 'her', 'us', 'them',
+      'my', 'your', 'his', 'her', 'its', 'our', 'their',
+      'and', 'but', 'or', 'nor', 'so', 'yet', 'because', 'if', 'that', 'than',
+      'is', 'am', 'are', 'was', 'were', 'be', 'been', 'being',
+      'have', 'has', 'had', 'do', 'does', 'did',
+      'can', 'could', 'will', 'would', 'shall', 'should', 'may', 'might',
+      'few', 'some', 'any', 'much', 'many'
+    ]);
+
+    const STRESSED_EXCEPTIONS = new Set([
+      'not', 'no', 'never', 'none', 'neither',
+      "hadn't", "didn't", "weren't", "wasn't", "haven't", "hasn't",
+      "can't", "couldn't", "won't", "wouldn't", "shouldn't", "don't", "doesn't",
+      'years', 'ago', 'time', 'more', 'first', 'bad', 'good'
+    ]);
+
+    function applySentenceStress(text) {
+      if (!text) return '';
+      const tokens = text.split(/(\b[a-zA-Z']+\b)/);
+      const result = [];
+      let startOfSentence = true;
+
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+        if (!/^[a-zA-Z']+$/.test(token)) {
+          result.push(token);
+          if (/[.!?;
+]/.test(token)) {
+            startOfSentence = true;
+          }
+          continue;
+        }
+
+        const low = token.toLowerCase();
+        let isStressed = false;
+        if (STRESSED_EXCEPTIONS.has(low)) {
+          isStressed = true;
+        } else if (UNSTRESSED_WORDS.has(low)) {
+          isStressed = false;
+        } else {
+          isStressed = true;
+        }
+
+        let resWord = '';
+        if (isStressed) {
+          resWord = token.toUpperCase();
+        } else {
+          if (low === 'i') {
+            resWord = 'I';
+          } else if (startOfSentence) {
+            resWord = token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+          } else {
+            resWord = low;
+          }
+        }
+        result.push(resWord);
+        startOfSentence = false;
+      }
+      return result.join('');
+    }
+
+    window.toggleStressMode = () => {
+      isStressModeOn = !isStressModeOn;
+      updateStressModeBtn();
+      loadSlide(currentSlideIdx);
+      if (currentViewMode === 'full') renderFullModeView();
+    };
+
+    function updateStressModeBtn() {
+      const btn = document.getElementById('btnToggleStressMode');
+      const label = document.getElementById('stressModeBtnLabel');
+      if (!btn || !label) return;
+      if (isStressModeOn) {
+        label.textContent = 'Trọng Âm: BẬT';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-amber-100 border border-amber-400 text-amber-900 transition flex items-center gap-1.5 text-xs font-bold shadow-xs';
+      } else {
+        label.textContent = 'Trọng Âm: TẮT';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-gray-100 border border-gray-300 text-gray-700 transition flex items-center gap-1.5 text-xs font-semibold shadow-xs';
+      }
+    }
+
     let currentViewMode = 'slide';
 
     // HTML5 Real Audio Instance
@@ -872,8 +965,9 @@
         audioVoiceBadge.innerHTML = `<span>🎙️</span> <span>${slide.voice_type || 'Trình đọc tích hợp (Browser Speech)'}</span>`;
       }
 
-      // Highlight structures in English text
-      let highlightedEn = slide.en_text;
+      // Highlight structures in English text with Sentence Stress
+      let rawText = (isStressModeOn ? applySentenceStress(slide.en_text) : slide.en_text);
+      let highlightedEn = rawText;
       try {
         if (slide.structures && slide.structures.length > 0) {
           slide.structures.forEach(st => {
@@ -1005,7 +1099,7 @@
           </div>
 
           <div class="text-base text-[#363A38] leading-relaxed">
-            ${slide.en_text}
+            ${isStressModeOn ? applySentenceStress(slide.en_text) : slide.en_text}
           </div>
 
           <div class="p-4 bg-[#F2F8F7] rounded-xl border-l-4 border-[#2F6F68] ${isGlobalTranslateOn ? '' : 'hidden'} full-vi-box">
