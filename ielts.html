@@ -694,8 +694,7 @@
         const token = tokens[i];
         if (!/^[a-zA-Z']+$/.test(token)) {
           result.push(token);
-          if (/[.!?;
-]/.test(token)) {
+          if (token.includes('.') || token.includes('!') || token.includes('?') || token.includes(';') || token.includes('\n')) {
             startOfSentence = true;
           }
           continue;
