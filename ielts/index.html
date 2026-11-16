@@ -70,13 +70,17 @@
     }
     .struct-hl {
       background: linear-gradient(120deg, rgba(181, 75, 75, 0.15) 0%, rgba(181, 75, 75, 0.15) 100%);
-      border-bottom: 2px solid #B54B4B;
-      font-weight: 600;
+      border-bottom: 2.5px solid #B54B4B;
+      font-weight: 700;
+      font-size: 1.08em;
       color: #8B2C2C;
-      padding: 0 4px;
+      padding: 1px 6px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s;
+      display: inline;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
     }
     .struct-hl:hover {
       background-color: rgba(181, 75, 75, 0.28);
@@ -864,15 +868,15 @@
         else if (st.type && st.type.includes('Phrasal')) typeBadgeBg = 'bg-amber-700';
 
         card.innerHTML = `
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-xs font-bold text-[#1F4A45] font-mono tracking-wide">${st.phrase}</span>
-            <span class="text-[10px] uppercase font-bold text-white px-2 py-0.5 rounded ${typeBadgeBg}">${st.type || 'Structure'}</span>
+          <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-[#F0E8DC]">
+            <span class="text-sm sm:text-base font-extrabold text-[#1F4A45] font-mono tracking-wide">${st.phrase}</span>
+            <span class="text-[10px] uppercase font-bold text-white px-2 py-0.5 rounded ${typeBadgeBg} ml-2 flex-shrink-0">${st.type || 'Structure'}</span>
           </div>
-          <div class="text-xs text-[#363A38] font-medium mb-1">
+          <div class="text-xs sm:text-sm text-[#363A38] font-medium mb-1">
             <span class="text-[#B54B4B] font-bold">Ý nghĩa:</span> ${st.meaning}
           </div>
-          ${st.grammar_note ? `<div class="text-[11px] text-[#756B66] leading-relaxed mb-1">📌 <span class="italic">${st.grammar_note}</span></div>` : ''}
-          ${st.example ? `<div class="text-[11px] text-emerald-800 bg-white/70 p-1.5 rounded border border-[#E5DDD0]">💬 <em>"${st.example}"</em></div>` : ''}
+          ${st.grammar_note ? `<div class="text-[11px] sm:text-xs text-[#756B66] leading-relaxed mb-1">📌 <span class="italic">${st.grammar_note}</span></div>` : ''}
+          ${st.example ? `<div class="text-[11px] sm:text-xs text-emerald-800 bg-white/70 p-1.5 rounded border border-[#E5DDD0]">💬 <em>"${st.example}"</em></div>` : ''}
         `;
         slideStructuresContainer.appendChild(card);
       });
@@ -909,8 +913,8 @@
           structHtml = `
             <div class="mt-3 pt-3 border-t border-[#EBE2D5] grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
               ${slide.structures.map(st => `
-                <div class="bg-white p-2 rounded-lg border border-[#E5DDD0]">
-                  <strong class="text-[#2F6F68]">${st.phrase}</strong>: ${st.meaning}
+                <div class="bg-white p-2.5 rounded-lg border border-[#E5DDD0]">
+                  <strong class="text-sm font-extrabold text-[#2F6F68]">${st.phrase}</strong>: <span class="text-xs text-[#363A38]">${st.meaning}</span>
                 </div>
               `).join('')}
             </div>
