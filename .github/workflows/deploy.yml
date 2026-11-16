@@ -30,6 +30,9 @@ jobs:
           mkdir -p _site
           cp -r hsk-master _site/
           cp index.html _site/
+          cp ielts.html _site/
+          cp -r ielts _site/
+          cp -r audio_dialogues _site/
           touch _site/.nojekyll
 
       - name: Upload artifact
