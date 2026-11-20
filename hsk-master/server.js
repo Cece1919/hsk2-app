@@ -7714,6 +7714,7 @@ var COMMON_EXTRA_WORDS = [
 ];
 
 // src/data/dictionaryDatabase.ts
+import { pinyin } from "pinyin-pro";
 var COMPREHENSIVE_DICTIONARY = [
   // Phương tiện & Giao thông
   {
@@ -11147,6 +11148,14 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
       hanViet: hanVietOverride?.trim() || existingWord.hanViet
     };
   }
+  let autoPinyin = "";
+  try {
+    if (/[\u4e00-\u9fa5]/.test(cleanTerm)) {
+      autoPinyin = pinyin(cleanTerm);
+    }
+  } catch (err) {
+    console.warn("pinyin generation error:", err);
+  }
   const chars = Array.from(cleanTerm);
   let combinedPinyin = "";
   let combinedHanViet = "";
@@ -11160,11 +11169,10 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
       totalStrokes += info.strokes;
       if (!radicals.includes(info.radical)) radicals.push(info.radical);
     } else {
-      combinedPinyin += (combinedPinyin ? " " : "") + c;
       totalStrokes += 6;
     }
   }
-  const pinyinFormatted = pinyinOverride || combinedPinyin || cleanTerm;
+  const pinyinFormatted = pinyinOverride && !/[\u4e00-\u9fa5]/.test(pinyinOverride) ? pinyinOverride : autoPinyin || combinedPinyin || "";
   const hanVietFormatted = hanVietOverride || combinedHanViet || "";
   const radicalFormatted = radicals.length > 0 ? radicals.join(", ") : "Ch\u1EEF H\xE1n";
   let finalVietnamese = (vietnameseOverride || "").trim();
@@ -11175,6 +11183,18 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
       finalVietnamese = cleanTerm;
     }
   }
+  const safePinyinSentence = (zhText) => {
+    try {
+      return pinyin(zhText);
+    } catch {
+      return "";
+    }
+  };
+  const makeEx = (zh, vi) => ({
+    zh,
+    pinyin: safePinyinSentence(zh),
+    vi
+  });
   let detectedPartOfSpeech = "Danh t\u1EEB";
   let examples = [];
   const isVerb = /[跑走飞游跳唱画踢打拿抓提选找问说讲读写看听吃喝买卖租穿洗开送接换变记忘学练考帮让请借还付陪逛爬坐骑躺站睡醒查试演]/i.test(cleanTerm);
@@ -11186,99 +11206,43 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
   if (isVerb) {
     detectedPartOfSpeech = "\u0110\u1ED9ng t\u1EEB";
     examples = [
-      {
-        zh: `\u5468\u672B\u6211\u548C\u597D\u670B\u53CB\u7EA6\u597D\u4E00\u8D77\u53BB${cleanTerm}\u3002`,
-        pinyin: `Zh\u014Dum\xF2 w\u01D2 h\xE9 h\u01CEop\xE9ngyou yu\u0113 h\u01CEo y\xECq\u01D0 q\xF9 ${pinyinFormatted}.`,
-        vi: `Cu\u1ED1i tu\u1EA7n t\xF4i v\xE0 b\u1EA1n th\xE2n \u0111\xE3 h\u1EB9n nhau c\xF9ng \u0111i ${finalVietnamese}.`
-      },
-      {
-        zh: `\u5E73\u65F6\u6709\u7A7A\u7684\u65F6\u5019\uFF0C\u4F60\u6700\u559C\u6B22${cleanTerm}\u5417\uFF1F`,
-        pinyin: `P\xEDngsh\xED y\u01D2u k\xF2ng de sh\xEDhou, n\u01D0 zu\xEC x\u01D0huan ${pinyinFormatted} ma?`,
-        vi: `Nh\u1EEFng l\xFAc r\u1EA3nh r\u1ED7i b\xECnh th\u01B0\u1EDDng, b\u1EA1n c\xF3 th\xEDch ${finalVietnamese} nh\u1EA5t kh\xF4ng?`
-      }
+      makeEx(`\u5468\u672B\u6211\u548C\u597D\u670B\u53CB\u7EA6\u597D\u4E00\u8D77\u53BB${cleanTerm}\u3002`, `Cu\u1ED1i tu\u1EA7n t\xF4i v\xE0 b\u1EA1n th\xE2n \u0111\xE3 h\u1EB9n nhau c\xF9ng \u0111i ${finalVietnamese}.`),
+      makeEx(`\u5E73\u65F6\u6709\u7A7A\u7684\u65F6\u5019\uFF0C\u4F60\u6700\u559C\u6B22${cleanTerm}\u5417\uFF1F`, `Nh\u1EEFng l\xFAc r\u1EA3nh r\u1ED7i b\xECnh th\u01B0\u1EDDng, b\u1EA1n c\xF3 th\xEDch ${finalVietnamese} nh\u1EA5t kh\xF4ng?`)
     ];
   } else if (isAdj) {
     detectedPartOfSpeech = "T\xEDnh t\u1EEB";
     examples = [
-      {
-        zh: `\u5927\u5BB6\u90FD\u89C9\u5F97\u8FD9\u4E2A\u4E1C\u897F\u975E\u5E38${cleanTerm}\uFF0C\u6211\u4E5F\u5F88\u559C\u6B22\u3002`,
-        pinyin: `D\xE0ji\u0101 d\u014Du ju\xE9de zh\xE8 ge d\u014Dngxi f\u0113ich\xE1ng ${pinyinFormatted}, w\u01D2 y\u011B h\u011Bn x\u01D0huan.`,
-        vi: `M\u1ECDi ng\u01B0\u1EDDi \u0111\u1EC1u th\u1EA5y th\u1EE9 n\xE0y r\u1EA5t ${finalVietnamese}, t\xF4i c\u0169ng r\u1EA5t th\xEDch.`
-      },
-      {
-        zh: `\u4ECA\u5929\u7684\u5929\u6C14\u5F88${cleanTerm}\uFF0C\u51FA\u95E8\u6563\u6B65\u7279\u522B\u8212\u670D\u3002`,
-        pinyin: `J\u012Bnti\u0101n de ti\u0101nq\xEC h\u011Bn ${pinyinFormatted}, ch\u016Bm\xE9n s\xE0nb\xF9 t\xE8bi\xE9 sh\u016Bfu.`,
-        vi: `Th\u1EDDi ti\u1EBFt h\xF4m nay r\u1EA5t ${finalVietnamese}, ra ngo\xE0i d\u1EA1o b\u1ED9 v\xF4 c\xF9ng d\u1EC5 ch\u1ECBu.`
-      }
+      makeEx(`\u5927\u5BB6\u90FD\u89C9\u5F97\u8FD9\u4E2A\u4E1C\u897F\u975E\u5E38${cleanTerm}\uFF0C\u6211\u4E5F\u5F88\u559C\u6B22\u3002`, `M\u1ECDi ng\u01B0\u1EDDi \u0111\u1EC1u th\u1EA5y th\u1EE9 n\xE0y r\u1EA5t ${finalVietnamese}, t\xF4i c\u0169ng r\u1EA5t th\xEDch.`),
+      makeEx(`\u4ECA\u5929\u7684\u5929\u6C14\u5F88${cleanTerm}\uFF0C\u51FA\u95E8\u6563\u6B65\u7279\u522B\u8212\u670D\u3002`, `Th\u1EDDi ti\u1EBFt h\xF4m nay r\u1EA5t ${finalVietnamese}, ra ngo\xE0i d\u1EA1o b\u1ED9 v\xF4 c\xF9ng d\u1EC5 ch\u1ECBu.`)
     ];
   } else if (isFood) {
     detectedPartOfSpeech = "Danh t\u1EEB (\u1EA8m th\u1EF1c)";
     examples = [
-      {
-        zh: `\u8FD9\u5BB6\u9910\u9986\u7684${cleanTerm}\u5473\u9053\u975E\u5E38\u9C9C\u7F8E\u5730\u9053\u3002`,
-        pinyin: `Zh\xE8 ji\u0101 c\u0101ngu\u01CEn de ${pinyinFormatted} w\xE8id\xE0o f\u0113ich\xE1ng xi\u0101nm\u011Bi d\xECdao.`,
-        vi: `M\xF3n ${finalVietnamese} c\u1EE7a qu\xE1n \u0103n n\xE0y h\u01B0\u01A1ng v\u1ECB r\u1EA5t th\u01A1m ngon v\xE0 chu\u1EA9n v\u1ECB.`
-      },
-      {
-        zh: `\u4F60\u60F3\u5C1D\u4E00\u70B9\u513F\u65B0\u9C9C\u7684${cleanTerm}\u5417\uFF1F\u5F88\u597D\u5403\u7684\u3002`,
-        pinyin: `N\u01D0 xi\u01CEng ch\xE1ng y\xECdi\u01CEnr x\u012Bnxian de ${pinyinFormatted} ma? H\u011Bn h\u01CEoch\u012B de.`,
-        vi: `B\u1EA1n c\xF3 mu\u1ED1n n\u1EBFm th\u1EED m\u1ED9t ch\xFAt ${finalVietnamese} t\u01B0\u01A1i m\u1EDBi kh\xF4ng? Ngon l\u1EAFm \u0111\u1EA5y.`
-      }
+      makeEx(`\u8FD9\u5BB6\u9910\u9986\u7684${cleanTerm}\u5473\u9053\u975E\u5E38\u9C9C\u7F8E\u5730\u9053\u3002`, `M\xF3n ${finalVietnamese} c\u1EE7a qu\xE1n \u0103n n\xE0y h\u01B0\u01A1ng v\u1ECB r\u1EA5t th\u01A1m ngon v\xE0 chu\u1EA9n v\u1ECB.`),
+      makeEx(`\u4F60\u60F3\u5C1D\u4E00\u70B9\u513F\u65B0\u9C9C\u7684${cleanTerm}\u5417\uFF1F\u5F88\u597D\u5403\u7684\u3002`, `B\u1EA1n c\xF3 mu\u1ED1n n\u1EBFm th\u1EED m\u1ED9t ch\xFAt ${finalVietnamese} t\u01B0\u01A1i m\u1EDBi kh\xF4ng? Ngon l\u1EAFm \u0111\u1EA5y.`)
     ];
   } else if (isPlace) {
     detectedPartOfSpeech = "Danh t\u1EEB (\u0110\u1ECBa \u0111i\u1EC3m)";
     examples = [
-      {
-        zh: `\u8BF7\u95EE\u4ECE\u8FD9\u91CC\u53BB${cleanTerm}\u5927\u6982\u9700\u8981\u591A\u957F\u65F6\u95F4\uFF1F`,
-        pinyin: `Q\u01D0ngw\xE8n c\xF3ng zh\xE8l\u01D0 q\xF9 ${pinyinFormatted} d\xE0g\xE0i x\u016By\xE0o du\u014D ch\xE1ng sh\xEDji\u0101n?`,
-        vi: `Xin h\u1ECFi t\u1EEB \u0111\xE2y \u0111i \u0111\u1EBFn ${finalVietnamese} m\u1EA5t kho\u1EA3ng bao l\xE2u?`
-      },
-      {
-        zh: `\u6211\u4EEC\u7EA6\u597D\u4ECA\u5929\u4E0B\u5348\u5728${cleanTerm}\u95E8\u524D\u89C1\u9762\u3002`,
-        pinyin: `W\u01D2men yu\u0113 h\u01CEo j\u012Bnti\u0101n xi\xE0w\u01D4 z\xE0i ${pinyinFormatted} m\xE9nqi\xE1n ji\xE0nmi\xE0n.`,
-        vi: `Ch\xFAng t\xF4i h\u1EB9n chi\u1EC1u nay g\u1EB7p nhau tr\u01B0\u1EDBc c\u1EEDa ${finalVietnamese}.`
-      }
+      makeEx(`\u8BF7\u95EE\u4ECE\u8FD9\u91CC\u53BB${cleanTerm}\u5927\u6982\u9700\u8981\u591A\u957F\u65F6\u95F4\uFF1F`, `Xin h\u1ECFi t\u1EEB \u0111\xE2y \u0111i \u0111\u1EBFn ${finalVietnamese} m\u1EA5t kho\u1EA3ng bao l\xE2u?`),
+      makeEx(`\u6211\u4EEC\u7EA6\u597D\u4ECA\u5929\u4E0B\u5348\u5728${cleanTerm}\u95E8\u524D\u89C1\u9762\u3002`, `Ch\xFAng t\xF4i h\u1EB9n chi\u1EC1u nay g\u1EB7p nhau tr\u01B0\u1EDBc c\u1EEDa ${finalVietnamese}.`)
     ];
   } else if (isPerson) {
     detectedPartOfSpeech = "Danh t\u1EEB (Nh\xE2n x\u01B0ng)";
     examples = [
-      {
-        zh: `\u4ED6\u662F\u4E00\u4F4D\u7ECF\u9A8C\u975E\u5E38\u4E30\u5BCC\u4E14\u70ED\u5FC3\u7684${cleanTerm}\u3002`,
-        pinyin: `T\u0101 sh\xEC y\xED w\xE8i j\u012Bngy\xE0n f\u0113ich\xE1ng f\u0113ngf\xF9 qi\u011B r\xE8x\u012Bn de ${pinyinFormatted}.`,
-        vi: `Anh \u1EA5y l\xE0 m\u1ED9t ${finalVietnamese} v\xF4 c\xF9ng gi\xE0u kinh nghi\u1EC7m v\xE0 nhi\u1EC7t t\xECnh.`
-      },
-      {
-        zh: `\u4ECA\u5929\u6211\u548C\u6211\u7684${cleanTerm}\u4E00\u8D77\u53BB\u53C2\u52A0\u6C49\u8BED\u4EA4\u6D41\u6D3B\u52A8\u3002`,
-        pinyin: `J\u012Bnti\u0101n w\u01D2 h\xE9 w\u01D2 de ${pinyinFormatted} y\xECq\u01D0 q\xF9 c\u0101nji\u0101 H\xE0ny\u01D4 ji\u0101oli\xFA hu\xF3d\xF2ng.`,
-        vi: `H\xF4m nay t\xF4i c\xF9ng ${finalVietnamese} c\u1EE7a t\xF4i c\xF9ng \u0111i tham gia ho\u1EA1t \u0111\u1ED9ng giao l\u01B0u ti\u1EBFng H\xE1n.`
-      }
+      makeEx(`\u4ED6\u662F\u4E00\u4F4D\u7ECF\u9A8C\u975E\u5E38\u4E30\u5BCC\u4E14\u70ED\u5FC3\u7684${cleanTerm}\u3002`, `Anh \u1EA5y l\xE0 m\u1ED9t ${finalVietnamese} v\xF4 c\xF9ng gi\xE0u kinh nghi\u1EC7m v\xE0 nhi\u1EC7t t\xECnh.`),
+      makeEx(`\u4ECA\u5929\u6211\u548C\u6211\u7684${cleanTerm}\u4E00\u8D77\u53BB\u53C2\u52A0\u6C49\u8BED\u4EA4\u6D41\u6D3B\u52A8\u3002`, `H\xF4m nay t\xF4i c\xF9ng ${finalVietnamese} c\u1EE7a t\xF4i c\xF9ng \u0111i tham gia ho\u1EA1t \u0111\u1ED9ng giao l\u01B0u ti\u1EBFng H\xE1n.`)
     ];
   } else if (isTime) {
     detectedPartOfSpeech = "Danh t\u1EEB ch\u1EC9 th\u1EDDi gian";
     examples = [
-      {
-        zh: `\u5728\u63A5\u4E0B\u6765\u7684${cleanTerm}\u91CC\uFF0C\u795D\u4F60\u4E00\u5207\u987A\u5229\u3001\u5E73\u5B89\u559C\u4E50\uFF01`,
-        pinyin: `Z\xE0i ji\u0113xi\xE0l\xE1i de ${pinyinFormatted} l\u01D0, zh\xF9 n\u01D0 y\xEDqi\xE8 sh\xF9nl\xEC, p\xEDng'\u0101n x\u01D0l\xE8!`,
-        vi: `Trong th\u1EDDi gian ${finalVietnamese} s\u1EAFp t\u1EDBi, ch\xFAc b\u1EA1n m\u1ECDi \u0111i\u1EC1u thu\u1EADn l\u1EE3i, b\xECnh an v\xE0 vui v\u1EBB!`
-      },
-      {
-        zh: `\u660E\u5929${cleanTerm}\u4F60\u6709\u7A7A\u548C\u6211\u4E00\u8D77\u53BB\u56FE\u4E66\u9986\u590D\u4E60\u5417\uFF1F`,
-        pinyin: `M\xEDngti\u0101n ${pinyinFormatted} n\u01D0 y\u01D2u k\xF2ng h\xE9 w\u01D2 y\xECq\u01D0 q\xF9 t\xFAsh\u016Bgu\u01CEn f\xF9x\xED ma?`,
-        vi: `Ng\xE0y mai v\xE0o l\xFAc ${finalVietnamese} b\u1EA1n c\xF3 r\u1EA3nh c\xF9ng t\xF4i \u0111\u1EBFn th\u01B0 vi\u1EC7n \xF4n t\u1EADp kh\xF4ng?`
-      }
+      makeEx(`\u5728\u63A5\u4E0B\u6765\u7684${cleanTerm}\u91CC\uFF0C\u795D\u4F60\u4E00\u5207\u987A\u5229\u3001\u5E73\u5B89\u559C\u4E50\uFF01`, `Trong th\u1EDDi gian ${finalVietnamese} s\u1EAFp t\u1EDBi, ch\xFAc b\u1EA1n m\u1ECDi \u0111i\u1EC1u thu\u1EADn l\u1EE3i, b\xECnh an v\xE0 vui v\u1EBB!`),
+      makeEx(`\u660E\u5929${cleanTerm}\u4F60\u6709\u7A7A\u548C\u6211\u4E00\u8D77\u53BB\u56FE\u4E66\u9986\u590D\u4E60\u5417\uFF1F`, `Ng\xE0y mai v\xE0o l\xFAc ${finalVietnamese} b\u1EA1n c\xF3 r\u1EA3nh c\xF9ng t\xF4i \u0111\u1EBFn th\u01B0 vi\u1EC7n \xF4n t\u1EADp kh\xF4ng?`)
     ];
   } else {
     examples = [
-      {
-        zh: `\u6211\u60F3\u6311\u9009\u4E00\u4E2A\u8D28\u91CF\u597D\u4E00\u70B9\u513F\u7684${cleanTerm}\u3002`,
-        pinyin: `W\u01D2 xi\u01CEng ti\u0101oxu\u01CEn y\xED g\xE8 zh\xECli\xE0ng h\u01CEo y\xECdi\u01CEnr de ${pinyinFormatted}.`,
-        vi: `T\xF4i mu\u1ED1n ch\u1ECDn mua m\u1ED9t chi\u1EBFc ${finalVietnamese} c\xF3 ch\u1EA5t l\u01B0\u1EE3ng t\u1ED1t h\u01A1n m\u1ED9t ch\xFAt.`
-      },
-      {
-        zh: `\u684C\u5B50\u4E0A\u6446\u653E\u7740\u4E00\u4E2A\u975E\u5E38\u6F02\u4EAE\u7684${cleanTerm}\u3002`,
-        pinyin: `Zhu\u014Dzi shang b\u01CEif\xE0ng zhe y\xED g\xE8 f\u0113ich\xE1ng pi\xE0oliang de ${pinyinFormatted}.`,
-        vi: `Tr\xEAn b\xE0n c\xF3 \u0111\u1EB7t m\u1ED9t chi\u1EBFc ${finalVietnamese} r\u1EA5t l\xE0 \u0111\u1EB9p m\u1EAFt.`
-      }
+      makeEx(`\u6211\u60F3\u6311\u9009\u4E00\u4E2A\u8D28\u91CF\u597D\u4E00\u70B9\u513F\u7684${cleanTerm}\u3002`, `T\xF4i mu\u1ED1n ch\u1ECDn mua m\u1ED9t chi\u1EBFc ${finalVietnamese} c\xF3 ch\u1EA5t l\u01B0\u1EE3ng t\u1ED1t h\u01A1n m\u1ED9t ch\xFAt.`),
+      makeEx(`\u684C\u5B50\u4E0A\u6446\u653E\u7740\u4E00\u4E2A\u975E\u5E38\u6F02\u4EAE\u7684${cleanTerm}\u3002`, `Tr\xEAn b\xE0n c\xF3 \u0111\u1EB7t m\u1ED9t chi\u1EBFc ${finalVietnamese} r\u1EA5t l\xE0 \u0111\u1EB9p m\u1EAFt.`)
     ];
   }
   return {
@@ -11297,6 +11261,7 @@ function synthesizeChineseWordCard(rawQuery, vietnameseOverride, pinyinOverride,
 }
 
 // server.ts
+import { pinyin as pinyin2 } from "pinyin-pro";
 dotenv.config();
 var rootDir = process.cwd();
 var publicDir = path.resolve(rootDir, "public");
@@ -11516,6 +11481,24 @@ Y\xEAu c\u1EA7u b\u1EAFt bu\u1ED9c:
       }
     }
     if (wordData) {
+      if (wordData.hanzi && (!wordData.pinyin || /[\u4e00-\u9fa5]/.test(wordData.pinyin))) {
+        try {
+          wordData.pinyin = pinyin2(wordData.hanzi);
+        } catch {
+        }
+      }
+      if (Array.isArray(wordData.examples)) {
+        wordData.examples = wordData.examples.map((ex) => {
+          let exPy = (ex.pinyin || "").trim();
+          if ((!exPy || /[\u4e00-\u9fa5]/.test(exPy)) && ex.zh) {
+            try {
+              exPy = pinyin2(ex.zh);
+            } catch {
+            }
+          }
+          return { ...ex, pinyin: exPy };
+        });
+      }
       if (lookupCache.size > 3e3) {
         const firstKey = lookupCache.keys().next().value;
         if (firstKey) lookupCache.delete(firstKey);
